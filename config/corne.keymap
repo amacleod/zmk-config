@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
+ * Copyright (c) 2024 Allister MacLeod
  *
  * SPDX-License-Identifier: MIT
  */
@@ -25,6 +25,13 @@
 #define BTOOTH  12
 #define LAYOUTS 13
 
+
+// Things to try next:
+// - mod-tap home row mods (shift on home row pinkies to start), preferably with quiet time to prevent delayed keypresses
+// - better handling of adaptive keys in Hands Down Gold; maybe tap-dance is not the best way to handle Z and Q
+// - experiment with different sticky keys durations
+// - try spacebar on the right thumb to see if it feels any more natural
+// - more ctrl-* combos in nav layer, or maybe a dedicated hotkey layer: ^S save, ^T new tab, ^R reload, etc.
 
 / {
 chosen { zmk,matrix_transform = &five_column_transform; };
@@ -199,7 +206,7 @@ keymap {
   &kp F1 &kp F2  &kp F3  &kp F4  &tog NUMLOCK    &kp KP_MULTIPLY &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_SUBTRACT
   &kp F5 &kp F6  &kp F7  &kp F8  &none           &kp KP_DIVIDE   &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS
   &kp F9 &kp F10 &kp F11 &kp F12 &none           &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp RETURN2
-         &to BTOOTH &trans &tog NUMPAD           &kp KP_N0 &trans &kp KP_DOT
+        &to BTOOTH &trans &tog NUMLOCK           &kp KP_N0 &trans &kp KP_DOT
     >;
   };
 
