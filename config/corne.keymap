@@ -70,9 +70,9 @@ keymap {
 // |  X  |  C  |  L  |  D  |  G  |   |  -  |  U  |  O  |  Y  |  K  |
 // `-----------| Esc | SYM | Spc |   | Bks | NAV | Tab |-----------'
     bindings = <
-  &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q    &kp Z  &kp J
-  &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E    &kp I  &kp H
-  &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp Z    &kp Y  &kp K
+  &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
+  &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &kp H
+  &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
    &tdesclay &sl SYMBOLS  &kp SPACE    &kp BSPC  &sl NAV &kp TAB
     >;
   };
