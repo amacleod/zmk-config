@@ -248,7 +248,7 @@ keymap {
   &trans     &to HD_NEU  &to DVORAK &to COLEMAK &trans    &trans &trans &trans &trans &trans
   &to QWERTY &to HD_GOLD &to STURDY &to CANARY  &trans    &trans &trans &trans &trans &trans
   &trans     &trans      &trans     &trans      &trans    &trans &trans &trans &trans &trans
-                             &trans &trans &tog LAYOUT    &trans &trans &trans
+                            &trans &trans &tog LAYOUTS    &trans &trans &trans
     >;
   };
 };
