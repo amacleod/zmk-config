@@ -29,10 +29,12 @@ chosen { zmk,matrix_transform = &five_column_transform; };
 behaviors {
   tdjz: tap_dance_jz {
     compatible = "zmk,behavior-tap-dance";
+    #binding-cells = <0>;
     bindings = <&kp J>, <&kp Z>;
   };
   tdgq: tap_dance_gq {
     compatible = "zmk,behavior-tap-dance";
+    #binding-cells = <0>;
     bindings = <&kp G>, <&kp Q>;
   };
 };
