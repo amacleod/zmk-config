@@ -29,9 +29,13 @@
 #define LTHUMB BACKSPACE
 #define RTHUMB SPACE
 
-// Home row mods settings:
+// Home row mods settings; history notes below:
+// - fast tapping term of 100 feels too fast
+// - in Dvorak, al roll sometimes comes out as L, and so roll as O, also as as S
+// - maybe Callum-style sticky mods are the way to go after all?
+// - what about mod-tap shift space on the big thumb keys? would have to get used to backspace on a layer, but that might be okay
 #define HM_TAPPING_TERM 200
-#define HM_TAPPING_TERM_FAST 100
+#define HM_TAPPING_TERM_FAST 175
 #define HM_PRIOR_IDLE 125
 #define HM_QUICK_TAP 150
 
