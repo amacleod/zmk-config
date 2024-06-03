@@ -1,56 +1,303 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
+ * Copyright (c) 2024 Allister MacLeod
  *
  * SPDX-License-Identifier: MIT
  */
 
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
+
+#define DEFAULT 0
+#define HD_NEU  0
+#define HD_GOLD 1
+#define DVORAK  2
+#define COLEMAK 3
+#define QWERTY  4
+#define CANARY  5
+#define STURDY  6
+#define SYMBOLS 7
+#define NAV     8
+#define NUMPAD  9
+#define NUMLOCK 10
+#define NUMTEMP 11
+#define BTOOTH  12
+#define LAYOUTS 13
+
+// Keycode definitions by thumb, to hopefully make swapping easier.
+#define LTHUMB BACKSPACE
+#define RTHUMB SPACE
+
+// Home row mods settings; history notes below:
+// - fast tapping term of 100 feels too fast
+// - in Dvorak, al roll sometimes comes out as L, and so roll as O, also as as S
+// - maybe Callum-style sticky mods are the way to go after all?
+// - what about mod-tap shift space on the big thumb keys? would have to get used to backspace on a layer, but that might be okay
+#define HM_TAPPING_TERM 200
+#define HM_TAPPING_TERM_FAST 175
+#define HM_PRIOR_IDLE 125
+#define HM_QUICK_TAP 150
+
+// Key groups for cross-hand hold trigger definitions.
+#define KEYS_LEFT  0 1 2 3 4  10 11 12 13 14  20 21 22 23 24
+#define KEYS_RIGHT 5 6 7 8 9  15 16 17 18 19  25 26 27 28 29
+#define KEYS_THUMB 30 31 32  33 34 35
+
+
+// Things to try next:
+// - mod-tap home row mods (shift on home row pinkies to start), preferably with quiet time to prevent delayed keypresses
+// - better handling of adaptive keys in Hands Down Gold; maybe tap-dance is not the best way to handle Z and Q
+// - experiment with different sticky keys durations
+// - try spacebar on the right thumb to see if it feels any more natural
+// - more ctrl-* combos in nav layer, or maybe a dedicated hotkey layer: ^S save, ^T new tab, ^R reload, etc.
 
 / {
-        keymap {
-                compatible = "zmk,keymap";
+chosen { zmk,matrix_transform = &five_column_transform; };
 
-                default_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
-                        bindings = <
-   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                  &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
-                        >;
-                };
-                lower_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
-                                    &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
-                        >;
-                };
+behaviors {
+  tdjz: tap_dance_jz {
+    compatible = "zmk,behavior-tap-dance";
+    #binding-cells = <0>;
+    bindings = <&kp J>, <&kp Z>;
+  };
+  tdgq: tap_dance_gq {
+    compatible = "zmk,behavior-tap-dance";
+    #binding-cells = <0>;
+    bindings = <&kp G>, <&kp Q>;
+  };
+  tdesclay: tap_dance_esc_layouts {
+    compatible = "zmk,behavior-tap-dance";
+    #binding-cells = <0>;
+    tapping-term-ms = <200>;
+    bindings = <&kp ESC>, <&to LAYOUTS>;
+  };
+  // Positional home-row shift; uses fast tapping term
+  hsl: homerow_mods_shift_left {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    bindings = <&kp>, <&kp>;
+    flavor = "tap-unless-interrupted";
+    tapping-term-ms = <HM_TAPPING_TERM_FAST>;
+    quick-tap-ms = <HM_QUICK_TAP>;
+    require-prior-idle-ms = <HM_PRIOR_IDLE>;
+    hold-trigger-key-positions = <KEYS_RIGHT KEYS_THUMB>;
+  };
+  hsr: homerow_mods_shift_right {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    bindings = <&kp>, <&kp>;
+    flavor = "tap-unless-interrupted";
+    tapping-term-ms = <HM_TAPPING_TERM_FAST>;
+    quick-tap-ms = <HM_QUICK_TAP>;
+    require-prior-idle-ms = <HM_PRIOR_IDLE>;
+    hold-trigger-key-positions = <KEYS_LEFT KEYS_THUMB>;
+  };
+};
 
-                raise_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-   &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
-   &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
-                             &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
-                        >;
-                };
-        };
+conditional_layers {
+  compatible = "zmk,conditional-layers";
+  numeric_momentary {
+    if-layers = <NUMTEMP>;
+    then-layer = <NUMPAD>;
+  };
+  numeric_lock {
+    if-layers = <NUMLOCK>;
+    then-layer = <NUMPAD>;
+  };
+};
+
+keymap {
+  compatible = "zmk,keymap";
+
+  hands_down_neu_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  W  |  F  |  M  |  P  |  V  |   |  /  |  .  |  Q  |  Z  |  J  |
+// |  R  |  S  |  N  |  T  |  B  |   |  ,  |  A  |  E  |  I  |  H  |
+// |  X  |  C  |  L  |  D  |  G  |   |  -  |  U  |  O  |  Y  |  K  |
+// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+    bindings = <
+  &kp W         &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
+  &hsl LSHIFT R &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &hsr RSHIFT H
+  &kp X         &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
+         &tdesclay &sl SYMBOLS  &kp LTHUMB    &kp RTHUMB  &sl NAV &kp TAB
+    >;
+  };
+
+  hands_down_gold_layer {
+// ,-----------------------------.   ,-----------------------------.
+// | J z | G q |  M  |  P  |  V  |   |  ;  |  .  |  /  |  "  |  '  |
+// |  R  |  S  |  N  |  D  |  B  |   |  ,  |  A  |  E  |  I  |  H  |
+// |  X  |  F  |  L  |  C  |  W  |   |  -  |  U  |  O  |  Y  |  K  |
+// `-----------| Esc | SYM |  T  |   | Bks | NAV | Tab |-----------'
+    bindings = <
+  &tdjz         &tdgq  &kp M  &kp P  &kp V    &kp SEMI  &kp DOT &kp FSLH &kp DQT &kp SQT
+  &hsl LSHIFT R &kp S  &kp N  &kp D  &kp B    &kp COMMA &kp A   &kp E    &kp I   &hsr RSHIFT H
+  &kp X         &kp F  &kp L  &kp C  &kp W    &kp MINUS &kp U   &kp O    &kp Y   &kp K
+               &tdesclay &sl SYMBOLS &kp T    &kp SPACE &sl NAV &kp TAB
+    >;
+  };
+
+  dvorak_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  '  |  ,  |  .  |  P  |  Y  |   |  F  |  G  |  C  |  R  |  L  |
+// |  A  |  O  |  E  |  U  |  I  |   |  D  |  H  |  T  |  N  |  S  |
+// |  ;  |  Q  |  J  |  K  |  X  |   |  B  |  M  |  W  |  V  |  Z  |
+// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+    bindings = <
+  &kp SQT       &kp COMMA &kp DOT &kp P  &kp Y    &kp F  &kp G  &kp C  &kp R  &kp L
+  &hsl LSHIFT A &kp O     &kp E   &kp U  &kp I    &kp D  &kp H  &kp T  &kp N  &hsr RSHIFT S
+  &kp SEMI      &kp Q     &kp J   &kp K  &kp X    &kp B  &kp M  &kp W  &kp V  &kp Z
+              &tdesclay &sl SYMBOLS &kp LTHUMB    &kp RTHUMB &sl NAV &kp TAB
+    >;
+  };
+
+  colemakdh_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  Q  |  W  |  F  |  P  |  B  |   |  J  |  L  |  U  |  Y  |  '  |
+// |  A  |  R  |  S  |  T  |  G  |   |  M  |  N  |  E  |  I  |  O  |
+// |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H  |  ,  |  .  |  /  |
+// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+    bindings = <
+  &kp Q         &kp W  &kp F  &kp P  &kp B    &kp J    &kp L   &kp U     &kp Y   &kp SQT
+  &hsl LSHIFT A &kp R  &kp S  &kp T  &kp G    &kp M    &kp N   &kp E     &kp I   &hsr RSHIFT O
+  &kp Z         &kp X  &kp C  &kp D  &kp V    &kp K    &kp H   &kp COMMA &kp DOT &kp FSLH
+          &tdesclay &sl SYMBOLS &kp LTHUMB    &kp RTHUMB &sl NAV &kp TAB
+    >;
+  };
+
+  qwerty_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |
+// |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  |  ;  |
+// |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  |
+// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+    bindings = <
+  &kp Q         &kp W  &kp E  &kp R  &kp T    &kp Y &kp U  &kp I     &kp O   &kp P
+  &hsl LSHIFT A &kp S  &kp D  &kp F  &kp G    &kp H &kp J  &kp K     &kp L   &hsr RSHIFT SEMI
+  &kp Z         &kp X  &kp C  &kp V  &kp B    &kp N &kp M  &kp COMMA &kp DOT &kp FSLH
+          &tdesclay &sl SYMBOLS &kp LTHUMB    &kp RTHUMB &sl NAV &kp TAB
+    >;
+  };
+
+  canary_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  W  |  L  |  Y  |  P  |  B  |   |  Z  |  F  |  O  |  U  |  '  |
+// |  C  |  R  |  S  |  T  |  G  |   |  M  |  N  |  E  |  I  |  A  |
+// |  Q  |  J  |  V  |  D  |  K  |   |  X  |  H  |  /  |  ,  |  .  |
+// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+    bindings = <
+  &kp W         &kp L  &kp Y  &kp P  &kp B    &kp Z  &kp F  &kp O    &kp U     &kp SQT
+  &hsl LSHIFT C &kp R  &kp S  &kp T  &kp G    &kp M  &kp N  &kp E    &kp I     &hsr RSHIFT A
+  &kp Q         &kp J  &kp V  &kp D  &kp K    &kp X  &kp H  &kp FSLH &kp COMMA &kp DOT
+          &tdesclay &sl SYMBOLS &kp LTHUMB    &kp RTHUMB &sl NAV &kp TAB
+    >;
+  };
+
+  sturdy_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  V  |  M  |  L  |  C  |  P  |   |  X  |  F  |  O  |  U  |  J  |
+// |  S  |  T  |  R  |  D  |  Y  |   |  .  |  N  |  A  |  E  |  I  |
+// |  Z  |  K  |  Q  |  G  |  W  |   |  B  |  H  |  '  |  ;  |  ,  |
+// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+    bindings = <
+  &kp V         &kp M  &kp L  &kp C  &kp P    &kp X   &kp F  &kp O   &kp U    &kp J
+  &hsl LSHIFT S &kp T  &kp R  &kp D  &kp Y    &kp DOT &kp N  &kp A   &kp E    &hsr RSHIFT I
+  &kp Z         &kp K  &kp Q  &kp G  &kp W    &kp B   &kp H  &kp SQT &kp SEMI &kp COMMA
+          &tdesclay &sl SYMBOLS &kp LTHUMB    &kp RTHUMB &sl NAV &kp TAB
+    >;
+  };
+
+  symbols_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  \  |
+// |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
+// |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  /  |
+// `-----------|Shift|#####| BAS |   | Ent | NUM |Shift|-----------'
+    bindings = <
+  &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp BSLH
+  &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
+  &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp FSLH
+                     &sk LSHIFT &trans &tog SYMBOLS    &kp RET &mo NUMTEMP &sk RSHIFT
+    >;
+  };
+
+  navigation_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  1  |  2  |  3  |  4  |  5  |   | Hom | PgD | Up  | PgU | Esc |
+// |  6  |  7  |  8  |  9  |  0  |   | End | Left| Down|Right| Bks |
+// | Undo| Cut | Copy|Paste| GUI |   | Ins | Ctrl| Del | Alt | Tab |
+// `-----------|Shift| NUM | BAS |   | Ent |#####|Shift|-----------'
+    bindings = <
+  &kp N1    &kp N2    &kp N3    &kp N4     &kp N5      &kp HOME &kp PG_DN &kp UP   &kp PG_UP &kp ESC
+  &kp N6    &kp N7    &kp N8    &kp N9     &kp N0      &kp END  &kp LEFT  &kp DOWN &kp RIGHT &kp BSPC
+  &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &sk LGUI    &kp INS  &sk RCTRL &kp DEL  &sk LALT  &kp TAB
+                    &sk LSHIFT &mo NUMTEMP &tog NAV    &kp RET &trans &sk RSHIFT
+    >;
+  };
+
+  numpad_layer {
+// ,-----------------------------.   ,------------------------------.
+// | F1  | F2  | F3  | F4  |NumLk|   |  *  |  7   |  8  |  9  |  -  |
+// | F5  | F6  | F7  | F8  |     |   |  /  |  4   |  5  |  6  |  +  |
+// | F9  | F10 | F11 | F12 |     |   |  0  |  1   |  2  |  3  | Ent |
+// `-----------|     |#####| BAS |   |  0  |######|  .  |-----------'
+    bindings = <
+  &kp F1 &kp F2  &kp F3  &kp F4  &tog NUMLOCK    &kp KP_MULTIPLY &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_SUBTRACT
+  &kp F5 &kp F6  &kp F7  &kp F8  &none           &kp KP_DIVIDE   &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS
+  &kp F9 &kp F10 &kp F11 &kp F12 &none           &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp RETURN2
+        &to BTOOTH &trans &tog NUMLOCK           &kp KP_N0 &trans &kp KP_DOT
+    >;
+  };
+
+  num_temp_layer {
+    // Only exists to momentarily activate numpad layer.
+    bindings = <
+      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                    &trans &trans &trans    &trans &trans &trans
+    >;
+  };
+
+  num_lock_layer {
+    // Only exists to toggle numpad layer lock on and off.
+    bindings = <
+      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                    &trans &trans &trans    &trans &trans &trans
+    >;
+  };
+
+  bluetooth_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
+// | BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN | UP  | RGT |     |
+// |     |     |     |     |     |   |     |     |     |     |     |
+// `-----------|     |     |     |   |     |     |     |-----------'
+
+    bindings = <
+  &kp N1       &kp N2       &kp N3       &kp N4       &kp N5          &kp N6    &kp N7    &kp N8  &kp N9    &kp N0
+  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT &trans
+  &trans       &trans       &trans       &trans       &trans          &trans    &trans    &trans  &trans    &trans
+                                         &trans &trans &tog BTOOTH    &trans &trans &trans
+    >;
+  };
+  layout_selection_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |     |HDNeu|Dvork|Clmak|     |   |     |     |     |     |     |
+// |QWRTY|HDGld|STRDY|Cnary|     |   |     |     |     |     |     |
+// |     |     |     |     |     |   |     |     |     |     |     |
+// `-----------|     |     |     |   |     |     |     |-----------'
+
+    bindings = <
+  &trans     &to HD_NEU  &to DVORAK &to COLEMAK &trans    &trans &trans &trans &trans &trans
+  &to QWERTY &to HD_GOLD &to STURDY &to CANARY  &trans    &trans &trans &trans &trans &trans
+  &trans     &trans      &trans     &trans      &trans    &trans &trans &trans &trans &trans
+                            &trans &trans &tog LAYOUTS    &trans &trans &trans
+    >;
+  };
+};
+// end keymap
 };
