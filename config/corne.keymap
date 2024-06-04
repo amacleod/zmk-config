@@ -251,7 +251,7 @@ keymap {
   &kp F1 &kp F2  &kp F3  &kp F4  &tog NUMLOCK    &kp KP_MULTIPLY &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_SUBTRACT
   &kp F5 &kp F6  &kp F7  &kp F8  &none           &kp KP_DIVIDE   &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS
   &kp F9 &kp F10 &kp F11 &kp F12 &none           &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp RETURN2
-        &to BTOOTH &trans &tog NUMLOCK           &kp KP_N0 &trans &kp KP_DOT
+            &trans &trans &tog NUMLOCK           &kp KP_N0 &trans &kp KP_DOT
     >;
   };
 
