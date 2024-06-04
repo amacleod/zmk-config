@@ -49,6 +49,7 @@
 // - need easier access to backspace; maybe put it on rightmost thumb, where tab is now
 // - consider making one of the space keys pure space, rather than mod-tap shift
 // - or have one of them be tap-preferred and the other one be hold-preferred
+//
 
 / {
 chosen { zmk,matrix_transform = &five_column_transform; };
@@ -232,7 +233,7 @@ keymap {
   &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp BSLH
   &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
   &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH
-                         &trans &trans &tog SYMBOLS    &kp RET &mo NUMTEMP &sk BSLH
+                         &trans &trans &tog SYMBOLS    &kp RET &mo NUMTEMP &kp BSLH
     >;
   };
 
