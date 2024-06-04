@@ -26,8 +26,8 @@
 #define LAYOUTS 13
 
 // Keycode definitions by thumb, to hopefully make swapping easier.
-#define LTHUMB BACKSPACE
-#define RTHUMB SPACE
+#define LTHUMB &mt LSHIFT SPACE
+#define RTHUMB &mt RSHIFT SPACE
 
 // Home row mods settings; history notes below:
 // - fast tapping term of 100 feels too fast
@@ -117,10 +117,10 @@ keymap {
 // |  X  |  C  |  L  |  D  |  G  |   |  -  |  U  |  O  |  Y  |  K  |
 // `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
     bindings = <
-  &kp W         &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
-  &hsl LSHIFT R &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &hsr RSHIFT H
-  &kp X         &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
-         &tdesclay &sl SYMBOLS  &kp LTHUMB    &kp RTHUMB  &sl NAV &kp TAB
+  &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
+  &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &kp H
+  &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
+      &tdesclay &sl SYMBOLS  LTHUMB    RTHUMB  &sl NAV &kp TAB
     >;
   };
 
@@ -131,10 +131,10 @@ keymap {
 // |  X  |  F  |  L  |  C  |  W  |   |  -  |  U  |  O  |  Y  |  K  |
 // `-----------| Esc | SYM |  T  |   | Bks | NAV | Tab |-----------'
     bindings = <
-  &tdjz         &tdgq  &kp M  &kp P  &kp V    &kp SEMI  &kp DOT &kp FSLH &kp DQT &kp SQT
-  &hsl LSHIFT R &kp S  &kp N  &kp D  &kp B    &kp COMMA &kp A   &kp E    &kp I   &hsr RSHIFT H
-  &kp X         &kp F  &kp L  &kp C  &kp W    &kp MINUS &kp U   &kp O    &kp Y   &kp K
-               &tdesclay &sl SYMBOLS &kp T    &kp SPACE &sl NAV &kp TAB
+  &tdjz  &tdgq  &kp M  &kp P  &kp V    &kp SEMI  &kp DOT &kp FSLH &kp DQT &kp SQT
+  &kp R  &kp S  &kp N  &kp D  &kp B    &kp COMMA &kp A   &kp E    &kp I   &kp H
+  &kp X  &kp F  &kp L  &kp C  &kp W    &kp MINUS &kp U   &kp O    &kp Y   &kp K
+        &tdesclay &sl SYMBOLS &kp T    &mt RSHIFT SPACE &sl NAV &kp TAB
     >;
   };
 
@@ -145,10 +145,10 @@ keymap {
 // |  ;  |  Q  |  J  |  K  |  X  |   |  B  |  M  |  W  |  V  |  Z  |
 // `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
     bindings = <
-  &kp SQT       &kp COMMA &kp DOT &kp P  &kp Y    &kp F  &kp G  &kp C  &kp R  &kp L
-  &hsl LSHIFT A &kp O     &kp E   &kp U  &kp I    &kp D  &kp H  &kp T  &kp N  &hsr RSHIFT S
-  &kp SEMI      &kp Q     &kp J   &kp K  &kp X    &kp B  &kp M  &kp W  &kp V  &kp Z
-              &tdesclay &sl SYMBOLS &kp LTHUMB    &kp RTHUMB &sl NAV &kp TAB
+  &kp SQT  &kp COMMA &kp DOT &kp P  &kp Y    &kp F  &kp G  &kp C  &kp R  &kp L
+  &kp A    &kp O     &kp E   &kp U  &kp I    &kp D  &kp H  &kp T  &kp N  &kp S
+  &kp SEMI &kp Q     &kp J   &kp K  &kp X    &kp B  &kp M  &kp W  &kp V  &kp Z
+             &tdesclay &sl SYMBOLS LTHUMB    RTHUMB &sl NAV &kp TAB
     >;
   };
 
@@ -159,10 +159,10 @@ keymap {
 // |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H  |  ,  |  .  |  /  |
 // `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
     bindings = <
-  &kp Q         &kp W  &kp F  &kp P  &kp B    &kp J    &kp L   &kp U     &kp Y   &kp SQT
-  &hsl LSHIFT A &kp R  &kp S  &kp T  &kp G    &kp M    &kp N   &kp E     &kp I   &hsr RSHIFT O
-  &kp Z         &kp X  &kp C  &kp D  &kp V    &kp K    &kp H   &kp COMMA &kp DOT &kp FSLH
-          &tdesclay &sl SYMBOLS &kp LTHUMB    &kp RTHUMB &sl NAV &kp TAB
+  &kp Q  &kp W  &kp F  &kp P  &kp B    &kp J    &kp L   &kp U     &kp Y   &kp SQT
+  &kp A  &kp R  &kp S  &kp T  &kp G    &kp M    &kp N   &kp E     &kp I   &kp O
+  &kp Z  &kp X  &kp C  &kp D  &kp V    &kp K    &kp H   &kp COMMA &kp DOT &kp FSLH
+       &tdesclay &sl SYMBOLS LTHUMB    RTHUMB &sl NAV &kp TAB
     >;
   };
 
@@ -173,10 +173,10 @@ keymap {
 // |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  |
 // `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
     bindings = <
-  &kp Q         &kp W  &kp E  &kp R  &kp T    &kp Y &kp U  &kp I     &kp O   &kp P
-  &hsl LSHIFT A &kp S  &kp D  &kp F  &kp G    &kp H &kp J  &kp K     &kp L   &hsr RSHIFT SEMI
-  &kp Z         &kp X  &kp C  &kp V  &kp B    &kp N &kp M  &kp COMMA &kp DOT &kp FSLH
-          &tdesclay &sl SYMBOLS &kp LTHUMB    &kp RTHUMB &sl NAV &kp TAB
+  &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y &kp U  &kp I     &kp O   &kp P
+  &kp A  &kp S  &kp D  &kp F  &kp G    &kp H &kp J  &kp K     &kp L   &kp SEMI
+  &kp Z  &kp X  &kp C  &kp V  &kp B    &kp N &kp M  &kp COMMA &kp DOT &kp FSLH
+       &tdesclay &sl SYMBOLS LTHUMB    RTHUMB &sl NAV &kp TAB
     >;
   };
 
@@ -187,10 +187,10 @@ keymap {
 // |  Q  |  J  |  V  |  D  |  K  |   |  X  |  H  |  /  |  ,  |  .  |
 // `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
     bindings = <
-  &kp W         &kp L  &kp Y  &kp P  &kp B    &kp Z  &kp F  &kp O    &kp U     &kp SQT
-  &hsl LSHIFT C &kp R  &kp S  &kp T  &kp G    &kp M  &kp N  &kp E    &kp I     &hsr RSHIFT A
-  &kp Q         &kp J  &kp V  &kp D  &kp K    &kp X  &kp H  &kp FSLH &kp COMMA &kp DOT
-          &tdesclay &sl SYMBOLS &kp LTHUMB    &kp RTHUMB &sl NAV &kp TAB
+  &kp W  &kp L  &kp Y  &kp P  &kp B    &kp Z  &kp F  &kp O    &kp U     &kp SQT
+  &kp C  &kp R  &kp S  &kp T  &kp G    &kp M  &kp N  &kp E    &kp I     &kp A
+  &kp Q  &kp J  &kp V  &kp D  &kp K    &kp X  &kp H  &kp FSLH &kp COMMA &kp DOT
+       &tdesclay &sl SYMBOLS LTHUMB    RTHUMB &sl NAV &kp TAB
     >;
   };
 
@@ -201,10 +201,10 @@ keymap {
 // |  Z  |  K  |  Q  |  G  |  W  |   |  B  |  H  |  '  |  ;  |  ,  |
 // `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
     bindings = <
-  &kp V         &kp M  &kp L  &kp C  &kp P    &kp X   &kp F  &kp O   &kp U    &kp J
-  &hsl LSHIFT S &kp T  &kp R  &kp D  &kp Y    &kp DOT &kp N  &kp A   &kp E    &hsr RSHIFT I
-  &kp Z         &kp K  &kp Q  &kp G  &kp W    &kp B   &kp H  &kp SQT &kp SEMI &kp COMMA
-          &tdesclay &sl SYMBOLS &kp LTHUMB    &kp RTHUMB &sl NAV &kp TAB
+  &kp V  &kp M  &kp L  &kp C  &kp P    &kp X   &kp F  &kp O   &kp U    &kp J
+  &kp S  &kp T  &kp R  &kp D  &kp Y    &kp DOT &kp N  &kp A   &kp E    &kp I
+  &kp Z  &kp K  &kp Q  &kp G  &kp W    &kp B   &kp H  &kp SQT &kp SEMI &kp COMMA
+              &tdesclay &sl SYMBOLS LTHUMB    RTHUMB &sl NAV &kp TAB
     >;
   };
 
