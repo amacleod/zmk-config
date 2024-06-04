@@ -285,7 +285,7 @@ keymap {
   &trans       &to HD_NEU   &to DVORAK   &to COLEMAK  &trans          &trans &trans &trans &trans &trans
   &to QWERTY   &to HD_GOLD  &to STURDY   &to CANARY   &trans          &trans &trans &trans &trans &trans
   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &trans &trans &trans &trans &trans
-                                        &trans &trans &tog LAYOUTS    &trans &trans &trans
+                                        &trans &trans &tog KEEBCTL    &trans &trans &trans
     >;
   };
 };
