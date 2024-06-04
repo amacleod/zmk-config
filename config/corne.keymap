@@ -33,7 +33,6 @@
 // - fast tapping term of 100 feels too fast
 // - in Dvorak, al roll sometimes comes out as L, and so roll as O, also as as S
 // - maybe Callum-style sticky mods are the way to go after all?
-// - what about mod-tap shift space on the big thumb keys? would have to get used to backspace on a layer, but that might be okay
 #define HM_TAPPING_TERM 200
 #define HM_TAPPING_TERM_FAST 175
 #define HM_PRIOR_IDLE 125
@@ -54,6 +53,16 @@
 
 / {
 chosen { zmk,matrix_transform = &five_column_transform; };
+
+combos {
+  compatible = "zmk,combos";
+  // Both main thumb keys to trigger caps word.
+  combo_caps_word {
+    timeout-ms = <50>;
+    key-positions = <32 33>;
+    bindings = <&caps_word>;    
+  };
+};
 
 behaviors {
   tdjz: tap_dance_jz {
@@ -212,26 +221,26 @@ keymap {
 // ,-----------------------------.   ,-----------------------------.
 // |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  \  |
 // |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
-// |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  /  |
+// |  ~  |  _  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  /  |
 // `-----------|Shift|#####| BAS |   | Ent | NUM |Shift|-----------'
     bindings = <
   &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp BSLH
   &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
-  &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp FSLH
+  &kp TILDE &kp UNDER &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp FSLH
                      &sk LSHIFT &trans &tog SYMBOLS    &kp RET &mo NUMTEMP &sk RSHIFT
     >;
   };
 
   navigation_layer {
 // ,-----------------------------.   ,-----------------------------.
-// |  1  |  2  |  3  |  4  |  5  |   | Hom | PgD | Up  | PgU | Esc |
-// |  6  |  7  |  8  |  9  |  0  |   | End | Left| Down|Right| Bks |
-// | Undo| Cut | Copy|Paste| GUI |   | Ins | Ctrl| Del | Alt | Tab |
+// | ^Q  | ^W  | ^E  | ^R  | ^T  |   | Hom | PgD | Up  | PgU | Esc |
+// | ^A  | ^S  | ^D  | ^F  | ^G  |   | End | Left| Down|Right| Bks |
+// | ^Z  | ^X  | ^C  | ^V  | Caps|   | Ins | Ctrl| Del | Alt | Tab |
 // `-----------|Shift| NUM | BAS |   | Ent |#####|Shift|-----------'
     bindings = <
-  &kp N1    &kp N2    &kp N3    &kp N4     &kp N5      &kp HOME &kp PG_DN &kp UP   &kp PG_UP &kp ESC
-  &kp N6    &kp N7    &kp N8    &kp N9     &kp N0      &kp END  &kp LEFT  &kp DOWN &kp RIGHT &kp BSPC
-  &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &sk LGUI    &kp INS  &sk RCTRL &kp DEL  &sk LALT  &kp TAB
+  &kp LC(Q) &kp LC(W) &kp LC    &kp LC     &kp LC      &kp HOME &kp PG_DN &kp UP   &kp PG_UP &kp ESC
+  &kp LC(A) &kp LC    &kp LC    &kp LC     &kp LC      &kp END  &kp LEFT  &kp DOWN &kp RIGHT &kp BSPC
+  &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &capsGUI    &kp INS  &sk RCTRL &kp DEL  &sk LALT  &kp TAB
                     &sk LSHIFT &mo NUMTEMP &tog NAV    &kp RET &trans &sk RSHIFT
     >;
   };
