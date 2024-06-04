@@ -22,8 +22,7 @@
 #define NUMPAD  9
 #define NUMLOCK 10
 #define NUMTEMP 11
-#define BTOOTH  12
-#define LAYOUTS 13
+#define KEEBCTL 12
 
 // Keycode definitions by thumb, to hopefully make swapping easier.
 #define LTHUMB &mt LSHIFT SPACE
@@ -45,11 +44,8 @@
 
 
 // Things to try next:
-// - mod-tap home row mods (shift on home row pinkies to start), preferably with quiet time to prevent delayed keypresses
 // - better handling of adaptive keys in Hands Down Gold; maybe tap-dance is not the best way to handle Z and Q
-// - experiment with different sticky keys durations
-// - try spacebar on the right thumb to see if it feels any more natural
-// - more ctrl-* combos in nav layer, or maybe a dedicated hotkey layer: ^S save, ^T new tab, ^R reload, etc.
+// - sticky mods should exit the nav layer
 
 / {
 chosen { zmk,matrix_transform = &five_column_transform; };
@@ -60,7 +56,13 @@ combos {
   combo_caps_word {
     timeout-ms = <50>;
     key-positions = <32 33>;
-    bindings = <&caps_word>;    
+    bindings = <&caps_word>;
+  };
+  // Both outer thumb keys trigger the keyboard control layer (layout selection and Bluetooth).
+  combo_meta_layer {
+    timeout-ms = <50>;
+    key-positions = <30 35>;
+    bindings = <&sl KEEBCTL>;
   };
 };
 
@@ -221,12 +223,12 @@ keymap {
 // ,-----------------------------.   ,-----------------------------.
 // |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  \  |
 // |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
-// |  ~  |  _  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  /  |
+// |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  _  |
 // `-----------|Shift|#####| BAS |   | Ent | NUM |Shift|-----------'
     bindings = <
   &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp BSLH
   &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
-  &kp TILDE &kp UNDER &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp FSLH
+  &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp UNDER
                      &sk LSHIFT &trans &tog SYMBOLS    &kp RET &mo NUMTEMP &sk RSHIFT
     >;
   };
@@ -278,33 +280,18 @@ keymap {
                     &trans &trans &trans    &trans &trans &trans
     >;
   };
-
-  bluetooth_layer {
-// ,-----------------------------.   ,-----------------------------.
-// |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
-// | BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN | UP  | RGT |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// `-----------|     |     |     |   |     |     |     |-----------'
-
-    bindings = <
-  &kp N1       &kp N2       &kp N3       &kp N4       &kp N5          &kp N6    &kp N7    &kp N8  &kp N9    &kp N0
-  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT &trans
-  &trans       &trans       &trans       &trans       &trans          &trans    &trans    &trans  &trans    &trans
-                                         &trans &trans &tog BTOOTH    &trans &trans &trans
-    >;
-  };
-  layout_selection_layer {
+  keyboard_control_layer {
 // ,-----------------------------.   ,-----------------------------.
 // |     |HDNeu|Dvork|Clmak|     |   |     |     |     |     |     |
 // |QWRTY|HDGld|STRDY|Cnary|     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
+// | BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |
 // `-----------|     |     |     |   |     |     |     |-----------'
 
     bindings = <
-  &trans     &to HD_NEU  &to DVORAK &to COLEMAK &trans    &trans &trans &trans &trans &trans
-  &to QWERTY &to HD_GOLD &to STURDY &to CANARY  &trans    &trans &trans &trans &trans &trans
-  &trans     &trans      &trans     &trans      &trans    &trans &trans &trans &trans &trans
-                            &trans &trans &tog LAYOUTS    &trans &trans &trans
+  &trans       &to HD_NEU   &to DVORAK   &to COLEMAK  &trans          &trans &trans &trans &trans &trans
+  &to QWERTY   &to HD_GOLD  &to STURDY   &to CANARY   &trans          &trans &trans &trans &trans &trans
+  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &trans &trans &trans &trans &trans
+                                        &trans &trans &tog LAYOUTS    &trans &trans &trans
     >;
   };
 };
