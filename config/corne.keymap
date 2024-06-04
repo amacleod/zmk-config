@@ -62,7 +62,7 @@ combos {
   combo_meta_layer {
     timeout-ms = <50>;
     key-positions = <30 35>;
-    bindings = <&sl KEEBCTL>;
+    bindings = <&slx KEEBCTL>;
   };
 };
 
@@ -97,6 +97,12 @@ behaviors {
     quick-tap-ms = <HM_QUICK_TAP>;
     require-prior-idle-ms = <HM_PRIOR_IDLE>;
     hold-trigger-key-positions = <KEYS_LEFT KEYS_THUMB>;
+  };
+  slx: sticky_layer_extended {
+    compatible = "zmk,behavior-sticky-key";
+    #binding-cells = <1>;
+    bindings = <&mo>;
+    release-after-ms = <8000>;
   };
 };
 
