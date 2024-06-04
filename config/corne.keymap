@@ -235,12 +235,12 @@ keymap {
 // ,-----------------------------.   ,-----------------------------.
 // | ^Q  | ^W  | ^E  | ^R  | ^T  |   | Hom | PgD | Up  | PgU | Esc |
 // | ^A  | ^S  | ^D  | ^F  | ^G  |   | End | Left| Down|Right| Bks |
-// | ^Z  | ^X  | ^C  | ^V  | Caps|   | Ins | Ctrl| Del | Alt | Tab |
+// | ^Z  | ^X  | ^C  | ^V  |     |   | Ins | Ctrl| Del | Alt | Tab |
 // `-----------|Shift| NUM | BAS |   | Ent |#####|Shift|-----------'
     bindings = <
-  &kp LC(Q) &kp LC(W) &kp LC    &kp LC     &kp LC      &kp HOME &kp PG_DN &kp UP   &kp PG_UP &kp ESC
-  &kp LC(A) &kp LC    &kp LC    &kp LC     &kp LC      &kp END  &kp LEFT  &kp DOWN &kp RIGHT &kp BSPC
-  &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &capsGUI    &kp INS  &sk RCTRL &kp DEL  &sk LALT  &kp TAB
+  &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)  &kp LC(T)   &kp HOME &kp PG_DN &kp UP   &kp PG_UP &kp ESC
+  &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F)  &kp LC(G)   &kp END  &kp LEFT  &kp DOWN &kp RIGHT &kp BSPC
+  &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &none       &kp INS  &sk RCTRL &kp DEL  &sk LALT  &kp TAB
                     &sk LSHIFT &mo NUMTEMP &tog NAV    &kp RET &trans &sk RSHIFT
     >;
   };
