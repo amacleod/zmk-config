@@ -48,11 +48,9 @@
 
 // Things to try next:
 // - better handling of adaptive keys in Hands Down Gold; maybe tap-dance is not the best way to handle Z and Q
-// - sticky mods should exit the nav layer (maybe? are there situations where they should not?)
-// - or forget mod-tap shift space altogether; typing very fast leads to false positive rolls
 // - combos for backspace and ctrl-backspace maybe? possibly right ring and pinky
 // - what about combos for shift?
-// - need a way to get backspace on numpad; might need another, higher overlay layer with editing keys
+// - make one or more of the backspace keys use hold-tap: tap for ^Bks, hold for plain Bks; that way plain can benefit from repeat
 
 / {
 chosen { zmk,matrix_transform = &five_column_transform; };
