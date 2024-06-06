@@ -29,7 +29,7 @@
 #define RTHUMB &kp SPACE
 
 // Convenience macros for repeated patterns.
-#define MO_TOG(layer) &mo_tog layer layer
+#define MO_TOG(layer) &motog layer layer
 
 // Home row mods settings; history notes below:
 // - fast tapping term of 100 feels too fast
