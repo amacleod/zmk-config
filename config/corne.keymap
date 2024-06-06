@@ -26,7 +26,7 @@
 
 // Keycode definitions by thumb, to hopefully make swapping easier.
 #define LTHUMB &mt LSHIFT SPACE
-#define RTHUMB &mt RSHIFT SPACE
+#define RTHUMB &kp SPACE
 
 // Convenience macros for repeated patterns.
 #define MO_TOG(layer) &mo_tog layer layer
@@ -113,6 +113,13 @@ behaviors {
     bindings = <&mo>;
     release-after-ms = <8000>;
   };
+  motog: momentary_or_toggle_hold_tap {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    flavor = "hold-preferred";
+    tapping-term-ms = <200>;
+    bindings = <&mo>, <&tog>;
+  }; 
 };
 
 conditional_layers {
@@ -135,12 +142,12 @@ keymap {
 // |  W  |  F  |  M  |  P  |  V  |   |  /  |  .  |  Q  |  Z  |  J  |
 // |  R  |  S  |  N  |  T  |  B  |   |  ,  |  A  |  E  |  I  |  H  |
 // |  X  |  C  |  L  |  D  |  G  |   |  -  |  U  |  O  |  Y  |  K  |
-// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+// `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
   &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &kp H
   &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
-            &kp ESC &mo SYM  LTHUMB    RTHUMB &mo NAV &kp TAB
+         &kp ESC MO_TOG(SYM) LTHUMB    RTHUMB MO_TOG(NAV) &kp BSPC
     >;
   };
 
@@ -149,12 +156,12 @@ keymap {
 // | J z | G q |  M  |  P  |  V  |   |  ;  |  .  |  /  |  "  |  '  |
 // |  R  |  S  |  N  |  D  |  B  |   |  ,  |  A  |  E  |  I  |  H  |
 // |  X  |  F  |  L  |  C  |  W  |   |  -  |  U  |  O  |  Y  |  K  |
-// `-----------| Esc | SYM |  T  |   | Bks | NAV | Tab |-----------'
+// `-----------| Esc | SYM |  T  |   | Spc | NAV | Bks |-----------'
     bindings = <
   &tdjz  &tdgq  &kp M  &kp P  &kp V    &kp SEMI  &kp DOT &kp FSLH &kp DQT &kp SQT
   &kp R  &kp S  &kp N  &kp D  &kp B    &kp COMMA &kp A   &kp E    &kp I   &kp H
   &kp X  &kp F  &kp L  &kp C  &kp W    &kp MINUS &kp U   &kp O    &kp Y   &kp K
-              &kp ESC &mo SYM &kp T    &mt RSHIFT SPACE &mo NAV &kp TAB
+          &kp ESC MO_TOG(SYM) &kp T    &mt RSHIFT SPACE MO_TOG(NAV) &kp BSPC
     >;
   };
 
@@ -163,12 +170,12 @@ keymap {
 // |  '  |  ,  |  .  |  P  |  Y  |   |  F  |  G  |  C  |  R  |  L  |
 // |  A  |  O  |  E  |  U  |  I  |   |  D  |  H  |  T  |  N  |  S  |
 // |  ;  |  Q  |  J  |  K  |  X  |   |  B  |  M  |  W  |  V  |  Z  |
-// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+// `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp SQT  &kp COMMA &kp DOT &kp P  &kp Y    &kp F  &kp G  &kp C  &kp R  &kp L
   &kp A    &kp O     &kp E   &kp U  &kp I    &kp D  &kp H  &kp T  &kp N  &kp S
   &kp SEMI &kp Q     &kp J   &kp K  &kp X    &kp B  &kp M  &kp W  &kp V  &kp Z
-                   &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp TAB
+               &kp ESC MO_TOG(SYM) LTHUMB    RTHUMB MO_TOG(NAV) &kp BSPC
     >;
   };
 
@@ -177,12 +184,12 @@ keymap {
 // |  Q  |  W  |  F  |  P  |  B  |   |  J  |  L  |  U  |  Y  |  '  |
 // |  A  |  R  |  S  |  T  |  G  |   |  M  |  N  |  E  |  I  |  O  |
 // |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H  |  ,  |  .  |  /  |
-// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+// `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp Q  &kp W  &kp F  &kp P  &kp B    &kp J    &kp L   &kp U     &kp Y   &kp SQT
   &kp A  &kp R  &kp S  &kp T  &kp G    &kp M    &kp N   &kp E     &kp I   &kp O
   &kp Z  &kp X  &kp C  &kp D  &kp V    &kp K    &kp H   &kp COMMA &kp DOT &kp FSLH
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp TAB
+         &kp ESC MO_TOG(SYM) LTHUMB    RTHUMB MO_TOG(NAV) &kp BSPC
     >;
   };
 
@@ -191,12 +198,12 @@ keymap {
 // |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |
 // |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  |  ;  |
 // |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  |
-// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+// `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y &kp U  &kp I     &kp O   &kp P
   &kp A  &kp S  &kp D  &kp F  &kp G    &kp H &kp J  &kp K     &kp L   &kp SEMI
   &kp Z  &kp X  &kp C  &kp V  &kp B    &kp N &kp M  &kp COMMA &kp DOT &kp FSLH
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp TAB
+         &kp ESC MO_TOG(SYM) LTHUMB    RTHUMB MO_TOG(NAV) &kp BSPC
     >;
   };
 
@@ -205,12 +212,12 @@ keymap {
 // |  W  |  L  |  Y  |  P  |  B  |   |  Z  |  F  |  O  |  U  |  '  |
 // |  C  |  R  |  S  |  T  |  G  |   |  M  |  N  |  E  |  I  |  A  |
 // |  Q  |  J  |  V  |  D  |  K  |   |  X  |  H  |  /  |  ,  |  .  |
-// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+// `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp W  &kp L  &kp Y  &kp P  &kp B    &kp Z  &kp F  &kp O    &kp U     &kp SQT
   &kp C  &kp R  &kp S  &kp T  &kp G    &kp M  &kp N  &kp E    &kp I     &kp A
   &kp Q  &kp J  &kp V  &kp D  &kp K    &kp X  &kp H  &kp FSLH &kp COMMA &kp DOT
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp TAB
+         &kp ESC MO_TOG(SYM) LTHUMB    RTHUMB MO_TOG(NAV) &kp BSPC
     >;
   };
 
@@ -219,12 +226,12 @@ keymap {
 // |  V  |  M  |  L  |  C  |  P  |   |  X  |  F  |  O  |  U  |  J  |
 // |  S  |  T  |  R  |  D  |  Y  |   |  .  |  N  |  A  |  E  |  I  |
 // |  Z  |  K  |  Q  |  G  |  W  |   |  B  |  H  |  '  |  ;  |  ,  |
-// `-----------| Esc | SYM | Bks |   | Spc | NAV | Tab |-----------'
+// `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp V  &kp M  &kp L  &kp C  &kp P    &kp X   &kp F  &kp O   &kp U    &kp J
   &kp S  &kp T  &kp R  &kp D  &kp Y    &kp DOT &kp N  &kp A   &kp E    &kp I
   &kp Z  &kp K  &kp Q  &kp G  &kp W    &kp B   &kp H  &kp SQT &kp SEMI &kp COMMA
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp TAB
+         &kp ESC MO_TOG(SYM) LTHUMB    RTHUMB MO_TOG(NAV) &kp BSPC
     >;
   };
 
@@ -233,12 +240,12 @@ keymap {
 // |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  _  |
 // |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
 // |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  /  |
-// `-----------|     |#####| BAS |   | Ent | NUM |  \  |-----------'
+// `-----------|     |#####| BAS |   |     | NUM |  \  |-----------'
     bindings = <
   &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER
   &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
   &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH
-                             &trans &trans &tog SYM    &kp RET &mo NUMTEMP &kp BSLH
+                             &trans &trans &tog SYM    &trans &mo NUMTEMP &kp BSLH
     >;
   };
 
@@ -246,27 +253,27 @@ keymap {
 // ,-----------------------------.   ,-----------------------------.
 // | ^Q  | ^W  | ^E  | ^R  | ^T  |   | Hom | PgD | Up  | PgU | Esc |
 // | ^A  | ^S  | ^D  | ^F  | ^G  |   | End | Left| Down|Right| Bks |
-// | ^Z  | ^X  | ^C  | ^V  |     |   | Ins | Ctrl| Del | Alt | Tab |
-// `-----------|Shift| NUM | BAS |   | Ent |#####|Shift|-----------'
+// | ^Z  | ^X  | ^C  | ^V  |XXXXX|   | Ins | Ctrl| Del | Alt | Tab |
+// `-----------|Shift| NUM | BAS |   |     |#####|Shift|-----------'
     bindings = <
   &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)  &kp LC(T)   &kp HOME &kp PG_DN &kp UP   &kp PG_UP &kp ESC
   &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F)  &kp LC(G)   &kp END  &kp LEFT  &kp DOWN &kp RIGHT &kp BSPC
   &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &none       &kp INS  &sk RCTRL &kp DEL  &sk LALT  &kp TAB
-                    &sk LSHIFT &mo NUMTEMP &tog NAV    &kp RET &trans &sk RSHIFT
+                    &sk LSHIFT &mo NUMTEMP &tog NAV    &trans &trans &sk RSHIFT
     >;
   };
 
   numpad_layer {
 // ,-----------------------------.   ,------------------------------.
 // | F1  | F2  | F3  | F4  |NumLk|   |  *  |  7   |  8  |  9  |  -  |
-// | F5  | F6  | F7  | F8  |     |   |  /  |  4   |  5  |  6  |  +  |
-// | F9  | F10 | F11 | F12 |     |   |  0  |  1   |  2  |  3  | Ent |
-// `-----------|     |#####| BAS |   |  0  |######|  .  |-----------'
+// | F5  | F6  | F7  | F8  |XXXXX|   |  /  |  4   |  5  |  6  |  +  |
+// | F9  | F10 | F11 | F12 |XXXXX|   |  0  |  1   |  2  |  3  | Ent |
+// `-----------|     |#####|     |   |  0  |######|  .  |-----------'
     bindings = <
   &kp F1 &kp F2  &kp F3  &kp F4  &tog NUMLOCK    &kp KP_MULTIPLY &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_SUBTRACT
   &kp F5 &kp F6  &kp F7  &kp F8  &none           &kp KP_DIVIDE   &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS
   &kp F9 &kp F10 &kp F11 &kp F12 &none           &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp RETURN2
-            &trans &trans &tog NUMLOCK           &kp KP_N0 &trans &kp KP_DOT
+                         &trans &trans &trans    &kp KP_N0 &mo NAV &kp KP_DOT
     >;
   };
 
@@ -294,7 +301,7 @@ keymap {
 // |     |HDNeu|Dvork|Clmak|     |   |     |     |     |     |     |
 // |QWRTY|HDGld|STRDY|Cnary|     |   |     |     |     |     |     |
 // | BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |
-// `-----------|     |     |     |   |     |     |     |-----------'
+// `-----------|     |     | BAS |   |     |     |     |-----------'
 
     bindings = <
   &trans       &to HD_NEU   &to DVORAK   &to COLEMAK  &trans          &trans &trans &trans &trans &trans
