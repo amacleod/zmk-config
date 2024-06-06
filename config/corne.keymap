@@ -240,12 +240,12 @@ keymap {
 // |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  _  |
 // |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
 // |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  /  |
-// `-----------|     |#####| BAS |   |     | NUM |  \  |-----------'
+// `-----------|     |#####| BAS |   | Ret | NUM |  \  |-----------'
     bindings = <
   &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER
   &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
   &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH
-                             &trans &trans &tog SYM    &trans &mo NUMTEMP &kp BSLH
+                             &trans &trans &tog SYM    &kp RET &mo NUMTEMP &kp BSLH
     >;
   };
 
@@ -254,12 +254,12 @@ keymap {
 // | ^Q  | ^W  | ^E  | ^R  | ^T  |   | Hom | PgD | Up  | PgU | Esc |
 // | ^A  | ^S  | ^D  | ^F  | ^G  |   | End | Left| Down|Right| Bks |
 // | ^Z  | ^X  | ^C  | ^V  |XXXXX|   | Ins | Ctrl| Del | Alt | Tab |
-// `-----------|Shift| NUM | BAS |   |     |#####|Shift|-----------'
+// `-----------|Shift| NUM | BAS |   | Ret |#####|Shift|-----------'
     bindings = <
   &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)  &kp LC(T)   &kp HOME &kp PG_DN &kp UP   &kp PG_UP &kp ESC
   &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F)  &kp LC(G)   &kp END  &kp LEFT  &kp DOWN &kp RIGHT &kp BSPC
   &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &none       &kp INS  &sk RCTRL &kp DEL  &sk LALT  &kp TAB
-                    &sk LSHIFT &mo NUMTEMP &tog NAV    &trans &trans &sk RSHIFT
+                    &sk LSHIFT &mo NUMTEMP &tog NAV    &kp RET &trans &sk RSHIFT
     >;
   };
 
@@ -272,7 +272,7 @@ keymap {
     bindings = <
   &kp F1 &kp F2  &kp F3  &kp F4  &tog NUMLOCK    &kp KP_MULTIPLY &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_SUBTRACT
   &kp F5 &kp F6  &kp F7  &kp F8  &none           &kp KP_DIVIDE   &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS
-  &kp F9 &kp F10 &kp F11 &kp F12 &none           &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp RETURN2
+  &kp F9 &kp F10 &kp F11 &kp F12 &none           &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_EQUAL
                          &trans &trans &trans    &kp KP_N0 &mo NAV &kp KP_DOT
     >;
   };
