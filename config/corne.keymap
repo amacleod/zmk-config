@@ -49,7 +49,9 @@
 // - need easier access to backspace; maybe put it on rightmost thumb, where tab is now
 // - consider making one of the space keys pure space, rather than mod-tap shift
 // - or have one of them be tap-preferred and the other one be hold-preferred
-//
+// - or forget mod-tap shift space altogether; typing very fast leads to false positive rolls
+// - combos for backspace and ctrl-backspace maybe? possibly right ring and pinky
+// - what about combos for shift?
 
 / {
 chosen { zmk,matrix_transform = &five_column_transform; };
