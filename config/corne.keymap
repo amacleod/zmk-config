@@ -57,6 +57,7 @@
 // - what about combos for shift?
 // - make one or more of the backspace keys use hold-tap: tap for ^Bks, hold for plain Bks; that way plain can benefit from repeat
 // - colon on numpad layer? (for typing times)
+// - layer with GUI+numbers for i3 desktop switching
 
 / {
 chosen { zmk,matrix_transform = &five_column_transform; };
