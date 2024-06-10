@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 The ZMK Contributors
+ * Copyright (c) 2024 Allister MacLeod
  *
  * SPDX-License-Identifier: MIT
  */
@@ -9,62 +9,283 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/ext_power.h>
 
-/ {
-    keymap {
-        compatible = "zmk,keymap";
 
-        default_layer {
-// ------------------------------------------------------------------------------------------------------------
-// |  ESC  |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   `   |
-// |  TAB  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   |   -   |
-// |  CTRL |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   ;   |   '   |
-// | SHIFT |  Z  |  X  |  C   |  V   |  B   |   "["  |  |  "]"  |  N   |  M    |  ,    |  .   |   /   | SHIFT |
-//                     | ALT  | GUI  | LOWER|  SPACE |  | ENTER | RAISE| BSPC  | GUI   |
-            bindings = <
-&kp ESC   &kp N1 &kp N2 &kp N3   &kp N4   &kp N5                     &kp N6 &kp N7   &kp N8    &kp N9  &kp N0   &kp GRAVE
+#define DEFAULT 0
+#define QWERTY  0
+#define DVORAK  1
+#define COLEMAK 2
+// 3
+// 4
+// 5
+// 6
+#define SYM     7
+#define NAV     8
+#define NUMPAD  9
+#define NUMLOCK 10
+#define NUMTEMP 11
+#define KEEBCTL 12
+
+
+#define SC_LS &mod-tap LSHIFT LPAR
+#define SC_RS &mod-tap RSHIFT RPAR
+
+
+// Map of key positions:
+//  0  1  2  3  4  5          6  7  8  9 10 11
+// 12 13 14 15 16 17         18 19 20 21 22 23
+// 24 25 26 27 28 29         30 31 32 33 34 35
+// 36 37 38 39 40 41 42   43 44 45 46 47 48 49
+//         50 51 52 53     54 55 56 57
+//
+// Note: 42 and 43 are offset 1/2 key upward, between bottom row and home row.
+// The "main thumb keys" 53 and 54 are 1.5u bars set diagonally.
+
+/ {
+combos {
+  compatible = "zmk,combos";
+  // Both main thumb keys to trigger caps word.
+  combo_caps_word {
+    timeout-ms = <50>;
+    key-positions = <53 54>;
+    bindings = <&caps_word>;
+  };
+  // Corners of left thumb cluster for keyboard control.
+  combo_keyboard_control {
+    timeout-ms = <50>;
+    key-positions = <50 42>;
+    bindings = <&slx KEEBCTL>;
+  };
+};
+
+behaviors {
+  slx: sticky_layer_extended {
+    compatible = "zmk,behavior-sticky-key";
+    #binding-cells = <1>;
+    bindings = <&mo>;
+    release-after-ms = <8000>;
+  };
+};
+
+keymap {
+  compatible = "zmk,keymap";
+
+  qwerty_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// | Esc |  1  |  2  |  3  |  4  |  5  |             |  6  |  7  |  8  |  9  |  0  | Bks |
+// | Tab |  Q  |  W  |  E  |  R  |  T  |             |  Y  |  U  |  I  |  O  |  P  |  -  |
+// | Ctl |  A  |  S  |  D  |  F  |  G  |-----. ,-----|  H  |  J  |  K  |  L  |  ;  |  '  |
+// |Shf/(|  Z  |  X  |  C  |  V  |  B  |     | |     |  N  |  M  |  ,  |  .  |  /  |)/Shf|
+// `----------------| Alt | GUI | SYM | Spc |   | Ent | NAV | Bks | GUI |----------------'
+    bindings = <
+&kp ESC   &kp N1 &kp N2 &kp N3   &kp N4   &kp N5                     &kp N6 &kp N7   &kp N8    &kp N9  &kp N0   &kp BSPC
 &kp TAB   &kp Q  &kp W  &kp E    &kp R    &kp T                      &kp Y  &kp U    &kp I     &kp O   &kp P    &kp MINUS
 &kp LCTRL &kp A  &kp S  &kp D    &kp F    &kp G                      &kp H  &kp J    &kp K     &kp L   &kp SEMI &kp SQT
-&kp LSHFT &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp M    &kp COMMA &kp DOT &kp FSLH &kp RSHFT
+&kp SC_LS &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp M    &kp COMMA &kp DOT &kp FSLH &kp SC_RS
                         &kp LALT &kp LGUI &mo 1  &kp SPACE  &kp RET  &mo 2  &kp BSPC &kp RGUI
-            >;
+    >;
+  };
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-        };
+  dvorak_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |  '  |  ,  |  .  |  P  |  Y  |             |  F  |  G  |  C  |  R  |  L  |     |
+// |     |  A  |  O  |  E  |  U  |  I  |-----. ,-----|  D  |  H  |  T  |  N  |  S  |  -  |
+// |     |  ;  |  Q  |  J  |  K  |  X  |     | |     |  B  |  M  |  W  |  V  |  Z  |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+  };
 
-        lower_layer {
-// ------------------------------------------------------------------------------------------------------------
+  colemak_layer { // actually Colemak-DH
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |  Q  |  W  |  F  |  P  |  B  |             |  J  |  L  |  U  |  Y  |  ;  |     |
+// |     |  A  |  R  |  S  |  T  |  G  |-----. ,-----|  M  |  N  |  E  |  I  |  O  |  '  |
+// |     |  Z  |  X  |  C  |  D  |  V  |     | |     |  K  |  H  |  ,  |  .  |  /  |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+  };
+
+  empty_layer_03 {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
+// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+  };
+
+  empty_layer_04 {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
+// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+  };
+
+  empty_layer_05 {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
+// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+  };
+
+  empty_layer_06 {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
+// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+  };
+
+  symbol_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
+// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+// ,----------------------------------------------------------------------------------------------------------.
 // | BTCLR | BT1 | BT2 |  BT3 |  BT4 |  BT5 |                   |      |       |       |      |       |       |
 // |  F1   |  F2 |  F3 |  F4  |  F5  |  F6  |                   |  F7  |  F8   |  F9   |  F10 |  F11  |  F12  |
 // |   `   |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |   ~   |
 // |       |     |     |      |      |      |        |  |       |      |  _    |  +    |  {   |   }   |  "|"  |
 //                     |      |      |      |        |  |       |      |       |       |
-            bindings = <
+    bindings = <
 &bt BT_CLR &bt BT_SEL 0     &bt BT_SEL 1      &bt BT_SEL 2      &bt BT_SEL 3 &bt BT_SEL 4                 &trans    &trans    &trans    &trans    &trans    &trans
 &kp F1     &kp F2           &kp F3            &kp F4            &kp F5       &kp F6                       &kp F7    &kp F8    &kp F9    &kp F10   &kp F11   &kp F12
 &kp GRAVE  &kp EXCL         &kp AT            &kp HASH          &kp DOLLAR   &kp PRCNT                    &kp CARET &kp AMPS  &kp ASTRK &kp LPAR  &kp RPAR  &kp TILDE
 &trans     &ext_power EP_ON &ext_power EP_OFF &ext_power EP_TOG &trans       &trans    &trans   &trans    &trans    &kp MINUS &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE
                                               &trans            &trans       &trans    &trans   &trans    &trans    &trans    &trans
-            >;
+    >;
+  };
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-        };
-
-        raise_layer {
-// ------------------------------------------------------------------------------------------------------------
+  navigation_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
+// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+// ,----------------------------------------------------------------------------------------------------------.
 // |       |     |     |      |      |      |                   |      |       |       |      |       |       |
 // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
 // |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
 // |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
 //                     |      |      |      |        |  |       |      |       |       |
-            bindings = <
+    bindings = <
 &trans    &trans &trans &trans  &trans  &trans                       &trans      &trans    &trans    &trans   &trans    &trans
 &kp GRAVE &kp N1 &kp N2 &kp N3  &kp N4  &kp N5                       &kp N6      &kp N7    &kp N8    &kp N9   &kp N0    &trans
 &kp F1    &kp F2 &kp F3 &kp F4  &kp F5  &kp F6                       &trans      &kp LEFT  &kp DOWN  &kp UP   &kp RIGHT &trans
 &kp F7    &kp F8 &kp F9 &kp F10 &kp F11 &kp F12   &trans   &trans    &kp KP_PLUS &kp MINUS &kp EQUAL &kp LBKT &kp RBKT  &kp BSLH
                         &trans  &trans  &trans    &trans   &trans    &trans      &trans    &trans
-            >;
+    >;
+  };
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
-        };
-    };
+  empty_layer_01 {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
+// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+  };
+
+  empty_layer_01 {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
+// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+  };
+
+  empty_layer_01 {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
+// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+  };
+
+  keyboard_control_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// |BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |             |     |     |     |     |     |     |
+// |Dvork|     |     |     |     |     |             |     |     |     |     |     |     |
+// |Colmk|     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
+// |QWRTY|     |     |     |     |     |     | |     |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4          &trans &trans &trans &trans &trans &trans
+&to DVORAK  &trans       &trans       &trans       &trans       &trans                &trans &trans &trans &trans &trans &trans
+&to COLEMAK &trans       &trans       &trans       &trans       &trans                &trans &trans &trans &trans &trans &trans
+&to QWERTY  &trans       &trans       &trans       &trans       &trans &trans  &trans &trans &trans &trans &trans &trans &trans
+                                                &trans &trans &trans &trans      &trans &trans &trans &trans
+    >;
+  };
 };
