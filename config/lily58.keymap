@@ -26,8 +26,8 @@
 #define KEEBCTL 12
 
 
-#define SC_LS &mod-tap LSHIFT LPAR
-#define SC_RS &mod-tap RSHIFT RPAR
+#define SC_LEFT &mod-tap LSHIFT LPAR
+#define SC_RIGHT &mod-tap RSHIFT RPAR
 
 
 // Map of key positions:
@@ -80,7 +80,7 @@ keymap {
 &kp ESC   &kp N1 &kp N2 &kp N3   &kp N4   &kp N5                     &kp N6 &kp N7   &kp N8    &kp N9  &kp N0   &kp BSPC
 &kp TAB   &kp Q  &kp W  &kp E    &kp R    &kp T                      &kp Y  &kp U    &kp I     &kp O   &kp P    &kp MINUS
 &kp LCTRL &kp A  &kp S  &kp D    &kp F    &kp G                      &kp H  &kp J    &kp K     &kp L   &kp SEMI &kp SQT
-&kp SC_LS &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp M    &kp COMMA &kp DOT &kp FSLH &kp SC_RS
+SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp M    &kp COMMA &kp DOT &kp FSLH SC_RIGHT
                         &kp LALT &kp LGUI &mo 1  &kp SPACE  &kp RET  &mo 2  &kp BSPC &kp RGUI
     >;
   };
