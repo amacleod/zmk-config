@@ -26,8 +26,8 @@
 #define KEEBCTL 12
 
 
-#define SC_LEFT &mod-tap LSHIFT LPAR
-#define SC_RIGHT &mod-tap RSHIFT RPAR
+#define SC_LEFT  &mt LSHIFT LPAR
+#define SC_RIGHT &mt RSHIFT RPAR
 
 
 // Map of key positions:
