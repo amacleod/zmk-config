@@ -41,6 +41,7 @@
 // The "main thumb keys" 53 and 54 are 1.5u bars set diagonally.
 
 / {
+
 combos {
   compatible = "zmk,combos";
   // Both main thumb keys to trigger caps word.
@@ -288,4 +289,6 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
                                                 &trans &trans &trans &trans      &trans &trans &trans &trans
     >;
   };
+};
+// end keymap
 };
