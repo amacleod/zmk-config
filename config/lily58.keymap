@@ -118,7 +118,7 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &trans &kp Z  &kp X  &kp C  &kp D  &kp V &trans        &trans &kp K  &kp H  &kp COMMA &kp DOT &kp FSLH &trans
                    &trans &trans &trans &trans            &trans &trans &trans &trans
     >;
-    display-name = "Colemak-DH";
+    display-name = "Colemak";
   };
 
   empty_layer_03 {
@@ -281,7 +281,7 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &to QWERTY  &trans       &trans       &trans       &trans       &trans &trans  &trans &trans &trans &trans &trans &trans &trans
                                                 &trans &trans &trans &trans      &trans &trans &trans &trans
     >;
-    display-name = "KBDCTL";
+    display-name = "KBD CTL";
   };
 };
 // end keymap
