@@ -82,8 +82,9 @@ keymap {
 &kp TAB   &kp Q  &kp W  &kp E    &kp R    &kp T                      &kp Y  &kp U    &kp I     &kp O   &kp P    &kp MINUS
 &kp LCTRL &kp A  &kp S  &kp D    &kp F    &kp G                      &kp H  &kp J    &kp K     &kp L   &kp SEMI &kp SQT
 SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp M    &kp COMMA &kp DOT &kp FSLH SC_RIGHT
-                        &kp LALT &kp LGUI &mo 1  &kp SPACE  &kp RET  &mo 2  &kp BSPC &kp RGUI
+                      &kp LALT &kp LGUI &mo SYM &kp SPACE   &kp RET &mo NAV &kp BSPC &kp RGUI
     >;
+    display-name = "QWERTY";
   };
 
   dvorak_layer {
@@ -95,11 +96,12 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 // `----------------|     |     |     |     |   |     |     |     |     |----------------'
     bindings = <
 &trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &kp SQT &kp COMMA &kp DOT &kp P &kp Y                  &kp F &kp G &kp C &kp R &kp L &trans
-&trans &kp A   &kp O     &kp E   &kp U &kp I                  &kp D &kp H &kp T &kp N &kp S &kp MINUS
-&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+&trans &kp SQT  &kp COMMA &kp DOT &kp P &kp Y                 &kp F  &kp G  &kp C  &kp R  &kp L  &trans
+&trans &kp A    &kp O     &kp E   &kp U &kp I                 &kp D  &kp H  &kp T  &kp N  &kp S  &kp MINUS
+&trans &kp SEMI &kp Q     &kp J   &kp K &kp X &trans   &trans &kp B  &kp M  &kp W  &kp V  &kp Z  &trans
                    &trans &trans &trans &trans            &trans &trans &trans &trans
     >;
+    display-name = "Dvorak";
   };
 
   colemak_layer { // actually Colemak-DH
@@ -111,11 +113,12 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 // `----------------|     |     |     |     |   |     |     |     |     |----------------'
     bindings = <
 &trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+&trans &kp Q  &kp W  &kp F  &kp P  &kp B                      &kp J  &kp L  &kp U  &kp Y  &kp SEMI &trans
+&trans &kp A  &kp R  &kp S  &kp T  &kp G                      &kp M  &kp N  &kp E  &kp I  &kp O    &kp SQT
+&trans &kp Z  &kp X  &kp C  &kp D  &kp V &trans        &trans &kp K  &kp H  &kp COMMA &kp DOT &kp FSLH &trans
                    &trans &trans &trans &trans            &trans &trans &trans &trans
     >;
+    display-name = "Colemak-DH";
   };
 
   empty_layer_03 {
@@ -189,12 +192,6 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 // |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
 // |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
 // `----------------|     |     |     |     |   |     |     |     |     |----------------'
-// ,----------------------------------------------------------------------------------------------------------.
-// | BTCLR | BT1 | BT2 |  BT3 |  BT4 |  BT5 |                   |      |       |       |      |       |       |
-// |  F1   |  F2 |  F3 |  F4  |  F5  |  F6  |                   |  F7  |  F8   |  F9   |  F10 |  F11  |  F12  |
-// |   `   |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |   ~   |
-// |       |     |     |      |      |      |        |  |       |      |  _    |  +    |  {   |   }   |  "|"  |
-//                     |      |      |      |        |  |       |      |       |       |
     bindings = <
 &bt BT_CLR &bt BT_SEL 0     &bt BT_SEL 1      &bt BT_SEL 2      &bt BT_SEL 3 &bt BT_SEL 4                 &trans    &trans    &trans    &trans    &trans    &trans
 &kp F1     &kp F2           &kp F3            &kp F4            &kp F5       &kp F6                       &kp F7    &kp F8    &kp F9    &kp F10   &kp F11   &kp F12
@@ -202,6 +199,7 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &trans     &ext_power EP_ON &ext_power EP_OFF &ext_power EP_TOG &trans       &trans    &trans   &trans    &trans    &kp MINUS &kp PLUS  &kp LBRC  &kp RBRC  &kp PIPE
                                               &trans            &trans       &trans    &trans   &trans    &trans    &trans    &trans
     >;
+    display-name = "SYM";
   };
 
   navigation_layer {
@@ -211,12 +209,6 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 // |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
 // |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
 // `----------------|     |     |     |     |   |     |     |     |     |----------------'
-// ,----------------------------------------------------------------------------------------------------------.
-// |       |     |     |      |      |      |                   |      |       |       |      |       |       |
-// |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |   7   |   8   |  9   |   0   |       |
-// |   F1  |  F2 |  F3 |  F4  |  F5  |  F6  |                   |      |   <-  |   v   |  ^   |  ->   |       |
-// |   F7  |  F8 |  F9 |  F10 |  F11 |  F12 |        |  |       |  +   |   -   |   =   |  [   |   ]   |   \   |
-//                     |      |      |      |        |  |       |      |       |       |
     bindings = <
 &trans    &trans &trans &trans  &trans  &trans                       &trans      &trans    &trans    &trans   &trans    &trans
 &kp GRAVE &kp N1 &kp N2 &kp N3  &kp N4  &kp N5                       &kp N6      &kp N7    &kp N8    &kp N9   &kp N0    &trans
@@ -224,6 +216,7 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &kp F7    &kp F8 &kp F9 &kp F10 &kp F11 &kp F12   &trans   &trans    &kp KP_PLUS &kp MINUS &kp EQUAL &kp LBKT &kp RBKT  &kp BSLH
                         &trans  &trans  &trans    &trans   &trans    &trans      &trans    &trans
     >;
+    display-name = "NAV";
   };
 
   empty_layer_09 {
@@ -276,18 +269,19 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 
   keyboard_control_layer {
 // ,-----------------------------------.             ,-----------------------------------.
-// |BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |             |     |     |     |     |     |     |
-// |Dvork|     |     |     |     |     |             |     |     |     |     |     |     |
+// |XXXXX| BT1 | BT2 | BT3 | BT4 | BT5 |             |     |     |     |     |     |     |
+// |Dvork|     |     |     |     |BTCLR|             |     |     |     |     |     |     |
 // |Colmk|     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
 // |QWRTY|     |     |     |     |     |     | |     |     |     |     |     |     |     |
 // `----------------|     |     |     |     |   |     |     |     |     |----------------'
     bindings = <
-&bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4          &trans &trans &trans &trans &trans &trans
+&none       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4          &trans &trans &trans &trans &trans &trans
 &to DVORAK  &trans       &trans       &trans       &trans       &trans                &trans &trans &trans &trans &trans &trans
 &to COLEMAK &trans       &trans       &trans       &trans       &trans                &trans &trans &trans &trans &trans &trans
 &to QWERTY  &trans       &trans       &trans       &trans       &trans &trans  &trans &trans &trans &trans &trans &trans &trans
                                                 &trans &trans &trans &trans      &trans &trans &trans &trans
     >;
+    display-name = "KBDCTL";
   };
 };
 // end keymap
