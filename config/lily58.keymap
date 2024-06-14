@@ -40,6 +40,18 @@
 // Note: 42 and 43 are offset 1/2 key upward, between bottom row and home row.
 // The "main thumb keys" 53 and 54 are 1.5u bars set diagonally.
 
+
+// Things to try next:
+// - smaller combos for layout switching: I have key 57 totally free
+//   and it is a pain to reach from normal home row typing, so it is
+//   ideally situated for uncommon one-off stuff like switching
+//   layouts. I have a keycap with an infinity symbol on that key,
+//   so let us call it "Inf".
+//  - maybe Inf-D for Dvorak, Inf-Q for QWERTY, Inf-C for colemak
+//  - but what if I add Hands Down, Canary, Sturdy, etc.?
+//  - could do some adjacent-letter stuff for collisions: Inf-N for Hands Down Neu, Inf-G for Hands Down Gold, Inf-S for Sturdy, and Inf-R for CanaRy?
+//  - so far, all of these ideas are on the left half _except_ for Inf-N
+
 / {
 
 combos {
