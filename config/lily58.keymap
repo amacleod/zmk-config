@@ -237,7 +237,7 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &trans &trans &trans &trans  &trans  &trans                                &trans   &trans    &trans     &trans    &trans   &trans
 &trans &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T)                   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &none    &trans
 &trans &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G)                   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &none    &trans
-&trans &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL &trans       &trans &kp INS  &kp RCTRL &kp RSHIFT &kp LALT  &kp RGUI &trans
+&trans &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL &trans       &trans &kp INS  &sk RCTRL &sk RSHIFT &sk LALT  &sk RGUI &trans
                            &trans &trans &mo NUMTEMP &trans           &trans &trans &trans &trans
     >;
     display-name = "NAV";
