@@ -85,6 +85,19 @@ combos {
   };
 };
 
+macros {
+  bt_clear_one: bluetooth_clear_one {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    bindings = <&bt BT_CLR>;
+  };
+  bt_clear_all: bluetooth_clear_all {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    bindings = <&bt BT_CLR_ALL>;
+  };
+};
+
 behaviors {
   tdjz: tap_dance_jz {
     compatible = "zmk,behavior-tap-dance";
@@ -129,7 +142,14 @@ behaviors {
     flavor = "hold-preferred";
     tapping-term-ms = <200>;
     bindings = <&mo>, <&tog>;
-  }; 
+  };
+  bt_clear: hold_tap_bluetooth_clear {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    flavor = "hold-preferred";
+    tapping-term-ms = <1000>;
+    bindings = <&bt_clear_all>, <&bt_clear_one>;
+  };
 };
 
 conditional_layers {
@@ -312,13 +332,13 @@ keymap {
 // |     |HDNeu|Dvork|Clmak|     |   |     |     |     |     |     |
 // |QWRTY|HDGld|STRDY|Cnary|     |   |     |     |     |     |     |
 // | BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |
-// `-----------|     |     | BAS |   |     |     |     |-----------'
+// `-----------|     |BTClr| BAS |   |     |     |     |-----------'
 
     bindings = <
   &trans       &to HD_NEU   &to DVORAK   &to COLEMAK  &trans          &trans &trans &trans &trans &trans
   &to QWERTY   &to HD_GOLD  &to STURDY   &to CANARY   &trans          &trans &trans &trans &trans &trans
   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &trans &trans &trans &trans &trans
-                                        &trans &trans &tog KEEBCTL    &trans &trans &trans
+                                        &trans &bt_clear &tog KEEBCTL    &trans &trans &trans
     >;
   };
 };
