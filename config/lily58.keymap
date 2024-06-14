@@ -238,7 +238,7 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &trans &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T)                   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &none    &trans
 &trans &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G)                   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &none    &trans
 &trans &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL &trans       &trans &kp INS  &kp RCTRL &kp RSHIFT &kp LALT  &kp RGUI &trans
-                        &trans  &trans  &trans    &trans   &trans    &trans      &trans    &trans
+                           &trans &trans &mo NUMTEMP &trans           &trans &trans &trans &trans
     >;
     display-name = "NAV";
   };
@@ -260,18 +260,6 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
     display-name = "NumPad";
   };
 
-  num_temp_layer {
-    // Only exists to momentarily activate numpad layer.
-    bindings = <
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
-                   &trans &trans &trans &trans            &trans &trans &trans &trans
-    >;
-    display-name = "NumPad";
-  };
-
   num_lock_layer {
     // Only exists to toggle numpad layer lock on and off.
     bindings = <
@@ -281,7 +269,19 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
                    &trans &trans &trans &trans            &trans &trans &trans &trans
     >;
-    display-name = "NumLOCK";
+    display-name = "NumLOK";
+  };
+
+  num_temp_layer {
+    // Only exists to momentarily activate numpad layer.
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+    display-name = "NumTmp";
   };
 
   keyboard_control_layer {

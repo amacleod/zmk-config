@@ -287,6 +287,16 @@ keymap {
     >;
   };
 
+  num_lock_layer {
+    // Only exists to toggle numpad layer lock on and off.
+    bindings = <
+      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                    &trans &trans &trans    &trans &trans &trans
+    >;
+  };
+
   num_temp_layer {
     // Only exists to momentarily activate numpad layer.
     bindings = <
@@ -297,15 +307,6 @@ keymap {
     >;
   };
 
-  num_lock_layer {
-    // Only exists to toggle numpad layer lock on and off.
-    bindings = <
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-                    &trans &trans &trans    &trans &trans &trans
-    >;
-  };
   keyboard_control_layer {
 // ,-----------------------------.   ,-----------------------------.
 // |     |HDNeu|Dvork|Clmak|     |   |     |     |     |     |     |
