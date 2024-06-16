@@ -83,6 +83,14 @@ combos {
     bindings = <&kp Z>;
     layers = <HD_NEU HD_GOLD>;
   };
+  // Combo U and Y to produce Q and Qu, only on Hands Down Neu.
+  combo_uy_qu {
+    timeout-ms = <50>;
+    key-positions = <26 28>;
+    // bindings = <&qup U Q>;
+    bindings = <&kp Q>;
+    layers = <HD_NEU>;
+  };
 };
 
 macros {
@@ -149,6 +157,21 @@ behaviors {
     flavor = "hold-preferred";
     tapping-term-ms = <1000>;
     bindings = <&bt_clear_all>, <&bt_clear_one>;
+  };
+  // Hold tap for the Qu pair.
+  qup: hold_tap_q_u_pair {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <100>;
+    bindings = <&weeu>, <&kp>;
+  };
+  // Always-lowercase 'u' for use with "Qu" pair combo.
+  weeu: always_lowercase_u {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp U>, <&kp U>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
   };
 };
 
