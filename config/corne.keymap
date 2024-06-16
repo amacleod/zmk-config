@@ -103,6 +103,14 @@ macros {
     #binding-cells = <0>;
     bindings = <&bt BT_CLR_ALL>;
   };
+  // Type "qu" but force the "u" to be un-shifted. This ought to
+  // result in "QU" when caps lock is on, "Qu" when shift is held,
+  // and "qu" when neither caps nor shift is active.
+  squ: sequence_q_u {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    bindings = <&macro_tap &kp Q>, <&macro_release &kp LSHFT &kp RSHFT>, <&macro_tap &kp U>;
+  };
 };
 
 behaviors {
@@ -162,15 +170,8 @@ behaviors {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     flavor = "tap-preferred";
-    tapping-term-ms = <100>;
-    bindings = <&weeu>, <&kp>;
-  };
-  // Always-lowercase 'u' for use with "Qu" pair combo.
-  weeu: always_lowercase_u {
-    compatible = "zmk,behavior-mod-morph";
-    #binding-cells = <0>;
-    bindings = <&kp U>, <&kp U>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
+    tapping-term-ms = <150>;
+    bindings = <&squ>, <&kp>;
   };
 };
 
