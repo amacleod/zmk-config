@@ -90,6 +90,43 @@ combos {
     bindings = <&qut U Q>;
     layers = <HD_NEU>;
   };
+  // Combos for H digraphs in Hands Down Neu.
+  combo_nt_th {
+    timeout-ms = <50>;
+    key-positions = <12 13>;
+    bindings = <&sls T H>;
+    layers = <HD_NEU>;
+  };
+  combo_sn_sh {
+    timeout-ms = <50>;
+    key-positions = <11 12>;
+    bindings = <&sls S H>;
+    layers = <HD_NEU>;
+  };
+  combo_st_ch {
+    timeout-ms = <50>;
+    key-positions = <11 13>;
+    bindings = <&sls C H>;
+    layers = <HD_NEU>;
+  };
+  combo_fp_wh {
+    timeout-ms = <50>;
+    key-positions = <1 3>;
+    bindings = <&sls W H>;
+    layers = <HD_NEU>;
+  };
+  combo_dg_gh {
+    timeout-ms = <50>;
+    key-positions = <23 24>;
+    bindings = <&sls G H>;
+    layers = <HD_NEU>;
+  };
+  combo_pm_ph {
+    timeout-ms = <50>;
+    key-positions = <2 3>;
+    bindings = <&sls P H>;
+    layers = <HD_NEU>;
+  };
 };
 
 macros {
@@ -106,10 +143,24 @@ macros {
   // Type "qu" but force the "u" to be un-shifted. This ought to
   // result in "QU" when caps lock is on, "Qu" when shift is held,
   // and "qu" when neither caps nor shift is active.
-  squ: sequence_q_u {
+  squ: sequence_q_lower_u {
     compatible = "zmk,behavior-macro";
     #binding-cells = <0>;
     bindings = <&macro_tap &kp Q>, <&macro_release &kp LSHFT &kp RSHFT>, <&macro_tap &kp U>;
+  };
+  // Type a digraph whose second letter is to be lowercase
+  // regardless of shift. Note that this will remove shift even if
+  // it is physically held beyond the end of the macro.
+  sls: sequence_lower_second {
+    compatible = "zmk,behavior-macro-two-param";
+    #binding-cells = <2>;
+    bindings
+      = <&macro_param_1to1>
+      , <&macro_tap &kp MACRO_PLACEHOLDER>
+      , <&macro_release &kp LSHFT &kp RSHFT>
+      , <&macro_param_2to1>
+      , <&macro_tap &kp MACRO_PLACEHOLDER>
+      ;
   };
 };
 
