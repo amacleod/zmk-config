@@ -26,6 +26,7 @@
 #define KEEBCTL 12
 
 
+// Space Cadet shift/parenthesis macros.
 #define SC_LEFT  &mt LSHIFT LPAR
 #define SC_RIGHT &mt RSHIFT RPAR
 
@@ -128,7 +129,7 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
     display-name = "Dvorak";
   };
 
-  colemak_layer { // actually Colemak-DH
+  colemak_dh_layer {
 // ,-----------------------------------.             ,-----------------------------------.
 // |     |     |     |     |     |     |             |     |     |     |     |     |     |
 // |     |  Q  |  W  |  F  |  P  |  B  |             |  J  |  L  |  U  |  Y  |  ;  |     |
