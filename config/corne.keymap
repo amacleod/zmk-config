@@ -146,7 +146,7 @@ macros {
   squ: sequence_q_lower_u {
     compatible = "zmk,behavior-macro";
     #binding-cells = <0>;
-    bindings = <&macro_tap &kp Q>, <&hold_u_small 0 U>;
+    bindings = <&macro_tap &kp Q>, <&hold_u_small 0 0>;
   };
   // Type a digraph whose second letter is to be lowercase
   // regardless of shift. Note that this will remove shift even if
@@ -235,7 +235,7 @@ behaviors {
     #binding-cells = <2>;
     flavor = "hold-preferred";
     tapping-term-ms = <150>;
-    bindings = <&weeu>, <&kp>;
+    bindings = <&none>, <&weeu>;
   };
 };
 
