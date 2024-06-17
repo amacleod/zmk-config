@@ -28,9 +28,6 @@
 #define LTHUMB &mt LSHIFT SPACE
 #define RTHUMB &kp SPACE
 
-// Convenience macros for repeated patterns.
-#define MO_TOG(layer) &motog layer layer
-
 // Home row mods settings; history notes below:
 // - fast tapping term of 100 feels too fast
 // - in Dvorak, al roll sometimes comes out as L, and so roll as O, also as as S
@@ -58,6 +55,9 @@
 // - make one or more of the backspace keys use hold-tap: tap for ^Bks, hold for plain Bks; that way plain can benefit from repeat
 // - colon on numpad layer? (for typing times)
 // - layer with GUI+numbers for i3 desktop switching
+// - easy way to hold down ctrl on just the left half, for use with ctrl-mouseclick
+// - Mac-friendly shortcuts either on nav layer or another layer (but if possible keep it easy to do Emacs commands)
+// - alt-tab shortcut, Callum-style if possible (virtually hold Alt for successive "next window" presses)
 
 / {
 chosen { zmk,matrix_transform = &five_column_transform; };
