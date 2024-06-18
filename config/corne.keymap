@@ -43,6 +43,9 @@
 #define LTHUMB &mt LSHIFT SPACE
 #define RTHUMB &kp SPACE
 
+// Other convenience macros for in-layout bindings.
+#define BSLINGER &tph BACKSPACE LC(BACKSPACE)
+
 // Home row mods settings; history notes below:
 // - fast tapping term of 100 feels too fast
 // - in Dvorak, al roll sometimes comes out as L, and so roll as O, also as as S
@@ -243,9 +246,18 @@ behaviors {
   hold_u_small: hold_tap_small_u {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
-    flavor = "hold-preferred";
+    flavor = "tap-preferred";
     tapping-term-ms = <LINGER_HOLD_MS>;
     bindings = <&weeu>, <&none>;
+  };
+  // Generic tap-preferred hold-tap. Useful for backspace hold-tap:
+  // short for Ctrl-Backspace, long for plain Backspace.
+  tph: tap_preferred_hold {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    bindings = <&kp>, <&kp>;
   };
 };
 
@@ -274,7 +286,7 @@ keymap {
   &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
   &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &kp H
   &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV BSLINGER
     >;
   };
 
@@ -288,7 +300,7 @@ keymap {
   &tdjz  &tdgq  &kp M  &kp P  &kp V    &kp SEMI  &kp DOT &kp FSLH &kp DQT &kp SQT
   &kp R  &kp S  &kp N  &kp D  &kp B    &kp COMMA &kp A   &kp E    &kp I   &kp H
   &kp X  &kp F  &kp L  &kp C  &kp W    &kp MINUS &kp U   &kp O    &kp Y   &kp K
-              &kp ESC &mo SYM &kp T    &mt RSHIFT SPACE &mo NAV &kp BSPC
+              &kp ESC &mo SYM &kp T    &mt RSHIFT SPACE &mo NAV BSLINGER
     >;
   };
 
@@ -302,7 +314,7 @@ keymap {
   &kp SQT  &kp COMMA &kp DOT &kp P  &kp Y    &kp F  &kp G  &kp C  &kp R  &kp L
   &kp A    &kp O     &kp E   &kp U  &kp I    &kp D  &kp H  &kp T  &kp N  &kp S
   &kp SEMI &kp Q     &kp J   &kp K  &kp X    &kp B  &kp M  &kp W  &kp V  &kp Z
-                   &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+                   &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV BSLINGER
     >;
   };
 
@@ -316,7 +328,7 @@ keymap {
   &kp Q  &kp W  &kp F  &kp P  &kp B    &kp J    &kp L   &kp U     &kp Y   &kp SQT
   &kp A  &kp R  &kp S  &kp T  &kp G    &kp M    &kp N   &kp E     &kp I   &kp O
   &kp Z  &kp X  &kp C  &kp D  &kp V    &kp K    &kp H   &kp COMMA &kp DOT &kp FSLH
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV BSLINGER
     >;
   };
 
@@ -330,7 +342,7 @@ keymap {
   &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y &kp U  &kp I     &kp O   &kp P
   &kp A  &kp S  &kp D  &kp F  &kp G    &kp H &kp J  &kp K     &kp L   &kp SEMI
   &kp Z  &kp X  &kp C  &kp V  &kp B    &kp N &kp M  &kp COMMA &kp DOT &kp FSLH
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV BSLINGER
     >;
   };
 
@@ -344,7 +356,7 @@ keymap {
   &kp W  &kp L  &kp Y  &kp P  &kp B    &kp Z  &kp F  &kp O    &kp U     &kp SQT
   &kp C  &kp R  &kp S  &kp T  &kp G    &kp M  &kp N  &kp E    &kp I     &kp A
   &kp Q  &kp J  &kp V  &kp D  &kp K    &kp X  &kp H  &kp FSLH &kp COMMA &kp DOT
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV BSLINGER
     >;
   };
 
@@ -358,7 +370,7 @@ keymap {
   &kp V  &kp M  &kp L  &kp C  &kp P    &kp X   &kp F  &kp O   &kp U    &kp J
   &kp S  &kp T  &kp R  &kp D  &kp Y    &kp DOT &kp N  &kp A   &kp E    &kp I
   &kp Z  &kp K  &kp Q  &kp G  &kp W    &kp B   &kp H  &kp SQT &kp SEMI &kp COMMA
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV BSLINGER
     >;
   };
 
