@@ -139,6 +139,12 @@ combos {
     bindings = <&sls P H>;
     layers = <HD_NEU>;
   };
+  // Leftmost two home row keys for ctrl.
+  combo_left_pinky_control {
+    timeout-ms = <50>;
+    key-positions = <10 11>;
+    bindings = <&kp LCTRL>;
+  };
 };
 
 macros {
