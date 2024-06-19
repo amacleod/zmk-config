@@ -11,7 +11,7 @@
 
 // Things to try next:
 // - better handling of adaptive keys in Hands Down Gold; maybe tap-dance is not the best way to handle Z and Q
-// - combos for backspace and ctrl-backspace maybe? possibly right ring and pinky
+// - consider making right-pinky backspace combo a hold-tap for C-backspace.
 // - what about combos for shift?
 // - colon on numpad layer? (for typing times)
 // - layer with GUI+numbers for i3 desktop switching
@@ -32,7 +32,6 @@
 #define NAV     8
 #define NUMPAD  9
 #define NUMLOCK 10
-#define NUMTEMP 11
 #define KEEBCTL 12
 
 // Placeholder for mandatory parameters that are never used.
@@ -145,6 +144,24 @@ combos {
     key-positions = <10 11>;
     bindings = <&kp LCTRL>;
   };
+  // Rightmost two home row keys for backspace.
+  combo_right_pinky_backspace {
+    timeout-ms = <50>;
+    key-positions = <18 19>;
+    bindings = <&kp BACKSPACE>;
+  };
+  // Leftmost two keys in bottom row for left shift.
+  combo_left_pinky_shift {
+    timeout-ms = <50>;
+    key-positions = <20 21>;
+    bindings = <&kp LSHFT>;
+  };
+  // Rightmost two keys in bottom row for right shift.
+  combo_right_pinky_shift {
+    timeout-ms = <50>;
+    key-positions = <28 29>;
+    bindings = <&kp RSHFT>;
+  };
 };
 
 macros {
@@ -200,22 +217,22 @@ behaviors {
     #binding-cells = <0>;
     bindings = <&kp G>, <&kp Q>;
   };
-  // Positional home-row shift; uses fast tapping term
-  hsl: homerow_mods_shift_left {
+  // Positional home-row mods; uses fast tapping term
+  hsl: homerow_mods_left {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     bindings = <&kp>, <&kp>;
-    flavor = "tap-unless-interrupted";
+    flavor = "balanced";
     tapping-term-ms = <HM_TAPPING_TERM_FAST>;
     quick-tap-ms = <HM_QUICK_TAP>;
     require-prior-idle-ms = <HM_PRIOR_IDLE>;
     hold-trigger-key-positions = <KEYS_RIGHT KEYS_THUMB>;
   };
-  hsr: homerow_mods_shift_right {
+  hsr: homerow_mods_right {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     bindings = <&kp>, <&kp>;
-    flavor = "tap-unless-interrupted";
+    flavor = "balanced";
     tapping-term-ms = <HM_TAPPING_TERM_FAST>;
     quick-tap-ms = <HM_QUICK_TAP>;
     require-prior-idle-ms = <HM_PRIOR_IDLE>;
@@ -269,7 +286,7 @@ behaviors {
 conditional_layers {
   compatible = "zmk,conditional-layers";
   numeric_momentary {
-    if-layers = <NUMTEMP>;
+    if-layers = <SYM NAV>;
     then-layer = <NUMPAD>;
   };
   numeric_lock {
@@ -389,7 +406,7 @@ keymap {
   &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER
   &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
   &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH
-                                &trans &trans &none    &kp RET &mo NUMTEMP &kp BSLH
+                                &trans &trans &none    &kp RET &trans &kp BSLH
     >;
   };
 
@@ -403,7 +420,7 @@ keymap {
   &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)  &kp LC(T)   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp ESC
   &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F)  &kp LC(G)   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp BSPC
   &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &kp DEL     &kp INS  &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
-                   &sk LGUI &mo NUMTEMP &kp LC(BSPC)   &kp RET &trans &sk RGUI
+                   &sk LGUI &trans &kp LC(BSPC)   &kp RET &trans &sk RGUI
     >;
   };
 
@@ -412,27 +429,17 @@ keymap {
 // | F1  | F2  | F3  | F4  |NumLk|   |  *  |  7   |  8  |  9  |  -  |
 // | F5  | F6  | F7  | F8  | Bks |   |  /  |  4   |  5  |  6  |  +  |
 // | F9  | F10 | F11 | F12 | Del |   |  0  |  1   |  2  |  3  | Ent |
-// `-----------|     |#####| Spc |   |  0  |######|  .  |-----------'
+// `-----------|     |#####| Spc |   |  :  |######|  .  |-----------'
     bindings = <
   &kp F1 &kp F2  &kp F3  &kp F4  &tog NUMLOCK    &kp KP_MULTIPLY &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_SUBTRACT
   &kp F5 &kp F6  &kp F7  &kp F8  &kp BSPC        &kp KP_DIVIDE   &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS
   &kp F9 &kp F10 &kp F11 &kp F12 &kp DEL         &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER
-                      &trans &trans &kp SPACE    &kp KP_N0 &trans &kp KP_DOT
+                      &trans &trans &kp SPACE    &kp COLON &trans &kp KP_DOT
     >;
   };
 
   num_lock_layer {
     // Only exists to toggle numpad layer lock on and off.
-    bindings = <
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-                    &trans &trans &trans    &trans &trans &trans
-    >;
-  };
-
-  num_temp_layer {
-    // Only exists to momentarily activate numpad layer.
     bindings = <
       &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
       &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
