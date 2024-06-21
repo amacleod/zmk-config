@@ -32,8 +32,7 @@
 #define NAV     8
 #define NUMPAD  9
 #define NUMLOCK 10
-#define NUMTEMP 11
-#define KEEBCTL 12
+#define KEEBCTL 11
 
 // Placeholder for mandatory parameters that are never used.
 #define UNUSED 0
@@ -423,16 +422,6 @@ keymap {
 
   num_lock_layer {
     // Only exists to toggle numpad layer lock on and off.
-    bindings = <
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-                    &trans &trans &trans    &trans &trans &trans
-    >;
-  };
-
-  num_temp_layer {
-    // Only exists to momentarily activate numpad layer.
     bindings = <
       &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
       &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
