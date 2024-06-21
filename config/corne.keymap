@@ -44,6 +44,12 @@
 // Other convenience macros for in-layout bindings.
 #define BSLINGER &tph BACKSPACE LC(BACKSPACE)
 
+// Protect from shift; ensure that a key sends the same thing,
+// regardless of whether shift is held. Note that this affects caps-word
+// behavior as well, since caps-word uses LSHIFT.
+#define PFS(PROTECTED_KEYCODE) pfs_##PROTECTED_KEYCODE
+
+
 // Home row mods settings; history notes below:
 // - fast tapping term of 100 feels too fast
 // - in Dvorak, al roll sometimes comes out as L, and so roll as O, also as as S
