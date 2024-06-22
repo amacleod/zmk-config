@@ -10,6 +10,11 @@
 #include <dt-bindings/zmk/ext_power.h>
 
 
+// Things to try next:
+// - more stuff in the keyboard control layer, like stuff on the right half
+// - nicer slash on Dvorak layer, sacrificing dedicated enter key
+
+
 #define DEFAULT 0
 #define QWERTY  0
 #define DVORAK  1
@@ -21,9 +26,8 @@
 #define SYM     7
 #define NAV     8
 #define NUMPAD  9
-#define NUMTEMP 10
-#define NUMLOCK 11
-#define KEEBCTL 12
+#define NUMLOCK 10
+#define KEEBCTL 11
 
 
 // Space Cadet shift/parenthesis macros.
@@ -40,18 +44,6 @@
 //
 // Note: 42 and 43 are offset 1/2 key upward, between bottom row and home row.
 // The "main thumb keys" 53 and 54 are 1.5u bars set diagonally.
-
-
-// Things to try next:
-// - smaller combos for layout switching: I have key 57 totally free
-//   and it is a pain to reach from normal home row typing, so it is
-//   ideally situated for uncommon one-off stuff like switching
-//   layouts. I have a keycap with an infinity symbol on that key,
-//   so let us call it "Inf".
-//  - maybe Inf-D for Dvorak, Inf-Q for QWERTY, Inf-C for colemak
-//  - but what if I add Hands Down, Canary, Sturdy, etc.?
-//  - could do some adjacent-letter stuff for collisions: Inf-N for Hands Down Neu, Inf-G for Hands Down Gold, Inf-S for Sturdy, and Inf-R for CanaRy?
-//  - so far, all of these ideas are on the left half _except_ for Inf-N
 
 / {
 
@@ -78,12 +70,20 @@ behaviors {
     bindings = <&mo>;
     release-after-ms = <8000>;
   };
+  // // Mod-morph for ignoring shift on a key pressed with ctrl.
+  // // This will prevent caps-word from causing unexpected shift-ctrl-key presses.
+  // lclc: lowercase_always_control {
+  //   compatible = "zmk,behavior-mod-morph";
+  //   #binding-cells = <0>;
+  //   mods = 
+  //   keep-mods = <(MOD_LCTL)>;
+  // };
 };
 
 conditional_layers {
   compatible = "zmk,conditional-layers";
   numeric_momentary {
-    if-layers = <NUMTEMP>;
+    if-layers = <NAV SYM>;
     then-layer = <NUMPAD>;
   };
   numeric_lock {
@@ -101,13 +101,13 @@ keymap {
 // | Tab |  Q  |  W  |  E  |  R  |  T  |             |  Y  |  U  |  I  |  O  |  P  | Ret |
 // | Ctl |  A  |  S  |  D  |  F  |  G  |-----. ,-----|  H  |  J  |  K  |  L  |  ;  |  '  |
 // |Shf/(|  Z  |  X  |  C  |  V  |  B  |  [  | |  ]  |  N  |  M  |  ,  |  .  |  /  |)/Shf|
-// `----------------| Alt | GUI | SYM | Spc |   | Spc | NAV | Bks |XXXXX|----------------'
+// `----------------| Alt | GUI | SYM | Spc |   | Spc | NAV | Bks |KBCTL|----------------'
     bindings = <
 &kp ESC   &kp N1 &kp N2 &kp N3   &kp N4   &kp N5                     &kp N6 &kp N7   &kp N8    &kp N9  &kp N0   &kp BSPC
 &kp TAB   &kp Q  &kp W  &kp E    &kp R    &kp T                      &kp Y  &kp U    &kp I     &kp O   &kp P    &kp ENTER
 &kp LCTRL &kp A  &kp S  &kp D    &kp F    &kp G                      &kp H  &kp J    &kp K     &kp L   &kp SEMI &kp SQT
 SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp M    &kp COMMA &kp DOT &kp FSLH SC_RIGHT
-                      &kp LALT &kp LGUI &mo SYM &kp SPACE   &kp SPACE &mo NAV &kp BSPC &none
+                      &kp LALT &kp LGUI &mo SYM &kp SPACE   &kp SPACE &mo NAV &kp BSPC &mo KEEBCTL
     >;
     display-name = "QWERTY";
   };
@@ -222,7 +222,7 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &trans &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT                &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER &trans
 &trans &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH               &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK &trans
 &trans &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT &trans   &trans &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH &trans
-                                &trans &trans &trans &none        &kp RET &mo NUMTEMP &kp BSLH &trans
+                                &trans &trans &trans &none        &kp RET &trans &kp BSLH &trans
     >;
     display-name = "SYM";
   };
@@ -239,7 +239,7 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &trans &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T)                   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &none    &trans
 &trans &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G)                   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &none    &trans
 &trans &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL &trans       &trans &kp INS  &sk RCTRL &sk RSHIFT &sk LALT  &sk RGUI &trans
-                           &trans &trans &mo NUMTEMP &trans           &trans &trans &trans &trans
+                           &trans &trans &trans &trans           &trans &trans &trans &trans
     >;
     display-name = "NAV";
   };
@@ -255,20 +255,8 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &trans &trans &trans  &trans  &trans  &trans                      &trans          &trans    &trans    &trans    &trans          &trans
 &trans &kp F1 &kp F2  &kp F3  &kp F4  &none                       &kp KP_MULTIPLY &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_SUBTRACT &trans
 &trans &kp F5 &kp F6  &kp F7  &kp F8  &none                       &kp KP_DIVIDE   &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS     &tog NUMLOCK
-&trans &kp F9 &kp F10 &kp F11 &kp F12 &kp DEL &trans       &trans &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER    &trans
+&trans &kp F9 &kp F10 &kp F11 &kp F12 &kp DEL &trans       &trans &kp KP_N05       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER    &trans
                        &trans &trans &trans &trans           &kp KP_N0 &trans &trans &kp KP_DOT
-    >;
-    display-name = "Numpad";
-  };
-
-  num_temp_layer {
-    // Only exists to momentarily activate numpad layer.
-    bindings = <
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
-                   &trans &trans &trans &trans            &trans &trans &trans &trans
     >;
     display-name = "Numpad";
   };
@@ -287,16 +275,16 @@ num_lock_layer {
 
   keyboard_control_layer {
 // ,-----------------------------------.             ,-----------------------------------.
-// |XXXXX| BT1 | BT2 | BT3 | BT4 | BT5 |             |     |     |     |     |     |     |
-// |Dvork|     |     |     |     |BTCLR|             |     |     |     |     |     |     |
-// |Colmk|     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
-// |QWRTY|     |     |     |     |     | DFU | | DFU |     |     |     |     |     |     |
+// |BTC_C| BT1 | BT2 | BT3 | BT4 | BT5 |             |     |     |     |     |     |     |
+// |Dvork|QWRTY|     |     |     |     |             |     |     |     |     |     |     |
+// |Colmk|     |     |Dvork|     |     |-----. ,-----|     |     |     |     |     |     |
+// |QWRTY|     |     |Colmk|     |BTC_A| DFU | | DFU |     |     |     |     |     |     |
 // `----------------|     |     |     |     |   |     |     |     |     |----------------'
     bindings = <
-&none       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                &trans &trans &trans &trans &trans &trans
-&to DVORAK  &trans       &trans       &trans       &trans       &trans                      &trans &trans &trans &trans &trans &trans
-&to COLEMAK &trans       &trans       &trans       &trans       &trans                      &trans &trans &trans &trans &trans &trans
-&to QWERTY  &trans       &trans       &trans       &trans       &trans &bootloader   &bootloader &trans &trans &trans &trans &trans &trans
+&bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                &trans &trans &trans &trans &trans &trans
+&to DVORAK  &to QWERTY   &trans       &trans       &trans       &trans                      &trans &trans &trans &trans &trans &trans
+&to COLEMAK &trans       &trans       &to DVORAK   &trans       &trans                      &trans &trans &trans &trans &trans &trans
+&to QWERTY  &trans       &trans       &to COLEMAK  &trans       &bt BT_CLR_ALL &bootloader   &bootloader &trans &trans &trans &trans &trans &trans
                                                 &trans &trans &trans &tog KEEBCTL      &trans &trans &trans &trans
     >;
     display-name = "KBD CTL";
