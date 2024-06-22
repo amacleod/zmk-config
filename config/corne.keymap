@@ -13,7 +13,6 @@
 // - better handling of adaptive keys in Hands Down Gold; maybe tap-dance is not the best way to handle Z and Q
 // - combos for backspace and ctrl-backspace maybe? possibly right ring and pinky
 // - what about combos for shift?
-// - colon on numpad layer? (for typing times)
 // - layer with GUI+numbers for i3 desktop switching
 // - easy way to hold down ctrl on just the left half, for use with ctrl-mouseclick
 // - Mac-friendly shortcuts either on nav layer or another layer (but if possible keep it easy to do Emacs commands)
