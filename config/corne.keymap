@@ -11,7 +11,7 @@
 
 // Things to try next:
 // - better handling of adaptive keys in Hands Down Gold; maybe tap-dance is not the best way to handle Z and Q
-// - combos for backspace and ctrl-backspace maybe? possibly right ring and pinky
+// - consider making right-pinky backspace combo a hold-tap for C-backspace.
 // - what about combos for shift?
 // - layer with GUI+numbers for i3 desktop switching
 // - easy way to hold down ctrl on just the left half, for use with ctrl-mouseclick
@@ -149,6 +149,24 @@ combos {
     key-positions = <10 11>;
     bindings = <&kp LCTRL>;
   };
+  // Rightmost two home row keys for backspace.
+  combo_right_pinky_backspace {
+    timeout-ms = <50>;
+    key-positions = <18 19>;
+    bindings = <&kp BACKSPACE>;
+  };
+  // Leftmost two keys in bottom row for left shift.
+  combo_left_pinky_shift {
+    timeout-ms = <50>;
+    key-positions = <20 21>;
+    bindings = <&kp LSHFT>;
+  };
+  // Rightmost two keys in bottom row for right shift.
+  combo_right_pinky_shift {
+    timeout-ms = <50>;
+    key-positions = <28 29>;
+    bindings = <&kp RSHFT>;
+  };
 };
 
 macros {
@@ -204,22 +222,22 @@ behaviors {
     #binding-cells = <0>;
     bindings = <&kp G>, <&kp Q>;
   };
-  // Positional home-row shift; uses fast tapping term
-  hsl: homerow_mods_shift_left {
+  // Positional home-row mods; uses fast tapping term
+  hsl: homerow_mods_left {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     bindings = <&kp>, <&kp>;
-    flavor = "tap-unless-interrupted";
+    flavor = "balanced";
     tapping-term-ms = <HM_TAPPING_TERM_FAST>;
     quick-tap-ms = <HM_QUICK_TAP>;
     require-prior-idle-ms = <HM_PRIOR_IDLE>;
     hold-trigger-key-positions = <KEYS_RIGHT KEYS_THUMB>;
   };
-  hsr: homerow_mods_shift_right {
+  hsr: homerow_mods_right {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     bindings = <&kp>, <&kp>;
-    flavor = "tap-unless-interrupted";
+    flavor = "balanced";
     tapping-term-ms = <HM_TAPPING_TERM_FAST>;
     quick-tap-ms = <HM_QUICK_TAP>;
     require-prior-idle-ms = <HM_PRIOR_IDLE>;
