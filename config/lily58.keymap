@@ -255,7 +255,7 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 &trans &trans &trans  &trans  &trans  &trans                      &trans          &trans    &trans    &trans    &trans          &trans
 &trans &kp F1 &kp F2  &kp F3  &kp F4  &none                       &kp KP_MULTIPLY &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_SUBTRACT &trans
 &trans &kp F5 &kp F6  &kp F7  &kp F8  &none                       &kp KP_DIVIDE   &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS     &tog NUMLOCK
-&trans &kp F9 &kp F10 &kp F11 &kp F12 &kp DEL &trans       &trans &kp KP_N05       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER    &trans
+&trans &kp F9 &kp F10 &kp F11 &kp F12 &kp DEL &trans       &trans &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER    &trans
                        &trans &trans &trans &trans           &kp KP_N0 &trans &trans &kp KP_DOT
     >;
     display-name = "Numpad";
