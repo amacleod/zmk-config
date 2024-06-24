@@ -43,10 +43,20 @@
 // Other convenience macros for in-layout bindings.
 #define BSLINGER &tph BACKSPACE LC(BACKSPACE)
 
-// Protect from shift; ensure that a key sends the same thing,
-// regardless of whether shift is held. Note that this affects caps-word
-// behavior as well, since caps-word uses LSHIFT.
-#define PFS(PROTECTED_KEYCODE) pfs_##PROTECTED_KEYCODE
+// Protect from (left) shift; ensure that a key sends the same thing,
+// regardless of whether left shift is held. This is intended to keep
+// caps-word from unintentionalli capitalizing left-control hotkeys.
+// Usage (example protects only A and D from shift):
+//   behaviors { PFS(a, &kp A); PFS(d, &kp D); };
+//   keymap { mylayer { &pfs_a  &kp S  &pfs_d  &kp F  &kp G };
+#define PFS(NAME, BHAV) \
+  pfs_##NAME: protect_##NAME##_from_shift { \
+    compatible = "zmk,behavior-mod-morph"; \
+    #binding-cells = <0>; \
+    bindings = <BHAV>, <BHAV>; \
+    mods = <(MOD_LSFT|MOD_LCTL)>; \
+    keep-mods = <(MOD_LCTL)>; \
+  }
 
 
 // Home row mods settings; history notes below:
@@ -286,6 +296,23 @@ behaviors {
     tapping-term-ms = <200>;
     bindings = <&kp>, <&kp>;
   };
+  // Behaviors protected from shift (and perhaps more importantly caps-word).
+  PFS(c_q, &kp LC(Q));
+  PFS(c_w, &kp LC(W));
+  PFS(c_e, &kp LC(E));
+  PFS(c_r, &kp LC(R));
+  PFS(c_t, &kp LC(T));
+
+  PFS(c_a, &kp LC(A));
+  PFS(c_s, &kp LC(S));
+  PFS(c_d, &kp LC(D));
+  PFS(c_f, &kp LC(F));
+  PFS(c_g, &kp LC(G));
+
+  PFS(c_z, &kp LC(Z));
+  PFS(c_x, &kp LC(X));
+  PFS(c_c, &kp LC(C));
+  PFS(c_v, &kp LC(V));
 };
 
 conditional_layers {
@@ -406,12 +433,12 @@ keymap {
 // |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  _  |
 // |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
 // |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  /  |
-// `-----------|     |#####|XXXXX|   | Ret | NUM |  \  |-----------'
+// `-----------|     | Spc |XXXXX|   | Ret | NUM |  \  |-----------'
     bindings = <
   &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER
   &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
   &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH
-                                &trans &trans &none    &kp RET &trans &kp BSLH
+                                &trans &trans &kp SPC    &kp RET &trans &kp BSLH
     >;
   };
 
@@ -422,9 +449,9 @@ keymap {
 // | ^Z  | ^X  | ^C  | ^V  | Del |   | Ins | Ctrl|Shift| Alt | Tab |
 // `-----------| GUI | NUM | Bks |   | Ret |#####| GUI |-----------'
     bindings = <
-  &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)  &kp LC(T)   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp ESC
-  &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F)  &kp LC(G)   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp BSPC
-  &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &kp DEL     &kp INS  &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
+  &pfs_c_q &pfs_c_w &pfs_c_e &pfs_c_r  &pfs_c_t   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp ESC
+  &pfs_c_a &pfs_c_s &pfs_c_d &pfs_c_f  &pfs_c_g   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp BSPC
+  &pfs_c_z &pfs_c_x &pfs_c_c &pfs_c_v  &kp DEL    &kp INS  &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
                    &sk LGUI &trans &kp LC(BSPC)   &kp RET &trans &sk RGUI
     >;
   };
