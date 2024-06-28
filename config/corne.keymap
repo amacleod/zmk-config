@@ -143,10 +143,10 @@ combos {
     key-positions = <10 11>;
     bindings = <&kp LCTRL>;
   };
-  // Rightmost two home row keys for backspace.
+  // Rightmost two top row keys for backspace.
   combo_right_pinky_backspace {
     timeout-ms = <50>;
-    key-positions = <18 19>;
+    key-positions = <8 9>;
     bindings = <&kp BACKSPACE>;
   };
   // Leftmost two keys in bottom row for left shift.
