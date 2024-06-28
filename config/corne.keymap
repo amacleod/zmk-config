@@ -448,9 +448,9 @@ keymap {
 // | ^Z  | ^X  | ^C  | ^V  | Del |   | Ins | Ctrl|Shift| Alt | Tab |
 // `-----------| GUI | NUM | Bks |   | Ret |#####| GUI |-----------'
     bindings = <
-  &hk LC(Q) &hk LC(W) &hk LC(E) &hk LC(R)  &hk LC(T)   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp ESC
-  &hk LC(A) &hk LC(S) &hk LC(D) &hk LC(F)  &hk LC(G)   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp BSPC
-  &hk LC(Z) &hk LC(X) &hk LC(C) &hk LC(V)  &kp DEL    &kp INS  &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
+  &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)  &kp LC(T)   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp ESC
+  &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F)  &kp LC(G)   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp BSPC
+  &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &kp DEL    &kp INS  &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
                    &sk LGUI &trans &kp LC(BSPC)   &kp RET &trans &sk RGUI
     >;
   };
