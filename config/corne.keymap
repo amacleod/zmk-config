@@ -17,6 +17,8 @@
 // - easy way to hold down ctrl on just the left half, for use with ctrl-mouseclick
 // - Mac-friendly shortcuts either on nav layer or another layer (but if possible keep it easy to do Emacs commands)
 // - alt-tab shortcut, Callum-style if possible (virtually hold Alt for successive "next window" presses)
+// - split things out into includable dtsi files (but with what sort of organization scheme?)
+// - Emacs-specific macro keys: C-space, maybe others
 
 
 #define DEFAULT 0
@@ -39,9 +41,6 @@
 // Keycode definitions by thumb, to hopefully make swapping easier.
 #define LTHUMB &mt LSHIFT SPACE
 #define RTHUMB &kp SPACE
-
-// Other convenience macros for in-layout bindings.
-#define BSLINGER &tph BACKSPACE LC(BACKSPACE)
 
 
 // Home row mods settings; history notes below:
@@ -162,18 +161,70 @@ combos {
     key-positions = <28 29>;
     bindings = <&kp RSHFT>;
   };
+  // Combos for clearing Bluetooth. Only available in keyboard
+  // control layer.
+  combo_bt_clear_all {
+    timeout-ms = <50>;
+    key-positions = <20 21 22 23>;
+    bindings = <&bt BT_CLR_ALL>;
+    layers = <KEEBCTL>;
+  };
+  combo_bt_clear_first {
+    timeout-ms = <50>;
+    key-positions = <20 31>;
+    bindings = <&btclr 0>;
+    layers = <KEEBCTL>;
+  };
+  combo_bt_clear_second {
+    timeout-ms = <50>;
+    key-positions = <21 31>;
+    bindings = <&btclr 1>;
+    layers = <KEEBCTL>;
+  };
+  combo_bt_clear_third {
+    timeout-ms = <50>;
+    key-positions = <22 31>;
+    bindings = <&btclr 2>;
+    layers = <KEEBCTL>;
+  };
+  combo_bt_clear_fourth {
+    timeout-ms = <50>;
+    key-positions = <23 31>;
+    bindings = <&btclr 3>;
+    layers = <KEEBCTL>;
+  };
+  combo_bt_clear_fifth {
+    timeout-ms = <50>;
+    key-positions = <24 31>;
+    bindings = <&btclr 4>;
+    layers = <KEEBCTL>;
+  };
 };
 
 macros {
-  bt_clear_one: bluetooth_clear_one {
-    compatible = "zmk,behavior-macro";
-    #binding-cells = <0>;
-    bindings = <&bt BT_CLR>;
-  };
-  bt_clear_all: bluetooth_clear_all {
-    compatible = "zmk,behavior-macro";
-    #binding-cells = <0>;
-    bindings = <&bt BT_CLR_ALL>;
+  // Select a specific Bluetooth profile and then toggle the
+  // keyboard control layer; this is intended to deactivate that layer
+  // when activated from within it.
+  btsel: bluetooth_select_and_toggle {
+    compatible = "zmk,behavior-macro-one-param";
+    #binding-cells = <1>;
+    bindings
+      = <&macro_param_1to2>
+      , <&macro_tap &bt BT_SEL MACRO_PLACEHOLDER>
+      , <&macro_pause_for_release>
+      , <&tog KEEBCTL>
+      ;
+  };    
+  // Clear a specific Bluetooth profile, relying on the &btsel macro to
+  // toggle the layer.
+  btclr: bluetooth_clear_and_toggle {
+    compatible = "zmk,behavior-macro-one-param";
+    #binding-cells = <1>;
+    bindings
+      = <&macro_param_1to1>
+      , <&btsel MACRO_PLACEHOLDER>
+      , <&macro_tap &bt BT_CLR>
+      ;
   };
   // Type "qu" but force the "u" to be un-shifted. This ought to
   // result in "QU" when caps lock or caps-word is on, "Qu" when
@@ -203,21 +254,6 @@ macros {
       , <&macro_release &kp LSHFT &kp RSHFT>
       , <&macro_param_2to1>
       , <&macro_tap &kp MACRO_PLACEHOLDER>
-      ;
-  };
-  // Ctrl-<key> hotkey that is immune to left shift and caps-word,
-  // but can still be used with right shift if you really want the
-  // shifted version.
-  hk: hot_key {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings
-      = <&macro_release &kp LSHFT>
-      , <&macro_param_1to1>
-      , <&macro_press &kp MACRO_PLACEHOLDER>
-      , <&macro_pause_for_release>
-      , <&macro_param_1to1>
-      , <&macro_release &kp MACRO_PLACEHOLDER>
       ;
   };
 };
@@ -254,25 +290,13 @@ behaviors {
     require-prior-idle-ms = <HM_PRIOR_IDLE>;
     hold-trigger-key-positions = <KEYS_LEFT KEYS_THUMB>;
   };
+  // Long duration sticky layer. I use this for KEEBCTL since I am
+  // often slow at choosing a function there.
   slx: sticky_layer_extended {
     compatible = "zmk,behavior-sticky-key";
     #binding-cells = <1>;
     bindings = <&mo>;
     release-after-ms = <8000>;
-  };
-  motog: momentary_or_toggle_hold_tap {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    flavor = "hold-preferred";
-    tapping-term-ms = <200>;
-    bindings = <&mo>, <&tog>;
-  };
-  bt_clear: hold_tap_bluetooth_clear {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    flavor = "hold-preferred";
-    tapping-term-ms = <1000>;
-    bindings = <&bt_clear_all>, <&bt_clear_one>;
   };
   // Behaviors for Qu pair.
   weeu: morph_small_u {
@@ -287,15 +311,6 @@ behaviors {
     flavor = "tap-preferred";
     tapping-term-ms = <LINGER_HOLD_MS>;
     bindings = <&weeu>, <&none>;
-  };
-  // Generic tap-preferred hold-tap. Useful for backspace hold-tap:
-  // short for Ctrl-Backspace, long for plain Backspace.
-  tph: tap_preferred_hold {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    flavor = "tap-preferred";
-    tapping-term-ms = <200>;
-    bindings = <&kp>, <&kp>;
   };
 };
 
@@ -417,7 +432,7 @@ keymap {
 // |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  _  |
 // |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
 // |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  /  |
-// `-----------|     | Spc |XXXXX|   | Ret | NUM |  \  |-----------'
+// `-----------|     |#####| Spc |   | Ret | NUM |  \  |-----------'
     bindings = <
   &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER
   &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
@@ -469,13 +484,13 @@ keymap {
 // |     |HDNeu|Dvork|Clmak|     |   |     |     |     |     |     |
 // |QWRTY|HDGld|STRDY|Cnary|     |   |     |     |     |     |     |
 // | BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |
-// `-----------|     |BTClr| BAS |   |     |     |     |-----------'
+// `-----------|#####|XXXXX| BAS |   |     |     |#####|-----------'
 
     bindings = <
-  &trans       &to HD_NEU   &to DVORAK   &to COLEMAK  &trans          &trans &trans &trans &trans &trans
-  &to QWERTY   &to HD_GOLD  &to STURDY   &to CANARY   &trans          &trans &trans &trans &trans &trans
-  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &trans &trans &trans &trans &trans
-                                        &trans &bt_clear &tog KEEBCTL    &trans &trans &trans
+  &trans     &to HD_NEU  &to DVORAK &to COLEMAK &trans          &trans &trans &trans &trans &trans
+  &to QWERTY &to HD_GOLD &to STURDY &to CANARY  &trans          &trans &trans &trans &trans &trans
+  &btsel 0   &btsel 1    &btsel 2   &btsel 3    &btsel 4        &trans &trans &trans &trans &trans
+                                 &trans &none &tog KEEBCTL    &trans &trans &trans
     >;
   };
 };
