@@ -12,9 +12,7 @@
 // Things to try next:
 // - better handling of adaptive keys in Hands Down Gold; maybe tap-dance is not the best way to handle Z and Q
 // - consider making right-pinky backspace combo a hold-tap for C-backspace.
-// - what about combos for shift?
 // - layer with GUI+numbers for i3 desktop switching
-// - easy way to hold down ctrl on just the left half, for use with ctrl-mouseclick
 // - Mac-friendly shortcuts either on nav layer or another layer (but if possible keep it easy to do Emacs commands)
 // - alt-tab shortcut, Callum-style if possible (virtually hold Alt for successive "next window" presses)
 // - split things out into includable dtsi files (but with what sort of organization scheme?)
@@ -37,11 +35,6 @@
 
 // Placeholder for mandatory parameters that are never used.
 #define UNUSED 0
-
-// Keycode definitions by thumb, to hopefully make swapping easier.
-#define LTHUMB &mt LSHIFT SPACE
-#define RTHUMB &kp SPACE
-
 
 // Home row mods settings; history notes below:
 // - fast tapping term of 100 feels too fast
@@ -137,7 +130,7 @@ combos {
     bindings = <&sls P H>;
     layers = <HD_NEU>;
   };
-  // Leftmost two home row keys for ctrl.
+  // Leftmost two home row keys for ctrl. Note that this prevents using Hands Down Neu's RS -> tab combo.
   combo_left_pinky_control {
     timeout-ms = <50>;
     key-positions = <10 11>;
@@ -160,6 +153,12 @@ combos {
     timeout-ms = <50>;
     key-positions = <28 29>;
     bindings = <&kp RSHFT>;
+  };
+  // Left pinky and index for escape, as recommended by Hands Down Neu.
+  combo_left_fork_escape {
+    timeout-ms = <50>;
+    key-positions = <10 13>;
+    bindings = <&kp ESC>;
   };
   // Combos for clearing Bluetooth. Only available in keyboard
   // control layer.
@@ -339,7 +338,7 @@ keymap {
   &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
   &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &kp H
   &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+   &kp ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
   };
 
@@ -348,7 +347,7 @@ keymap {
 // | J z | G q |  M  |  P  |  V  |   |  ;  |  .  |  /  |  "  |  '  |
 // |  R  |  S  |  N  |  D  |  B  |   |  ,  |  A  |  E  |  I  |  H  |
 // |  X  |  F  |  L  |  C  |  W  |   |  -  |  U  |  O  |  Y  |  K  |
-// `-----------| Esc | SYM |  T  |   | Spc | NAV | Bks |-----------'
+// `-----------| Esc | SYM |  T  |   |Sp/Sh| NAV | Bks |-----------'
     bindings = <
   &tdjz  &tdgq  &kp M  &kp P  &kp V    &kp SEMI  &kp DOT &kp FSLH &kp DQT &kp SQT
   &kp R  &kp S  &kp N  &kp D  &kp B    &kp COMMA &kp A   &kp E    &kp I   &kp H
@@ -367,7 +366,7 @@ keymap {
   &kp SQT  &kp COMMA &kp DOT &kp P  &kp Y    &kp F  &kp G  &kp C  &kp R  &kp L
   &kp A    &kp O     &kp E   &kp U  &kp I    &kp D  &kp H  &kp T  &kp N  &kp S
   &kp SEMI &kp Q     &kp J   &kp K  &kp X    &kp B  &kp M  &kp W  &kp V  &kp Z
-                   &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+         &kp ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
   };
 
@@ -381,7 +380,7 @@ keymap {
   &kp Q  &kp W  &kp F  &kp P  &kp B    &kp J    &kp L   &kp U     &kp Y   &kp SQT
   &kp A  &kp R  &kp S  &kp T  &kp G    &kp M    &kp N   &kp E     &kp I   &kp O
   &kp Z  &kp X  &kp C  &kp D  &kp V    &kp K    &kp H   &kp COMMA &kp DOT &kp FSLH
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+   &kp ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
   };
 
@@ -395,7 +394,7 @@ keymap {
   &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y &kp U  &kp I     &kp O   &kp P
   &kp A  &kp S  &kp D  &kp F  &kp G    &kp H &kp J  &kp K     &kp L   &kp SEMI
   &kp Z  &kp X  &kp C  &kp V  &kp B    &kp N &kp M  &kp COMMA &kp DOT &kp FSLH
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+   &kp ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
   };
 
@@ -409,7 +408,7 @@ keymap {
   &kp W  &kp L  &kp Y  &kp P  &kp B    &kp Z  &kp F  &kp O    &kp U     &kp SQT
   &kp C  &kp R  &kp S  &kp T  &kp G    &kp M  &kp N  &kp E    &kp I     &kp A
   &kp Q  &kp J  &kp V  &kp D  &kp K    &kp X  &kp H  &kp FSLH &kp COMMA &kp DOT
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+   &kp ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
   };
 
@@ -423,7 +422,7 @@ keymap {
   &kp V  &kp M  &kp L  &kp C  &kp P    &kp X   &kp F  &kp O   &kp U    &kp J
   &kp S  &kp T  &kp R  &kp D  &kp Y    &kp DOT &kp N  &kp A   &kp E    &kp I
   &kp Z  &kp K  &kp Q  &kp G  &kp W    &kp B   &kp H  &kp SQT &kp SEMI &kp COMMA
-             &kp ESC &mo SYM LTHUMB    RTHUMB &mo NAV &kp BSPC
+   &kp ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
   };
 
