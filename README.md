@@ -13,6 +13,7 @@ The following designs and writings have served as inspiration:
 - Pascal Getreuer's posts about keyboards (https://getreuer.info/posts/keyboards/index.html)
 - Callum Oakley's QMK keymap, particularly one-shot mods (https://github.com/callum-oakley/qmk_firmware/tree/master/users/callum)
 - the Miryoku layout (https://github.com/manna-harbour/miryoku)
+- Alan Reiser's Hands Down layouts, especially Hands Down Neu (https://sites.google.com/alanreiser.com/handsdown)
 
 Personal Notes
 --------------
