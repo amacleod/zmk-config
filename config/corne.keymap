@@ -11,7 +11,6 @@
 
 // Things to try next:
 // - better handling of adaptive keys in Hands Down Gold; maybe tap-dance is not the best way to handle Z and Q
-// - consider making right-pinky backspace combo a hold-tap for C-backspace.
 // - layer with GUI+numbers for i3 desktop switching
 // - Mac-friendly shortcuts either on nav layer or another layer (but if possible keep it easy to do Emacs commands)
 // - alt-tab shortcut, Callum-style if possible (virtually hold Alt for successive "next window" presses)
