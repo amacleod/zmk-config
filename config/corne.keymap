@@ -15,6 +15,7 @@
 // - Mac-friendly shortcuts either on nav layer or another layer (but if possible keep it easy to do Emacs commands)
 // - alt-tab shortcut, Callum-style if possible (virtually hold Alt for successive "next window" presses)
 // - split things out into includable dtsi files (but with what sort of organization scheme?)
+//   - identify commonalities between Corne keymap and Lily58 keymap
 // - Emacs-specific macro keys: C-space, maybe others
 
 
@@ -50,6 +51,9 @@
 // hold time for the actual hold-tap behavior should be 120ms.
 #define LINGER_MACRO_TAP_MS 30
 #define LINGER_HOLD_MS 120
+
+// Adaptive keys settings.
+#define ADAPTIVE_KEYS_TAPPING_TERM 175
 
 //  0  1  2  3  4      5  6  7  8  9
 // 10 11 12 13 14     15 16 17 18 19
