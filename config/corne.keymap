@@ -10,11 +10,15 @@
 
 
 // Things to try next:
-// - better handling of adaptive keys in Hands Down Gold; maybe tap-dance is not the best way to handle Z and Q
+// - better handling of adaptive keys in Hands Down Gold;
+//    maybe tap-dance is not the best way to handle Z and Q
 // - layer with GUI+numbers for i3 desktop switching
-// - Mac-friendly shortcuts either on nav layer or another layer (but if possible keep it easy to do Emacs commands)
-// - alt-tab shortcut, Callum-style if possible (virtually hold Alt for successive "next window" presses)
-// - split things out into includable dtsi files (but with what sort of organization scheme?)
+// - Mac-friendly shortcuts either on nav layer or another layer
+//   (but if possible keep it easy to do Emacs commands)
+// - alt-tab shortcut, Callum-style if possible (virtually hold Alt
+//   for successive "next window" presses)
+// - split things out into includable dtsi files (but with what sort
+//   of organization scheme?)
 //   - identify commonalities between Corne keymap and Lily58 keymap
 // - Emacs-specific macro keys: C-space, maybe others
 
@@ -76,7 +80,8 @@ combos {
     key-positions = <32 33>;
     bindings = <&caps_word>;
   };
-  // Both outer thumb keys trigger the keyboard control layer (layout selection and Bluetooth).
+  // Both outer thumb keys trigger the keyboard control layer (layout
+  //  selection and Bluetooth).
   combo_meta_layer {
     timeout-ms = <50>;
     key-positions = <30 35>;
@@ -133,7 +138,8 @@ combos {
     bindings = <&sls P H>;
     layers = <HD_NEU>;
   };
-  // Leftmost two home row keys for ctrl. Note that this prevents using Hands Down Neu's RS -> tab combo.
+  // Leftmost two home row keys for ctrl.
+  // Note that this prevents using Hands Down Neu's RS -> tab combo.
   combo_left_pinky_control {
     timeout-ms = <50>;
     key-positions = <10 11>;
@@ -216,7 +222,7 @@ macros {
       , <&macro_pause_for_release>
       , <&tog KEEBCTL>
       ;
-  };    
+  };
   // Clear a specific Bluetooth profile, relying on the &btsel macro to
   // toggle the layer.
   btclr: bluetooth_clear_and_toggle {
@@ -474,10 +480,10 @@ keymap {
   num_lock_layer {
     // Only exists to toggle numpad layer lock on and off.
     bindings = <
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-      &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-                    &trans &trans &trans    &trans &trans &trans
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans    &trans &trans &trans
     >;
   };
 
