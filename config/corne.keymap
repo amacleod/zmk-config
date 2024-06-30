@@ -35,7 +35,8 @@
 #define NAV     8
 #define NUMPAD  9
 #define NUMLOCK 10
-#define KEEBCTL 11
+#define I3WMNAV 11
+#define KEEBCTL 12
 
 // Placeholder for mandatory parameters that are never used.
 #define UNUSED 0
@@ -358,7 +359,7 @@ keymap {
   &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
   &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &kp H
   &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
-   &kp ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
+   &lt I3WMNAV ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
   };
 
@@ -476,10 +477,10 @@ keymap {
 
   numpad_layer {
 // ,-----------------------------.   ,------------------------------.
-// | F1  | F2  | F3  | F4  |NumLk|   |  *  |  7   |  8  |  9  |  -  |
-// | F5  | F6  | F7  | F8  | Bks |   |  /  |  4   |  5  |  6  |  +  |
-// | F9  | F10 | F11 | F12 | Del |   |  0  |  1   |  2  |  3  | Ent |
-// `-----------|     |#####| Spc |   |  :  |######|  .  |-----------'
+// | F1  | F2  | F3  | F4  |NumLk|   |  *  |  7  |  8  |  9  |  -  |
+// | F5  | F6  | F7  | F8  | Bks |   |  /  |  4  |  5  |  6  |  +  |
+// | F9  | F10 | F11 | F12 | Del |   |  0  |  1  |  2  |  3  | Ent |
+// `-----------|     |#####| Spc |   |  :  |#####|  .  |-----------'
     bindings = <
   &kp F1 &kp F2  &kp F3  &kp F4  &tog NUMLOCK    &kp KP_MULTIPLY &kp N7 &kp N8 &kp N9 &kp KP_SUBTRACT
   &kp F5 &kp F6  &kp F7  &kp F8  &kp BSPC        &kp KP_DIVIDE   &kp N4 &kp N5 &kp N6 &kp KP_PLUS
@@ -489,12 +490,26 @@ keymap {
   };
 
   num_lock_layer {
-    // Only exists to toggle numpad layer lock on and off.
+// Only exists to toggle numpad layer lock on and off.
     bindings = <
   &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
   &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
   &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
                 &trans &trans &trans    &trans &trans &trans
+    >;
+  };
+
+  tiling_nav_layer {
+// ,-----------------------------.   ,------------------------------.
+// |     |     |     |     |     |   |     |     |     |     |     |
+// | WS1 | WS2 | WS3 | WS4 | WS5 |   | WS6 | WS7 | WS8 | WS9 | WS10|
+// |     |     |     |     |     |   |     |     |     |     |     |
+// `-----------|#####|     |     |   |     |     |     |-----------'
+    bindings = <
+  &trans     &trans     &trans     &trans     &trans        &trans     &trans     &trans     &trans     &trans
+  &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4) &kp LG(N5)    &kp LG(N6) &kp LG(N7) &kp LG(N8) &kp LG(N9) &kp LG(N0)
+  &trans     &trans     &trans     &trans     &trans        &trans     &trans     &trans     &trans     &trans
+                                  &trans &trans &trans    &trans &trans &trans
     >;
   };
 
