@@ -230,7 +230,7 @@ macros {
   };
   // Type "qu" but force the "u" to be un-shifted. This ought to
   // result in "QU" when caps lock or caps-word is on, "Qu" when
-  // shift is held normally,  and "qu" when neither caps nor shift
+  // shift is held normally, and "qu" when neither caps nor shift
   // is active.
   squ: sequence_q_lower_u {
     compatible = "zmk,behavior-macro";
@@ -239,9 +239,10 @@ macros {
     wait-ms = <0>;
     bindings
       = <&macro_tap &kp Q>
-      , <&macro_press   &hold_u_small UNUSED UNUSED>
+      , <&macro_tap &weeu>
+      , <&macro_press   &lng BACKSPACE UNUSED>
       , <&macro_pause_for_release>
-      , <&macro_release &hold_u_small UNUSED UNUSED>
+      , <&macro_release &lng BACKSPACE UNUSED>
       ;
   };
   // Type a digraph whose second letter is to be lowercase
@@ -313,6 +314,14 @@ behaviors {
     flavor = "tap-preferred";
     tapping-term-ms = <LINGER_HOLD_MS>;
     bindings = <&weeu>, <&none>;
+  };
+  // General hold-tap for linger keys. Totally ignores the tap part.
+  lng: linger_key {
+    compatible = "zmk-behavior-hold-tap";
+    #binding-cells = <2>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <LINGER_HOLD_MS>;
+    bindings = <&kp>, <&none>;
   };
 };
 
