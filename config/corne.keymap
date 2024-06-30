@@ -332,6 +332,14 @@ behaviors {
     tapping-term-ms = <LINGER_HOLD_MS>;
     bindings = <&h2t>, <&none>;
   };
+  // Layer tap variant that tries to guarantee the tap if the held
+  // layer was not used.
+  ltt: layer_tap_really_tap {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    flavor = "tap-unless-interrupted";
+    bindings = <&mo>, <&kp>;
+  };
 };
 
 conditional_layers {
@@ -359,7 +367,7 @@ keymap {
   &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
   &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &kp H
   &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
-   &lt I3WMNAV ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
+   &ltt I3WMNAV ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
   };
 
