@@ -317,7 +317,7 @@ behaviors {
   };
   // General hold-tap for linger keys. Totally ignores the tap part.
   lng: linger_key {
-    compatible = "zmk-behavior-hold-tap";
+    compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     flavor = "tap-preferred";
     tapping-term-ms = <LINGER_HOLD_MS>;
