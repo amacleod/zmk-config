@@ -8,11 +8,13 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 
+#include "zmk-helpers/helpers.h"
+#include "zmk-helpers/key-labels/36.h"
+
 
 // Things to try next:
 // - better handling of adaptive keys in Hands Down Gold;
 //    maybe tap-dance is not the best way to handle Z and Q
-// - layer with GUI+numbers for i3 desktop switching
 // - Mac-friendly shortcuts either on nav layer or another layer
 //   (but if possible keep it easy to do Emacs commands)
 // - alt-tab shortcut, Callum-style if possible (virtually hold Alt
@@ -21,6 +23,12 @@
 //   of organization scheme?)
 //   - identify commonalities between Corne keymap and Lily58 keymap
 // - Emacs-specific macro keys: C-space, maybe others
+// - change shifting of , and . in Hands Down Neu; could do ; and :
+//   or ? and !
+// - reclaim Q and Z keys for symbols in Hands Down Neu, since I type
+//   Q and Z exclusively with combos now
+// - add common i3wm(Regolith, actually) shortcuts like GUI-enter for
+//   terminal, GUI-space for launcher, and GUI-shift-enter for web
 
 
 #define DEFAULT 0
