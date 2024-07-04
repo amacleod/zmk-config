@@ -116,6 +116,7 @@ combos {
     timeout-ms = <50>;
     key-positions = <26 28>;
     bindings = <&qut Q UNUSED>;
+    // bindings = <&squ>;
     layers = <HD_NEU>;
   };
   // Combos for H digraphs in Hands Down Neu.
@@ -401,15 +402,16 @@ keymap {
   compatible = "zmk,keymap";
 
   hands_down_neu_layer {
+// NB: Q and Z exist in combos: UY->Qu/Q (linger), WF->Z.
 // ,-----------------------------.   ,-----------------------------.
-// |  W  |  F  |  M  |  P  |  V  |   |  /  |  .  |  Q  |  Z  |  J  |
+// |  W  |  F  |  M  |  P  |  V  |   |  /  |  .  |  "  |  '  |  J  |
 // |  R  |  S  |  N  |  T  |  B  |   |  ,  |  A  |  E  |  I  |  H  |
 // |  X  |  C  |  L  |  D  |  G  |   |  -  |  U  |  O  |  Y  |  K  |
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
-  &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
-  &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &kp H
-  &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
+  &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp DQT &kp SQT &kp J
+  &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E   &kp I   &kp H
+  &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O   &kp Y   &kp K
    &ltt I3WMNAV ESC  &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
   };
