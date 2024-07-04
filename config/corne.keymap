@@ -61,8 +61,10 @@
 // Linger keys settings. When choosing a hold time, subtract the macro
 // tap time from the actual desired hold time. For example if the linger
 // should activate after 150ms and the macro tap time is 30ms, then the
-// hold time for the actual hold-tap behavior should be 120ms.
+// hold time for the actual hold-tap behavior should be 120ms. Wait
+// time may come into play if the macro taps multiple keys.
 #define LINGER_MACRO_TAP_MS 30
+#define LINGER_MACRO_WAIT_MS 10
 #define LINGER_HOLD_MS 120
 
 // Adaptive keys settings.
@@ -113,7 +115,7 @@ combos {
   combo_uy_qu {
     timeout-ms = <50>;
     key-positions = <26 28>;
-    bindings = <&squ>;
+    bindings = <&qut Q UNUSED>;
     layers = <HD_NEU>;
   };
   // Combos for H digraphs in Hands Down Neu.
@@ -233,7 +235,7 @@ macros {
     #binding-cells = <1>;
     bindings
       = <&macro_param_1to2>
-      , <&macro_tap &bt BT_SEL MACRO_PLACEHOLDER>
+      , <&bt BT_SEL MACRO_PLACEHOLDER>
       , <&macro_pause_for_release>
       , <&tog KEEBCTL>
       ;
@@ -246,24 +248,35 @@ macros {
     bindings
       = <&macro_param_1to1>
       , <&btsel MACRO_PLACEHOLDER>
-      , <&macro_tap &bt BT_CLR>
+      , <&bt BT_CLR>
       ;
   };
   // Type "qu" but force the "u" to be un-shifted. This ought to
   // result in "QU" when caps lock or caps-word is on, "Qu" when
   // shift is held normally, and "qu" when neither caps nor shift
-  // is active.
-  squ: sequence_q_lower_u {
+  // is active. This variant nests the hold-tap inside it so that
+  // the Q can be typed right away and then the U comes later.
+  squh: sequence_q_lower_u_held {
     compatible = "zmk,behavior-macro";
     #binding-cells = <0>;
     tap-ms = <LINGER_MACRO_TAP_MS>;
-    wait-ms = <0>;
+    wait-ms = <LINGER_MACRO_WAIT_MS>;
     bindings
-      = <&macro_tap &kp Q>
+      = <&kp Q>
       , <&macro_press   &linger_u UNUSED UNUSED>
       , <&macro_pause_for_release>
       , <&macro_release &linger_u UNUSED UNUSED>
       ;
+  };
+  // Type "qu" with unshifted U. This variant is a straightforward
+  // two-tap macro that can be used pretty much anywhere, including as
+  // the tap or the hold of a hold-tap.
+  squ: sequence_q_lower_u_simple {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    tap-ms = <LINGER_MACRO_TAP_MS>;
+    wait-ms = <LINGER_MACRO_WAIT_MS>;
+    bindings = <&kp Q &weeu>;
   };
   // Type a digraph whose second letter is to be lowercase
   // regardless of shift. Note that this will remove shift even if
@@ -345,6 +358,14 @@ behaviors {
     tapping-term-ms = <LINGER_HOLD_MS>;
     bindings = <&weeu>, <&none>;
   };
+  // Tap to get Qu, hold to get a single key (expected to be Q).
+  qut: linger_key_tap_qu {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <LINGER_HOLD_MS>;
+    bindings = <&kp>, <&squ>;
+  };
   // General hold-tap for linger keys. Totally ignores the tap part.
   lng: linger_key {
     compatible = "zmk,behavior-hold-tap";
@@ -389,7 +410,7 @@ keymap {
   &kp W  &kp F  &kp M  &kp P  &kp V    &kp FSLH  &kp DOT &kp Q  &kp Z  &kp J
   &kp R  &kp S  &kp N  &kp T  &kp B    &kp COMMA &kp A   &kp E  &kp I  &kp H
   &kp X  &kp C  &kp L  &kp D  &kp G    &kp MINUS &kp U   &kp O  &kp Y  &kp K
-   &ltt I3WMNAV ESC &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
+   &ltt I3WMNAV ESC  &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
   };
 
@@ -482,12 +503,12 @@ keymap {
 // |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  _  |
 // |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
 // |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  /  |
-// `-----------|     |#####| Spc |   | Ret | NUM |  \  |-----------'
+// `-----------|     |#####|Rt/Sp|   | Ret | NUM |  \  |-----------'
     bindings = <
   &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER
   &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
   &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH
-                                &trans &trans &kp SPC    &kp RET &trans &kp BSLH
+                     &trans &trans &mt SPC LS(RET)    &kp RET &trans &kp BSLH
     >;
   };
 
