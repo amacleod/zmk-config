@@ -63,9 +63,12 @@
 // should activate after 150ms and the macro tap time is 30ms, then the
 // hold time for the actual hold-tap behavior should be 120ms. Wait
 // time may come into play if the macro taps multiple keys.
+// Use the short hold time for hold-taps inside macros with previous
+// taps, and the long hold time for hold-taps that stand alone.
 #define LINGER_MACRO_TAP_MS 30
 #define LINGER_MACRO_WAIT_MS 10
-#define LINGER_HOLD_MS 120
+#define LINGER_HOLD_SHORT_MS 120
+#define LINGER_HOLD_LONG_MS 180
 
 // Adaptive keys settings.
 #define ADAPTIVE_KEYS_TAPPING_TERM 175
@@ -356,7 +359,7 @@ behaviors {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     flavor = "tap-preferred";
-    tapping-term-ms = <LINGER_HOLD_MS>;
+    tapping-term-ms = <LINGER_HOLD_SHORT_MS>;
     bindings = <&weeu>, <&none>;
   };
   // Tap to get Qu, hold to get a single key (expected to be Q).
@@ -364,7 +367,7 @@ behaviors {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     flavor = "tap-preferred";
-    tapping-term-ms = <LINGER_HOLD_MS>;
+    tapping-term-ms = <LINGER_HOLD_LONG_MS>;
     bindings = <&kp>, <&squ>;
   };
   // General hold-tap for linger keys. Totally ignores the tap part.
@@ -372,7 +375,7 @@ behaviors {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     flavor = "tap-preferred";
-    tapping-term-ms = <LINGER_HOLD_MS>;
+    tapping-term-ms = <LINGER_HOLD_SHORT_MS>;
     bindings = <&h2t>, <&none>;
   };
   // Layer tap variant that tries to guarantee the tap if the held
