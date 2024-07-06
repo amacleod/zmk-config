@@ -105,7 +105,7 @@ combos {
   combo_meta_layer {
     timeout-ms = <50>;
     key-positions = <30 35>;
-    bindings = <&slx KEEBCTL>;
+    bindings = <&tog KEEBCTL>;
   };
   // Upper left two keys for Z in both Hands Down layers.
   combo_northwest_zed {
@@ -167,6 +167,7 @@ combos {
   };
   // Leftmost two home row keys for ctrl.
   // Note that this prevents using Hands Down Neu's RS -> tab combo.
+  // Remove this combo when getting home row mods to work.
   combo_left_pinky_control {
     timeout-ms = <50>;
     key-positions = <10 11>;
@@ -179,12 +180,14 @@ combos {
     bindings = <&kp BACKSPACE>;
   };
   // Leftmost two keys in bottom row for left shift.
+  // Remove this combo when getting home row mods to work.
   combo_left_pinky_shift {
     timeout-ms = <50>;
     key-positions = <20 21>;
     bindings = <&kp LSHFT>;
   };
   // Rightmost two keys in bottom row for right shift.
+  // Remove this combo when getting home row mods to work.
   combo_right_pinky_shift {
     timeout-ms = <50>;
     key-positions = <28 29>;
@@ -261,23 +264,6 @@ macros {
       , <&bt BT_CLR>
       ;
   };
-  // Type "qu" but force the "u" to be un-shifted. This ought to
-  // result in "QU" when caps lock or caps-word is on, "Qu" when
-  // shift is held normally, and "qu" when neither caps nor shift
-  // is active. This variant nests the hold-tap inside it so that
-  // the Q can be typed right away and then the U comes later.
-  squh: sequence_q_lower_u_held {
-    compatible = "zmk,behavior-macro";
-    #binding-cells = <0>;
-    tap-ms = <LINGER_MACRO_TAP_MS>;
-    wait-ms = <LINGER_MACRO_WAIT_MS>;
-    bindings
-      = <&kp Q>
-      , <&macro_press   &linger_u UNUSED UNUSED>
-      , <&macro_pause_for_release>
-      , <&macro_release &linger_u UNUSED UNUSED>
-      ;
-  };
   // Type "qu" with unshifted U. This variant is a straightforward
   // two-tap macro that can be used pretty much anywhere, including as
   // the tap or the hold of a hold-tap.
@@ -301,14 +287,6 @@ macros {
       , <&macro_param_2to1>
       , <&macro_tap &kp MACRO_PLACEHOLDER>
       ;
-  };
-  // Convert a hold to a tap. This is useful for linger keys that
-  // should not be repeated on a hold, such as backspace in the
-  // inverted Qu combo.
-  h2t: hold_to_tap {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings = <&macro_param_1to1>, <&macro_tap &kp MACRO_PLACEHOLDER>;
   };
 };
 
@@ -344,14 +322,6 @@ behaviors {
     require-prior-idle-ms = <HM_PRIOR_IDLE>;
     hold-trigger-key-positions = <KEYS_LEFT KEYS_THUMB>;
   };
-  // Long duration sticky layer. I use this for KEEBCTL since I am
-  // often slow at choosing a function there.
-  slx: sticky_layer_extended {
-    compatible = "zmk,behavior-sticky-key";
-    #binding-cells = <1>;
-    bindings = <&mo>;
-    release-after-ms = <8000>;
-  };
   // Morph for Qu pair. Conveniently this guards it from regular
   // shift, but not from caps-word.
   weeu: morph_small_u {
@@ -359,30 +329,6 @@ behaviors {
     #binding-cells = <0>;
     bindings = <&kp U>, <&kp U>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-  };
-  // Hold-tap for Qu linger: type unshifted U only if lingered.
-  linger_u: linger_for_unshifted_u {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    flavor = "tap-preferred";
-    tapping-term-ms = <LINGER_HOLD_SHORT_MS>;
-    bindings = <&weeu>, <&none>;
-  };
-  // Tap to get Qu, hold to get a single key (expected to be Q).
-  qut: linger_key_tap_qu {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    flavor = "tap-preferred";
-    tapping-term-ms = <LINGER_HOLD_LONG_MS>;
-    bindings = <&kp>, <&squ>;
-  };
-  // General hold-tap for linger keys. Totally ignores the tap part.
-  lng: linger_key {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    flavor = "tap-preferred";
-    tapping-term-ms = <LINGER_HOLD_SHORT_MS>;
-    bindings = <&h2t>, <&none>;
   };
   // Layer tap variant that tries to guarantee the tap if the held
   // layer was not used.
