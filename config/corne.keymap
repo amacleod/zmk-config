@@ -114,12 +114,18 @@ combos {
     bindings = <&kp Z>;
     layers = <HD_NEU HD_GOLD>;
   };
-  // Combo U and Y to produce Qu and Q, only on Hands Down Neu.
+  // Combo U and Y to produce Qu, only on Hands Down Neu.
   combo_uy_qu {
     timeout-ms = <50>;
     key-positions = <26 28>;
-    bindings = <&qut Q UNUSED>;
-    // bindings = <&squ>;
+    bindings = <&squ>;
+    layers = <HD_NEU>;
+  };
+  // Combo U, O, and Y to produce Q, only on Hands Down Neu.
+  combo_uoy_q {
+    timeout-ms = <50>;
+    key-positions = <26 27 28>;
+    bindings = <&kp Q>;
     layers = <HD_NEU>;
   };
   // Combos for H digraphs in Hands Down Neu.
