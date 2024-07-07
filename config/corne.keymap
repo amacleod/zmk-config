@@ -27,7 +27,6 @@
 //   or ? and !
 // - add common i3wm(Regolith, actually) shortcuts like GUI-enter for
 //   terminal, GUI-space for launcher, and GUI-shift-enter for web
-// - try making a floating homerow mods layer that uses a hold-tap with &trans in it
 
 
 #define DEFAULT 0
@@ -44,7 +43,6 @@
 #define NUMLOCK 10
 #define I3WMNAV 11
 #define KEEBCTL 12
-#define MODS    13
 
 // Placeholder for mandatory parameters that are never used.
 #define UNUSED 0
@@ -57,24 +55,15 @@
 #define HM_PRIOR_IDLE 150
 #define HM_QUICK_TAP 175
 
-// #define HMLA(KEYCODE) &hml LALT  KEYCODE
-// #define HMLC(KEYCODE) &hml LCTRL KEYCODE
-// #define HMLG(KEYCODE) &hml LGUI  KEYCODE
-// #define HMLS(KEYCODE) &hml LSHFT KEYCODE
+#define HMLA(KEYCODE) &hml LALT  KEYCODE
+#define HMLC(KEYCODE) &hml LCTRL KEYCODE
+#define HMLG(KEYCODE) &hml LGUI  KEYCODE
+#define HMLS(KEYCODE) &hml LSHFT KEYCODE
 
-// #define HMRA(KEYCODE) &hmr LALT  KEYCODE // Use left alt to avoid AltGr issues.
-// #define HMRC(KEYCODE) &hmr RCTRL KEYCODE
-// #define HMRG(KEYCODE) &hmr RGUI  KEYCODE
-// #define HMRS(KEYCODE) &hmr RSHFT KEYCODE
-
-#define HMLA(KEYCODE) &kp KEYCODE
-#define HMLC(KEYCODE) &kp KEYCODE
-#define HMLG(KEYCODE) &kp KEYCODE
-#define HMLS(KEYCODE) &kp KEYCODE
-#define HMRA(KEYCODE) &kp KEYCODE
-#define HMRC(KEYCODE) &kp KEYCODE
-#define HMRG(KEYCODE) &kp KEYCODE
-#define HMRS(KEYCODE) &kp KEYCODE
+#define HMRA(KEYCODE) &hmr LALT  KEYCODE // Use left alt to avoid AltGr issues.
+#define HMRC(KEYCODE) &hmr RCTRL KEYCODE
+#define HMRG(KEYCODE) &hmr RGUI  KEYCODE
+#define HMRS(KEYCODE) &hmr RSHFT KEYCODE
 
 // Linger keys settings. When choosing a hold time, subtract the macro
 // tap time from the actual desired hold time. For example if the linger
@@ -260,20 +249,6 @@ combos {
     bindings = <&btclr 4>;
     layers = <KEEBCTL>;
   };
-  // Both home row pinkies to enable floating mods.
-  combo_enable_floating_mods {
-    timeout-ms = <50>;
-    key-positions = <LM4 RM4>;
-    bindings = <&tog MODS>;
-    layers = <0 1 2 3 4 5 6 7 8 9 10 11 12>;
-  };
-  // Both home row innermost keys to disable floating mods.
-  combo_disable_floating_mods {
-    timeout-ms = <50>;
-    key-positions = <LM0 RM0>;
-    bindings = <&tog MODS>;
-    layers = <MODS>;
-  };
 };
 
 macros {
@@ -377,17 +352,6 @@ behaviors {
     flavor = "hold-preferred";
     tapping-term-ms = <LAYERTAP_HOLD_MS>;
     bindings = <&mo>, <&kp>;
-  };
-  hmlt: homerow_mods_left_transparent {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    bindings = <&kp>, <&trans>;
-    flavor = "balanced";
-    tapping-term-ms = <HM_TAPPING_TERM>;
-    quick-tap-ms = <HM_QUICK_TAP>;
-    require-prior-idle-ms = <HM_PRIOR_IDLE>;
-    hold-trigger-key-positions = <KEYS_RIGHT KEYS_THUMB>;
-    hold-trigger-on-release;
   };
 };
 
@@ -583,20 +547,6 @@ keymap {
   &to QWERTY &to HD_GOLD &to STURDY &to CANARY  &trans          &trans &trans &trans &trans &trans
   &btsel 0   &btsel 1    &btsel 2   &btsel 3    &btsel 4        &trans &trans &trans &trans &trans
                                  &trans &none &tog KEEBCTL    &trans &trans &trans
-    >;
-  };
-
-  floating_mods_layer {
-// ,-----------------------------.   ,-----------------------------.
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     | Ctl |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// `-----------|     |     |     |   |     |     |     |-----------'
-    bindings = <
-  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-  &trans &trans &trans &hmlt LSHFT UNUSED &trans    &trans &trans &trans &trans &trans
-  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-                &trans &trans &trans    &trans &trans &trans
     >;
   };
 };
