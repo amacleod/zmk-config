@@ -27,6 +27,7 @@
 //   or ? and !
 // - add common i3wm(Regolith, actually) shortcuts like GUI-enter for
 //   terminal, GUI-space for launcher, and GUI-shift-enter for web
+// - try making a floating homerow mods layer that uses a hold-tap with &trans in it
 
 
 #define DEFAULT 0
