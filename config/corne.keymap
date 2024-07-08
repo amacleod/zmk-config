@@ -373,12 +373,12 @@ keymap {
   hands_down_neu_layer {
 // NB: Q and Z exist in combos: UY->Qu/Q (linger), WF->Z.
 // ,-----------------------------.   ,-----------------------------.
-// |  W  |  F  |  M  |  P  |  V  |   |  /  |  .  |  "  |  '  |  J  |
+// |  W  |  F  |  M  |  P  |  V  |   |  /  |  .  |  J  |  "  |  '  |
 // |  R  |  S  |  N  |  T  |  B  |   |  ,  |  A  |  E  |  I  |  H  |
 // |  X  |  C  |  L  |  D  |  G  |   |  -  |  U  |  O  |  Y  |  K  |
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
-  &kp W   &kp F   &kp M   &kp P   &kp V    &kp FSLH  &kp DOT &kp DQT &kp SQT &kp J
+  &kp W   &kp F   &kp M   &kp P   &kp V    &kp FSLH  &kp DOT &kp J &kp DQT &kp SQT
   HMLS(R) HMLG(S) HMLA(N) HMLC(T) &kp B    &kp COMMA HMRC(A) HMRA(E) HMRG(I) HMRS(H)
   &kp X   &kp C   &kp L   &kp D   &kp G    &kp MINUS &kp U   &kp O   &kp Y   &kp K
    &ltt I3WMNAV ESC  &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
@@ -387,14 +387,14 @@ keymap {
 
   hands_down_gold_layer {
 // ,-----------------------------.   ,-----------------------------.
-// | J z | G q |  M  |  P  |  V  |   |  ;  |  .  |  /  |  "  |  '  |
+// | J z | G q |  M  |  P  |  V  |   |  /  |  .  |  ;  |  "  |  '  |
 // |  R  |  S  |  N  |  D  |  B  |   |  ,  |  A  |  E  |  I  |  H  |
 // |  X  |  F  |  L  |  C  |  W  |   |  -  |  U  |  O  |  Y  |  K  |
 // `-----------| Esc | SYM |  T  |   |Sp/Sh| NAV | Bks |-----------'
     bindings = <
-  &tdjz  &tdgq  &kp M  &kp P  &kp V    &kp SEMI  &kp DOT &kp FSLH &kp DQT &kp SQT
-  &kp R  &kp S  &kp N  &kp D  &kp B    &kp COMMA &kp A   &kp E    &kp I   &kp H
-  &kp X  &kp F  &kp L  &kp C  &kp W    &kp MINUS &kp U   &kp O    &kp Y   &kp K
+  &tdjz   &tdgq   &kp M   &kp P   &kp V    &kp FSLH  &kp DOT &kp SEMI &kp DQT &kp SQT
+  HMLS(R) HMLG(S) HMLA(N) HMLC(D) &kp B    &kp COMMA HMRC(A) HMRA(E)  HMRG(I) HMRS(H)
+  &kp X   &kp F   &kp L   &kp C   &kp W    &kp MINUS &kp U   &kp O    &kp Y   &kp K
                 &trans &trans &kp T    &mt RSHIFT SPACE &trans &trans
     >;
   };
@@ -420,9 +420,9 @@ keymap {
 // |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H  |  ,  |  .  |  /  |
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
-  &kp Q  &kp W  &kp F  &kp P  &kp B    &kp J    &kp L   &kp U     &kp Y   &kp SQT
-  &kp A  &kp R  &kp S  &kp T  &kp G    &kp M    &kp N   &kp E     &kp I   &kp O
-  &kp Z  &kp X  &kp C  &kp D  &kp V    &kp K    &kp H   &kp COMMA &kp DOT &kp FSLH
+  &kp Q   &kp W   &kp F   &kp P   &kp B    &kp J  &kp L   &kp U     &kp Y   &kp SQT
+  HMLS(A) HMLG(R) HMLA(S) HMLC(T) &kp G    &kp M  HMRC(N) HMRA(E)   HMRG(I) HMRS(O)
+  &kp Z   &kp X   &kp C   &kp D   &kp V    &kp K  &kp H   &kp COMMA &kp DOT &kp FSLH
                &trans &trans &trans    &trans &trans &trans
     >;
   };
@@ -434,9 +434,9 @@ keymap {
 // |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  |
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
-  &kp Q  &kp W  &kp E  &kp R  &kp T    &kp Y &kp U  &kp I     &kp O   &kp P
-  &kp A  &kp S  &kp D  &kp F  &kp G    &kp H &kp J  &kp K     &kp L   &kp SEMI
-  &kp Z  &kp X  &kp C  &kp V  &kp B    &kp N &kp M  &kp COMMA &kp DOT &kp FSLH
+  &kp Q   &kp W   &kp E   &kp R   &kp T    &kp Y  &kp U   &kp I     &kp O   &kp P
+  HMLS(A) HMLG(S) HMLA(D) HMLC(F) &kp G    &kp H  HMRC(J) HMRA(K)   HMRG(L) HMRS(SEMI)
+  &kp Z   &kp X   &kp C   &kp V   &kp B    &kp N  &kp M   &kp COMMA &kp DOT &kp FSLH
                &trans &trans &trans    &trans &trans &trans
     >;
   };
