@@ -41,8 +41,10 @@
 #define NAV     8
 #define NUMPAD  9
 #define NUMLOCK 10
-#define I3WMNAV 11
-#define KEEBCTL 12
+#define MACNAV  11
+#define MACLOCK 12
+#define I3WMNAV 13
+#define KEEBCTL 14
 
 // Placeholder for mandatory parameters that are never used.
 #define UNUSED 0
@@ -521,6 +523,30 @@ keymap {
     >;
   };
 
+  mac_nav_layer {
+    bindings = <
+// ,-----------------------------.   ,-----------------------------.
+// |     |     |     |     |     |   |     |     |     |     |     |
+// |     |     |     |     |     |   |     |     |     |     |     |
+// |     |     |     |     |     |   |     |     |     |     |     |
+// `-----------|     |     |     |   |     |     |     |-----------'
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans    &trans &trans &trans
+    >;
+  };
+
+  mac_mutate_layer {
+// Only exists to cause the Mac navigation layer to automatically mutate the regular navigation layer.
+    bindings = <
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans    &trans &trans &trans
+    >;
+  };
+
   tiling_nav_layer {
 // ,-----------------------------.   ,-----------------------------.
 // |     |     |     |     |     |   |     |     |     |     |     |
@@ -552,3 +578,11 @@ keymap {
 };
 // end keymap
 };
+
+// Blank layer diagram for easy cutting and pasting.
+
+// ,-----------------------------.   ,-----------------------------.
+// |     |     |     |     |     |   |     |     |     |     |     |
+// |     |     |     |     |     |   |     |     |     |     |     |
+// |     |     |     |     |     |   |     |     |     |     |     |
+// `-----------|     |     |     |   |     |     |     |-----------'
