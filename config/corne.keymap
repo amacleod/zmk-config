@@ -39,10 +39,10 @@
 #define STURDY  6
 #define SYM     7
 #define NAV     8
-#define NUMPAD  9
-#define NUMLOCK 10
-#define NAV_MAC 11
-#define ENABMAC 12
+#define NAV_MAC 9
+#define ENABMAC 10
+#define NUMPAD  11
+#define NUMLOCK 12
 #define I3WMNAV 13
 #define KEEBCTL 14
 
@@ -250,6 +250,12 @@ combos {
     key-positions = <LB0 LH1>;
     bindings = <&btclr 4>;
     layers = <KEEBCTL>;
+  };
+  // Innermost two top row keys to toggle Mac-mode nav layer.
+  combo_toggle_macintosh {
+    timeout-ms = <50>;
+    key-positions = <LT0 RT0>;
+    bindings = <&tog ENABMAC>;
   };
 };
 
@@ -494,12 +500,38 @@ keymap {
 // | ^Q  | ^W  | ^E  | ^R  | ^T  |   | Hom | PgD | Up  | PgU | Esc |
 // | ^A  | ^S  | ^D  | ^F  | ^G  |   | End | Left| Down|Right| Bks |
 // | ^Z  | ^X  | ^C  | ^V  | Del |   | GUI | Ctrl|Shift| Alt | Tab |
-// `-----------|XXXXX| NUM | Bks |   | Ret |#####| Ins |-----------'
+// `-----------|XXXXX| NUM |C-Bks|   | Ret |#####| Ins |-----------'
     bindings = <
   &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)  &kp LC(T)     &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp ESC
   &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F)  &kp LC(G)     &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp BSPC
   &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &kp DEL       &sk RGUI &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
                    &none &trans &kp LC(BSPC)   &kp RET &trans &kp INS
+    >;
+  };
+
+  mac_nav_layer {
+// NB: This layer overwrites the Del binding in the normal nav layer
+// because I use Command-B all the time in IntelliJ IDEA on my Mac.
+// ,-----------------------------.   ,-----------------------------.
+// |  ⌘Q |  ⌘W |  ⌘E |  ⌘R |  ⌘T |   |     |     |     |     |     |
+// |  ⌘A |  ⌘S |  ⌘D |  ⌘F |  ⌘G |   |     |     |     |     |     |
+// |  ⌘Z |  ⌘X |  ⌘C |  ⌘V |  ⌘B |   |     |     |     |     |     |
+// `-----------|     |     |G-Bks|   |     |#####|     |-----------'
+    bindings = <
+  &kp LG(Q) &kp LG(W) &kp LG(E) &kp LG(R) &kp LG(T)    &trans &trans &trans &trans &trans
+  &kp LG(A) &kp LG(S) &kp LG(D) &kp LG(F) &kp LG(G)    &trans &trans &trans &trans &trans
+  &kp LG(Z) &kp LG(X) &kp LG(C) &kp LG(V) &kp LG(B)    &trans &trans &trans &trans &trans
+                         &trans &trans &kp LG(BSPC)    &trans &trans &trans
+    >;
+  };
+
+  mac_mutate_layer {
+// Only exists to cause the Mac navigation layer to automatically mutate the regular navigation layer.
+    bindings = <
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                &trans &trans &trans    &trans &trans &trans
     >;
   };
 
@@ -519,32 +551,6 @@ keymap {
 
   num_lock_layer {
 // Only exists to toggle numpad layer lock on and off.
-    bindings = <
-  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-                &trans &trans &trans    &trans &trans &trans
-    >;
-  };
-
-  mac_nav_layer {
-    bindings = <
-// NB: This layer overwrites the Del binding in the normal nav layer
-// because I use Command-B all the time in IntelliJ IDEA on my Mac.
-// ,-----------------------------.   ,-----------------------------.
-// |  ⌘Q |  ⌘W |  ⌘E |  ⌘R |  ⌘T |   |     |     |     |     |     |
-// |  ⌘A |  ⌘S |  ⌘D |  ⌘F |  ⌘G |   |     |     |     |     |     |
-// |  ⌘Z |  ⌘X |  ⌘C |  ⌘V |  ⌘B |   |     |     |     |     |     |
-// `-----------|     |     |     |   |     |     |     |-----------'
-  &kp LG(Q) &kp LG(W) &kp LG(E) &kp LG(R) &kp LG(T)    &trans &trans &trans &trans &trans
-  &kp LG(A) &kp LG(S) &kp LG(D) &kp LG(F) &kp LG(G)    &trans &trans &trans &trans &trans
-  &kp LG(Z) &kp LG(X) &kp LG(C) &kp LG(V) &kp LG(B)    &trans &trans &trans &trans &trans
-                &trans &trans &trans    &trans &trans &trans
-    >;
-  };
-
-  mac_mutate_layer {
-// Only exists to cause the Mac navigation layer to automatically mutate the regular navigation layer.
     bindings = <
   &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
   &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
