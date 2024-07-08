@@ -373,12 +373,12 @@ keymap {
   hands_down_neu_layer {
 // NB: Q and Z exist in combos: UY->Qu/Q (linger), WF->Z.
 // ,-----------------------------.   ,-----------------------------.
-// |  W  |  F  |  M  |  P  |  V  |   |  /  |  .  |  J  |  "  |  '  |
+// |  W  |  F  |  M  |  P  |  V  |   |  /  |  .  |  '  |  "  |  J  |
 // |  R  |  S  |  N  |  T  |  B  |   |  ,  |  A  |  E  |  I  |  H  |
 // |  X  |  C  |  L  |  D  |  G  |   |  -  |  U  |  O  |  Y  |  K  |
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
-  &kp W   &kp F   &kp M   &kp P   &kp V    &kp FSLH  &kp DOT &kp J &kp DQT &kp SQT
+  &kp W   &kp F   &kp M   &kp P   &kp V    &kp FSLH  &kp DOT &kp SQT &kp DQT &kp J
   HMLS(R) HMLG(S) HMLA(N) HMLC(T) &kp B    &kp COMMA HMRC(A) HMRA(E) HMRG(I) HMRS(H)
   &kp X   &kp C   &kp L   &kp D   &kp G    &kp MINUS &kp U   &kp O   &kp Y   &kp K
    &ltt I3WMNAV ESC  &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
