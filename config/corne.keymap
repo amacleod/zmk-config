@@ -41,8 +41,8 @@
 #define NAV     8
 #define NUMPAD  9
 #define NUMLOCK 10
-#define MACNAV  11
-#define MACLOCK 12
+#define NAV_MAC 11
+#define ENABMAC 12
 #define I3WMNAV 13
 #define KEEBCTL 14
 
@@ -367,6 +367,10 @@ conditional_layers {
     if-layers = <NUMLOCK>;
     then-layer = <NUMPAD>;
   };
+  mac_nav_mutate {
+    if-layers = <NAV ENABMAC>;
+    then-layer = <NAV_MAC>;
+  };
 };
 
 keymap {
@@ -500,7 +504,7 @@ keymap {
   };
 
   numpad_layer {
-// ,-----------------------------.   ,------------------------------.
+// ,-----------------------------.   ,-----------------------------.
 // | F1  | F2  | F3  | F4  |NumLk|   |  *  |  7  |  8  |  9  |  -  |
 // | F5  | F6  | F7  | F8  | Bks |   |  /  |  4  |  5  |  6  |  +  |
 // | F9  | F10 | F11 | F12 | Del |   |  0  |  1  |  2  |  3  | Ent |
@@ -525,14 +529,16 @@ keymap {
 
   mac_nav_layer {
     bindings = <
+// NB: This layer overwrites the Del binding in the normal nav layer
+// because I use Command-B all the time in IntelliJ IDEA on my Mac.
 // ,-----------------------------.   ,-----------------------------.
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
+// |  ⌘Q |  ⌘W |  ⌘E |  ⌘R |  ⌘T |   |     |     |     |     |     |
+// |  ⌘A |  ⌘S |  ⌘D |  ⌘F |  ⌘G |   |     |     |     |     |     |
+// |  ⌘Z |  ⌘X |  ⌘C |  ⌘V |  ⌘B |   |     |     |     |     |     |
 // `-----------|     |     |     |   |     |     |     |-----------'
-  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
-  &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+  &kp LG(Q) &kp LG(W) &kp LG(E) &kp LG(R) &kp LG(T)    &trans &trans &trans &trans &trans
+  &kp LG(A) &kp LG(S) &kp LG(D) &kp LG(F) &kp LG(G)    &trans &trans &trans &trans &trans
+  &kp LG(Z) &kp LG(X) &kp LG(C) &kp LG(V) &kp LG(B)    &trans &trans &trans &trans &trans
                 &trans &trans &trans    &trans &trans &trans
     >;
   };
