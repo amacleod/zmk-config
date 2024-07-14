@@ -262,7 +262,7 @@ combos {
   // matter as long as they are pressed within 50ms of each other.
   combo_ctrl_backspace {
     timeout-ms = <50>;
-    key-positions = <LT0 RT1>;
+    key-positions = <LH0 RH1>;
     bindings = <&kp LC(BACKSPACE)>;
   };
 };
