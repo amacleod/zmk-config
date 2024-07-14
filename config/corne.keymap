@@ -257,6 +257,14 @@ combos {
     key-positions = <LT0 RT0>;
     bindings = <&tog ENABMAC>;
   };
+  // Ctrl-backspace combo to use as a backstop; same keys as the
+  // binding on the NAV layer, but since it is a combo, order does not
+  // matter as long as they are pressed within 50ms of each other.
+  combo_ctrl_backspace {
+    timeout-ms = <50>;
+    key-positions = <LT0 RT1>;
+    bindings = <&kp LC(BACKSPACE)>;
+  };
 };
 
 macros {
