@@ -492,26 +492,26 @@ keymap {
 // |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  _  |
 // |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
 // |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  |  /  |
-// `-----------|     |#####|Rt/Sp|   | Ret | NUM |  \  |-----------'
+// `-----------|     |#####|Rt/Sp|   |     | NUM |  \  |-----------'
     bindings = <
   &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER
   &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
   &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH
-                     &trans &trans &mt SPC LS(RET)    &kp RET &trans &kp BSLH
+                     &trans &trans &mt SPC LS(RET)    &trans &trans &kp BSLH
     >;
   };
 
   navigation_layer {
 // ,-----------------------------.   ,-----------------------------.
-// | ^Q  | ^W  | ^E  | ^R  | ^T  |   | Hom | PgD | Up  | PgU | Esc |
-// | ^A  | ^S  | ^D  | ^F  | ^G  |   | End | Left| Down|Right| Bks |
+// | ^Q  | ^W  | ^E  | ^R  | ^T  |   | Hom | PgD | Up  | PgU | Bks |
+// | ^A  | ^S  | ^D  | ^F  | ^G  |   | End | Left| Down|Right| Ret |
 // | ^Z  | ^X  | ^C  | ^V  | Del |   | GUI | Ctrl|Shift| Alt | Tab |
-// `-----------|XXXXX| NUM |C-Bks|   | Ret |#####| Ins |-----------'
+// `-----------|XXXXX| NUM |C-Bks|   |     |#####| Ins |-----------'
     bindings = <
-  &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)  &kp LC(T)     &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp ESC
-  &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F)  &kp LC(G)     &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp BSPC
+  &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)  &kp LC(T)     &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp BSPC
+  &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F)  &kp LC(G)     &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp RET
   &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &kp DEL       &sk RGUI &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
-                   &none &trans &kp LC(BSPC)   &kp RET &trans &kp INS
+                           &none &trans &kp LC(BSPC)   &trans &trans &kp INS
     >;
   };
 

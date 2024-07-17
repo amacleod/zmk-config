@@ -70,14 +70,6 @@ behaviors {
     bindings = <&mo>;
     release-after-ms = <8000>;
   };
-  // // Mod-morph for ignoring shift on a key pressed with ctrl.
-  // // This will prevent caps-word from causing unexpected shift-ctrl-key presses.
-  // lclc: lowercase_always_control {
-  //   compatible = "zmk,behavior-mod-morph";
-  //   #binding-cells = <0>;
-  //   mods = 
-  //   keep-mods = <(MOD_LCTL)>;
-  // };
 };
 
 conditional_layers {
@@ -115,13 +107,13 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
   dvorak_layer {
 // ,-----------------------------------.             ,-----------------------------------.
 // |     |     |     |     |     |     |             |     |     |     |     |     |     |
-// |     |  '  |  ,  |  .  |  P  |  Y  |             |  F  |  G  |  C  |  R  |  L  |  /  |
+// |     |  '  |  ,  |  .  |  P  |  Y  |             |  F  |  G  |  C  |  R  |  L  |     |
 // |     |  A  |  O  |  E  |  U  |  I  |-----. ,-----|  D  |  H  |  T  |  N  |  S  |  -  |
 // |     |  ;  |  Q  |  J  |  K  |  X  |     | |     |  B  |  M  |  W  |  V  |  Z  |     |
 // `----------------|     |     |     |     |   |     |     |     |     |----------------'
     bindings = <
 &trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &kp SQT  &kp COMMA &kp DOT &kp P &kp Y                 &kp F  &kp G  &kp C  &kp R  &kp L  &kp FSLH
+&trans &kp SQT  &kp COMMA &kp DOT &kp P &kp Y                 &kp F  &kp G  &kp C  &kp R  &kp L  &trans
 &trans &kp A    &kp O     &kp E   &kp U &kp I                 &kp D  &kp H  &kp T  &kp N  &kp S  &kp MINUS
 &trans &kp SEMI &kp Q     &kp J   &kp K &kp X &trans   &trans &kp B  &kp M  &kp W  &kp V  &kp Z  &trans
                    &trans &trans &trans &trans            &trans &trans &trans &trans
@@ -216,13 +208,13 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
 // |     |  `  |  <  |  >  |  "  |  '  |             |  &  |  :  |  [  |  ]  |  _  |     |
 // |     |  !  |  -  |  +  |  =  |  #  |-----. ,-----|  |  |  ;  |  {  |  }  |  ?  |     |
 // |     |  ~  |  /  |  *  |  %  |  @  |     | |     |  ^  |  $  |  (  |  )  |  /  |     |
-// `----------------|     |     |#####|XXXXX|   | Ret | NUM |  \  |     |----------------'
+// `----------------|     |     |#####|ShRet|   |     | NUM |  \  |     |----------------'
     bindings = <
 &trans &trans    &trans    &trans   &trans      &trans                 &trans    &trans     &trans   &trans   &trans    &trans
 &trans &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT                &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER &trans
 &trans &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH               &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK &trans
 &trans &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT &trans   &trans &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH &trans
-                                &trans &trans &trans &none        &kp RET &trans &kp BSLH &trans
+                         &trans &trans &trans &kp LS(ENTER)        &trans &trans &kp BSLH &trans
     >;
     display-name = "SYM";
   };
@@ -230,14 +222,14 @@ SC_LEFT   &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp 
   navigation_layer {
 // ,-----------------------------------.             ,-----------------------------------.
 // |     |     |     |     |     |     |             |     |     |     |     |     |     |
-// |     | ^Q  | ^W  | ^E  | ^R  | ^T  |             | Home| PgD | Up  | PgU |XXXXX|     |
-// |     | ^A  | ^S  | ^D  | ^F  | ^G  |-----. ,-----| End | Left| Down|Right|XXXXX|     |
+// |     | ^Q  | ^W  | ^E  | ^R  | ^T  |             | Home| PgD | Up  | PgU | Bks |     |
+// |     | ^A  | ^S  | ^D  | ^F  | ^G  |-----. ,-----| End | Left| Down|Right| Ret |     |
 // |     | ^Z  | ^X  | ^C  | ^V  | Del |     | |     | Ins | Ctrl|Shift| Alt | GUI |     |
 // `----------------|     |     | NUM |     |   |     |#####|     |     |----------------'
     bindings = <
 &trans &trans &trans &trans  &trans  &trans                                &trans   &trans    &trans     &trans    &trans   &trans
-&trans &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T)                   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &none    &trans
-&trans &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G)                   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &none    &trans
+&trans &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T)                   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp BSPC &trans
+&trans &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G)                   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp RET  &trans
 &trans &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL &trans       &trans &kp INS  &sk RCTRL &sk RSHIFT &sk LALT  &sk RGUI &trans
                            &trans &trans &trans &trans           &trans &trans &trans &trans
     >;
