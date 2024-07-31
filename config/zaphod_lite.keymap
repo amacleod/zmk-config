@@ -108,8 +108,8 @@ macros {
   squ: sequence_q_lower_u_simple {
     compatible = "zmk,behavior-macro";
     #binding-cells = <0>;
-    tap-ms = <LINGER_MACRO_TAP_MS>;
-    wait-ms = <LINGER_MACRO_WAIT_MS>;
+    tap-ms = <30>;
+    wait-ms = <10>;
     bindings = <&kp Q &weeu>;
   };
   // Type a digraph whose second letter is to be lowercase
