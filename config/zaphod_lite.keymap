@@ -135,7 +135,7 @@ macros {
       = <&macro_param_1to1>
       , <&macro_tap &kp MACRO_PLACEHOLDER>
       , <&macro_release &kp LSHFT &kp RSHFT>
-      , <&mecro_tap &kp C &kp H>
+      , <&macro_tap &kp C &kp H>
       ;
   };
 };
@@ -163,7 +163,7 @@ keymap {
 // `-----------------| SYM |  R  |   | Spc | NAV |-----------------'
     bindings = <
 &kp X &kp W &kp M &kp G &kp J        &kp HASH  &kp DOT &kp SQT &kp DQT &kp FSLH
-&kp S &kp C &kp M &kp T &kp K        &kp COMMA &kp A   &kp E   &kp I   &kp H
+&kp S &kp C &kp N &kp T &kp K        &kp COMMA &kp A   &kp E   &kp I   &kp H
 &kp F &kp P &kp L &kp D &kp V        &kp MINUS &kp U   &kp O   &kp Y   &kp B
                   &sl SYM &kp R    &mt LSHIFT SPACE &sl NAV
     >;
@@ -174,10 +174,12 @@ keymap {
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
 // `-----------------|     |     |   |     |     |-----------------'
+    bindings = <
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
                       &trans &trans &trans &trans
+    >;
   };
   navigation_layer {
 // ,-----------------------------.   ,-----------------------------.
@@ -185,10 +187,12 @@ keymap {
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
 // `-----------------|     |     |   |     |     |-----------------'
+    bindings = <
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
                       &trans &trans &trans &trans
+    >;
   };
   numeric_layer {
 // ,-----------------------------.   ,-----------------------------.
@@ -196,10 +200,12 @@ keymap {
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
 // `-----------------|     |     |   |     |     |-----------------'
+    bindings = <
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
                       &trans &trans &trans &trans
+    >;
   };
   keyboard_control_layer {
 // ,-----------------------------.   ,-----------------------------.
@@ -207,10 +213,12 @@ keymap {
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
 // `-----------------|     |     |   |     |     |-----------------'
+    bindings = <
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
                       &trans &trans &trans &trans
+    >;
   };
 };
 };
