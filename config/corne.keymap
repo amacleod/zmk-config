@@ -396,7 +396,7 @@ keymap {
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp W   &kp F   &kp M   &kp P   &kp V    &kp FSLH  &kp DOT &kp SQT &kp DQT &kp J
-  HMLS(R) HMLG(S) HMLA(N) HMLC(T) &kp B    &kp COMMA HMRC(A) HMRA(E) HMRG(I) HMRS(H)
+  &kp R   &kp S   &kp N   &kp T   &kp B    &kp COMMA &kp A   &kp E   &kp I   &kp H
   &kp X   &kp C   &kp L   &kp D   &kp G    &kp MINUS &kp U   &kp O   &kp Y   &kp K
    &ltt I3WMNAV ESC  &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
@@ -410,7 +410,7 @@ keymap {
 // `-----------| Esc | SYM |  T  |   |Sp/Sh| NAV | Bks |-----------'
     bindings = <
   &tdjz   &tdgq   &kp M   &kp P   &kp V    &kp FSLH  &kp DOT &kp SEMI &kp DQT &kp SQT
-  HMLS(R) HMLG(S) HMLA(N) HMLC(D) &kp B    &kp COMMA HMRC(A) HMRA(E)  HMRG(I) HMRS(H)
+  &kp R   &kp S   &kp N   &kp D   &kp B    &kp COMMA &kp A   &kp E    &kp I   &kp H
   &kp X   &kp F   &kp L   &kp C   &kp W    &kp MINUS &kp U   &kp O    &kp Y   &kp K
                 &trans &trans &kp T    &mt RSHIFT SPACE &trans &trans
     >;
@@ -424,7 +424,7 @@ keymap {
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp SQT  &kp COMMA &kp DOT &kp P   &kp Y    &kp F  &kp G   &kp C   &kp R   &kp L
-  HMLS(A)  HMLG(O)   HMLA(E) HMLC(U) &kp I    &kp D  HMRC(H) HMRA(T) HMRG(N) HMRS(S)
+  &kp A    &kp O     &kp E   &kp U   &kp I    &kp D  &kp H   &kp T   &kp N   &kp S
   &kp SEMI &kp Q     &kp J   &kp K   &kp X    &kp B  &kp M   &kp W   &kp V   &kp Z
                       &trans &trans &trans    &trans &trans &trans
     >;
@@ -438,7 +438,7 @@ keymap {
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp Q   &kp W   &kp F   &kp P   &kp B    &kp J  &kp L   &kp U     &kp Y   &kp SQT
-  HMLS(A) HMLG(R) HMLA(S) HMLC(T) &kp G    &kp M  HMRC(N) HMRA(E)   HMRG(I) HMRS(O)
+  &kp A   &kp R   &kp S   &kp T   &kp G    &kp M  &kp N   &kp E     &kp I   &kp O
   &kp Z   &kp X   &kp C   &kp D   &kp V    &kp K  &kp H   &kp COMMA &kp DOT &kp FSLH
                &trans &trans &trans    &trans &trans &trans
     >;
@@ -452,7 +452,7 @@ keymap {
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp Q   &kp W   &kp E   &kp R   &kp T    &kp Y  &kp U   &kp I     &kp O   &kp P
-  HMLS(A) HMLG(S) HMLA(D) HMLC(F) &kp G    &kp H  HMRC(J) HMRA(K)   HMRG(L) HMRS(SEMI)
+  &kp A   &kp S   &kp D   &kp F   &kp G    &kp H  &kp J   &kp K     &kp L   &kp SEMI
   &kp Z   &kp X   &kp C   &kp V   &kp B    &kp N  &kp M   &kp COMMA &kp DOT &kp FSLH
                &trans &trans &trans    &trans &trans &trans
     >;
