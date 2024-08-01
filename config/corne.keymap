@@ -298,12 +298,12 @@ macros {
   sls: sequence_lower_second {
     compatible = "zmk,behavior-macro-two-param";
     #binding-cells = <2>;
+    tap-ms = <DIGRAPH_TAP_MS>;
+    wait-ms = <DIGRAPH_WAIT_MS>;
     bindings
       = <&macro_param_1to1>
-      , <&macro_tap &kp MACRO_PLACEHOLDER>
-      , <&macro_release &kp LSHFT &kp RSHFT>
-      , <&macro_param_2to1>
-      , <&macro_tap &kp MACRO_PLACEHOLDER>
+      , <&kp MACRO_PLACEHOLDER>
+      , <&weeh>
       ;
   };
 };
@@ -348,6 +348,13 @@ behaviors {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     bindings = <&kp U>, <&kp U>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  // Morph for lowercase h in Ch, Gh, Ph, Sh, Th, Wh digraph macros.
+  weeh: morph_small_h {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp H>, <&kp H>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
   };
   // Layer tap variant that tries to guarantee the tap if the held
