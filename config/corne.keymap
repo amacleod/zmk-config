@@ -25,6 +25,8 @@
 //   or ? and !
 // - add common i3wm(Regolith, actually) shortcuts like GUI-enter for
 //   terminal, GUI-space for launcher, and GUI-shift-enter for web
+// - combos for tch, sch, and ght
+// - maybe other trigraphs and consonant clusters? but which ones?
 
 
 #define DEFAULT 0
