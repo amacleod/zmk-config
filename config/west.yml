@@ -18,7 +18,7 @@ manifest:
       remote: urob
       revision: v2 # switch to main when urob makes v2 main
     - name: zaphod-config
-      remode: amacleod
+      remote: amacleod
       revision: zaphod-module
   self:
     path: config
