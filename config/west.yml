@@ -7,6 +7,8 @@ manifest:
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
     - name: urob
       url-base: https://github.com/urob
+    - name: amacleod
+      url-base: https://github.com/amacleod
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -15,5 +17,8 @@ manifest:
     - name: zmk-helpers
       remote: urob
       revision: v2 # switch to main when urob makes v2 main
+    - name: zaphod-config
+      remode: amacleod
+      revision: zaphod-module
   self:
     path: config
