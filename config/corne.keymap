@@ -25,6 +25,8 @@
 //   or ? and !
 // - add common i3wm(Regolith, actually) shortcuts like GUI-enter for
 //   terminal, GUI-space for launcher, and GUI-shift-enter for web
+// - combos for tch, sch, and ght
+// - maybe other trigraphs and consonant clusters? but which ones?
 
 
 #define DEFAULT 0
@@ -65,17 +67,9 @@
 #define HMRG(KEYCODE) &hmr RGUI  KEYCODE
 #define HMRS(KEYCODE) &hmr RSHFT KEYCODE
 
-// Linger keys settings. When choosing a hold time, subtract the macro
-// tap time from the actual desired hold time. For example if the linger
-// should activate after 150ms and the macro tap time is 30ms, then the
-// hold time for the actual hold-tap behavior should be 120ms. Wait
-// time may come into play if the macro taps multiple keys.
-// Use the short hold time for hold-taps inside macros with previous
-// taps, and the long hold time for hold-taps that stand alone.
-#define LINGER_MACRO_TAP_MS 30
-#define LINGER_MACRO_WAIT_MS 10
-#define LINGER_HOLD_SHORT_MS 120
-#define LINGER_HOLD_LONG_MS 180
+// Macro delays for digraphs (or other multi-letter morpheme stuff).
+#define DIGRAPH_TAP_MS 5
+#define DIGRAPH_WAIT_MS 5
 
 // Adaptive keys settings.
 #define ADAPTIVE_KEYS_TAPPING_TERM 175
@@ -296,8 +290,8 @@ macros {
   squ: sequence_q_lower_u_simple {
     compatible = "zmk,behavior-macro";
     #binding-cells = <0>;
-    tap-ms = <LINGER_MACRO_TAP_MS>;
-    wait-ms = <LINGER_MACRO_WAIT_MS>;
+    tap-ms = <DIGRAPH_TAP_MS>;
+    wait-ms = <DIGRAPH_WAIT_MS>;
     bindings = <&kp Q &weeu>;
   };
   // Type a digraph whose second letter is to be lowercase
@@ -306,12 +300,12 @@ macros {
   sls: sequence_lower_second {
     compatible = "zmk,behavior-macro-two-param";
     #binding-cells = <2>;
+    tap-ms = <DIGRAPH_TAP_MS>;
+    wait-ms = <DIGRAPH_WAIT_MS>;
     bindings
       = <&macro_param_1to1>
-      , <&macro_tap &kp MACRO_PLACEHOLDER>
-      , <&macro_release &kp LSHFT &kp RSHFT>
-      , <&macro_param_2to1>
-      , <&macro_tap &kp MACRO_PLACEHOLDER>
+      , <&kp MACRO_PLACEHOLDER>
+      , <&weeh>
       ;
   };
 };
@@ -358,6 +352,13 @@ behaviors {
     bindings = <&kp U>, <&kp U>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
   };
+  // Morph for lowercase h in Ch, Gh, Ph, Sh, Th, Wh digraph macros.
+  weeh: morph_small_h {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp H>, <&kp H>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
   // Layer tap variant that tries to guarantee the tap if the held
   // layer was not used.
   ltt: layer_tap_really_tap {
@@ -397,7 +398,7 @@ keymap {
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp W   &kp F   &kp M   &kp P   &kp V    &kp FSLH  &kp DOT &kp SQT &kp DQT &kp J
-  HMLS(R) HMLG(S) HMLA(N) HMLC(T) &kp B    &kp COMMA HMRC(A) HMRA(E) HMRG(I) HMRS(H)
+  &kp R   &kp S   &kp N   &kp T   &kp B    &kp COMMA &kp A   &kp E   &kp I   &kp H
   &kp X   &kp C   &kp L   &kp D   &kp G    &kp MINUS &kp U   &kp O   &kp Y   &kp K
    &ltt I3WMNAV ESC  &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
@@ -411,7 +412,7 @@ keymap {
 // `-----------| Esc | SYM |  T  |   |Sp/Sh| NAV | Bks |-----------'
     bindings = <
   &tdjz   &tdgq   &kp M   &kp P   &kp V    &kp FSLH  &kp DOT &kp SEMI &kp DQT &kp SQT
-  HMLS(R) HMLG(S) HMLA(N) HMLC(D) &kp B    &kp COMMA HMRC(A) HMRA(E)  HMRG(I) HMRS(H)
+  &kp R   &kp S   &kp N   &kp D   &kp B    &kp COMMA &kp A   &kp E    &kp I   &kp H
   &kp X   &kp F   &kp L   &kp C   &kp W    &kp MINUS &kp U   &kp O    &kp Y   &kp K
                 &trans &trans &kp T    &mt RSHIFT SPACE &trans &trans
     >;
@@ -425,7 +426,7 @@ keymap {
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp SQT  &kp COMMA &kp DOT &kp P   &kp Y    &kp F  &kp G   &kp C   &kp R   &kp L
-  HMLS(A)  HMLG(O)   HMLA(E) HMLC(U) &kp I    &kp D  HMRC(H) HMRA(T) HMRG(N) HMRS(S)
+  &kp A    &kp O     &kp E   &kp U   &kp I    &kp D  &kp H   &kp T   &kp N   &kp S
   &kp SEMI &kp Q     &kp J   &kp K   &kp X    &kp B  &kp M   &kp W   &kp V   &kp Z
                       &trans &trans &trans    &trans &trans &trans
     >;
@@ -439,7 +440,7 @@ keymap {
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp Q   &kp W   &kp F   &kp P   &kp B    &kp J  &kp L   &kp U     &kp Y   &kp SQT
-  HMLS(A) HMLG(R) HMLA(S) HMLC(T) &kp G    &kp M  HMRC(N) HMRA(E)   HMRG(I) HMRS(O)
+  &kp A   &kp R   &kp S   &kp T   &kp G    &kp M  &kp N   &kp E     &kp I   &kp O
   &kp Z   &kp X   &kp C   &kp D   &kp V    &kp K  &kp H   &kp COMMA &kp DOT &kp FSLH
                &trans &trans &trans    &trans &trans &trans
     >;
@@ -453,7 +454,7 @@ keymap {
 // `-----------| Esc | SYM |Sp/Sh|   | Spc | NAV | Bks |-----------'
     bindings = <
   &kp Q   &kp W   &kp E   &kp R   &kp T    &kp Y  &kp U   &kp I     &kp O   &kp P
-  HMLS(A) HMLG(S) HMLA(D) HMLC(F) &kp G    &kp H  HMRC(J) HMRA(K)   HMRG(L) HMRS(SEMI)
+  &kp A   &kp S   &kp D   &kp F   &kp G    &kp H  &kp J   &kp K     &kp L   &kp SEMI
   &kp Z   &kp X   &kp C   &kp V   &kp B    &kp N  &kp M   &kp COMMA &kp DOT &kp FSLH
                &trans &trans &trans    &trans &trans &trans
     >;
