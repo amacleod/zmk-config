@@ -55,7 +55,7 @@ combos {
     bindings = <&squ>;
     layers = <HD_VIBR>;
   };
-  // Combo U, O, and Y to produce Q only on Hands Down.
+  // Combo U, O, and Y to produce bare Q in Hands Down.
   combo_uoy_q {
     timeout-ms = <50>;
     key-positions = <RB1 RB2 RB3>;
@@ -63,40 +63,59 @@ combos {
     layers = <HD_VIBR>;
   };
   // Combos for H digraphs in Hands Down.
+  combo_sc_sh {
+    timeout-ms = <50>;
+    key-positions = <LM4 LM3>;
+    bindings = <&sdh S>;
+    layers = <HD_VIBR>;
+  };
+  combo_cn_ch {
+    timeout-ms = <50>;
+    key-positions = <LM3 LM2>;
+    bindings = <&sdh C>;
+    layers = <HD_VIBR>;
+  };
   combo_nt_th {
     timeout-ms = <50>;
     key-positions = <LM2 LM1>;
-    bindings = <&sls T H>;
+    bindings = <&sdh T>;
     layers = <HD_VIBR>;
   };
-  combo_sn_sh {
+  combo_wm_wh {
     timeout-ms = <50>;
-    key-positions = <LM3 LM2>;
-    bindings = <&sls S H>;
+    key-positions = <LT3 LT2>;
+    bindings = <&sdh W>;
     layers = <HD_VIBR>;
   };
-  combo_st_ch {
-    timeout-ms = <50>;
-    key-positions = <LM3 LM1>;
-    bindings = <&sls C H>;
-    layers = <HD_VIBR>;
-  };
-  combo_fp_wh {
-    timeout-ms = <50>;
-    key-positions = <LT3 LT1>;
-    bindings = <&sls W H>;
-    layers = <HD_VIBR>;
-  };
-  combo_dg_gh {
-    timeout-ms = <50>;
-    key-positions = <LB1 LB0>;
-    bindings = <&sls G H>;
-    layers = <HD_VIBR>;
-  };
-  combo_pm_ph {
+  combo_mg_gh {
     timeout-ms = <50>;
     key-positions = <LT2 LT1>;
-    bindings = <&sls P H>;
+    bindings = <&sdh G>;
+    layers = <HD_VIBR>;
+  };
+  combo_pl_ph {
+    timeout-ms = <50>;
+    key-positions = <LB3 LB2>;
+    bindings = <&sdh P>;
+    layers = <HD_VIBR>;
+  };
+  // Combos for trigraphs and 3-letter consonant clusters.
+  combo_scn_sch {
+    timeout-ms = <50>;
+    key-positions = <LM4 LM3 LM2>;
+    bindings = <&stch S>;
+    layers = <HD_VIBR>;
+  };
+  combo_cnt_sch {
+    timeout-ms = <50>;
+    key-positions = <LM3 LM2 LM1>;
+    bindings = <&stch T>;
+    layers = <HD_VIBR>;
+  };
+  combo_wmg_ght {
+    timeout-ms = <50>;
+    key-positions = <LT3 LT2 LT1>;
+    bindings = <&sght>;
     layers = <HD_VIBR>;
   };
   // Top and bottom keys on both innermost columns to enter flashing
@@ -122,15 +141,13 @@ macros {
   // Type a digraph whose second letter is to be lowercase
   // regardless of shift. Note that this will remove shift even if
   // it is physically held beyond the end of the macro.
-  sls: sequence_lower_second {
-    compatible = "zmk,behavior-macro-two-param";
-    #binding-cells = <2>;
+  sdh: sequence_digraph_h {
+    compatible = "zmk,behavior-macro-one-param";
+    #binding-cells = <1>;
     bindings
       = <&macro_param_1to1>
-      , <&macro_tap &kp MACRO_PLACEHOLDER>
-      , <&macro_release &kp LSHFT &kp RSHFT>
-      , <&macro_param_2to1>
-      , <&macro_tap &kp MACRO_PLACEHOLDER>
+      , <&kp MACRO_PLACEHOLDER>
+      , <&weeh>
       ;
   };
   // Type a -ch trigraph such as Sch or Tch. The macro parameter is
@@ -140,10 +157,14 @@ macros {
     #binding-cells = <1>;
     bindings
       = <&macro_param_1to1>
-      , <&macro_tap &kp MACRO_PLACEHOLDER>
-      , <&macro_release &kp LSHFT &kp RSHFT>
-      , <&macro_tap &kp C &kp H>
+      , <&kp MACRO_PLACEHOLDER>
+      , <&weec &weeh>
       ;
+  };
+  sght: sequence_cluster_ght {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    bindings = <&kp G &weeh &weet>;
   };
 };
 
@@ -154,6 +175,24 @@ behaviors {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     bindings = <&kp U>, <&kp U>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  weec: morph_small_c {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp C>, <&kp C>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  weeh: morph_small_h {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp H>, <&kp H>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  weet: morph_small_t {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp T>, <&kp T>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
   };
 };
