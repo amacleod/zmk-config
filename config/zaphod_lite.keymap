@@ -203,15 +203,15 @@ keymap {
 // Vibranium f (Neu-vf) with punctuation moved a bit to match my habits.
 // Q and Z exist only in combos.
 // ,-----------------------------.   ,-----------------------------.
-// |  X  |  W  |  M  |  G  |  J  |   | # @ | . : | ' ! | " ? |  /  |
+// |  X  |  W  |  M  |  G  |  J  |   | # @ | . : | ' ! | " ? | / \ |
 // |  S  |  C  |  N  |  T  |  K  |   | , ; |  A  |  E  |  I  |  H  |
 // |  F  |  P  |  L  |  D  |  V  |   |  -  |  U  |  O  |  Y  |  B  |
-// `-----------------| SYM |  R  |   | Spc | NAV |-----------------'
+// `-----------------|Layer|  R  |   | Spc | Bks |-----------------'
     bindings = <
 &kp X &kp W &kp M &kp G &kp J        &kp HASH  &kp DOT &kp SQT &kp DQT &kp FSLH
 &kp S &kp C &kp N &kp T &kp K        &kp COMMA &kp A   &kp E   &kp I   &kp H
 &kp F &kp P &kp L &kp D &kp V        &kp MINUS &kp U   &kp O   &kp Y   &kp B
-                  &sl SYM &kp R    &mt LSHIFT SPACE &sl NAV
+                  &sl SYM &kp R    &mt LSHIFT SPACE &kp BACKSPACE
     >;
   };
   symbols_layer {
@@ -219,12 +219,12 @@ keymap {
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
-// `-----------------|     |     |   |     |     |-----------------'
+// `-----------------|Layer|     |   |Base |     |-----------------'
     bindings = <
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
+&kp Y  &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-                      &trans &trans &trans &trans
+                     &sl NAV &trans &tog SYM &trans
     >;
   };
   navigation_layer {
@@ -232,12 +232,12 @@ keymap {
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
-// `-----------------|     |     |   |     |     |-----------------'
+// `-----------------|     |     |   |Base |     |-----------------'
     bindings = <
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
+&kp V  &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-                      &trans &trans &trans &trans
+                  &sl NUMPAD &trans &tog NAV &trans
     >;
   };
   numeric_layer {
@@ -245,12 +245,12 @@ keymap {
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
-// `-----------------|     |     |   |     |     |-----------------'
+// `-----------------|     |     |   |Base |     |-----------------'
     bindings = <
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
+&kp N  &trans &trans &trans &trans   &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-                      &trans &trans &trans &trans
+                      &trans &trans &tog NUMPAD &trans
     >;
   };
   keyboard_control_layer {
