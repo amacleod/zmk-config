@@ -1,0 +1,62 @@
+
+// Macro timing for digraphs, trigraphs, consonant clusters, and other
+// multi-character morpheme stuff.
+#define SEQUENCE_TAP_MS 5
+#define SEQUENCE_WAIT_MS 5
+
+// Macros for character sequences (mostly multi-letter phonemes and
+// morphemes); these all start with 's' for sequence, and they use
+// mod-morphs for subsequent letters to protect them from normal shift.
+macros {
+  squ: sequence_q_lower_u {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    tap-ms = <SEQUENCE_TAP_MS>;
+    wait-ms = <SEQUENCE_WAIT_MS>;
+    bindings = <&kp Q &weeu>;
+  };
+  sdh: sequence_digraph_h {
+    compatible = "zmk,behavior-macro-one-param";
+    #binding-cells = <1>;
+    tap-ms = <SEQUENCE_TAP_MS>;
+    wait-ms = <SEQUENCE_WAIT_MS>;
+    bindings = <&macro_param_1to1>,
+      <&kp MACRO_PLACEHOLDER>,
+      <&weeh>;
+  };
+  stch: sequence_trigraph_ch {
+    compatible = "zmk,behavior-macro-one-param";
+    #binding-cells = <1>;
+    tap-ms = <SEQUENCE_TAP_MS>;
+    wait-ms = <SEQUENCE_WAIT_MS>;
+    bindings = <&macro_param_1to1>,
+      <&kp MACRO_PLACEHOLDER>,
+      <&weec &weeh>;
+  };
+};
+
+// Mod-morph behaviors for letters that should be downcased during
+// normal shift but not during caps-word. For example, qu should be Qu
+// during normal shift and QU during caps-word.
+// TODO: DRY it up with a preprocessor macro. ~ACM 2024-08-07
+behaviors {
+  weec: morph_small_c {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp C>, <&kp C>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  weeh: morph_small_h {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp H>, <&kp H>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  weeu: morph_small_u {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp U>, <&kp U>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+};
+
