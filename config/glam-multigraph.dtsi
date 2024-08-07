@@ -33,6 +33,13 @@ macros {
       <&kp MACRO_PLACEHOLDER>,
       <&weec &weeh>;
   };
+  sght: sequence_cluster_ght {
+    compatible = "zmk,behavior-macro";
+    #binding-cells = <0>;
+    tap-ms = <SEQUENCE_TAP_MS>;
+    wait-ms = <SEQUENCE_WAIT_MS>;
+    bindings = <&kp G &weeh &weet>;
+  };
 };
 
 // Mod-morph behaviors for letters that should be downcased during
@@ -50,6 +57,12 @@ behaviors {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     bindings = <&kp H>, <&kp H>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  weet: morph_small_t {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp T>, <&kp T>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
   };
   weeu: morph_small_u {
