@@ -98,6 +98,8 @@
 / {
 chosen { zmk,matrix_transform = &five_column_transform; };
 
+#include "glam-multigraph.dtsi"
+
 combos {
   compatible = "zmk,combos";
   // Both main thumb keys to trigger caps word.
@@ -138,37 +140,37 @@ combos {
   combo_nt_th {
     timeout-ms = <50>;
     key-positions = <LM2 LM1>;
-    bindings = <&sls T H>;
+    bindings = <&sth T>;
     layers = <HD_NEU>;
   };
   combo_sn_sh {
     timeout-ms = <50>;
     key-positions = <LM3 LM2>;
-    bindings = <&sls S H>;
+    bindings = <&sth S>;
     layers = <HD_NEU>;
   };
   combo_st_ch {
     timeout-ms = <50>;
     key-positions = <LM3 LM1>;
-    bindings = <&sls C H>;
+    bindings = <&sth C>;
     layers = <HD_NEU>;
   };
   combo_fp_wh {
     timeout-ms = <50>;
     key-positions = <LT3 LT1>;
-    bindings = <&sls W H>;
+    bindings = <&sth W>;
     layers = <HD_NEU>;
   };
   combo_dg_gh {
     timeout-ms = <50>;
     key-positions = <LB1 LB0>;
-    bindings = <&sls G H>;
+    bindings = <&sth G>;
     layers = <HD_NEU>;
   };
   combo_pm_ph {
     timeout-ms = <50>;
     key-positions = <LT2 LT1>;
-    bindings = <&sls P H>;
+    bindings = <&sth P>;
     layers = <HD_NEU>;
   };
   // Leftmost two home row keys for ctrl.
@@ -284,30 +286,6 @@ macros {
       , <&bt BT_CLR>
       ;
   };
-  // Type "qu" with unshifted U. This variant is a straightforward
-  // two-tap macro that can be used pretty much anywhere, including as
-  // the tap or the hold of a hold-tap.
-  squ: sequence_q_lower_u_simple {
-    compatible = "zmk,behavior-macro";
-    #binding-cells = <0>;
-    tap-ms = <DIGRAPH_TAP_MS>;
-    wait-ms = <DIGRAPH_WAIT_MS>;
-    bindings = <&kp Q &weeu>;
-  };
-  // Type a digraph whose second letter is to be lowercase
-  // regardless of shift. Note that this will remove shift even if
-  // it is physically held beyond the end of the macro.
-  sls: sequence_lower_second {
-    compatible = "zmk,behavior-macro-two-param";
-    #binding-cells = <2>;
-    tap-ms = <DIGRAPH_TAP_MS>;
-    wait-ms = <DIGRAPH_WAIT_MS>;
-    bindings
-      = <&macro_param_1to1>
-      , <&kp MACRO_PLACEHOLDER>
-      , <&weeh>
-      ;
-  };
 };
 
 behaviors {
@@ -343,21 +321,6 @@ behaviors {
     require-prior-idle-ms = <HM_PRIOR_IDLE>;
     hold-trigger-key-positions = <KEYS_LEFT KEYS_THUMB>;
     hold-trigger-on-release;
-  };
-  // Morph for Qu pair. Conveniently this guards it from regular
-  // shift, but not from caps-word.
-  weeu: morph_small_u {
-    compatible = "zmk,behavior-mod-morph";
-    #binding-cells = <0>;
-    bindings = <&kp U>, <&kp U>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-  };
-  // Morph for lowercase h in Ch, Gh, Ph, Sh, Th, Wh digraph macros.
-  weeh: morph_small_h {
-    compatible = "zmk,behavior-mod-morph";
-    #binding-cells = <0>;
-    bindings = <&kp H>, <&kp H>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
   };
   // Layer tap variant that tries to guarantee the tap if the held
   // layer was not used.
