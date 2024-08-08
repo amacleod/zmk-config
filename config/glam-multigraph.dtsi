@@ -1,8 +1,16 @@
+/*
+ * Copyright (c) 2024 Allister MacLeod
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 // Macro timing for digraphs, trigraphs, consonant clusters, and other
 // multi-character morpheme stuff.
 #define SEQUENCE_TAP_MS 5
 #define SEQUENCE_WAIT_MS 5
+
+
+/ {
 
 // Macros for character sequences (mostly multi-letter phonemes and
 // morphemes); these all start with 's' for sequence, and they use
@@ -73,3 +81,4 @@ behaviors {
   };
 };
 
+};

@@ -11,6 +11,8 @@
 #include "zmk-helpers/helper.h"
 #include "zmk-helpers/key-labels/36.h"
 
+#include "glam-multigraph.dtsi"
+
 
 // Things to try next:
 // - better handling of adaptive keys in Hands Down Gold;
@@ -97,8 +99,6 @@
 
 / {
 chosen { zmk,matrix_transform = &five_column_transform; };
-
-#include "glam-multigraph.dtsi"
 
 combos {
   compatible = "zmk,combos";
