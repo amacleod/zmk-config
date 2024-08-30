@@ -140,37 +140,37 @@ combos {
   combo_nt_th {
     timeout-ms = <50>;
     key-positions = <LM2 LM1>;
-    bindings = <&sth T>;
+    bindings = <&sdh T>;
     layers = <HD_NEU>;
   };
   combo_sn_sh {
     timeout-ms = <50>;
     key-positions = <LM3 LM2>;
-    bindings = <&sth S>;
+    bindings = <&sdh S>;
     layers = <HD_NEU>;
   };
   combo_st_ch {
     timeout-ms = <50>;
     key-positions = <LM3 LM1>;
-    bindings = <&sth C>;
+    bindings = <&sdh C>;
     layers = <HD_NEU>;
   };
   combo_fp_wh {
     timeout-ms = <50>;
     key-positions = <LT3 LT1>;
-    bindings = <&sth W>;
+    bindings = <&sdh W>;
     layers = <HD_NEU>;
   };
   combo_dg_gh {
     timeout-ms = <50>;
     key-positions = <LB1 LB0>;
-    bindings = <&sth G>;
+    bindings = <&sdh G>;
     layers = <HD_NEU>;
   };
   combo_pm_ph {
     timeout-ms = <50>;
     key-positions = <LT2 LT1>;
-    bindings = <&sth P>;
+    bindings = <&sdh P>;
     layers = <HD_NEU>;
   };
   // Leftmost two home row keys for ctrl.
