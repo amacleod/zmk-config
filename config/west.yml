@@ -19,6 +19,6 @@ manifest:
       revision: v2 # switch to main when urob makes v2 main
     - name: zaphod-config
       remote: amacleod
-      revision: main
+      revision: zaphod-bongo-cat
   self:
     path: config
