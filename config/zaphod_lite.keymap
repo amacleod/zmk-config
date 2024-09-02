@@ -265,7 +265,7 @@ keymap {
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
                       &trans &trans &tog NUMPAD &trans
     >;
-    label = "NUM"
+    label = "NUM";
   };
   keyboard_control_layer {
 // ,-----------------------------.   ,-----------------------------.
