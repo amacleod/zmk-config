@@ -223,6 +223,7 @@ keymap {
 &kp F &kp P &kp L &kp D &kp V        &kp MINUS &kp U   &kp O   &kp Y   &kp B
                   &sl SYM &kp R    &mt LSHIFT SPACE &kp BACKSPACE
     >;
+    label = "HDVibr";
   };
   symbols_layer {
 // ,-----------------------------.   ,-----------------------------.
@@ -236,6 +237,7 @@ keymap {
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
                      &sl NAV &trans &tog SYM &trans
     >;
+    label = "SYM";
   };
   navigation_layer {
 // ,-----------------------------.   ,-----------------------------.
@@ -249,6 +251,7 @@ keymap {
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
                   &sl NUMPAD &trans &tog NAV &trans
     >;
+    label = "NAV";
   };
   numeric_layer {
 // ,-----------------------------.   ,-----------------------------.
@@ -262,6 +265,7 @@ keymap {
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
                       &trans &trans &tog NUMPAD &trans
     >;
+    label = "NUM"
   };
   keyboard_control_layer {
 // ,-----------------------------.   ,-----------------------------.
@@ -275,6 +279,7 @@ keymap {
 &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
                       &trans &trans &trans &trans
     >;
+    label = "KBDCTL";
   };
 };
 };
