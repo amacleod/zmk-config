@@ -205,6 +205,13 @@ behaviors {
     bindings = <&kp T>, <&kp T>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
   };
+  // Symbol morphs for non-conventional shifting.
+  hash_at: morph_octothorpe_amphora {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp HASH>, <&kp AT>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
 };
 
 keymap {
@@ -218,7 +225,7 @@ keymap {
 // |  F  |  P  |  L  |  D  |  V  |   |  -  |  U  |  O  |  Y  |  B  |
 // `-----------------|Layer|  R  |   | Spc | Bks |-----------------'
     bindings = <
-&kp X &kp W &kp M &kp G &kp J        &kp HASH  &kp DOT &kp SQT &kp DQT &kp FSLH
+&kp X &kp W &kp M &kp G &kp J        &hash_at  &kp DOT &kp SQT &kp DQT &kp FSLH
 &kp S &kp C &kp N &kp T &kp K        &kp COMMA &kp A   &kp E   &kp I   &kp H
 &kp F &kp P &kp L &kp D &kp V        &kp MINUS &kp U   &kp O   &kp Y   &kp B
                   &sl SYM &kp R    &mt LSHIFT SPACE &kp BACKSPACE
@@ -227,15 +234,15 @@ keymap {
   };
   symbols_layer {
 // ,-----------------------------.   ,-----------------------------.
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// `-----------------|Layer|     |   |Base |     |-----------------'
+// |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  _  |
+// |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
+// |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  | / \ |
+// `-----------------|Layer|Shift|   |Base |     |-----------------'
     bindings = <
-&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-&kp Y  &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-                     &sl NAV &trans &tog SYM &trans
+&kp GRAVE &kp LT &kp GT &kp DQT &kp SQT   &kp AMPS &kp COLON &kp LBKT &kp RBKT &kp UNDER
+&kp EXCL &kp MINUS &kp PLUS &kp EQUAL &kp HASH   &kp PIPE &kp SEMI &kp LBRC &kp RBRC &kp QMARK
+&kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT   &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH
+                     &sl NAV &kp LSHIFT  &tog SYM &trans
     >;
     display-name = "SYM";
   };
