@@ -1,12 +1,15 @@
 .PHONY: clean all
 .PHONY: zaphod
 
-BUILD_DIR := ${HOME}/zmk/app/build
+APP_DIR := $(realpath ../zmk/app)
+BUILD_DIR := $(realpath ${APP_DIR}/build)
+ZMK_CONFIG_DIR := $(realpath ../zmk-config)
+ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
 
 all: zaphod
 
 zaphod:
-	cd ~/zmk/app && west build -d build/zaphod -b seeeduino_xiao_ble -- -DSHIELD=zaphod_lite -DZMK_CONFIG=${HOME}/zmk-config -DZMK_EXTRA_MODULES=${HOME}/zaphod-config
+	cd ${APP_DIR} && west build -d build/zaphod -b seeeduino_xiao_ble -- -DSHIELD=zaphod_lite -DZMK_CONFIG=${ZMK_CONFIG_DIR} -DZMK_EXTRA_MODULES=${ZAPHOD_CONFIG_DIR}
 
 clean:
 	rm -rf ${BUILD_DIR}
