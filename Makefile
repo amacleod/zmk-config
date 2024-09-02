@@ -1,9 +1,15 @@
 .PHONY: clean all
+.PHONY: zaphod
 
-all:
+BUILD_DIR := ${HOME}/zmk/app/build
+
+all: zaphod
+
+zaphod:
+	cd ~/zmk/app && west build -d build/zaphod -b seeeduino_xiao_ble -- -DSHIELD=zaphod_lite -DZMK_CONFIG=${HOME}/zmk-config -DZMK_EXTRA_MODULES=${HOME}/zaphod-config
 
 clean:
-	rm -rf ~/zmk/app/build/zaphod
+	rm -rf ${BUILD_DIR}
 
 # #!/bin/bash -e
 # source ~/.virtualenvs/zmk/bin/activate
