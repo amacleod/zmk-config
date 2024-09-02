@@ -4,12 +4,16 @@
 APP_DIR := $(realpath ../zmk/app)
 BUILD_DIR := $(realpath ${APP_DIR}/build)
 ZMK_CONFIG_DIR := $(realpath ../zmk-config)
+ZMK_HELPERS_DIR := $(realpath ../zmk-helpers)
 ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
+
+CONFIGFLAGS := -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config
+EXTRA_MODFLAGS := -DZMK_EXTRA_MODULES="${ZAPHOD_CONFIG_DIR}"
 
 all: zaphod
 
 zaphod:
-	cd ${APP_DIR} && west build -d build/zaphod -b seeeduino_xiao_ble -- -DSHIELD=zaphod_lite -DZMK_CONFIG=${ZMK_CONFIG_DIR} -DZMK_EXTRA_MODULES=${ZAPHOD_CONFIG_DIR}
+	cd ${APP_DIR} && west build -d build/zaphod -b seeeduino_xiao_ble -- -DSHIELD=zaphod_lite ${CONFIGFLAGS} ${EXTRA_MODFLAGS}
 
 clean:
 	rm -rf ${BUILD_DIR}
