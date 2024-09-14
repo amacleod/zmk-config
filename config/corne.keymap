@@ -98,7 +98,7 @@
 #define KEYS_THUMB LH2 LH1 LH0  RH0 RH1 RH2
 
 / {
-chosen { zmk,matrix_transform = &five_column_transform; };
+chosen { zmk,physical-layout = &foostan_corne_5col_layout; };
 
 combos {
   compatible = "zmk,combos";
