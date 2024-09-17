@@ -553,7 +553,7 @@ keymap {
   keyboard_control_layer {
 // ,-----------------------------.   ,-----------------------------.
 // |     |HDNeu|Dvork|Clmak| DFU |   | DFU |     |     |     |     |
-// |QWRTY|HDGld|STRDY|Cnary|Studi|   |   |     |     |     |     |     |
+// |QWRTY|HDGld|STRDY|Cnary|Studi|   |     |     |     |     |     |
 // | BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |
 // `-----------|#####|XXXXX| BAS |   |     |     |#####|-----------'
 
