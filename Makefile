@@ -21,7 +21,7 @@ all: corne zaphod
 
 corne: ${BUILD_DIR}/corne_left/zephyr/zmk.uf2 ${BUILD_DIR}/corne_right/zephyr/zmk.uf2
 ${BUILD_DIR}/corne_left/zephyr/zmk.uf2:
-	cd ${APP_DIR} && west build -d build/corne_left -b nice_nano_v2 -- -DSHIELD=corne_left -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/corne_left -b nice_nano_v2 -S studio-rpc-usb-uart -- -DSHIELD=corne_left -DCONFIG_ZMK_STUDIO=y -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 ${BUILD_DIR}/corne_right/zephyr/zmk.uf2:
 	cd ${APP_DIR} && west build -d build/corne_right -b nice_nano_v2 -- -DSHIELD=corne_right -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
