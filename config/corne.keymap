@@ -552,13 +552,13 @@ keymap {
 
   keyboard_control_layer {
 // ,-----------------------------.   ,-----------------------------.
-// |     |HDNeu|Dvork|Clmak|     |   |     |     |     |     |     |
+// |     |HDNeu|Dvork|Clmak| DFU |   | DFU |     |     |     |     |
 // |QWRTY|HDGld|STRDY|Cnary|     |   |     |     |     |     |     |
 // | BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |
 // `-----------|#####|XXXXX| BAS |   |     |     |#####|-----------'
 
     bindings = <
-  &trans     &to HD_NEU  &to DVORAK &to COLEMAK &trans          &trans &trans &trans &trans &trans
+  &trans     &to HD_NEU  &to DVORAK &to COLEMAK &bootloader     &bootloader &trans &trans &trans &trans
   &to QWERTY &to HD_GOLD &to STURDY &to CANARY  &trans          &trans &trans &trans &trans &trans
   &btsel 0   &btsel 1    &btsel 2   &btsel 3    &btsel 4        &trans &trans &trans &trans &trans
                                  &trans &none &tog KEEBCTL    &trans &trans &trans
