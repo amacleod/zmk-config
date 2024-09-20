@@ -1,0 +1,33 @@
+/*
+ * Copyright (c) 2024 Allister MacLeod
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
+#include "zmk-helpers/helper.h"
+#include "zmk-helpers/key-labels/34.h"
+
+/ {
+keymap {
+  compatible = "zmk,keymap";
+  hands_down_vibranium_layer {
+// Vibranium f (Neu-vf) with punctuation moved a bit to match my habits.
+// Q and Z exist only in combos.
+// ,-----------------------------.   ,-----------------------------.
+// |  X  |  W  |  M  |  G  |  J  |   | # @ | . : | ' ! | " ? | / \ |
+// |  S  |  C  |  N  |  T  |  K  |   | , ; |  A  |  E  |  I  |  H  |
+// |  F  |  P  |  L  |  D  |  V  |   |  -  |  U  |  O  |  Y  |  B  |
+// `-----------------|     |  R  |   | Spc | Bks |-----------------'
+    bindings = <
+&kp X &kp W &kp M &kp G &kp J        &kp AT    &kp DOT &kp SQT &kp DQT &kp FSLH
+&kp S &kp C &kp N &kp T &kp K        &kp COMMA &kp A   &kp E   &kp I   &kp H
+&kp F &kp P &kp L &kp D &kp V        &kp MINUS &kp U   &kp O   &kp Y   &kp B
+                  &none &kp R    &mt LSHIFT SPACE &kp BACKSPACE
+    >;
+    display-name = "HDVibr";
+  };
+};
