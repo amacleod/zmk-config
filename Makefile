@@ -1,6 +1,6 @@
 .PHONY: clean all
-.PHONY: corne zaphod
-.PHONY: deploy_corne deploy_zaphod
+.PHONY: corne ferris zaphod
+.PHONY: deploy_corne deploy_ferris deploy_zaphod
 
 APP_DIR := $(realpath ../zmk/app)
 BUILD_DIR := $(realpath ${APP_DIR}/build)
@@ -40,6 +40,13 @@ deploy_corne:
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
 	cp -v ${BUILD_DIR}/corne_right/zephyr/zmk.uf2 ${NANO_PATH}/
+
+ferris: ${BUILD_DIR}/ferris_left/zephyr/zmk.uf2 ${BUILD_DIR}/ferris_right/zephyr/zmk.uf2
+${BUILD_DIR}/ferris_left/zephyr/zmk.uf2:
+	cd ${APP_DIR} && west build -d build/ferris_left -b nice_nano_v2 -- -DSHIELD=cradio_left -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+${BUILD_DIR}/ferris_right/zephyr/zmk.uf2:
+	cd ${APP_DIR} && west build -d build/ferris_right -b nice_nano_v2 -- -DSHIELD=cradio_left -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+
 
 zaphod: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR}
 zaphod:
