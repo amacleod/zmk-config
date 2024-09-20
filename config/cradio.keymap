@@ -31,3 +31,5 @@ keymap {
     display-name = "HDVibr";
   };
 };
+// end keymap
+};
