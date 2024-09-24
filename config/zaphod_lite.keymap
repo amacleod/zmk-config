@@ -23,6 +23,9 @@
 // - gotta adapt a 34-key layout to 58, 36, and 34
 // - doing urob's periphery trick with the X_FOO defines could work
 
+// Stuff to try:
+// - switch to Hands Down Neu; I think I prefer having S on LM3, and freeing a thumb key for mods/layers/etc. might be more useful than R on thumb
+
 #define DEFAULT 0
 #define HD_VIBR 0
 #define SYM     1
