@@ -12,7 +12,6 @@
 
 // Things to try next:
 // - more stuff in the keyboard control layer, like stuff on the right half
-// - nicer slash on Dvorak layer, sacrificing dedicated enter key
 
 
 #define DEFAULT 0
@@ -64,6 +63,13 @@ behaviors {
     #binding-cells = <1>;
     bindings = <&mo>;
     release-after-ms = <8000>;
+  };
+  tphold: tap_prefrerred_hold {
+    compatible = "zmk-behavior-hold-tap";
+    #binding-cells = <2>;
+    tapping-term-ms = <200>;
+    flavor = "tap-preferred";
+    bindings = <&kp>, <&kp>;
   };
 };
 
