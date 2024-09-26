@@ -18,15 +18,11 @@
 #define QWERTY  0
 #define DVORAK  1
 #define COLEMAK 2
-// 3
-// 4
-// 5
-// 6
-#define SYM     7
-#define NAV     8
-#define NUMPAD  9
-#define NUMLOCK 10
-#define KEEBCTL 11
+#define SYM     3
+#define NAV     4
+#define NUMPAD  5
+#define NUMLOCK 6
+#define KEEBCTL 7
 
 
 // Map of key positions:
@@ -137,70 +133,6 @@ keymap {
                    &trans &trans &trans &trans            &trans &trans &trans &trans
     >;
     display-name = "Colemak";
-  };
-
-  empty_layer_03 {
-// ,-----------------------------------.             ,-----------------------------------.
-// |     |     |     |     |     |     |             |     |     |     |     |     |     |
-// |     |     |     |     |     |     |             |     |     |     |     |     |     |
-// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
-// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
-// `----------------|     |     |     |     |   |     |     |     |     |----------------'
-    bindings = <
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
-                   &trans &trans &trans &trans            &trans &trans &trans &trans
-    >;
-  };
-
-  empty_layer_04 {
-// ,-----------------------------------.             ,-----------------------------------.
-// |     |     |     |     |     |     |             |     |     |     |     |     |     |
-// |     |     |     |     |     |     |             |     |     |     |     |     |     |
-// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
-// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
-// `----------------|     |     |     |     |   |     |     |     |     |----------------'
-    bindings = <
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
-                   &trans &trans &trans &trans            &trans &trans &trans &trans
-    >;
-  };
-
-  empty_layer_05 {
-// ,-----------------------------------.             ,-----------------------------------.
-// |     |     |     |     |     |     |             |     |     |     |     |     |     |
-// |     |     |     |     |     |     |             |     |     |     |     |     |     |
-// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
-// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
-// `----------------|     |     |     |     |   |     |     |     |     |----------------'
-    bindings = <
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
-                   &trans &trans &trans &trans            &trans &trans &trans &trans
-    >;
-  };
-
-  empty_layer_06 {
-// ,-----------------------------------.             ,-----------------------------------.
-// |     |     |     |     |     |     |             |     |     |     |     |     |     |
-// |     |     |     |     |     |     |             |     |     |     |     |     |     |
-// |     |     |     |     |     |     |-----. ,-----|     |     |     |     |     |     |
-// |     |     |     |     |     |     |     | |     |     |     |     |     |     |     |
-// `----------------|     |     |     |     |   |     |     |     |     |----------------'
-    bindings = <
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
-                   &trans &trans &trans &trans            &trans &trans &trans &trans
-    >;
   };
 
   symbol_layer {
