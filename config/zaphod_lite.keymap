@@ -11,6 +11,8 @@
 #include "zmk-helpers/helper.h"
 #include "zmk-helpers/key-labels/34.h"
 
+#include "glam-multigraph.dtsi"
+
 // Zaphod Lite keymap.
 
 // Refactoring thougts:
@@ -23,10 +25,8 @@
 // - gotta adapt a 34-key layout to 58, 36, and 34
 // - doing urob's periphery trick with the X_FOO defines could work
 
-// Stuff to try:
-// - switch to Hands Down Neu; I think I prefer having S on LM3, and freeing a thumb key for mods/layers/etc. might be more useful than R on thumb
+// TO-DO list:
 // - finish making the mod-morphs for shifted punctuation in HDNEU layer
-// - fix combos to match Hands Down Neu letter placement
 // - "smart" semi-layers: smart nav stays in arrows and nav until non-nav pressed, for example
 // - other smarts: numeric, caps
 
@@ -189,73 +189,9 @@ combos {
 };
 
 macros {
-  // Type "qu" with unshifted U. This variant is a straightforward
-  // two-tap macro that can be used pretty much anywhere, including as
-  // the tap or the hold of a hold-tap.
-  squ: sequence_q_lower_u_simple {
-    compatible = "zmk,behavior-macro";
-    #binding-cells = <0>;
-    tap-ms = <30>;
-    wait-ms = <10>;
-    bindings = <&kp Q &weeu>;
-  };
-  // Type a digraph whose second letter is to be lowercase
-  // regardless of shift. Note that this will remove shift even if
-  // it is physically held beyond the end of the macro.
-  sdh: sequence_digraph_h {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings
-      = <&macro_param_1to1>
-      , <&kp MACRO_PLACEHOLDER>
-      , <&weeh>
-      ;
-  };
-  // Type a -ch trigraph such as Sch or Tch. The macro parameter is
-  // the first letter. The subsequent letters will be unshifted.
-  stch: sequence_trigraph_ch {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings
-      = <&macro_param_1to1>
-      , <&kp MACRO_PLACEHOLDER>
-      , <&weec &weeh>
-      ;
-  };
-  sght: sequence_cluster_ght {
-    compatible = "zmk,behavior-macro";
-    #binding-cells = <0>;
-    bindings = <&kp G &weeh &weet>;
-  };
 };
 
 behaviors {
-  // Morph for Qu pair. Conveniently this guards it from regular
-  // shift, but not from caps-word.
-  weeu: morph_small_u {
-    compatible = "zmk,behavior-mod-morph";
-    #binding-cells = <0>;
-    bindings = <&kp U>, <&kp U>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-  };
-  weec: morph_small_c {
-    compatible = "zmk,behavior-mod-morph";
-    #binding-cells = <0>;
-    bindings = <&kp C>, <&kp C>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-  };
-  weeh: morph_small_h {
-    compatible = "zmk,behavior-mod-morph";
-    #binding-cells = <0>;
-    bindings = <&kp H>, <&kp H>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-  };
-  weet: morph_small_t {
-    compatible = "zmk,behavior-mod-morph";
-    #binding-cells = <0>;
-    bindings = <&kp T>, <&kp T>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-  };
   // Symbol morphs for non-conventional shifting.
   hash_at: morph_octothorpe_amphora {
     compatible = "zmk,behavior-mod-morph";
