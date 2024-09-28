@@ -165,6 +165,7 @@ combos {
     timeout-ms = <50>;
     key-positions = <RM3 RM4>;
     bindings = <&kp ENTER>;
+  };
   // All four thumb keys for keyboard control layer.
   combo_thumbs_keyboard_control {
     timeout-ms = <50>;
