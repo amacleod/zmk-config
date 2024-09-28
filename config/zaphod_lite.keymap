@@ -139,7 +139,14 @@ combos {
   combo_thumbs_keyboard_control {
     timeout-ms = <50>;
     key-positions = <LH1 LH0 RH0 RH1>;
-    bindings = <&to KEEBCTL>;
+    bindings = <&sl KEEBCTL>;
+  };
+  // Right hand index and ring fingers for BT_CLR_ALL but only on KEEBCTL layer.
+  combo_midright_bt_clear_all {
+    timeout-ms = <50>;
+    key-positions = <RM1 RM2>;
+    bindings = <&bt BT_CLR_ALL>;
+    layers = <KEEBCTL>;
   };
   // Top and bottom keys on both innermost columns to enter flashing
   // mode.
