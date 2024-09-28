@@ -137,12 +137,6 @@ combos {
     layers = <HD_NEU>;
   };
   // Combos for H digraphs in Hands Down Neu.
-  combo_nt_th {
-    timeout-ms = <50>;
-    key-positions = <LM2 LM1>;
-    bindings = <&sdh T>;
-    layers = <HD_NEU>;
-  };
   combo_sn_sh {
     timeout-ms = <50>;
     key-positions = <LM3 LM2>;
@@ -155,22 +149,28 @@ combos {
     bindings = <&sdh C>;
     layers = <HD_NEU>;
   };
+  combo_nt_th {
+    timeout-ms = <50>;
+    key-positions = <LM2 LM1>;
+    bindings = <&sdh T>;
+    layers = <HD_NEU>;
+  };
   combo_fp_wh {
     timeout-ms = <50>;
     key-positions = <LT3 LT1>;
     bindings = <&sdh W>;
     layers = <HD_NEU>;
   };
-  combo_dg_gh {
-    timeout-ms = <50>;
-    key-positions = <LB1 LB0>;
-    bindings = <&sdh G>;
-    layers = <HD_NEU>;
-  };
   combo_pm_ph {
     timeout-ms = <50>;
     key-positions = <LT2 LT1>;
     bindings = <&sdh P>;
+    layers = <HD_NEU>;
+  };
+  combo_dg_gh {
+    timeout-ms = <50>;
+    key-positions = <LB1 LB0>;
+    bindings = <&sdh G>;
     layers = <HD_NEU>;
   };
   // Combos for -CH trigraphs and other 3-sequences.
