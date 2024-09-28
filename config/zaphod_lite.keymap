@@ -170,7 +170,7 @@ combos {
   combo_thumbs_keyboard_control {
     timeout-ms = <50>;
     key-positions = <LH1 LH0 RH0 RH1>;
-    bindings = <&sl KEEBCTL>;
+    bindings = <&sll KEEBCTL>;
   };
   // Right hand index and ring fingers for BT_CLR_ALL but only on KEEBCTL layer.
   combo_midright_bt_clear_all {
@@ -262,6 +262,14 @@ behaviors {
     #binding-cells = <0>;
     bindings = <&kp HASH>, <&kp AT>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  // Long duration sticky layer.
+  sll: sticky_layer_long {
+    compatible = "zmk,behavior-sticky-key";
+    #binding-cells = <1>;
+    release-after-ms = <8000>;
+    bindings = <&mo>;
+    quick-release;
   };
 };
 
