@@ -11,9 +11,6 @@
 #include "zmk-helpers/helper.h"
 #include "zmk-helpers/key-labels/36.h"
 
-#include "glam-multigraph.dtsi"
-
-
 // Things to try next:
 // - better handling of adaptive keys in Hands Down Gold;
 //    maybe tap-dance is not the best way to handle Z and Q
@@ -29,7 +26,6 @@
 //   terminal, GUI-space for launcher, and GUI-shift-enter for web
 // - combos for tch, sch, and ght
 // - maybe other trigraphs and consonant clusters? but which ones?
-
 
 #define DEFAULT 0
 #define HD_NEU  0
@@ -47,6 +43,11 @@
 #define NUMLOCK 12
 #define I3WMNAV 13
 #define KEEBCTL 14
+
+// These includes (well, just glam-util) need to be after the layer
+// defines, specifically the one for KEEBCTL.
+#include "glam-multigraph.dtsi"
+#include "glam-util.dtsi"
 
 // Placeholder for mandatory parameters that are never used.
 #define UNUSED 0
