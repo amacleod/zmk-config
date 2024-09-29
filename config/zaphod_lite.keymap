@@ -11,8 +11,6 @@
 #include "zmk-helpers/helper.h"
 #include "zmk-helpers/key-labels/34.h"
 
-#include "glam-multigraph.dtsi"
-
 // Zaphod Lite keymap.
 
 // Refactoring thougts:
@@ -29,6 +27,7 @@
 // - finish making the mod-morphs for shifted punctuation in HDNEU layer
 // - "smart" semi-layers: smart nav stays in arrows and nav until non-nav pressed, for example
 // - other smarts: numeric, caps
+// - move backspace to a mod-morph of space, freeing up RH1 as a layer control key
 
 #define DEFAULT 0
 #define HDNEU   0
@@ -36,6 +35,11 @@
 #define NAV     2
 #define NUMPAD  3
 #define KEEBCTL 4
+
+// These includes (well, just glam-util) need to be after the layer
+// defines, specifically the one for KEEBCTL.
+#include "glam-multigraph.dtsi"
+#include "glam-util.dtsi"
 
 // Placeholder for unused parameters.
 #define UNUSED 0
@@ -170,13 +174,13 @@ combos {
   combo_thumbs_keyboard_control {
     timeout-ms = <50>;
     key-positions = <LH1 LH0 RH0 RH1>;
-    bindings = <&sll KEEBCTL>;
+    bindings = <&tog KEEBCTL>;
   };
   // Right hand index and ring fingers for BT_CLR_ALL but only on KEEBCTL layer.
-  combo_midright_bt_clear_all {
+  combo_bt_clear_all {
     timeout-ms = <50>;
-    key-positions = <RM1 RM2>;
-    bindings = <&bt BT_CLR_ALL>;
+    key-positions = <RB1 RB2>;
+    bindings = <&btclall>;
     layers = <KEEBCTL>;
   };
   // Top and bottom keys on both innermost columns to enter flashing
@@ -198,14 +202,6 @@ behaviors {
     #binding-cells = <0>;
     bindings = <&kp HASH>, <&kp AT>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-  };
-  // Long duration sticky layer.
-  sll: sticky_layer_long {
-    compatible = "zmk,behavior-sticky-key";
-    #binding-cells = <1>;
-    release-after-ms = <8000>;
-    bindings = <&mo>;
-    quick-release;
   };
 };
 
@@ -273,14 +269,14 @@ keymap {
 // Bluetooth clear-all on right hand index and ring finger combo.
 // ,-----------------------------.   ,-----------------------------.
 // |     |     |     |     |     |   |     |     |     |     |     |
-// | BT1 | BT2 | BT3 | BT4 | BT5 |   | Clr |  Clr-All  |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
-// `-----------------|     |     |   |     |     |-----------------'
+// | BT1 | BT2 | BT3 | BT4 | BT5 |   |ClCur| Clear All |     |
+// `-----------------|     |     |   |Base |     |-----------------'
     bindings = <
-&trans &trans &trans &trans &trans                                 &trans &trans &trans &trans &trans
-&bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &bt BT_CLR &trans &trans &trans &trans
-&trans &trans &trans &trans &trans                                 &trans &trans &trans &trans &trans
-                                                 &trans &trans   &trans &trans
+&trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
+&btsel 0 &btsel 1 &btsel 2 &btsel 3 &btsel 4      &btcc &trans &trans &trans &trans
+                                &trans &trans   &tog KEEBCTL &trans
     >;
     display-name = "KBDCTL";
   };
