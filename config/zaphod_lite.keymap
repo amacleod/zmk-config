@@ -289,15 +289,15 @@ keymap {
   };
   numeric_layer {
 // ,-----------------------------.   ,-----------------------------.
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// `-----------------|     |     |   |Base |     |-----------------'
+// |     |     |     |     |     |   |  *  |  7  |  8  |  9  |  -  |
+// |     |     |     |     |     |   |  /  |  4  |  5  |  6  |  +  |
+// |     |     |     |     |     |   | . : |  1  |  2  |  3  | Ent |
+// `-----------------|     |     |   |Base |  0  |-----------------'
     bindings = <
-&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-&kp N  &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-                      &trans &trans &tog NUMPAD &trans
+&trans &trans &trans &trans &trans   &kp STAR  &kp N7 &kp N8 &kp N9 &kp MINUS
+&kp N  &trans &trans &trans &trans   &kp SLASH &kp N4 &kp N5 &kp N6 &kp PLUS
+&trans &trans &trans &trans &trans   &dot_cln  &kp N1 &kp N2 &kp N3 &kp ENTER
+                      &trans &trans &tog NUMPAD &kp N0
     >;
     display-name = "NUM";
   };
