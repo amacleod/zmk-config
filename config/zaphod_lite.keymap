@@ -11,6 +11,8 @@
 #include "zmk-helpers/helper.h"
 #include "zmk-helpers/key-labels/34.h"
 
+#include <behaviors/num_word.dtsi>
+
 // Zaphod Lite keymap.
 
 // Refactoring thougts:
@@ -24,16 +26,14 @@
 // - doing urob's periphery trick with the X_FOO defines could work
 
 // TO-DO list:
-// - finish making the mod-morphs for shifted punctuation in HDNEU layer
 // - "smart" semi-layers: smart nav stays in arrows and nav until non-nav pressed, for example
 // - other smarts: numeric, caps
-// - move backspace to a mod-morph of space, freeing up RH1 as a layer control key
 
 #define DEFAULT 0
 #define HDNEU   0
 #define SYM     1
 #define NAV     2
-#define NUMPAD  3
+#define NUM     3
 #define KEEBCTL 4
 
 // These includes (well, just glam-util) need to be after the layer
@@ -151,6 +151,12 @@ combos {
     timeout-ms = <50>;
     key-positions = <LB4 LB3>;
     bindings = <&kp LSHFT>;
+  };
+  // Right pinky and ring in bottom row for RShift.
+  combo_southeast_shift {
+    timeout-ms = <50>;
+    key-positions = <RB3 RB4>;
+    bindings = <&kp RSHFT>;
   };
   // Left pinky and index in middle row for Esc.
   combo_left_fork_escape {
@@ -274,10 +280,10 @@ keymap {
 // |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  | / \ |
 // `-----------------|Layer|Shift|   |Base |NavLk|-----------------'
     bindings = <
-&kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT     &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER
-&kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH    &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
-&kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &slashes
-                               &sl NAV &kp LSHIFT  &tog SYM &to NAV
+&kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT      &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER
+&kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH     &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK
+&kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT       &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &slashes
+                               &sl NAV &kp LSHIFT    &tog SYM &num_word NUM
     >;
     display-name = "SYM";
   };
@@ -291,7 +297,7 @@ keymap {
 &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T)   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp BSPC
 &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G)   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp RET
 &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL     &sk RGUI &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
-                                &sl NUMPAD &trans &tog NAV &to SYM
+                                &none &trans       &tog NAV &to SYM
     >;
     display-name = "NAV";
   };
@@ -302,10 +308,10 @@ keymap {
 // |     |     |     |     |     |   | . : |  1  |  2  |  3  | Ent |
 // `-----------------|     |     |   |Base |  0  |-----------------'
     bindings = <
-&trans &trans &trans &trans &trans   &kp STAR  &kp N7 &kp N8 &kp N9 &kp MINUS
-&kp N  &trans &trans &trans &trans   &kp SLASH &kp N4 &kp N5 &kp N6 &kp PLUS
-&trans &trans &trans &trans &trans   &dot_cln  &kp N1 &kp N2 &kp N3 &kp ENTER
-                      &trans &trans &tog NUMPAD &kp N0
+&trans &trans &trans &trans &trans     &kp STAR  &kp N7 &kp N8 &kp N9 &kp MINUS
+&kp N  &trans &trans &trans &trans     &kp SLASH &kp N4 &kp N5 &kp N6 &kp PLUS
+&trans &trans &trans &trans &trans     &dot_cln  &kp N1 &kp N2 &kp N3 &kp ENTER
+                      &trans &trans   &tog NUM &kp N0
     >;
     display-name = "NUM";
   };
