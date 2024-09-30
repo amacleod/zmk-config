@@ -203,6 +203,12 @@ behaviors {
     bindings = <&kp HASH>, <&kp AT>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
   };
+  spc_bks: morph_space_backspace {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp SPACE>, <&kp BACKSPACE>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
 };
 
 keymap {
@@ -219,7 +225,7 @@ keymap {
 &kp W &kp F &kp M &kp P &kp V        &hash_at  &kp DOT &kp SQT &kp DQT &kp J
 &kp R &kp S &kp N &kp T &kp B        &kp COMMA &kp A   &kp E   &kp I   &kp H
 &kp X &kp C &kp L &kp D &kp G        &kp MINUS &kp U   &kp O   &kp Y   &kp K
-             &sl SYM &kp LSHIFT    &kp SPACE &kp BACKSPACE
+             &sl SYM &kp LSHIFT    &spc_bks &sl NAV
     >;
     display-name = "HDNeu";
   };
@@ -228,7 +234,7 @@ keymap {
 // |  `  |  <  |  >  |  "  |  '  |   |  &  |  :  |  [  |  ]  |  _  |
 // |  !  |  -  |  +  |  =  |  #  |   |  |  |  ;  |  {  |  }  |  ?  |
 // |  ~  |  /  |  *  |  %  |  @  |   |  ^  |  $  |  (  |  )  | / \ |
-// `-----------------|Layer|Shift|   |Base |     |-----------------'
+// `-----------------|Layer|Shift|   |Base |NavLk|-----------------'
     bindings = <
 &kp GRAVE &kp LT &kp GT &kp DQT &kp SQT   &kp AMPS &kp COLON &kp LBKT &kp RBKT &kp UNDER
 &kp EXCL &kp MINUS &kp PLUS &kp EQUAL &kp HASH   &kp PIPE &kp SEMI &kp LBRC &kp RBRC &kp QMARK
@@ -239,15 +245,15 @@ keymap {
   };
   navigation_layer {
 // ,-----------------------------.   ,-----------------------------.
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// `-----------------|     |     |   |Base |     |-----------------'
+// | ^Q  | ^W  | ^E  | ^R  | ^T  |   | Home| PgD |  Up | PgU | Bks |
+// | ^A  | ^S  | ^D  | ^F  | ^G  |   | End | Left| Down|Right| Ret |
+// | ^Z  | ^X  | ^C  | ^V  | Del |   | GUI | Ctrl|Shift| Alt | Tab |
+// `-----------------|Layer|     |   |Base |SymLk|-----------------'
     bindings = <
-&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-&kp V  &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans
-                  &sl NUMPAD &trans &tog NAV &to SYM
+&kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T)   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp BSPC
+&kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G)   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp RET
+&kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL     &sk RGUI &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
+                                &sl NUMPAD &trans &tog NAV &to SYM
     >;
     display-name = "NAV";
   };
