@@ -27,7 +27,8 @@
 
 // TO-DO list:
 // - "smart" semi-layers: smart nav stays in arrows and nav until non-nav pressed, for example
-// - other smarts: numeric, caps
+// - take backspace off Shift-Space; I accidentally hit it after words ending in capital letters ("I" and acronyms) too much
+// - vertical combos for numbers, maybe?
 
 #define DEFAULT 0
 #define HDNEU   0
