@@ -349,6 +349,7 @@ keymap {
   &kp X   &kp C   &kp L   &kp D   &kp G    &kp MINUS &kp U   &kp O   &kp Y   &kp K
    &ltt I3WMNAV ESC  &mo SYM &mt LSHIFT SPACE    &kp SPACE &mo NAV &kp BSPC
     >;
+    display-name = "HDNeu";
   };
 
   hands_down_gold_layer {
@@ -363,6 +364,7 @@ keymap {
   &kp X   &kp F   &kp L   &kp C   &kp W    &kp MINUS &kp U   &kp O    &kp Y   &kp K
                 &trans &trans &kp T    &mt RSHIFT SPACE &trans &trans
     >;
+    display-name = "HDGold";
   };
 
   dvorak_layer {
@@ -377,6 +379,7 @@ keymap {
   &kp SEMI &kp Q     &kp J   &kp K   &kp X    &kp B  &kp M   &kp W   &kp V   &kp Z
                       &trans &trans &trans    &trans &trans &trans
     >;
+    display-name = "Dvorak";
   };
 
   colemakdh_layer {
@@ -391,6 +394,7 @@ keymap {
   &kp Z   &kp X   &kp C   &kp D   &kp V    &kp K  &kp H   &kp COMMA &kp DOT &kp FSLH
                &trans &trans &trans    &trans &trans &trans
     >;
+    display-name = "Colemak";
   };
 
   qwerty_layer {
@@ -405,6 +409,7 @@ keymap {
   &kp Z   &kp X   &kp C   &kp V   &kp B    &kp N  &kp M   &kp COMMA &kp DOT &kp FSLH
                &trans &trans &trans    &trans &trans &trans
     >;
+    display-name = "QWERTY";
   };
 
   canary_layer {
@@ -419,6 +424,7 @@ keymap {
   &kp Q  &kp J  &kp V  &kp D  &kp K    &kp X  &kp H  &kp FSLH &kp COMMA &kp DOT
                &trans &trans &trans    &trans &trans &trans
     >;
+    display-name = "Canary";
   };
 
   sturdy_layer {
@@ -433,6 +439,7 @@ keymap {
   &kp Z  &kp K  &kp Q  &kp G  &kp W    &kp B   &kp H  &kp SQT &kp SEMI &kp COMMA
                &trans &trans &trans    &trans &trans &trans
     >;
+    display-name = "Sturdy";
   };
 
   symbols_layer {
@@ -447,6 +454,7 @@ keymap {
   &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT      &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH
                      &trans &trans &mt SPC LS(RET)    &trans &trans &kp BSLH
     >;
+    display-name = "SYM";
   };
 
   navigation_layer {
@@ -461,6 +469,7 @@ keymap {
   &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &kp DEL       &sk RGUI &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
                            &none &trans &kp LC(BSPC)   &trans &trans &kp INS
     >;
+    display-name = "NAV";
   };
 
   mac_nav_layer {
@@ -477,6 +486,7 @@ keymap {
   &kp LG(Z) &kp LG(X) &kp LG(C) &kp LG(V) &kp LG(B)    &trans &trans &trans &trans &trans
                          &trans &trans &kp LG(BSPC)    &trans &trans &trans
     >;
+    display-name = "(NAV)";
   };
 
   mac_mutate_layer {
@@ -501,6 +511,7 @@ keymap {
   &kp F9 &kp F10 &kp F11 &kp F12 &kp DEL         &kp N0          &kp N1 &kp N2 &kp N3 &kp ENTER
                       &trans &trans &kp SPACE    &kp COLON &trans &kp DOT
     >;
+    display-name = "NUM";
   };
 
   num_lock_layer {
@@ -511,6 +522,7 @@ keymap {
   &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
                 &trans &trans &trans    &trans &trans &trans
     >;
+    display-name = "NumLOK";
   };
 
   tiling_nav_layer {
@@ -525,6 +537,7 @@ keymap {
   &trans     &trans     &trans     &trans     &trans        &trans     &trans     &trans     &trans     &trans
                                   &trans &trans &trans    &trans &trans &trans
     >;
+    display-name = "i3wm";
   };
 
   keyboard_control_layer {
@@ -540,6 +553,7 @@ keymap {
   &btsel 0   &btsel 1    &btsel 2   &btsel 3    &btsel 4        &trans &trans &trans &trans &trans
                                  &trans &none &tog KEEBCTL    &trans &trans &trans
     >;
+    display-name = "KBDCTL";
   };
 };
 // end keymap

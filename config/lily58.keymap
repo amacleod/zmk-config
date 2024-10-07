@@ -109,7 +109,7 @@ keymap {
 &kp LSHFT &kp Z  &kp X  &kp C    &kp V    &kp B  &kp LBKT   &kp RBKT &kp N  &kp M    &kp COMMA &kp DOT &kp FSLH &kp RSHFT
                       &kp LALT &kp LGUI &mo SYM &kp SPACE   &kp SPACE &mo NAV &kp BSPC &mo KEEBCTL
     >;
-    // display-name = "QWERTY";
+    display-name = "QWERTY";
   };
 
   dvorak_layer {
@@ -126,7 +126,7 @@ keymap {
 &trans &kp SEMI &kp Q     &kp J   &kp K &kp X &trans   &trans &kp B  &kp M  &kp W  &kp V  &kp Z  &trans
                    &trans &trans &trans &trans            &trans &trans &trans &trans
     >;
-    // display-name = "Dvorak";
+    display-name = "Dvorak";
   };
 
   colemak_dh_layer {
@@ -143,7 +143,7 @@ keymap {
 &trans &kp Z  &kp X  &kp C  &kp D  &kp V &trans        &trans &kp K  &kp H  &kp COMMA &kp DOT &kp FSLH &trans
                    &trans &trans &trans &trans            &trans &trans &trans &trans
     >;
-    // display-name = "Colemak";
+    display-name = "Colemak";
   };
 
   symbol_layer {
@@ -160,7 +160,7 @@ keymap {
 &trans &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT &trans   &trans &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH &trans
                          &trans &trans &trans &kp LS(ENTER)        &trans &trans &kp BSLH &trans
     >;
-    // display-name = "SYM";
+    display-name = "SYM";
   };
 
   navigation_layer {
@@ -177,7 +177,7 @@ keymap {
 &trans &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL &trans       &trans &kp INS  &sk RCTRL &sk RSHIFT &sk LALT  &sk RGUI &trans
                            &trans &trans &trans &trans           &trans &trans &trans &trans
     >;
-    // display-name = "NAV";
+    display-name = "NAV";
   };
 
   numpad_layer {
@@ -194,7 +194,7 @@ keymap {
 &trans &kp F9 &kp F10 &kp F11 &kp F12 &kp DEL &trans       &trans &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER    &trans
                        &trans &trans &trans &trans           &kp KP_N0 &trans &trans &kp KP_DOT
     >;
-    // display-name = "Numpad";
+    display-name = "Numpad";
   };
 
 num_lock_layer {
@@ -206,7 +206,7 @@ num_lock_layer {
 &trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
                    &trans &trans &trans &trans            &trans &trans &trans &trans
     >;
-    // display-name = "NumLOK";
+    display-name = "NumLOK";
   };
 
   keyboard_control_layer {
@@ -223,7 +223,7 @@ num_lock_layer {
 &to QWERTY  &trans       &trans       &to COLEMAK  &trans       &bt BT_CLR_ALL &bootloader   &bootloader &trans &trans &trans &trans &trans &trans
                                                 &trans &trans &trans &tog KEEBCTL      &trans &trans &trans &trans
     >;
-    // display-name = "KBD CTL";
+    display-name = "KBD CTL";
   };
 };
 // end keymap

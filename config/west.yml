@@ -9,8 +9,8 @@ manifest:
       url-base: https://github.com/amacleod
   projects:
     - name: zmk
-      remote: amacleod # zmkfirmware
-      revision: fix/2540-layer-numbers # main
+      remote: zmkfirmware
+      revision: main
       import: app/west.yml
     - name: zmk-helpers
       remote: urob
