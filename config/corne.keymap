@@ -175,10 +175,22 @@ combos {
     layers = <HD_NEU>;
   };
   // Combos for -CH trigraphs and other 3-sequences.
+  combo_rsn_sch {
+    timeout-ms = <50>;
+    key-positions = <LM4 LM3 LM2>;
+    bindings = <&stch S>;
+    layers = <HD_NEU>;
+  };
   combo_snt_tch {
     timeout-ms = <50>;
     key-positions = <LM3 LM2 LM1>;
     bindings = <&stch T>;
+    layers = <HD_NEU>;
+  };
+  combo_ldg_ght {
+    timeout-ms = <50>;
+    key-positions = <LB2 LB1 LB0>;
+    bindings = <&sght>;
     layers = <HD_NEU>;
   };
   // Leftmost two home row keys for ctrl.
@@ -194,6 +206,12 @@ combos {
     timeout-ms = <50>;
     key-positions = <RT3 RT4>;
     bindings = <&kp BACKSPACE>;
+  };
+  // Rightmost two middle row keys for enter.
+  combo_east_enter {
+    timeout-ms = <50>;
+    key-positions = <RM3 RM4>;
+    bindings = <&kp ENTER>;
   };
   // Leftmost two keys in bottom row for left shift.
   // Remove this combo when getting home row mods to work.
