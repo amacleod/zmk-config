@@ -27,7 +27,6 @@
 
 // TO-DO list:
 // - "smart" semi-layers: smart nav stays in arrows and nav until non-nav pressed, for example
-// - take backspace off Shift-Space; I accidentally hit it after words ending in capital letters ("I" and acronyms) too much
 // - vertical combos for numbers, maybe?
 
 #define DEFAULT 0
@@ -240,13 +239,6 @@ behaviors {
     bindings = <&kp SLASH>, <&kp BACKSLASH>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
   };
-  // Morph space into backspace when shift is held.
-  spc_bks: morph_space_backspace {
-    compatible = "zmk,behavior-mod-morph";
-    #binding-cells = <0>;
-    bindings = <&kp SPACE>, <&kp BACKSPACE>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-  };
   // Morph for smart-shift inspired by urob.
   smart_shift: morph_smart_shift {
     compatible = "zmk,behavior-mod-morph";
@@ -270,7 +262,7 @@ keymap {
 &kp W &kp F &kp M &kp P &kp V        &hash_at  &dot_cln &sqt_bang &dqt_ques &kp J
 &kp R &kp S &kp N &kp T &kp B        &com_semi &kp A    &kp E     &kp I     &kp H
 &kp X &kp C &kp L &kp D &kp G        &kp MINUS &kp U    &kp O     &kp Y     &kp K
-           &sl SYM &smart_shift    &spc_bks &lt NAV BACKSPACE
+           &sl SYM &smart_shift    &kp SPACE &lt NAV BACKSPACE
     >;
     display-name = "HDNeu";
   };
