@@ -1,6 +1,10 @@
 .PHONY: clean all
-.PHONY: corne ferris zaphod
+.PHONY: corne corne_left corne_right
+.PHONY: ferris cradio_left cradio_right
+.PHONY: zaphod zaphod_lite
 .PHONY: deploy_corne deploy_ferris deploy_zaphod
+
+MAKEFLAGS += --jobs=2
 
 APP_DIR := $(realpath ../zmk/app)
 BUILD_DIR := ${APP_DIR}/build
@@ -21,18 +25,12 @@ NANO_PATH := /media/${USER}/NICENANO
 #WESTFLAGS := -S studio-rpc-usb-uart
 #CMAKEFLAGS := -DCONFIG_ZMK_STUDIO=y
 
-CORNE_DEPS := config/corne.*
-FERRIS_DEPS := config/cradio.*
-LILY58_DEPS := config/lily58.*
-ZAPHOD_DEPS := config/zaphod_lite.*
+all: corne ferris zaphod
 
-all: corne zaphod
-
-corne: ${BUILD_DIR}/corne_left/zephyr/zmk.uf2 ${BUILD_DIR}/corne_right/zephyr/zmk.uf2
-${BUILD_DIR}/corne_left/zephyr/zmk.uf2: ${CORNE_DEPS}
-	cd ${APP_DIR} && west build -d build/corne_left -b nice_nano_v2 ${WESTFLAGS} -- -DSHIELD=corne_left ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
-${BUILD_DIR}/corne_right/zephyr/zmk.uf2: ${CORNE_DEPS}
-	cd ${APP_DIR} && west build -d build/corne_right -b nice_nano_v2 -- -DSHIELD=corne_right -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+corne: corne_left corne_right
+	ls -l ${BUILD_DIR}/corne_*/zephyr/zmk.uf2
+corne_left corne_right:
+	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_corne: corne
 	@echo -n "Put corne_left in update mode..."
@@ -44,31 +42,30 @@ deploy_corne: corne
 	@echo
 	cp -v ${BUILD_DIR}/corne_right/zephyr/zmk.uf2 ${NANO_PATH}/
 
-ferris: ${BUILD_DIR}/ferris_left/zephyr/zmk.uf2 ${BUILD_DIR}/ferris_right/zephyr/zmk.uf2
-${BUILD_DIR}/ferris_left/zephyr/zmk.uf2: ${FERRIS_DEPS}
-	cd ${APP_DIR} && west build -d build/ferris_left -b nice_nano_v2 -- -DSHIELD=cradio_left -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
-${BUILD_DIR}/ferris_right/zephyr/zmk.uf2: ${FERRIS_DEPS}
-	cd ${APP_DIR} && west build -d build/ferris_right -b nice_nano_v2 -- -DSHIELD=cradio_left -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+ferris: cradio_left cradio_right
+cradio_left cradio_right:
+	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_ferris: ferris
 	@echo -n "Put ferris_left in update mode..."
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
-	cp -v ${BUILD_DIR}/ferris_left/zephyr/zmk.uf2 ${NANO_PATH}/
+	cp -v ${BUILD_DIR}/cradio_left/zephyr/zmk.uf2 ${NANO_PATH}/
 	@echo -n "Put ferris_right in update mode..."
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
-	cp -v ${BUILD_DIR}/ferris_right/zephyr/zmk.uf2 ${NANO_PATH}/
+	cp -v ${BUILD_DIR}/cradio_right/zephyr/zmk.uf2 ${NANO_PATH}/
 
-zaphod: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR}
-zaphod: ${ZAPHOD_DEPS}
-	cd ${APP_DIR} && west build -d build/zaphod -b seeeduino_xiao_ble -- -DSHIELD=zaphod_lite -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+zaphod: zaphod_lite
+zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR}
+zaphod_lite:
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
-deploy_zaphod: zaphod
+deploy_zaphod: zaphod_lite
 	@echo -n "Put zaphod_lite in update mode..."
 	@until [ -d ${XIAO_PATH} ]; do sleep 1s; done
 	@echo
-	cp -v ${BUILD_DIR}/zaphod/zephyr/zmk.uf2 ${XIAO_PATH}/
+	cp -v ${BUILD_DIR}/zaphod_lite/zephyr/zmk.uf2 ${XIAO_PATH}/
 
 clean:
 	rm -rf ${BUILD_DIR}
