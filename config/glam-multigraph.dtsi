@@ -6,8 +6,8 @@
 
 // Macro timing for digraphs, trigraphs, consonant clusters, and other
 // multi-character morpheme stuff.
-#define SEQUENCE_TAP_MS 5
-#define SEQUENCE_WAIT_MS 5
+#define SEQUENCE_TAP_MS 1
+#define SEQUENCE_WAIT_MS 1
 
 
 / {
