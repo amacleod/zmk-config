@@ -18,6 +18,37 @@
 
 / {
 
+behaviors {
+  // Morph to reverse the shiftedness of left bracket and brace.
+  left_brace_bracket: left_brace_bracket {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp LEFT_BRACE>, <&kp LEFT_BRACKET>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  // Morph to reverse shiftedness of right bracket and brace.
+  right_brace_bracket: right_brace_bracket {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp RIGHT_BRACE>, <&kp RIGHT_BRACKET>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  // Morph for left parenthesis and left angle bracket.
+  left_paren_angle: left_paren_angle {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp LEFT_PARENTHESIS>, <&kp LESS_THAN>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  // Morph for right parenthesis and right angle bracket.
+  right_paren_angle: right_paren_angle {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp RIGHT_PARENTHESIS>, <&kp GREATER_THAN>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+};
+
 macros {
   // Select a specific Bluetooth profile and then toggle the
   // keyboard control layer; this is intended to deactivate that layer

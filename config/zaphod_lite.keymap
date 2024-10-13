@@ -62,84 +62,11 @@
 / {
 combos {
   compatible = "zmk,combos";
-  // Upper left two keys for Z in Hands Down.
-  combo_northwest_zed {
-    timeout-ms = <50>;
-    key-positions = <LT4 LT3>;
-    bindings = <&kp Z>;
-    layers = <HD_NEU>;
-  };
-  // Combo U and Y to produce Qu in Hands Down.
-  combo_uy_qu {
-    timeout-ms = <50>;
-    key-positions = <RB1 RB3>;
-    bindings = <&squ>;
-    layers = <HD_NEU>;
-  };
-  // Combo U, O, and Y to produce bare Q in Hands Down.
-  combo_uoy_q {
-    timeout-ms = <50>;
-    key-positions = <RB1 RB2 RB3>;
-    bindings = <&kp Q>;
-    layers = <HD_NEU>;
-  };
-  // Combos for H digraphs in Hands Down.
-  combo_sn_sh {
-    timeout-ms = <50>;
-    key-positions = <LM3 LM2>;
-    bindings = <&sdh S>;
-    layers = <HD_NEU>;
-  };
-  combo_st_ch {
-    timeout-ms = <50>;
-    key-positions = <LM3 LM1>;
-    bindings = <&sdh C>;
-    layers = <HD_NEU>;
-  };
-  combo_nt_th {
-    timeout-ms = <50>;
-    key-positions = <LM2 LM1>;
-    bindings = <&sdh T>;
-    layers = <HD_NEU>;
-  };
-  combo_fp_wh {
-    timeout-ms = <50>;
-    key-positions = <LT3 LT1>;
-    bindings = <&sdh W>;
-    layers = <HD_NEU>;
-  };
-  combo_pm_ph {
-    timeout-ms = <50>;
-    key-positions = <LT2 LT1>;
-    bindings = <&sdh P>;
-    layers = <HD_NEU>;
-  };
-  combo_dg_gh {
-    timeout-ms = <50>;
-    key-positions = <LB1 LB0>;
-    bindings = <&sdh G>;
-    layers = <HD_NEU>;
-  };
-  // Combos for trigraphs and 3-letter consonant clusters.
-  combo_rsn_sch {
-    timeout-ms = <50>;
-    key-positions = <LM4 LM3 LM2>;
-    bindings = <&stch S>;
-    layers = <HD_NEU>;
-  };
-  combo_snt_tch {
-    timeout-ms = <50>;
-    key-positions = <LM3 LM2 LM1>;
-    bindings = <&stch T>;
-    layers = <HD_NEU>;
-  };
-  combo_ldg_ght {
-    timeout-ms = <50>;
-    key-positions = <LB2 LB1 LB0>;
-    bindings = <&sght>;
-    layers = <HD_NEU>;
-  };
+
+#include "glam-neu-combos.dtsi"
+
 #include "glam-mini-combos.dtsi"
+
   // All four thumb keys for keyboard control layer.
   combo_thumbs_keyboard_control {
     timeout-ms = <50>;

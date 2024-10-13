@@ -4,13 +4,20 @@
  * SPDX-License-Identifier: MIT
  */
 
-// Common combos for my 36-key (Corne) and 34-key (Zaphod, Sweep)
+// Shared combos for my 36-key (Corne) and 34-key (Zaphod, Sweep)
 // keymaps. This includes combos for numbers, modifiers, and navigation
 // keys since I want those to be consistent across boards. However, I
 // have left the digraph and multi-letter sequence combos in the
 // individual keymaps since those are specific to the alpha layer layout
 // which may vary from board to board, as well as meta stuff like
-// getting to the keyboard control layer.
+// getting to the keyboard control layer. Some of the symbol combo
+// bindings require behaviors to be defined in the keymap.
+
+// REQUIRES (from glam-util.dtsi):
+//  - &left_brace_bracket
+//  - &right_brace_bracket
+//  - &left_paren_angle
+//  - &right_paren_angle
 
 // This file is meant to be included in the middle of a `combos` block.
 
@@ -109,6 +116,29 @@
     timeout-ms = <50>;
     key-positions = <RT4 RM4>;
     bindings = <&kp N0>;
+  };
+  // Right hand combos for symbols and stuff. These ought not to
+  // interfere with Hands Down Neu multigraph combos, since those are
+  // mostly on the left hand (with Qu being the notable exception).
+  combo_poke_left_brace {
+    timeout-ms = <50>;
+    key-positions = <RM1 RM2>;
+    bindings = <&left_brace_bracket>;
+  };
+  combo_prod_right_brace {
+    timeout-ms = <50>;
+    key-positions = <RM2 RM3>;
+    bindings = <&right_brace_bracket>;
+  };
+  combo_lowpoke_left_parenthesis {
+    timeout-ms = <50>;
+    key-positions = <RB1 RB2>;
+    bindings = <&left_paren_angle>;
+  };
+  combo_lowprod_right_parenthesis {
+    timeout-ms = <50>;
+    key-positions = <RB2 RB3>;
+    bindings = <&right_paren_angle>;
   };
 
 // };
