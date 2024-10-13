@@ -1,0 +1,114 @@
+/*
+ * Copyright (c) 2024 Allister MacLeod
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+// Common combos for my 36-key (Corne) and 34-key (Zaphod, Sweep)
+// keymaps. This includes combos for numbers, modifiers, and navigation
+// keys since I want those to be consistent across boards. However, I
+// have left the digraph and multi-letter sequence combos in the
+// individual keymaps since those are specific to the alpha layer layout
+// which may vary from board to board, as well as meta stuff like
+// getting to the keyboard control layer.
+
+// This file is meant to be included in the middle of a `combos` block.
+
+// combos {
+
+  // Chord combos for modifiers and special keys:
+  // Left pinky and ring in middle row for LCtrl.
+  combo_leftmost_ctrl {
+    timeout-ms = <50>;
+    key-positions = <LM4 LM3>;
+    bindings = <&kp LCTRL>;
+  };
+  // Left pinky and ring in bottom row for LShift.
+  combo_southwest_shift {
+    timeout-ms = <50>;
+    key-positions = <LB4 LB3>;
+    bindings = <&kp LSHFT>;
+  };
+  // Right pinky and ring in bottom row for RShift.
+  combo_southeast_shift {
+    timeout-ms = <50>;
+    key-positions = <RB3 RB4>;
+    bindings = <&kp RSHFT>;
+  };
+  // Left pinky and index in middle row for Esc.
+  combo_left_fork_escape {
+    timeout-ms = <50>;
+    key-positions = <LM4 LM1>;
+    bindings = <&kp ESCAPE>;
+  };
+  // Left pinky and middle finger in middle row for Tab.
+  combo_left_prong_tab {
+    timeout-ms = <50>;
+    key-positions = <LM4 LM2>;
+    bindings = <&kp TAB>;
+  };
+  // Right pinky and ring in top row for Backspace.
+  combo_northeast_backspace {
+    timeout-ms = <50>;
+    key-positions = <RT3 RT4>;
+    bindings = <&kp BACKSPACE>;
+  };
+  // Right pinky and ring in middle row for Enter.
+  combo_rightmost_enter {
+    timeout-ms = <50>;
+    key-positions = <RM3 RM4>;
+    bindings = <&kp ENTER>;
+  };
+  // Vertical combos for numbers.
+  combo_vertical_one {
+    timeout-ms = <50>;
+    key-positions = <LT4 LM4>;
+    bindings = <&kp N1>;
+  };
+  combo_vertical_two {
+    timeout-ms = <50>;
+    key-positions = <LT3 LM3>;
+    bindings = <&kp N2>;
+  };
+  combo_vertical_three {
+    timeout-ms = <50>;
+    key-positions = <LT2 LM2>;
+    bindings = <&kp N3>;
+  };
+  combo_vertical_four {
+    timeout-ms = <50>;
+    key-positions = <LT1 LM1>;
+    bindings = <&kp N4>;
+  };
+  combo_vertical_five {
+    timeout-ms = <50>;
+    key-positions = <LT0 LM0>;
+    bindings = <&kp N5>;
+  };
+  combo_vertical_six {
+    timeout-ms = <50>;
+    key-positions = <RT0 RM0>;
+    bindings = <&kp N6>;
+  };
+  combo_vertical_seven {
+    timeout-ms = <50>;
+    key-positions = <RT1 RM1>;
+    bindings = <&kp N7>;
+  };
+  combo_vertical_eight {
+    timeout-ms = <50>;
+    key-positions = <RT2 RM2>;
+    bindings = <&kp N8>;
+  };
+  combo_vertical_nine {
+    timeout-ms = <50>;
+    key-positions = <RT3 RM3>;
+    bindings = <&kp N9>;
+  };
+  combo_vertical_zero {
+    timeout-ms = <50>;
+    key-positions = <RT4 RM4>;
+    bindings = <&kp N0>;
+  };
+
+// };
