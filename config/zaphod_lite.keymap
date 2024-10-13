@@ -65,7 +65,8 @@ combos {
 
 #include "glam-neu-combos.dtsi"
 
-#include "glam-mini-combos.dtsi"
+// Navigation, symbols, and numerals.
+#include "glam-sym-nav-num-combos.dtsi"
 
   // All four thumb keys for keyboard control layer.
   combo_thumbs_keyboard_control {

@@ -120,25 +120,28 @@
   // Right hand combos for symbols and stuff. These ought not to
   // interfere with Hands Down Neu multigraph combos, since those are
   // mostly on the left hand (with Qu being the notable exception).
-  combo_poke_left_brace {
-    timeout-ms = <50>;
-    key-positions = <RM1 RM2>;
-    bindings = <&left_brace_bracket>;
-  };
-  combo_prod_right_brace {
-    timeout-ms = <50>;
-    key-positions = <RM2 RM3>;
-    bindings = <&right_brace_bracket>;
-  };
-  combo_lowpoke_left_parenthesis {
-    timeout-ms = <50>;
-    key-positions = <RB1 RB2>;
-    bindings = <&left_paren_angle>;
-  };
-  combo_lowprod_right_parenthesis {
-    timeout-ms = <50>;
-    key-positions = <RB2 RB3>;
-    bindings = <&right_paren_angle>;
-  };
+  
+  // Commenting these out for now, since I accidentally hit them when rolling way too much. ~2024-10-12
+  /* combo_poke_left_brace { */
+  /*   timeout-ms = <50>; */
+  /*   key-positions = <RM1 RM2>; */
+  /*   bindings = <&left_brace_bracket>; */
+  /* }; */
+  /* combo_prod_right_brace { */
+  /*   timeout-ms = <50>; */
+  /*   key-positions = <RM2 RM3>; */
+  /*   bindings = <&right_brace_bracket>; */
+  /*   // require-prior-idle-ms = < */
+  /* }; */
+  /* combo_lowpoke_left_parenthesis { */
+  /*   timeout-ms = <50>; */
+  /*   key-positions = <RB1 RB2>; */
+  /*   bindings = <&left_paren_angle>; */
+  /* }; */
+  /* combo_lowprod_right_parenthesis { */
+  /*   timeout-ms = <50>; */
+  /*   key-positions = <RB2 RB3>; */
+  /*   bindings = <&right_paren_angle>; */
+  /* }; */
 
 // };

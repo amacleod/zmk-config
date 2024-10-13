@@ -121,7 +121,7 @@ combos {
 #include "glam-neu-combos.dtsi"
 
 // Navigation, symbols, and numerals.
-#include "glam-mini-combos.dtsi"
+#include "glam-sym-nav-num-combos.dtsi"
 
   // Combos for clearing Bluetooth. Only available in keyboard
   // control layer.
