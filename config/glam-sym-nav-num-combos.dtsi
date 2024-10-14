@@ -120,28 +120,37 @@
   // Right hand combos for symbols and stuff. These ought not to
   // interfere with Hands Down Neu multigraph combos, since those are
   // mostly on the left hand (with Qu being the notable exception).
-  
-  // Commenting these out for now, since I accidentally hit them when rolling way too much. ~2024-10-12
-  /* combo_poke_left_brace { */
-  /*   timeout-ms = <50>; */
-  /*   key-positions = <RM1 RM2>; */
-  /*   bindings = <&left_brace_bracket>; */
-  /* }; */
-  /* combo_prod_right_brace { */
-  /*   timeout-ms = <50>; */
-  /*   key-positions = <RM2 RM3>; */
-  /*   bindings = <&right_brace_bracket>; */
-  /*   // require-prior-idle-ms = < */
-  /* }; */
-  /* combo_lowpoke_left_parenthesis { */
-  /*   timeout-ms = <50>; */
-  /*   key-positions = <RB1 RB2>; */
-  /*   bindings = <&left_paren_angle>; */
-  /* }; */
-  /* combo_lowprod_right_parenthesis { */
-  /*   timeout-ms = <50>; */
-  /*   key-positions = <RB2 RB3>; */
-  /*   bindings = <&right_paren_angle>; */
-  /* }; */
+  // Right index and ring in middle row for left brace and bracket.
+  // This is E and A in Hands Down Neu, so it needs some roll protection because of the EA and AE diphthongs.
+  combo_mid_poke_left_brace {
+    timeout-ms = <20>;
+    key-positions = <RM1 RM3>;
+    bindings = <&left_brace_bracket>;
+    require-prior-idle-ms = <150>;
+  };
+  // Right middle and ring in middle row for right brace and bracket.
+  // This is I and E in Hands Down Neu, so it needs a little roll protection because of the IE diphthong.
+  combo_mid_prod_right_brace {
+    timeout-ms = <30>;
+    key-positions = <RM2 RM3>;
+    bindings = <&right_brace_bracket>;
+    require-prior-idle-ms = <150>;
+  };
+  // Right index and middle in bottom row for left parenthesis and angle bracket.
+  // This is O and U in Hands Down Neu, so it needs a little roll protection because of the OU diphthong.
+  combo_low_poke_left_parenthesis {
+    timeout-ms = <30>;
+    key-positions = <RB1 RB2>;
+    bindings = <&left_paren_angle>;
+    require-prior-idle-ms = <150>;
+  };
+  // Right middle and ring in bottom row for right parenthesis and angle bracket.
+  // This is Y and O in Hands Down Neu, so it needs a fair amount of roll protection since I tend to start "you" with a fast roll.
+  combo_low_prod_right_parenthesis {
+    timeout-ms = <20>;
+    key-positions = <RB2 RB3>;
+    bindings = <&right_paren_angle>;
+    require-prior-idle-ms = <150>;
+  };
 
 // };
