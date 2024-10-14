@@ -15,16 +15,6 @@
 
 // Zaphod Lite keymap.
 
-// Refactoring thougts:
-// - should reuse stuff among Corne, Lily58, and Zaphod Lite
-// - some stuff is different, like I want to use more taps and fewer holds on Zaphod
-// - combos are fairly keyboard specific, though some of them may stay the same within the 34-key footprint
-// - macros seem like a good refactoring candidate
-// - for example, the Qu macro is useful across all three boards
-// - keeping the symbol and navigation layers consistent would be good
-// - gotta adapt a 34-key layout to 58, 36, and 34
-// - doing urob's periphery trick with the X_FOO defines could work
-
 // TO-DO list:
 // - "smart" semi-layers: smart nav stays in arrows and nav until non-nav pressed, for example
 // - vertical combos for numbers, maybe?
