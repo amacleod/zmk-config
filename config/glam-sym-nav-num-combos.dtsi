@@ -124,7 +124,7 @@
   // This is E and A in Hands Down Neu, so it needs some roll protection because of the EA and AE diphthongs.
   combo_mid_poke_left_brace {
     timeout-ms = <20>;
-    key-positions = <RM1 RM3>;
+    key-positions = <RM1 RM2>;
     bindings = <&left_brace_bracket>;
     require-prior-idle-ms = <150>;
   };
