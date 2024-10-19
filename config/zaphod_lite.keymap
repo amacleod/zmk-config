@@ -167,12 +167,12 @@ keymap {
 // | ^Q  | ^W  | ^E  | ^R  | ^T  |   | Home| PgD |  Up | PgU | Bks |
 // | ^A  | ^S  | ^D  | ^F  | ^G  |   | End | Left| Down|Right| Ret |
 // | ^Z  | ^X  | ^C  | ^V  | Del |   | GUI | Ctrl|Shift| Alt | Tab |
-// `-----------------|Layer|     |   |Base |SymLk|-----------------'
+// `-----------------|Layer| Ins |   |Base |SymLk|-----------------'
     bindings = <
 &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T)   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp BSPC
 &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G)   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp RET
 &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL     &sk RGUI &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
-                                &none &trans       &tog NAV &to SYM
+                                &none &kp INS       &tog NAV &to SYM
     >;
     display-name = "NAV";
   };
