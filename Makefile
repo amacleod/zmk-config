@@ -1,8 +1,9 @@
 .PHONY: clean all
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
+.PHONY: weejock
 .PHONY: zaphod zaphod_lite
-.PHONY: deploy_corne deploy_ferris deploy_zaphod
+.PHONY: deploy_corne deploy_ferris deploy_weejock deploy_zaphod
 
 MAKEFLAGS += --jobs=2
 
@@ -11,6 +12,7 @@ BUILD_DIR := ${APP_DIR}/build
 ZMK_CONFIG_DIR := $(realpath ../zmk-config)
 ZMK_HELPERS_DIR := $(realpath ../zmk-helpers)
 ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
+WEEJOCK_CONFIG_DIR := $(realpath ../weejock-zmk)
 
 EXTRA_MODULES := ${ZMK_HELPERS_DIR}
 
@@ -55,6 +57,9 @@ deploy_ferris: ferris
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
 	cp -v ${BUILD_DIR}/cradio_right/zephyr/zmk.uf2 ${NANO_PATH}/
+
+weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 zaphod: zaphod_lite
 zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR}

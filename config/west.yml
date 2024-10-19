@@ -21,5 +21,8 @@ manifest:
     - name: zaphod-config
       remote: amacleod
       revision: main
+    - name: weejock-zmk
+      remote: amacleod
+      revision: main
   self:
     path: config

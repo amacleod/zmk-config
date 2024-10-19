@@ -1,0 +1,47 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+// Layer numbers
+#define NUM 0
+#define RAISE 1
+
+/ {
+  keymap {
+    compatible = "zmk,keymap";
+
+    default_layer { // layer 0
+      // ,-----------------------.
+      // | Esc |  /  |  *  | Bks |
+      // |  7  |  8  |  9  |  -  |
+      // |  4  |  5  |  6  |  +  |
+      // |  1  |  2  |  3  | Spc |
+      // |RAISE|  0  |  .  | Ent |
+      // `-----------------------'
+      bindings = <
+        &kp ESCAPE  &kp SLASH  &kp STAR  &kp BACKSPACE
+        &kp N7      &kp N8     &kp N9    &kp MINUS
+        &kp N4      &kp N5     &kp N6    &kp PLUS
+        &kp N1      &kp N2     &kp N3    &kp SPACE
+        &mo RAISE   &kp N0     &kp DOT   &kp ENTER
+      >;
+      display-name = "NUM";
+    };
+    raise_layer { // layer 1
+      // ,-----------------------.
+      // |     |     |     |     |
+      // |     |     |     |     |
+      // |     |     |     |     |
+      // |     |     |     |     |
+      // |#####|     |  :  | Tab |
+      // `-----------------------'
+      bindings = <
+        &trans    &trans    &trans     &trans
+        &trans    &trans    &trans     &trans
+        &trans    &trans    &trans     &trans
+        &trans    &trans    &trans     &trans
+        &trans    &trans    &kp COLON  &kp TAB
+      >;
+      display-name = "Raise";
+    };
+  };
+};
