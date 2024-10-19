@@ -54,6 +54,12 @@
     key-positions = <LM4 LM2>;
     bindings = <&kp TAB>;
   };
+  // Right index and middle in top row for Delete.
+  combo_right_high_poke_del {
+    timeout-ms = <50>;
+    key-positions = <LT1 LT2>;
+    bindings = <&kp DEL>;
+  };
   // Right pinky and ring in top row for Backspace.
   combo_northeast_backspace {
     timeout-ms = <50>;
