@@ -16,9 +16,6 @@
 //    maybe tap-dance is not the best way to handle Z and Q
 // - alt-tab shortcut, Callum-style if possible (virtually hold Alt
 //   for successive "next window" presses)
-// - split things out into includable dtsi files (but with what sort
-//   of organization scheme?)
-//   - identify commonalities between Corne keymap and Lily58 keymap
 // - Emacs-specific macro keys: C-space, maybe others
 // - change shifting of , and . in Hands Down Neu; could do ; and :
 //   or ? and !
