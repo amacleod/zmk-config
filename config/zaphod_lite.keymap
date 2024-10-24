@@ -24,7 +24,9 @@
 #define SYM     1
 #define NAV     2
 #define NUM     3
-#define KEEBCTL 4
+#define FACTORY 4
+#define FACMETA 5
+#define KEEBCTL 6
 
 // These includes (well, just glam-util) need to be after the layer
 // defines, specifically the one for KEEBCTL.
@@ -54,6 +56,8 @@ combos {
   compatible = "zmk,combos";
 
 #include "glam-neu-combos.dtsi"
+
+#include "glam-factorio-combos.dtsi"
 
 // Navigation, symbols, and numerals.
 #include "glam-sym-nav-num-combos.dtsi"
@@ -190,15 +194,43 @@ keymap {
     >;
     display-name = "NUM";
   };
+  factorio_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  T  |  Q  |  W  |  E  |  R  |   |  F1 |     |     |     |     |
+// | Ctrl|  A  |  S  |  D  |  H  |   |  F2 |     |     |     |     |
+// |Shift|  Z  |  X  |  C  |  V  |   |  F3 |     |     |     |     |
+// `-----------------|  F  |Space|   |     |FCMTA|-----------------'
+    bindings = <
+&kp T      &kp Q  &kp W  &kp E  &kp R             &kp F1 &trans &trans &trans &trans
+&kp LCTRL  &kp A  &kp S  &kp D  &kp H             &kp F2 &trans &trans &trans &trans
+&xp LSHIFT &kp Z  &kp X  &kp C  &kp V             &kp F3 &trans &trans &trans &trans
+                           &kp F &kp SPACE    &trans &mo FACMETA
+    >;
+    display-name = "F A C";
+  };
+  factorio_overlay_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |     |     |     |     |     |   |     |     |     |     |     |
+// |     |     |     |     |     |   |     |     |     |     |     |
+// |     |     |     |     |     |   |     |     |     |     |     |
+// `-----------------|     |     |   |Base |#####|-----------------'
+    bindings = <
+&trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
+                                &trans &trans   &tog FACTORY &trans
+    >;
+    display-name = "T O R Y";
+  };
   keyboard_control_layer {
 // Bluetooth clear-all on right hand index and ring finger combo.
 // ,-----------------------------.   ,-----------------------------.
-// |     |     |     |     |     |   |     |     |     |     |     |
+// |     |     |     |     | FAC |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
 // | BT1 | BT2 | BT3 | BT4 | BT5 |   |ClCur| Clear All |     |
 // `-----------------|     |     |   |Base |     |-----------------'
     bindings = <
-&trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &to FACTORY           &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
 &btsel 0 &btsel 1 &btsel 2 &btsel 3 &btsel 4      &btcc &trans &trans &trans &trans
                                 &trans &trans   &tog KEEBCTL &trans

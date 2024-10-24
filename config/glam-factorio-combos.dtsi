@@ -1,0 +1,126 @@
+/*
+ * Copyright (c) 2024 Allister MacLeod
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+// This file is meant to be included in the middle of a `combos` block.
+
+// combos {
+
+  // Left ring and index for G: rail level.
+  combo_left_split_grade {
+    timeout-ms = <50>;
+    key-positions = <LM3 LM1>;
+    bindings = <&kp G>;
+    layers = <FACTORY>;
+  };
+  // Left middle and index for blueprints: B when tapped, Alt+B when held.
+  combo_left_poke_blueprint {
+    timeout-ms = <50>;
+    key-positions = <LM2 LM1>;
+    bindings = <&mt LA(B) B>;
+    layers = <FACTORY>;
+  };
+  // Inner two keys of left middle row for P: production statistics.
+  combo_inner_production {
+    timeout-ms = <50>;
+    key-positions = <LM1 LM0>;
+    bindings = <&kp P>;
+    layers = <FACTORY>;
+  };
+  // Left ring and middle in bottom row for Alt+D: destruction planner.
+  combo_lowprod_destruction {
+    timeout-ms = <50>;
+    key-positions = <LB3 LB2>;
+    bindings = <&kp LA(D)>;
+    layers = <FACTORY>;
+  };
+  // Left middle and index in bottom row for Alt+U: upgrade planner.
+  combo_inner_production {
+    timeout-ms = <50>;
+    key-positions = <LB2 LB3>;
+    bindings = <&kp LA(U)>;
+    layers = <FACTORY>;
+  };
+  // Inner two keys of left bottom row for O: train overlay.
+  combo_low_inner_overlay {
+    timeout-ms = <50>;
+    key-positions = <LB1 LB0>;
+    bindings = <&kp O>;
+    layers = <FACTORY>;
+  };
+  // Chord combos in the top row for numerals.
+  // o o . . .
+  combo_chord_one {
+    timeout-ms = <50>;
+    key-positions = <LT4 LT3>;
+    bindings = <&kp N1>;
+    layers = <FACTORY>;
+  };
+  // . o o . .
+  combo_chord_two {
+    timeout-ms = <50>;
+    key-positions = <LT3 LT2>;
+    bindings = <&kp N2>;
+    layers = <FACTORY>;
+  };
+  // . . o o .
+  combo_chord_three {
+    timeout-ms = <50>;
+    key-positions = <LT2 LT1>;
+    bindings = <&kp N3>;
+    layers = <FACTORY>;
+  };
+  // . . . o o
+  combo_chord_four {
+    timeout-ms = <50>;
+    key-positions = <LT1 LT0>;
+    bindings = <&kp N4>;
+    layers = <FACTORY>;
+  };
+  // o . o . .
+  combo_chord_five {
+    timeout-ms = <50>;
+    key-positions = <LT4 LT2>;
+    bindings = <&kp N5>;
+    layers = <FACTORY>;
+  };
+  // . o . o .
+  combo_chord_six {
+    timeout-ms = <50>;
+    key-positions = <LT3 LT1>;
+    bindings = <&kp N6>;
+    layers = <FACTORY>;
+  };
+  // . . o . o
+  combo_chord_seven {
+    timeout-ms = <50>;
+    key-positions = <LT2 LT0>;
+    bindings = <&kp N7>;
+    layers = <FACTORY>;
+  };
+  // o . . o .
+  combo_chord_eight {
+    timeout-ms = <50>;
+    key-positions = <LT4 LT1>;
+    bindings = <&kp N8>;
+    layers = <FACTORY>;
+  };
+  // . o . . o
+  combo_chord_nine {
+    timeout-ms = <50>;
+    key-positions = <LT3 LT0>;
+    bindings = <&kp N9>;
+    layers = <FACTORY>;
+  };
+  // o . . . o
+  combo_chord_zero {
+    timeout-ms = <50>;
+    key-positions = <LT4 LT0>;
+    bindings = <&kp N0>;
+    layers = <FACTORY>;
+  };
+
+
+// };
