@@ -203,7 +203,7 @@ keymap {
     bindings = <
 &kp T      &kp Q  &kp W  &kp E  &kp R             &kp F1 &trans &trans &trans &trans
 &kp LCTRL  &kp A  &kp S  &kp D  &kp H             &kp F2 &trans &trans &trans &trans
-&xp LSHIFT &kp Z  &kp X  &kp C  &kp V             &kp F3 &trans &trans &trans &trans
+&kp LSHIFT &kp Z  &kp X  &kp C  &kp V             &kp F3 &trans &trans &trans &trans
                            &kp F &kp SPACE    &trans &mo FACMETA
     >;
     display-name = "F A C";
