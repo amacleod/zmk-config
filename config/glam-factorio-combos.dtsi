@@ -30,14 +30,14 @@
     layers = <FACTORY>;
   };
   // Left ring and middle in bottom row for Alt+D: destruction planner.
-  combo_lowprod_destruction {
+  combo_low_prod_destruction {
     timeout-ms = <50>;
     key-positions = <LB3 LB2>;
     bindings = <&kp LA(D)>;
     layers = <FACTORY>;
   };
   // Left middle and index in bottom row for Alt+U: upgrade planner.
-  combo_inner_production {
+  combo_low_poke_upgrade {
     timeout-ms = <50>;
     key-positions = <LB2 LB3>;
     bindings = <&kp LA(U)>;
