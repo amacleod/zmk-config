@@ -39,7 +39,7 @@
   // Left middle and index in bottom row for Alt+U: upgrade planner.
   combo_low_poke_upgrade {
     timeout-ms = <50>;
-    key-positions = <LB2 LB3>;
+    key-positions = <LB2 LB1>;
     bindings = <&kp LA(U)>;
     layers = <FACTORY>;
   };
