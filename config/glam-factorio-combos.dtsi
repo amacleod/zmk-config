@@ -4,6 +4,9 @@
  * SPDX-License-Identifier: MIT
  */
 
+// TODO:
+// - take combos off WASD movement keys; too easy to accidentally combo when moving
+
 // This file is meant to be included in the middle of a `combos` block.
 
 // combos {

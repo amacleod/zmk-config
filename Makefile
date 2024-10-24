@@ -11,6 +11,7 @@ APP_DIR := $(realpath ../zmk/app)
 BUILD_DIR := ${APP_DIR}/build
 ZMK_CONFIG_DIR := $(realpath ../zmk-config)
 ZMK_HELPERS_DIR := $(realpath ../zmk-helpers)
+ZMK_AUTO_LAYER_DIR := $(realpath ../zmk-auto-layer)
 ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
 WEEJOCK_CONFIG_DIR := $(realpath ../weejock-zmk)
 
@@ -59,10 +60,11 @@ deploy_ferris: ferris
 	cp -v ${BUILD_DIR}/cradio_right/zephyr/zmk.uf2 ${NANO_PATH}/
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
+weejock:
 	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 zaphod: zaphod_lite
-zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR}
+zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR}
 zaphod_lite:
 	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
