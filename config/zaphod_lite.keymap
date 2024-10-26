@@ -143,7 +143,15 @@ behaviors {
     bindings = <&kp &sl>;
     flavor = "tap-preferred";
     tapping-term-ms = <100>;
-    quick-tap-ms = <100>;
+    quick-tap-ms = <1000>;
+  };
+  lqt: long_quick_tap {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    bindings = <&kp &kp>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <5000>;
   };
 };
 
@@ -217,7 +225,7 @@ keymap {
 &kp T       &kp Q  &kp W  &kp E  &kp R             &kp F1 &none &none &none &none
 &kp LSHIFT  &kp A  &kp S  &kp D  &kp H             &kp F2 &none &none &none &none
 &kp LCTRL   &kp Z  &kp X  &kp C  &kp V             &kp F3 &none &none &none &none
-                   &slt F FACMETA &kp SPACE    &none &mo FACMETA
+                   &lqt Q T &kp SPACE    &none &mo FACMETA
     >;
     display-name = "F A C";
   };
