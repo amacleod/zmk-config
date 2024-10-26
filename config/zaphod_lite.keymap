@@ -196,29 +196,29 @@ keymap {
   };
   factorio_layer {
 // ,-----------------------------.   ,-----------------------------.
-// |  T  |  Q  |  W  |  E  |  R  |   |  F1 |     |     |     |     |
-// | Ctrl|  A  |  S  |  D  |  H  |   |  F2 |     |     |     |     |
-// |Shift|  Z  |  X  |  C  |  V  |   |  F3 |     |     |     |     |
-// `-----------------|  F  |Space|   |     |FCMTA|-----------------'
+// | FOV |  Q  |  W  |  E  |  R  |   |  F1 |XXXXX|XXXXX|XXXXX|XXXXX|
+// |Shift|  A  |  S  |  D  |  H  |   |  F2 |XXXXX|XXXXX|XXXXX|XXXXX|
+// | Ctrl|  Z  |  X  |  C  |  V  |   |  F3 |XXXXX|XXXXX|XXXXX|XXXXX|
+// `-----------------|  F  |Space|   |XXXXX| FOV |-----------------'
     bindings = <
-&kp T      &kp Q  &kp W  &kp E  &kp R             &kp F1 &trans &trans &trans &trans
-&kp LCTRL  &kp A  &kp S  &kp D  &kp H             &kp F2 &trans &trans &trans &trans
-&kp LSHIFT &kp Z  &kp X  &kp C  &kp V             &kp F3 &trans &trans &trans &trans
-                           &kp F &kp SPACE    &trans &mo FACMETA
+&sl FACMETA &kp Q  &kp W  &kp E  &kp R             &kp F1 &none &none &none &none
+&kp LSHIFT  &kp A  &kp S  &kp D  &kp H             &kp F2 &none &none &none &none
+&kp LCTRL   &kp Z  &kp X  &kp C  &kp V             &kp F3 &none &none &none &none
+                           &kp F &kp SPACE    &none &mo FACMETA
     >;
     display-name = "F A C";
   };
   factorio_overlay_layer {
 // ,-----------------------------.   ,-----------------------------.
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// |     |     |     |     |     |   |     |     |     |     |     |
-// `-----------------|     |     |   |Base |#####|-----------------'
+// |  1  |  2  |  3  |  4  |  5  |   |     |     |     |     |     |
+// |  R  |     |     |  T  |     |   |     |     |     |     |     |
+// |     |     |     |     |  G  |   |     |     |     |     |     |
+// `-----------------| Alt |     |   |Base |#####|-----------------'
     bindings = <
-&trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
-&trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
-                                &trans &trans   &tog FACTORY &trans
+&kp N1 &kp N2 &kp N3 &kp N4 &kp N5                   &trans &trans &trans &trans &trans
+&kp R  &trans &trans &kp T  &trans                   &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &kp G                    &trans &trans &trans &trans &trans
+                            &sk LALT &trans   &tog FACTORY &trans
     >;
     display-name = "T O R Y";
   };
