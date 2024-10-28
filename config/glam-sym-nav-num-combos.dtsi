@@ -16,8 +16,6 @@
 // REQUIRES (from glam-util.dtsi):
 //  - &left_brace_bracket
 //  - &right_brace_bracket
-//  - &left_paren_angle
-//  - &right_paren_angle
 
 // This file is meant to be included in the middle of a `combos` block.
 
@@ -140,22 +138,6 @@
     timeout-ms = <30>;
     key-positions = <RM2 RM3>;
     bindings = <&right_brace_bracket>;
-    require-prior-idle-ms = <150>;
-  };
-  // Right index and middle in bottom row for left parenthesis and angle bracket.
-  // This is O and U in Hands Down Neu, so it needs a little roll protection because of the OU diphthong.
-  combo_low_poke_left_parenthesis {
-    timeout-ms = <30>;
-    key-positions = <RB1 RB2>;
-    bindings = <&left_paren_angle>;
-    require-prior-idle-ms = <150>;
-  };
-  // Right middle and ring in bottom row for right parenthesis and angle bracket.
-  // This is Y and O in Hands Down Neu, so it needs a fair amount of roll protection since I tend to start "you" with a fast roll.
-  combo_low_prod_right_parenthesis {
-    timeout-ms = <20>;
-    key-positions = <RB2 RB3>;
-    bindings = <&right_paren_angle>;
     require-prior-idle-ms = <150>;
   };
 
