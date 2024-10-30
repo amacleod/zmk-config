@@ -42,7 +42,7 @@
         &trans          &trans    &trans     &trans
         &trans          &trans    &kp COLON  &kp TAB
       >;
-      display-name = "Raise";
+      display-name = "Fn";
     };
     extra_layer { // layer 2
       bindings = <
@@ -52,6 +52,7 @@
         &trans  &trans  &trans  &trans
         &trans  &trans  &trans  &trans
       >;
+      display-name = "Extra";
     };
   };
 };
