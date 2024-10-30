@@ -4,6 +4,7 @@
 // Layer numbers
 #define NUM 0
 #define RAISE 1
+#define EXTRA 2
 
 / {
   keymap {
@@ -28,20 +29,29 @@
     };
     raise_layer { // layer 1
       // ,-----------------------.
-      // |     |     |     |     |
+      // |ZMKSt|     |     |     |
       // |     |     |     |     |
       // |     |     |     |     |
       // |     |     |     |     |
       // |#####|     |  :  | Tab |
       // `-----------------------'
       bindings = <
-        &trans    &trans    &trans     &trans
-        &trans    &trans    &trans     &trans
-        &trans    &trans    &trans     &trans
-        &trans    &trans    &trans     &trans
-        &trans    &trans    &kp COLON  &kp TAB
+        &studio_unlock  &trans    &trans     &trans
+        &trans          &trans    &trans     &trans
+        &trans          &trans    &trans     &trans
+        &trans          &trans    &trans     &trans
+        &trans          &trans    &kp COLON  &kp TAB
       >;
       display-name = "Raise";
+    };
+    extra_layer { // layer 2
+      bindings = <
+        &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans
+      >;
     };
   };
 };
