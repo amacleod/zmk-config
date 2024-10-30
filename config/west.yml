@@ -24,6 +24,5 @@ manifest:
     - name: weejock-zmk
       remote: amacleod
       revision: main
-      snippet: studio-rpc-usb-uart
   self:
     path: config
