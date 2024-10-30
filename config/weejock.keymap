@@ -29,14 +29,14 @@
     };
     raise_layer { // layer 1
       // ,-----------------------.
-      // |ZMKSt|     |     |     |
+      // |ZMKSt|     |     |BTClr|
       // |     |     |     |     |
       // |     |     |     |     |
       // |     |     |     |     |
       // |#####|     |  :  | Tab |
       // `-----------------------'
       bindings = <
-        &studio_unlock  &trans    &trans     &trans
+        &studio_unlock  &trans    &trans     &bt_hold_clear 0 BACKSPACE
         &trans          &trans    &trans     &trans
         &trans          &trans    &trans     &trans
         &trans          &trans    &trans     &trans
@@ -53,6 +53,26 @@
         &trans  &trans  &trans  &trans
       >;
       display-name = "Extra";
+    };
+  };
+
+  macros {
+    // Clear all BT profiles. This is needed because &bt cannot be used directly from hold-taps.
+    bluetooth_clear_all: bluetooth_clear_all {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&bt BT_CLEAR_ALL>;
+    };
+  };
+
+  behaviors {
+    // Hold a button for over a second to clear all BT profiles.
+    bt_hold_clear: bt_hold_clear {
+      compatible = "zmk,hold-tap";
+      #binding-cells = <2>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <1000>;
+      bindings = <&bluetooth_clear_all>, <&kp>;
     };
   };
 };
