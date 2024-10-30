@@ -69,7 +69,7 @@
   behaviors {
     // Hold a button for over a second to clear all BT profiles.
     bt_hold_clear: bt_hold_clear {
-      compatible = "zmk,hold-tap";
+      compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
       flavor = "tap-preferred";
       tapping-term-ms = <1000>;
