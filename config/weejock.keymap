@@ -61,7 +61,7 @@
     bluetooth_clear_all: bluetooth_clear_all {
       compatible = "zmk,behavior-macro";
       #binding-cells = <0>;
-      bindings = <&bt BT_CLEAR_ALL>;
+      bindings = <&bt BT_CLR_ALL>;
     };
   };
 
