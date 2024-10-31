@@ -37,10 +37,13 @@ keymap {
   };
 
   overlay_layer {
+    bindings = <
  &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans
  &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans
  &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans
                         &trans &trans  &trans &trans
+    >;
+    display-name = "T O R Y";
   };
 
   qwerty_layer {
