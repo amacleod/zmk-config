@@ -16,8 +16,6 @@
 // REQUIRES (from glam-util.dtsi):
 //  - &left_brace_bracket
 //  - &right_brace_bracket
-//  - &left_paren_angle
-//  - &right_paren_angle
 
 // This file is meant to be included in the middle of a `combos` block.
 

@@ -4,6 +4,7 @@
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
 .PHONY: deploy_corne deploy_ferris deploy_weejock deploy_zaphod
+.PHONY: transfer
 
 MAKEFLAGS += --jobs=2
 
@@ -24,11 +25,10 @@ SPACE := $(EMPTY) $(EMPTY)
 XIAO_PATH := /media/${USER}/XIAO-SENSE
 NANO_PATH := /media/${USER}/NICENANO
 
-# Uncomment WESTFLAGS and CMAKEFLAGS if using ZMK Studio.
-#WESTFLAGS := -S studio-rpc-usb-uart
-#CMAKEFLAGS := -DCONFIG_ZMK_STUDIO=y
+WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
+KBD_PARTS := corne_left corne_right cradio_left cradio_right weejock zaphod_lite
 
-all: corne ferris zaphod
+all: corne ferris weejock zaphod
 
 corne: corne_left corne_right
 	ls -l ${BUILD_DIR}/corne_*/zephyr/zmk.uf2
@@ -61,7 +61,7 @@ deploy_ferris: ferris
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
 weejock:
-	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -S studio-rpc-usb-uart -- -DSHIELD=$@ -DCONFIG_ZMK_STUDIO=y -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 zaphod: zaphod_lite
 zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR}
@@ -73,6 +73,12 @@ deploy_zaphod: zaphod_lite
 	@until [ -d ${XIAO_PATH} ]; do sleep 1s; done
 	@echo
 	cp -v ${BUILD_DIR}/zaphod_lite/zephyr/zmk.uf2 ${XIAO_PATH}/
+
+# For getting UF2s from WSL to the Windows desktop.
+transfer:
+	@for x in ${KBD_PARTS}; do \
+	if [ -d ${BUILD_DIR}/$${x} ]; then cp -v ${BUILD_DIR}/$${x}/zephyr/zmk.uf2 ${WIN_DESKTOP}/$${x}.uf2 ; fi \
+	done
 
 clean:
 	rm -rf ${BUILD_DIR}

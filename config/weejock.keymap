@@ -1,9 +1,11 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
 
 // Layer numbers
 #define NUM 0
 #define RAISE 1
+#define EXTRA 2
 
 / {
   keymap {
@@ -28,20 +30,50 @@
     };
     raise_layer { // layer 1
       // ,-----------------------.
-      // |     |     |     |     |
+      // |ZMKSt|     |     |BTClr|
       // |     |     |     |     |
       // |     |     |     |     |
       // |     |     |     |     |
       // |#####|     |  :  | Tab |
       // `-----------------------'
       bindings = <
-        &trans    &trans    &trans     &trans
-        &trans    &trans    &trans     &trans
-        &trans    &trans    &trans     &trans
-        &trans    &trans    &trans     &trans
-        &trans    &trans    &kp COLON  &kp TAB
+        &studio_unlock  &trans    &trans     &bt_hold_clear 0 BACKSPACE
+        &trans          &trans    &trans     &trans
+        &trans          &trans    &trans     &trans
+        &trans          &trans    &trans     &trans
+        &trans          &trans    &kp COLON  &kp TAB
       >;
-      display-name = "Raise";
+      display-name = "Fn";
+    };
+    extra_layer { // layer 2
+      bindings = <
+        &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans
+      >;
+      display-name = "Extra";
+    };
+  };
+
+  macros {
+    // Clear all BT profiles. This is needed because &bt cannot be used directly from hold-taps.
+    bluetooth_clear_all: bluetooth_clear_all {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&bt BT_CLR_ALL>;
+    };
+  };
+
+  behaviors {
+    // Hold a button for over a second to clear all BT profiles.
+    bt_hold_clear: bt_hold_clear {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      flavor = "tap-preferred";
+      tapping-term-ms = <1000>;
+      bindings = <&bluetooth_clear_all>, <&kp>;
     };
   };
 };
