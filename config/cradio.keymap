@@ -28,8 +28,8 @@ keymap {
 // | Ctrl|  Z  |  X  |  C  |  V  |   |  N  |  M  |  ,  |  .  |  /  |
 // `-----------------|F/OVL|Space|   | Spc | Bks |-----------------'
     bindings = <
- &kp T      &kp Q &kp W &kp E &kp R   &qkp Y &qkp U &qkp I     &qkp O &qkp P
- &kp LSHIFT &kp A &kp S &kp D &kp H   &qkp H &qkp J &qkp K     &qkp L &qkp SEMI
+ &kp T      &kp Q &kp W &kp E &kp R   &qkp Y &qkp U &qkp I     &qkp O   &qkp P
+ &kp LSHIFT &kp A &kp S &kp D &kp H   &qkp H &qkp J &qkp K     &qkp L   &qkp SEMI
  &kp LCTRL  &kp Z &kp X &kp C &kp V   &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
                      &kp F &kp SPACE &qkp SPACE &to QWERTY
     >;
@@ -61,9 +61,10 @@ keymap {
     display-name = "QWERTY";
   };
 }; // end keymap
+
 macros {
   qkp: qwerty_keypress {
-    compatible = "zmk,macro-one-param";
+    compatible = "zmk,behavior-macro-one-param";
     #binding-cells = <1>;
     bindings
       = <&macro_param_1to1>
