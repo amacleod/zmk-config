@@ -9,27 +9,40 @@
 #include <dt-bindings/zmk/keys.h>
 
 // #include "zmk-helpers/helper.h"
-// #include "zmk-helpers/key-labels/34.h"
+#include "zmk-helpers/key-labels/34.h"
+
+// TODO: left hand combos for uncommon Factorio keys.
+
+#define FACTORY 0
+#define OVERLAY 1
+#define QWERTY  2
 
 / {
 keymap {
   compatible = "zmk,keymap";
-/*   hands_down_vibranium_layer { */
-/* // Vibranium f (Neu-vf) with punctuation moved a bit to match my habits. */
-/* // Q and Z exist only in combos. */
-/* // ,-----------------------------.   ,-----------------------------. */
-/* // |  X  |  W  |  M  |  G  |  J  |   | # @ | . : | ' ! | " ? | / \ | */
-/* // |  S  |  C  |  N  |  T  |  K  |   | , ; |  A  |  E  |  I  |  H  | */
-/* // |  F  |  P  |  L  |  D  |  V  |   |  -  |  U  |  O  |  Y  |  B  | */
-/* // `-----------------|     |  R  |   | Spc | Bks |-----------------' */
-/*     bindings = < */
-/* &kp X &kp W &kp M &kp G &kp J        &kp AT    &kp DOT &kp SQT &kp DQT &kp FSLH */
-/* &kp S &kp C &kp N &kp T &kp K        &kp COMMA &kp A   &kp E   &kp I   &kp H */
-/* &kp F &kp P &kp L &kp D &kp V        &kp MINUS &kp U   &kp O   &kp Y   &kp B */
-/*                   &none &kp R    &kp SPACE &kp BACKSPACE */
-/*     >; */
-/*     display-name = "HDVibr"; */
-/*   }; */
+
+  factorio_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |  T  |  Q  |  W  |  E  |  R  |   |  Y  |  U  |  I  |  O  |  P  |
+// |Shift|  A  |  S  |  D  |  H  |   |  H  |  J  |  K  |  L  |  ;  |
+// | Ctrl|  Z  |  X  |  C  |  V  |   |  N  |  M  |  ,  |  .  |  /  |
+// `-----------------|F/OVL|Space|   | Spc | Bks |-----------------'
+    bindings = <
+ &kp T      &kp Q &kp W &kp E &kp R   &qkp Y &qkp U &qkp I     &qkp O &qkp P
+ &kp LSHIFT &kp A &kp S &kp D &kp H   &qkp H &qkp J &qkp K     &qkp L &qkp SEMI
+ &kp LCTRL  &kp Z &kp X &kp C &kp V   &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
+                     &kp F &kp SPACE &qkp SPACE &to QWERTY
+    >;
+    display-name = "F A C";
+  };
+
+  overlay_layer {
+ &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans
+ &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans
+ &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans
+                        &trans &trans  &trans &trans
+  };
+
   qwerty_layer {
 // ,-----------------------------.   ,-----------------------------.
 // |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |
@@ -40,10 +53,20 @@ keymap {
   &kp Q   &kp W   &kp E   &kp R   &kp T    &kp Y  &kp U   &kp I     &kp O   &kp P
   &kp A   &kp S   &kp D   &kp F   &kp G    &kp H  &kp J   &kp K     &kp L   &kp SEMI
   &kp Z   &kp X   &kp C   &kp V   &kp B    &kp N  &kp M   &kp COMMA &kp DOT &kp FSLH
-                  &kp ESC &kp LSHIFT   &kp SPACE &kp BACKSPACE
+                  &kp ESC &kp LSHIFT   &kp SPACE &tog QWERTY
     >;
     display-name = "QWERTY";
   };
-};
-// end keymap
+}; // end keymap
+macros {
+  qkp: qwerty_keypress {
+    compatible = "zmk,macro-one-param";
+    #binding-cells = <1>;
+    bindings
+      = <&macro_param_1to1>
+      , <&to QWERTY>
+      , <&kp MACRO_PLACEHOLDER>
+      ;
+  };
+}; // end macros
 };
