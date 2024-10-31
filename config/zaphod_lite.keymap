@@ -71,7 +71,7 @@ combos {
   // Right hand index and ring fingers for BT_CLR_ALL but only on KEEBCTL layer.
   combo_bt_clear_all {
     timeout-ms = <50>;
-    key-positions = <RB1 RB2>;
+    key-positions = <RB1 RB3>;
     bindings = <&btclall>;
     layers = <KEEBCTL>;
   };
