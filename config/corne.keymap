@@ -41,10 +41,12 @@
 #define I3WMNAV 13
 #define KEEBCTL 14
 
-// These includes (well, just glam-util) need to be after the layer
-// defines, specifically the one for KEEBCTL.
 #include "glam-multigraph.dtsi"
 #include "glam-util.dtsi"
+
+// This bt-kbdctl include needs to be after the layer defines,
+// specifically the one for KEEBCTL.
+#include "glam-bt-kbdctl.dtsi"
 
 // Placeholder for mandatory parameters that are never used.
 #define UNUSED 0

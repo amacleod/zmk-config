@@ -7,14 +7,9 @@
 // Devicetree include for sharing miscellaneous utility code between
 // my various ZMK keymaps. Other .dtsi files in this directory have
 // more specific themes:
+//  - glam-bt-kbdctl.dtsi contains macros for dealing with Bluetooth
 //  - glam-multigraph.dtsi is about character-sequence macros
-
-// NOTE: Assumptions!
-// This dtsi assumes that you will be including it from a file where
-// there is a #define for the KEEBCTL layer number. This is needed so
-// that the Bluetooth macros can toggle the keyboard control layer
-// off after doing their thing.
-// This dtsi must be included after the #define KEEBCTL line.
+//  - various glam-*-combos.dtsi files contain combos of different varieties
 
 / {
 
@@ -46,47 +41,6 @@ behaviors {
     #binding-cells = <0>;
     bindings = <&kp RIGHT_PARENTHESIS>, <&kp GREATER_THAN>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-  };
-};
-
-macros {
-  // Select a specific Bluetooth profile and then toggle the
-  // keyboard control layer; this is intended to deactivate that layer
-  // when activated from within it.
-  btsel: bluetooth_select_and_toggle {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings
-      = <&macro_param_1to2>
-      , <&bt BT_SEL MACRO_PLACEHOLDER>
-      , <&macro_pause_for_release>
-      , <&tog KEEBCTL>
-      ;
-  };
-  // Clear a specific Bluetooth profile, relying on the &btsel macro to
-  // toggle the layer.
-  btclr: bluetooth_clear_and_toggle {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings
-      = <&macro_param_1to1>
-      , <&btsel MACRO_PLACEHOLDER>
-      , <&bt BT_CLR>
-      ;
-  };
-  // Clear the current Bluetooth profile and toggle the keyboard
-  // control layer.
-  btcc: bluetooth_clear_current_and_toggle {
-    compatible = "zmk,behavior-macro";
-    #binding-cells = <0>;
-    bindings = <&bt BT_CLR>, <&tog KEEBCTL>;
-  };
-  // Clear all Bluetooth profiles and toggle the keyboard control
-  // layer.
-  btclall: bluetooth_clear_all_and_toggle {
-    compatible = "zmk,behavior-macro";
-    #binding-cells = <0>;
-    bindings = <&bt BT_CLR_ALL>, <&tog KEEBCTL>;
   };
 };
 
