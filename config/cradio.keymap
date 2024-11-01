@@ -8,10 +8,7 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 
-// #include "zmk-helpers/helper.h"
 #include "zmk-helpers/key-labels/34.h"
-
-// TODO: left hand combos for uncommon Factorio keys.
 
 #define FACTORY 0
 #define OVERLAY 1
@@ -26,22 +23,27 @@ keymap {
 // |  T  |  Q  |  W  |  E  |  R  |   |  Y  |  U  |  I  |  O  |  P  |
 // |Shift|  A  |  S  |  D  |  H  |   |  H  |  J  |  K  |  L  |  ;  |
 // | Ctrl|  Z  |  X  |  C  |  V  |   |  N  |  M  |  ,  |  .  |  /  |
-// `-----------------|F/OVL|Space|   | Spc | Bks |-----------------'
+// `-----------------|F/OVL|Space|   | Spc |QWRTY|-----------------'
     bindings = <
  &kp T      &kp Q &kp W &kp E &kp R   &qkp Y &qkp U &qkp I     &qkp O   &qkp P
  &kp LSHIFT &kp A &kp S &kp D &kp H   &qkp H &qkp J &qkp K     &qkp L   &qkp SEMI
  &kp LCTRL  &kp Z &kp X &kp C &kp V   &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
-                     &kp F &kp SPACE &qkp SPACE &to QWERTY
+            &slt F OVERLAY &kp SPACE &qkp SPACE &to QWERTY
     >;
     display-name = "F A C";
   };
 
   overlay_layer {
     bindings = <
- &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans
- &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans
- &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans
-                        &trans &trans  &trans &trans
+// ,-----------------------------.   ,-----------------------------.
+// |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
+// |     |Alt-A|XXXXX|Alt-T|Alt-R|   |XXXXX|XXXXX|XXXXX|XXXXX|XXXXX|
+// |     |XXXXX|XXXXX|Alt-C|Alt-G|   |XXXXX|XXXXX|XXXXX|XXXXX|XXXXX|
+// `-----------------|#####|     |   |Base |QWRTY|-----------------'
+ &kp N1 &kp N2    &kp N3 &kp N4    &kp N5      &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
+ &trans &kp LA(A) &none  &kp LA(T) &kp LA(R)   &none  &none  &none  &none  &none
+ &trans &none     &none  &kp LA(C) &kp LA(G)   &none  &none  &none  &none  &none
+                        &trans &trans  &trans &to QWERTY
     >;
     display-name = "T O R Y";
   };
@@ -53,14 +55,37 @@ keymap {
 // |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  |
 // `-----------------| Esc |Shift|   | Spc | Bks |-----------------'
     bindings = <
-  &kp Q   &kp W   &kp E   &kp R   &kp T    &kp Y  &kp U   &kp I     &kp O   &kp P
-  &kp A   &kp S   &kp D   &kp F   &kp G    &kp H  &kp J   &kp K     &kp L   &kp SEMI
-  &kp Z   &kp X   &kp C   &kp V   &kp B    &kp N  &kp M   &kp COMMA &kp DOT &kp FSLH
-                  &kp ESC &kp LSHIFT   &kp SPACE &tog QWERTY
+  &kp Q   &kp W   &kp E   &kp R   &kp T     &kp Y  &kp U   &kp I     &kp O   &kp P
+  &kp A   &kp S   &kp D   &kp F   &kp G     &kp H  &kp J   &kp K     &kp L   &kp SEMI
+  &kp Z   &kp X   &kp C   &kp V   &kp B     &kp N  &kp M   &kp COMMA &kp DOT &kp FSLH
+                      &kp ESC &kp LSHIFT   &kp SPACE &tog QWERTY
     >;
     display-name = "QWERTY";
   };
 }; // end keymap
+
+combos {
+  compatible = "zmk,combos";
+
+#include "glam-factorio-combos.dtsi"
+
+}; // end combos
+
+behaviors {
+  // Hold tap where the tap is a sticky layer, kind of the converse of
+  // a layer-tap. This has a short tapping term since it is meant for
+  // the Factorio layer's "hold to pick up from ground (F), tap for
+  // sticky overlay" binding, and I do not want to have to wait too
+  // terribly long for stuff to start getting picked up.
+  slt: sticky_layer_tap {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    bindings = <&kp &sl>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <100>;
+  };
+}; // end behaviors
 
 macros {
   qkp: qwerty_keypress {
