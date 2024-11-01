@@ -59,7 +59,6 @@ combos {
 
 #include "glam-factorio-combos.dtsi"
 
-// Navigation, symbols, and numerals.
 #include "glam-sym-nav-num-combos.dtsi"
 
   // All four thumb keys for keyboard control layer.
