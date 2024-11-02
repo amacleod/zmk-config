@@ -246,7 +246,7 @@ keymap {
     bindings = <
 &trans &trans &trans &trans &to FACTORY           &trans &trans &trans &trans &trans
 &trans &trans &trans &trans &trans                &trans &trans &trans &trans &trans
-&btsel 0 &btsel 1 &btsel 2 &btsel 3 &btsel 4      &btcc &trans &trans &trans &trans
+&btp 0 &btp 1 &btp 2 &btp 3 &btp 4                &btcc &trans &trans &trans &trans
                                 &trans &trans   &tog KEEBCTL &trans
     >;
     display-name = "KBDCTL";

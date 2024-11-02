@@ -17,7 +17,7 @@ macros {
   // Select a specific Bluetooth profile and then toggle the
   // keyboard control layer; this is intended to deactivate that layer
   // when activated from within it.
-  btsel: bluetooth_select_and_toggle {
+  btp: bluetooth_select_and_toggle {
     compatible = "zmk,behavior-macro-one-param";
     #binding-cells = <1>;
     bindings
@@ -27,14 +27,14 @@ macros {
       , <&tog KEEBCTL>
       ;
   };
-  // Clear a specific Bluetooth profile, relying on the &btsel macro to
+  // Clear a specific Bluetooth profile, relying on the &btp macro to
   // toggle the layer.
   btclr: bluetooth_clear_and_toggle {
     compatible = "zmk,behavior-macro-one-param";
     #binding-cells = <1>;
     bindings
       = <&macro_param_1to1>
-      , <&btsel MACRO_PLACEHOLDER>
+      , <&btp MACRO_PLACEHOLDER>
       , <&bt BT_CLR>
       ;
   };
