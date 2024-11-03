@@ -83,9 +83,12 @@ combos {
     key-positions = <LT0 LB0 RT0 RB0>;
     bindings = <&bootloader>;
   };
-};
-
-macros {
+  // Right hand inner two keys on top row for alt-tab tri-state.
+  combo_alt_tab {
+    timeout-ms = <50>;
+    key-positions = <RT0 RT1>;
+    bindings = <&alttab>;
+  };
 };
 
 behaviors {
@@ -145,6 +148,13 @@ behaviors {
     flavor = "tap-preferred";
     tapping-term-ms = <200>;
     quick-tap-ms = <100>;
+  };
+  // App-switch tri-state; tap repeatedly to switch windows.
+  alttab: alt_tab_bookend {
+    compatible = "zmk,behavior-tri-state";
+    #binding-cells = <0>;
+    bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+    timeout-ms = <1500>;
   };
 };
 

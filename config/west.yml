@@ -5,6 +5,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: urob
       url-base: https://github.com/urob
+    - name: dhruvinsh
+      url-base: https://github.com/dhruvinsh
     - name: amacleod
       url-base: https://github.com/amacleod
   projects:
@@ -17,6 +19,9 @@ manifest:
       revision: main
     - name: zmk-auto-layer
       remote: urob
+      revision: main
+    - name: zmk-tri-state
+      remote: dhruvinsh
       revision: main
     - name: zaphod-config
       remote: amacleod
