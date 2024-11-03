@@ -7,12 +7,10 @@ manifest:
       url-base: https://github.com/urob
     - name: amacleod
       url-base: https://github.com/amacleod
-    - name: bttnns
-      url-base: https://github.com/bttnns
   projects:
     - name: zmk
-      remote: bttns # zmkfirmware
-      revision: patch-1 # main
+      remote: zmkfirmware
+      revision: main
       import: app/west.yml
     - name: zmk-helpers
       remote: urob
