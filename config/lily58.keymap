@@ -212,16 +212,16 @@ num_lock_layer {
 
   keyboard_control_layer {
 // ,-----------------------------------.             ,-----------------------------------.
-// |BTC_C| BT1 | BT2 | BT3 | BT4 | BT5 |             |     |     |     |     |     |     |
+// |BTC_C| BT1 | BT2 | BT3 | BT4 | BT5 |             |     |     |     |     |     |BTC_A|
 // |Dvork|QWRTY|     |     |     |     |             |     | USB |     |     |     |     |
 // |Colmk|     |     |Dvork|     |     |-----. ,-----|     |     |     |     |     |     |
-// |QWRTY|     |     |Colmk| BLE |BTC_A| DFU | | DFU |     |     |     |     |     |     |
+// |QWRTY|     |     |Colmk|     | BLE | DFU | | DFU |     |     |     |     |     |     |
 // `----------------|     |     |     |     |   |     |     |     |     |----------------'
     bindings = <
-&bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                   &trans &trans &trans &trans &trans &trans
+&bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                   &trans &trans &trans &trans &trans &bt BT_CLR_ALL
 &to DVORAK  &to QWERTY   &trans       &trans       &trans       &trans                         &trans &out OUT_USB &trans &trans &trans &trans
 &to COLEMAK &trans       &trans       &to DVORAK   &trans       &trans                         &trans &trans &trans &trans &trans &trans
-&to QWERTY  &trans       &trans       &to COLEMAK  &out OUT_BLE &bt BT_CLR_ALL &bootloader   &bootloader &trans &trans &trans &trans &trans &trans
+&to QWERTY  &trans       &trans       &to COLEMAK  &none        &out OUT_BLE  &bootloader   &bootloader &trans &trans &trans &trans &trans &trans
                                                         &trans &trans &trans &tog KEEBCTL      &trans &trans &trans &trans
     >;
     display-name = "KBD CTL";
