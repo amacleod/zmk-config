@@ -45,19 +45,6 @@ combos {
 
 #include "glam-sym-nav-num-combos.dtsi"
 
-  // Both main thumb keys to trigger caps word.
-  combo_caps_word {
-    timeout-ms = <50>;
-    key-positions = <53 54>;
-    bindings = <&caps_word>;
-  };
-  // Corners of left thumb cluster for keyboard control.
-  combo_keyboard_control {
-    timeout-ms = <50>;
-    key-positions = <50 42>;
-    bindings = <&slx KEEBCTL>;
-  };
-
 };
 
 behaviors {
