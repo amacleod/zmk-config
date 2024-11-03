@@ -27,7 +27,7 @@ XIAO_PATH := /media/${USER}/XIAO-SENSE
 NANO_PATH := /media/${USER}/NICENANO
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
-KBD_PARTS := corne_left corne_right cradio_left cradio_right weejock zaphod_lite
+KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right weejock zaphod_lite
 
 all: corne ferris weejock zaphod
 
