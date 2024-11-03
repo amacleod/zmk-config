@@ -62,7 +62,7 @@ deploy_ferris: ferris
 
 lily58: lily58_left lily58_right
 lily58_left lily58_right:
-	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 -- -DSHIELD="$@ nice_view_adapter nice_view" -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 -S zmk-usb-logging -- -DSHIELD="$@ nice_view_adapter nice_view" -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
 weejock:
