@@ -7,8 +7,6 @@
 .PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_weejock deploy_zaphod
 .PHONY: transfer
 
-MAKEFLAGS += --jobs=2
-
 APP_DIR := $(realpath ../zmk/app)
 BUILD_DIR := ${APP_DIR}/build
 ZMK_CONFIG_DIR := $(realpath ../zmk-config)
