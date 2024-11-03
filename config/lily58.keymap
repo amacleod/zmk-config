@@ -51,6 +51,9 @@
 
 combos {
   compatible = "zmk,combos";
+
+#include "glam-sym-nav-num-combos.dtsi"
+
   // Both main thumb keys to trigger caps word.
   combo_caps_word {
     timeout-ms = <50>;
@@ -63,6 +66,7 @@ combos {
     key-positions = <50 42>;
     bindings = <&slx KEEBCTL>;
   };
+
 };
 
 behaviors {
