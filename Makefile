@@ -1,9 +1,10 @@
 .PHONY: clean all
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
+.PHONY: lily58 lily58_left lily58_right
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
-.PHONY: deploy_corne deploy_ferris deploy_weejock deploy_zaphod
+.PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_weejock deploy_zaphod
 .PHONY: transfer
 
 MAKEFLAGS += --jobs=2
@@ -58,6 +59,10 @@ deploy_ferris: ferris
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
 	cp -v ${BUILD_DIR}/cradio_right/zephyr/zmk.uf2 ${NANO_PATH}/
+
+lily58: lily58_left lily58_right
+lily58_left lily58_right:
+	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
 weejock:
