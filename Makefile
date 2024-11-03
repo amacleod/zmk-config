@@ -12,6 +12,7 @@ BUILD_DIR := ${APP_DIR}/build
 ZMK_CONFIG_DIR := $(realpath ../zmk-config)
 ZMK_HELPERS_DIR := $(realpath ../zmk-helpers)
 ZMK_AUTO_LAYER_DIR := $(realpath ../zmk-auto-layer)
+ZMK_TRI_STATE_DIR := $(realpath ../zmk-tri-state)
 ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
 WEEJOCK_CONFIG_DIR := $(realpath ../weejock-zmk)
 
@@ -67,7 +68,7 @@ weejock:
 	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -S studio-rpc-usb-uart -- -DSHIELD=$@ -DCONFIG_ZMK_STUDIO=y -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 zaphod: zaphod_lite
-zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR}
+zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
 zaphod_lite:
 	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
