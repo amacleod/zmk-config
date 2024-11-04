@@ -122,14 +122,16 @@ behaviors {
     quick-tap-ms = <100>;
   };
   // Layer tap with quick tap. This is almost identical to &lt, except
-  // that it adds a quick-tap for easy key-holding of the tapped key.
+  // that it adds quick-tap and retro-tap for easy key-holding of the
+  // tapped key.
   ltq: layer_tap_quick {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     bindings = <&mo &kp>;
     flavor = "tap-preferred";
     tapping-term-ms = <200>;
-    quick-tap-ms = <100>;
+    quick-tap-ms = <200>;
+    retro-tap;
   };
 }; // end behaviors
 
