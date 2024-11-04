@@ -83,12 +83,6 @@ combos {
     key-positions = <LT0 LB0 RT0 RB0>;
     bindings = <&bootloader>;
   };
-  // Right hand inner two keys on top row for alt-tab tri-state.
-  combo_alt_tab {
-    timeout-ms = <50>;
-    key-positions = <RT0 RT1>;
-    bindings = <&alttab>;
-  };
 };
 
 behaviors {
@@ -150,11 +144,10 @@ behaviors {
     quick-tap-ms = <100>;
   };
   // App-switch tri-state; tap repeatedly to switch windows.
-  alttab: alt_tab_bookend {
+  alt_tab: alt_tab_bookend {
     compatible = "zmk,behavior-tri-state";
     #binding-cells = <0>;
     bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
-    timeout-ms = <1500>;
   };
 };
 
@@ -200,7 +193,7 @@ keymap {
 &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T)   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp BSPC
 &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G)   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp RET
 &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL     &sk RGUI &sk RCTRL &sk RSHIFT &sk LALT  &kp TAB
-                                &none &kp INS       &trans &to SYM
+                                &none &kp INS       &alt_tab &to SYM
     >;
     display-name = "NAV";
   };
