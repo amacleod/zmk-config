@@ -33,7 +33,7 @@ keymap {
  &kp T      &kp Q &kp W &kp E &kp R   &qkp Y &qkp U &qkp I     &qkp O   &qkp P
  &kp LSHIFT &kp A &kp S &kp D &kp H   &qkp H &qkp J &qkp K     &qkp L   &qkp SEMI
  &kp LCTRL  &kp Z &kp X &kp C &kp V   &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
-            &slt F OVERLAY &kp SPACE &qkp SPACE &to QWERTY
+            &ltq OVERLAY F &kp SPACE &qkp SPACE &to QWERTY
     >;
     display-name = "F A C";
   };
@@ -53,7 +53,7 @@ keymap {
     display-name = "T O R Y";
   };
 
-  qwerty_layer {
+    qwerty_layer {
 // ,-----------------------------.   ,-----------------------------.
 // |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |
 // |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  |  ;  |
@@ -117,6 +117,16 @@ behaviors {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     bindings = <&kp &sl>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <100>;
+  };
+  // Layer tap with quick tap. This is almost identical to &lt, except
+  // that it adds a quick-tap for easy key-holding of the tapped key.
+  ltq: layer_tap_quick {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    bindings = <&mo &kp>;
     flavor = "tap-preferred";
     tapping-term-ms = <200>;
     quick-tap-ms = <100>;
