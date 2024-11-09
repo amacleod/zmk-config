@@ -2,11 +2,11 @@
 name: Draw ZMK Keymaps
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "config/*.keymap"
-      - "config/*.dtsi"
-      - "keymap_drawer.config.yaml"
+  # push:
+  #   paths:
+  #     - "config/*.keymap"
+  #     - "config/*.dtsi"
+  #     - "keymap_drawer.config.yaml"
 
 jobs:
   draw:
