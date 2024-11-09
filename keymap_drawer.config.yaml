@@ -4,4 +4,4 @@ parse_config:
 draw_config:
   separate_combo_diagrams: true
   combo_diagrams_scale: 3
-  svg_extra_style: "rect.combo-separate { fill: #000000; }"
+  svg_extra_style: "rect.combo.held { fill: #000000; }"
