@@ -3,3 +3,4 @@ parse_config:
   zmk_additional_includes: ["zmk-helpers/include"]
 draw_config:
   separate_combo_diagrams: true
+  combo_diagrams_scale: 5
