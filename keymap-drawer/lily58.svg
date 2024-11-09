@@ -116,7 +116,7 @@ path.combo {
 }
 /* End Tabler Icons Cleanup */
 
-rect.combo.held { fill: #222; }</style>
+rect.held, rect.combo.held { fill: #222; }</style>
 <g transform="translate(30, 0)" class="layer-QWERTY">
 <text x="0" y="28" class="label" id="QWERTY">QWERTY:</text>
 <g transform="translate(0, 56)">
