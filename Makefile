@@ -60,7 +60,7 @@ deploy_ferris: ferris
 	cp -v ${BUILD_DIR}/cradio_right/zephyr/zmk.uf2 ${NANO_PATH}/
 
 lily58: lily58_left lily58_right
-lily58_left: SNIPPETS = -S zmk-usb-logging
+lily58_left: # SNIPPETS = -S zmk-usb-logging
 lily58_left lily58_right:
 	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 ${SNIPPETS} -- -DSHIELD="$@ nice_view_adapter nice_view" -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
