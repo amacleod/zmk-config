@@ -68,11 +68,11 @@ deploy_lily58: lily58
 	@echo -n "Put lily58_left in update mode..."
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
-	cp -v ${BUILD_DIR}/$^_left/zephyr/zmk.uf2 ${NANO_PATH}/ || echo "UF2 copies sometimes have innocuous errors."
+	cp -v ${BUILD_DIR}/$^_left/zephyr/zmk.uf2 ${NANO_PATH}/
 	@echo -n "Put lily58_right in update mode..."
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
-	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/ || echo "UF2 copies sometimes have innocuous errors."
+	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
 weejock:
