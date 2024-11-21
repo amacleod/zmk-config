@@ -137,14 +137,14 @@ behaviors {
   tdvh: tap_dance_v_h {
     compatible = "zmk,behavior-tap-dance";
     #binding-cells = <0>;
-    tapping-term-ms = <200>;
+    tapping-term-ms = <300>;
     bindings = <&kp V>, <&kp H>;
   };
   // Tap once for tapping F, twice to lock it in: pick up items.
   tdf: tap_dance_f_lock {
     compatible = "zmk,behavior-tap-dance";
     #binding-cells = <0>;
-    tapping-term-ms = <200>;
+    tapping-term-ms = <300>;
     bindings = <&kp F>, <&kt F>;
   };
 }; // end behaviors
