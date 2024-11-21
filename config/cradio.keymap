@@ -26,14 +26,14 @@ keymap {
   factorio_layer {
 // ,-----------------------------.   ,-----------------------------.
 // |  T  |  Q  |  W  |  E  |  R  |   |  Y  |  U  |  I  |  O  |  P  |
-// |Shift|  A  |  S  |  D  |  H  |   |  H  |  J  |  K  |  L  |  ;  |
-// | Ctrl|  Z  |  X  |  C  |  V  |   |  N  |  M  |  ,  |  .  |  /  |
-// `-----------------|F/OVL|Space|   | Spc |QWRTY|-----------------'
+// |Shift|  A  |  S  |  D  |  F  |   |  H  |  J  |  K  |  L  |  ;  |
+// | Ctrl|  Z  |  X  |  C  | V H |   |  N  |  M  |  ,  |  .  |  /  |
+// `-----------------| OVL |Space|   | Spc |QWRTY|-----------------'
     bindings = <
  &kp T      &kp Q &kp W &kp E &kp R   &qkp Y &qkp U &qkp I     &qkp O   &qkp P
- &kp LSHIFT &kp A &kp S &kp D &kp H   &qkp H &qkp J &qkp K     &qkp L   &qkp SEMI
- &kp LCTRL  &kp Z &kp X &kp C &kp V   &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
-            &ltq OVERLAY F &kp SPACE &qkp SPACE &to QWERTY
+ &kp LSHIFT &kp A &kp S &kp D &tdf    &qkp H &qkp J &qkp K     &qkp L   &qkp SEMI
+ &kp LCTRL  &kp Z &kp X &kp C &tdvh   &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
+              &mo OVERLAY &kp SPACE   &qkp SPACE &to QWERTY
     >;
     display-name = "F A C";
   };
@@ -132,6 +132,20 @@ behaviors {
     tapping-term-ms = <200>;
     quick-tap-ms = <200>;
     retro-tap;
+  };
+  // Tap once for V, twice for H: flipping of entities and ghosts.
+  tdvh: tap_dance_v_h {
+    compatible = "zmk,behavior-tap-dance";
+    #binding-cells = <0>;
+    tapping-term-ms = <200>;
+    bindings = <&kp V>, <&kp H>;
+  };
+  // Tap once for tapping F, twice to lock it in: pick up items.
+  tdf: tap_dance_f_lock {
+    compatible = "zmk,behavior-tap-dance";
+    #binding-cells = <0>;
+    tapping-term-ms = <200>;
+    bindings = <&kp F>, <&kt F>;
   };
 }; // end behaviors
 

@@ -50,5 +50,12 @@
     bindings = <&kp P>;
     layers = <FACTORY>;
   };
+  // Three bottom row keys in a row for M: map.
+  combo_bottom_triple_map {
+    timeout-ms = <50>;
+    key-positions = <LB3 LB2 LB1>;
+    bindings = <&kp M>;
+    layers = <FACTORY>;
+  };
 
 // };
