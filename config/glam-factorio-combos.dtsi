@@ -43,6 +43,13 @@
     bindings = <&kp O>;
     layers = <FACTORY>;
   };
+  // Vertical combo index finger middle and bottom rows for toggle-F: pick up stuff.
+  combo_index_toggle_pickup {
+    timeout-ms = <50>;
+    key-positions = <LM1 LB1>;
+    bindings = <&kt F>;
+    layers = <FACTORY>;
+  };
   // Vertical combo mid-inner + bot-inner for P: production statistics.
   combo_inner_production {
     timeout-ms = <50>;
