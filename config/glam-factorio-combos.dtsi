@@ -8,7 +8,49 @@
 
 // combos {
 
-  // Left ring and index for G: rail level.
+  // Left top pinky and ring for I: inventory in some games.
+  combo_northwest_inventory {
+    timeout-ms = <50>;
+    key-positions = <LT4 LT3>;
+    bindings = <&kp I>;
+    layers = <FACTORY>;
+  };
+  // Left top ring and middle for J.
+  combo_upper_left_jay {
+    timeout-ms = <50>;
+    key-positions = <LT3 LT2>;
+    bindings = <&kp J>;
+    layers = <FACTORY>;
+  };
+  // Left top middle and index for K.
+  combo_upper_right_kay {
+    timeout-ms = <50>;
+    key-positions = <LT2 LT1>;
+    bindings = <&kp K>;
+    layers = <FACTORY>;
+  };
+  // Left top inner and index for L, just because.
+  combo_northeast_lights {
+    timeout-ms = <50>;
+    key-positions = <LT1 LT0>;
+    bindings = <&kp L>;
+    layers = <FACTORY>;
+  };
+  // Left ring and index in top row for sticky Alt.
+  combo_upper_split_alt {
+    timeout-ms = <50>;
+    key-positions = <LT3 LT1>;
+    bindings = <&sk LALT>;
+    layers = <FACTORY>;
+  };
+  // Central three keys in left top row for Ctrl-Alt-F11: Steam overlay.
+  combo_upper_central_steam {
+    timeout-ms = <50>;
+    key-positions = <LT3 LT2 LT1>;
+    bindings = <&kp LC(LA(F11))>;
+    layers = <FACTORY>;
+  };
+  // Left ring and index in middle row for G: rail level.
   combo_left_split_grade {
     timeout-ms = <50>;
     key-positions = <LM3 LM1>;
