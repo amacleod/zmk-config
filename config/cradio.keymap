@@ -42,13 +42,13 @@ keymap {
     bindings = <
 // ,-----------------------------.   ,-----------------------------.
 // |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
-// |Enter|Alt-A| KP+ |Alt-T|Alt-R|   |XXXXX|XXXXX|XXXXX|XXXXX|XXXXX|
-// | Alt | ^Y  | KP- |Alt-C|Alt-G|   |XXXXX|XXXXX|XXXXX|XXXXX|XXXXX|
+// |Enter|Alt-A| KP+ |Alt-T|F-Lok|   |XXXXX|XXXXX|XXXXX|XXXXX|XXXXX|
+// | Alt | ^Y  | KP- |Alt-C|M-g/r|   |XXXXX|XXXXX|XXXXX|XXXXX|XXXXX|
 // `-----------------|#####|     |   |Base |QWRTY|-----------------'
- &kp N1   &kp N2    &kp N3       &kp N4    &kp N5      &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
- &kp RET  &kp LA(A) &kp KP_PLUS  &kp LA(T) &kp LA(R)   &none  &none  &none  &none  &none
- &kp LALT &kp LC(Y) &kp KP_MINUS &kp LA(C) &kp LA(G)   &none  &none  &none  &none  &none
-                                  &trans &trans  &trans &to QWERTY
+ &kp N1   &kp N2    &kp N3       &kp N4    &kp N5             &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
+ &kp RET  &kp LA(A) &kp KP_PLUS  &kp LA(T) &kt F              &none  &none  &none  &none  &none
+ &kp LALT &kp LC(Y) &kp KP_MINUS &kp LA(C) &tth LA(G) LA(R)   &none  &none  &none  &none  &none
+                                  &trans &trans             &trans &to QWERTY
     >;
     display-name = "T O R Y";
   };
@@ -58,7 +58,7 @@ keymap {
 // |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |
 // |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  |  ;  |
 // |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  |
-// `-----------------| Esc |Shift|   | Spc | Bks |-----------------'
+// `-----------------| Esc |Shift|   | Spc |#####|-----------------'
     bindings = <
   &kp Q   &kp W   &kp E   &kp R   &kp T     &kp Y  &kp U   &kp I     &kp O   &kp P
   &kp A   &kp S   &kp D   &kp F   &kp G     &kp H  &kp J   &kp K     &kp L   &kp SEMI
@@ -143,6 +143,16 @@ macros {
       = <&to QWERTY>
       , <&macro_param_1to1>
       , <&kp MACRO_PLACEHOLDER>
+      ;
+  };
+  tth: tap_into_hold {
+    compatible = "zmk,behavior-macro-two-param";
+    #binding-cells = <2>;
+    bindings
+      = <&macro_param_1to1>
+      , <&kp MACRO_PLACEHOLDER>
+      , <&macro_param_2to1>
+      , <&mt MACRO_PLACEHOLDER K_CANCEL>
       ;
   };
 }; // end macros
