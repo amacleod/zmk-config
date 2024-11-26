@@ -166,11 +166,11 @@ macros {
       , <&kp MACRO_PLACEHOLDER>
       , <&macro_press>
       , <&macro_param_2to1>
-      , <&only_hold MACRO_PLACEHOLDER UNUSED>
+      , <&mt MACRO_PLACEHOLDER K_CANCEL>
       , <&macro_pause_for_release>
       , <&macro_release>
       , <&macro_param_2to1>
-      , <&only_hold MACRO_PLACEHOLDER UNUSED>
+      , <&mt MACRO_PLACEHOLDER K_CANCEL>
       ;
   };
 }; // end macros
