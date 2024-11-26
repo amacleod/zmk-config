@@ -106,5 +106,40 @@
     bindings = <&kp M>;
     layers = <FACTORY>;
   };
+  // Bottom pinky and middne finger for U.
+  combo_bottom_left_split_u {
+    timeout-ms = <50>;
+    key-positions = <LB4 LB2>;
+    bindings = <&kp U>;
+    layers = <FACTORY>;
+  };
+  // Bottom ring and index. For what?
+  combo_bottom_middle_split {
+    timeout-ms = <50>;
+    key-positions = <LB3 LB1>;
+    bindings = <&none>;
+    layers = <FACTORY>;
+  };
+  // Bottom middle and inner column for Y.
+  combo_bottom_right_split_y { 
+    timeout-ms = <50>;
+    key-positions = <LB2 LB0>;
+    bindings = <&kp Y>;
+    layers = <FACTORY>;
+  };
+  // Vertical combo ring finger low for H: flip horizontally.
+  combo_ring_flip_horiz {
+    timeout-ms = <50>;
+    key-positions = <LM3 LB3>;
+    bindings = <&kp H>;
+    layers = <FACTORY>;
+  };
+  // Vertical combo middle finger low for N.
+  combo_middle_n {
+    timeout-ms = <50>;
+    key-positions = <LM2 LB2>;
+    bindings = <&kp N>;
+    layers = <FACTORY>;
+  };
 
 // };
