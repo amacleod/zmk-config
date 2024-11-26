@@ -17,6 +17,8 @@
 #define QWERTY  2
 #define KEEBCTL 3
 
+#define UNUSED 0
+
 #include "glam-bt-kbdctl.dtsi"
 
 / {
@@ -47,7 +49,7 @@ keymap {
 // `-----------------|#####|     |   |Base |QWRTY|-----------------'
  &kp N1   &kp N2    &kp N3       &kp N4    &kp N5             &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
  &kp RET  &kp LA(A) &kp KP_PLUS  &kp LA(T) &kt F              &none  &none  &none  &none  &none
- &kp LALT &kp LC(Y) &kp KP_MINUS &kp LA(C) &tth LA(G) LA(R)   &none  &none  &none  &none  &none
+ &kp LALT &kp LC(Y) &kp KP_MINUS &kp LA(C) &tth N1 N2   &none  &none  &none  &none  &none
                                   &trans &trans             &trans &to QWERTY
     >;
     display-name = "T O R Y";
@@ -133,6 +135,17 @@ behaviors {
     quick-tap-ms = <200>;
     retro-tap;
   };
+  // Hold tap that only uses the hold portion of the behavior. This is
+  // meant for macros that have a tap-like behavior earlier than this
+  // behavior in the sequence.
+  only_hold: tap_hold_only_hold {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    bindings = <&kp &none>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    
+  };
 }; // end behaviors
 
 macros {
@@ -151,8 +164,13 @@ macros {
     bindings
       = <&macro_param_1to1>
       , <&kp MACRO_PLACEHOLDER>
+      , <&macro_press>
       , <&macro_param_2to1>
-      , <&mt MACRO_PLACEHOLDER K_CANCEL>
+      , <&only_hold MACRO_PLACEHOLDER UNUSED>
+      , <&pause_for_release>
+      , <&macro_release>
+      , <&macro_param_2to1>
+      , <&only_hold MACRO_PLACEHOLDER UNUSED>
       ;
   };
 }; // end macros
