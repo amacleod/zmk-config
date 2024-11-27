@@ -251,7 +251,7 @@ keymap {
 // ,-----------------------------.   ,-----------------------------.
 // |     |     |     |     | FAC |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
-// | BT1 | BT2 | BT3 | BT4 | BT5 |   |ClCur| Clear All |     |
+// | BT1 | BT2 | BT3 | BT4 | BT5 |   |ClCur| [-ClAll-] |     |
 // `-----------------|     |     |   |Base |     |-----------------'
     bindings = <
 &trans &trans &trans &trans &to FACTORY           &trans &trans &trans &trans &trans
