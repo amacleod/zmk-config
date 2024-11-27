@@ -127,11 +127,11 @@
     bindings = <&kp Y>;
     layers = <FACTORY>;
   };
-  // Vertical combo ring finger low for H: flip horizontally.
+  // Vertical combo ring finger low for F: pick up stuff.
   combo_ring_flip_horiz {
     timeout-ms = <50>;
     key-positions = <LM3 LB3>;
-    bindings = <&kp H>;
+    bindings = <&kp F>;
     layers = <FACTORY>;
   };
   // Vertical combo middle finger low for N.
