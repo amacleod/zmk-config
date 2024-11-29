@@ -79,7 +79,7 @@ deploy_lily58: lily58
 tern: hummingbird
 hummingbird: EXTRA_MODULES += ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
 hummingbird:
-	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR} -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
