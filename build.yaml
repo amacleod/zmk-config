@@ -40,3 +40,6 @@ include:
   - board: seeeduino_xiao_ble
     shield: weejock
     snippet: studio-rpc-usb-uart
+
+  - board: seeeduino_xiao_ble
+    shield: hummingbird

@@ -2,6 +2,7 @@
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
 .PHONY: lily58 lily58_left lily58_right
+.PHONY: tern hummingbird
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
 .PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_weejock deploy_zaphod
@@ -26,7 +27,7 @@ XIAO_PATH := /media/${USER}/XIAO-SENSE
 NANO_PATH := /media/${USER}/NICENANO
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
-KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right weejock zaphod_lite
+KBD_PARTS := corne_left corne_right cradio_left cradio_right hummingbird lily58_left lily58_right weejock zaphod_lite
 
 all: corne ferris weejock zaphod
 
@@ -74,6 +75,12 @@ deploy_lily58: lily58
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
 	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/
+
+tern: hummingbird
+hummingbird: EXTRA_MODULES += ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
+hummingbird:
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR} -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
 weejock:
