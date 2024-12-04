@@ -12,10 +12,11 @@ keymap {
   compatible = "zmk,keymap";
 
   hands_down_layer {
+// mostly Hands Down Gold with adjusted punctuation
 //       ,-----------------------.             ,-----------------------.
 // ,-----+  G  |  M  |  P  |  V  |             | / # | . : | ' ! | " ? +-----.
 // |  R  |  S  |  N  |  D  |  B  |             | , ; |  A  |  E  |  I  |  H  |
-// |  X  |  L  |  C  |  W  +-----'-----. ,-----`-----+  U  |  O  |  Y  |  K  |
+// |  X  |  F  |  L  |  C  +-----'-----. ,-----`-----+  U  |  O  |  Y  |  K  |
 // `-----------------------| SYM |  T  | |Sh/Sp| NAV |-----------------------'
     bindings = <
 &kp R  &kp G  &kp M  &kp P  &kp V                 &slash_hash  &dot_cln  &sqt_bang  &dqt_ques  &kp H
