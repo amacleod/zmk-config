@@ -34,7 +34,7 @@ keymap {
     bindings = <
 &trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
-        &trens  &trans  &trans                                 &trans  &trans  &trans
+        &trans  &trans  &trans                                 &trans  &trans  &trans
                                 &trans &trans   &trans &trans
     >;
     display-name = "SYM";
@@ -48,7 +48,7 @@ keymap {
     bindings = <
 &trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
-        &trens  &trans  &trans                                 &trans  &trans  &trans
+        &trans  &trans  &trans                                 &trans  &trans  &trans
                                 &trans &trans   &trans &trans
     >;
     display-name = "NAV";
@@ -62,7 +62,7 @@ keymap {
     bindings = <
 &trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
-        &trens  &trans  &trans                                 &trans  &trans  &trans
+        &trans  &trans  &trans                                 &trans  &trans  &trans
                                 &trans &trans   &trans &trans
     >;
     display-name = "NUM";
@@ -76,7 +76,7 @@ keymap {
     bindings = <
 &trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
-        &trens  &trans  &trans                                 &trans  &trans  &trans
+        &trans  &trans  &trans                                 &trans  &trans  &trans
                                 &trans &trans   &trans &trans
     >;
     display-name = "KBDCTL";
@@ -126,6 +126,6 @@ behaviors {
 //     bindings = <
 // &trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
 // &trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
-//         &trens  &trans  &trans                                 &trans  &trans  &trans
+//         &trans  &trans  &trans                                 &trans  &trans  &trans
 //                                 &trans &trans   &trans &trans
 //     >;
