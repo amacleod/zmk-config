@@ -42,4 +42,4 @@ include:
     snippet: studio-rpc-usb-uart
 
   - board: seeeduino_xiao_ble
-    shield: hummingbird
+    shield: tern_ble

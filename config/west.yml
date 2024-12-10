@@ -29,5 +29,8 @@ manifest:
     - name: weejock-zmk
       remote: amacleod
       revision: main
+    - name: tern-zmk
+      remote: amacleod
+      revision: main
   self:
     path: config
