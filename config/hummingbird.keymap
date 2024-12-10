@@ -20,39 +20,39 @@ keymap {
 // ,-----+  G  |  M  |  P  |  V  |             | / # | . : | ' ! | " ? +-----.
 // |  R  |  S  |  N  |  D  |  B  |             | , ; |  A  |  E  |  I  |  H  |
 // |  X  |  F  |  L  |  C  +-----'-----. ,-----`-----+  U  |  O  |  Y  |  W  |
-// `-----------------------| SYM |  T  | |Sh/Sp| NAV |-----------------------'
+// `-----------------------| SYM |  T  | |Space| NAV |-----------------------'
     bindings = <
 &kp R  &kp G  &kp M  &kp P  &kp V                 &slash_hash  &dot_cln  &sqt_bang  &dqt_ques  &kp H
 &kp X  &kp S  &kp N  &kp D  &kp B                 &com_semi    &kp A     &kp E      &kp I      &kp W
        &kp F  &kp L  &kp C                                     &kp U     &kp O      &kp Y
-                            &mo SYM  &kp T   &mt RSHIFT SPACE  &mo NAV
+                            &mo SYM  &kp T   &kp SPACE  &mo NAV
     >;
     display-name = "HDGold";
   };
   symbols_layer {
 //       ,-----------------------.             ,-----------------------.
-// ,-----+     |     |     |     |             |     |     |     |     +-----.
-// |     |     |     |     |     |             |     |     |     |     |     |
-// |     |     |     |     +-----'-----. ,-----`-----+     |     |     |     |
-// `-----------------------|     |     | |     |     |-----------------------'
+// ,-----+  <  |  >  |  "  |  '  |             |  &  |  :  |  [  |  ]  +-----.
+// |  `  |  -  |  +  |  =  |  @  |             |  |  |  ;  |  {  |  }  |  ?  |
+// |  ~  |  /  |  *  |  %  +-----'-----. ,-----`-----+  $  |  (  |  )  | / \ |
+// `-----------------------|#####|  #  | |  ^  | NUM |-----------------------'
     bindings = <
-&trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans                                 &trans  &trans  &trans
-                                &trans &trans   &trans &trans
+&kp GRAVE  &kp LT     &kp GT    &kp DQT      &kp SQT      &kp AMPS  &kp COLON   &kp LBKT  &kp RBKT  &kp QMARK
+&kp TILDE  &kp MINUS  &kp PLUS  &kp EQUAL    &kp AT       &kp PIPE  &kp SEMI    &kp LBRC  &kp RBRC  &slashes
+           &kp FSLHs  &kp STAR  &kp PERCENT                         &kp DOLLAR  &kp LPAR  &kp RPAR
+                                &trans &kp HASH    &kp CARET &trans
     >;
     display-name = "SYM";
   };
   navigation_layer {
 //       ,-----------------------.             ,-----------------------.
-// ,-----+     |     |     |     |             |     |     |     |     +-----.
-// |     |     |     |     |     |             |     |     |     |     |     |
-// |     |     |     |     +-----'-----. ,-----`-----+     |     |     |     |
-// `-----------------------|     |     | |     |     |-----------------------'
+// ,-----+     |     |     |     |             |     | PgD | Up  | PgU +-----.
+// |     |     |     |     |     |             |     | Left| Down|Right| Ret |
+// |     |     |     |     +-----'-----. ,-----`-----+ Ctl |Shift| Alt | GUI |
+// `-----------------------| NUM |     | |     |#####|-----------------------'
     bindings = <
-&trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans                                 &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                 &trans  &kp PG_DN  &kp UP     &kp PG_UP  &kp RET
+&trans  &trans  &trans  &trans  &trans                 &trans  &kp LEFT   &kp DOWN   &kp RIGHT  &sk RGUI
+        &trans  &trans  &trans                                 &sk RCTRL  &sk RSHFT  &sk LALT
                                 &trans &trans   &trans &trans
     >;
     display-name = "NAV";
@@ -119,6 +119,18 @@ behaviors {
     bindings = <&kp COMMA>, <&kp SEMICOLON>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
   };
+  minus_plus: morph_hyphen_plus {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp MINUS>, <&kp PLUS>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  slashes: morph_slash_backslash {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp FSLH>, <&kp BSLH>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
 }; // end behaviors
 
 //     1  2  3  4           5  6  7  8
@@ -141,11 +153,32 @@ combos {
     bindings = <&kp Z>;
     layers = <HD_GOLD>;
   };
+  // Vertical combo left pinky for exclamation point, only in symbols layer.
+  combo_left_pinky_exclamatiom {
+    timeout-ms = <50>;
+    key-positions = <0 10>;
+    bindings = <&kp EXCL>;
+    layers = <SYM>;
+  };
   // Vertical combo right pinky for K.
   combo_right_pinky_kay {
     timeout-ms = <50>;
     key-positions = <9 19>;
     bindings = <&kp K>;
+    layers = <HD_GOLD>;
+  };
+  // Vertical combo left index for J.
+  combo_left_index_jay {
+    timeout-ms = <50>;
+    key-positions = <4 14>;
+    bindings = <&kp J>;
+    layers = <HD_GOLD>;
+  };
+  // Vertical combo right index for hyphen and plus.
+  combo_right_index_minus_plus {
+    timeout-ms = <50>;
+    key-positions = <5 15>;
+    bindings = <&minus_plus>;
     layers = <HD_GOLD>;
   };
   // Combo U and Y to produce Qu in Hands Down
@@ -199,6 +232,68 @@ combos {
     key-positions = <1 2>;
     bindings = <&sdh G>;
     layers = <HD_GOLD>;
+  };
+  // Combos for trigraphs and 3-letter consonant clusters.
+  combo_rsn_sch {
+    timeout-ms = <50>;
+    key-positions = <0 11 12>;
+    bindings = <&stch S>;
+    layers = <HD_GOLD>;
+  };
+  combo_snt_tch {
+    timeout-ms = <50>;
+    key-positions = <11 12 13>;
+    bindings = <&stch T>;
+    layers = <HD_GOLD>;
+  };
+  // Another holdover from Hands Down Neu.
+  combo_flc_ght {
+    timeout-ms = <50>;
+    key-positions = <20 21 22>;
+    bindings = <&sght>;
+    layers = <HD_GOLD>;
+  };
+  // Left ring and pinky home-row keys for ctrl.
+  combo_west_ctrl {
+    timeout-ms = <50>;
+    key-positions = <0 11>;
+    bindings = <&kp LCTRL>;
+  };
+  // Left ring and pinky bottom row keys for shift.
+  combo_southwest_shift {
+    timeout-ms = <50>;
+    key-positions = <10 20>;
+    bindings = <&kp LSHFT>;
+  };
+  // Left pinky and index for escape.
+  combo_left_fork_escape {
+    timeout-ms = <50>;
+    key-positions = <0 13>;
+    bindings = <&kp ESCAPE>;
+  };
+  // Left pinky and ring for tab.
+  combo_left_prong_tab {
+    timeout-ms = <50>;
+    key-positions = <0 12>;
+    bindings = <&kp TAB>;
+  };
+  // Right ring and pinky uppermost keys for backspace.
+  combo_northeast_backspace {
+    timeout-ms = <50>;
+    key-positions = <8 9>;
+    bindings = <&kp BACKSPACE>;
+  };
+  // Right ring and pinky home-row keys for enter.
+  combo_east_enter {
+    timeout-ms = <50>;
+    key-positions = <18 9>;
+    bindings = <&kp ENTER>;
+  };
+  // Right ring and pinky bottom row keys for shift.
+  combo_southeast_shift {
+    timeout-ms = <50>;
+    key-positions = <25 29>;
+    bindings = <&kp RSHFT>;
   };
   
 }; // end combos
