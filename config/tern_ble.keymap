@@ -17,6 +17,10 @@
 #include "key-labels-glam/tern.h"
 #include "glam-multigraph.dtsi"
 
+// TODO:
+// - find a place for caret
+// - think about layer access patterns--do I really need to dedicate two thumb buttons to layers, or could I do some clever nesting?
+
 / {
 keymap {
   compatible = "zmk,keymap";
