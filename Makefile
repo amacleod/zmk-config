@@ -16,6 +16,7 @@ ZMK_AUTO_LAYER_DIR := $(realpath ../zmk-auto-layer)
 ZMK_TRI_STATE_DIR := $(realpath ../zmk-tri-state)
 ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
 WEEJOCK_CONFIG_DIR := $(realpath ../weejock-zmk)
+TERN_CONFIG_DIR := $(realpath ../tern-zmk)
 
 EXTRA_MODULES := ${ZMK_HELPERS_DIR}
 
@@ -27,7 +28,7 @@ XIAO_PATH := /media/${USER}/XIAO-SENSE
 NANO_PATH := /media/${USER}/NICENANO
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
-KBD_PARTS := corne_left corne_right cradio_left cradio_right hummingbird lily58_left lily58_right weejock zaphod_lite
+KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right tern_ble weejock zaphod_lite
 
 all: corne ferris weejock zaphod
 
@@ -76,9 +77,9 @@ deploy_lily58: lily58
 	@echo
 	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/
 
-tern: hummingbird
-hummingbird: EXTRA_MODULES += ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
-hummingbird:
+tern: tern_ble
+tern_ble: EXTRA_MODULES += ${TERN_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
+tern_ble:
 	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 
