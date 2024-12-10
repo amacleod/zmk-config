@@ -36,12 +36,12 @@ keymap {
 // ,-----+  <  |  >  |  "  |  '  |             |  &  |  :  |  [  |  ]  +-----.
 // |  `  |  -  |  +  |  =  |  @  |             |  |  |  ;  |  {  |  }  |  ?  |
 // |  ~  |  /  |  *  |  %  +-----'-----. ,-----`-----+  $  |  (  |  )  | / \ |
-// `-----------------------|#####|  #  | |  ^  | NUM |-----------------------'
+// `-----------------------|#####|  #  | |  _  | NUM |-----------------------'
     bindings = <
            &kp LT     &kp GT    &kp DQT      &kp SQT      &kp AMPS  &kp COLON   &kp LBKT  &kp RBKT
 &kp GRAVE  &kp MINUS  &kp PLUS  &kp EQUAL    &kp AT       &kp PIPE  &kp SEMI    &kp LBRC  &kp RBRC  &kp QMARK
 &kp TILDE  &kp FSLH   &kp STAR  &kp PERCENT                         &kp DOLLAR  &kp LPAR  &kp RPAR  &slashes
-                                &trans &kp HASH    &kp CARET &trans
+                                &trans &kp HASH    &kp UNDERSCORE &trans
     >;
     display-name = "SYM";
   };
