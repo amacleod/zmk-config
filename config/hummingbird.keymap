@@ -38,7 +38,7 @@ keymap {
     bindings = <
 &kp GRAVE  &kp LT     &kp GT    &kp DQT      &kp SQT      &kp AMPS  &kp COLON   &kp LBKT  &kp RBKT  &kp QMARK
 &kp TILDE  &kp MINUS  &kp PLUS  &kp EQUAL    &kp AT       &kp PIPE  &kp SEMI    &kp LBRC  &kp RBRC  &slashes
-           &kp FSLHs  &kp STAR  &kp PERCENT                         &kp DOLLAR  &kp LPAR  &kp RPAR
+           &kp FSLH   &kp STAR  &kp PERCENT                         &kp DOLLAR  &kp LPAR  &kp RPAR
                                 &trans &kp HASH    &kp CARET &trans
     >;
     display-name = "SYM";
