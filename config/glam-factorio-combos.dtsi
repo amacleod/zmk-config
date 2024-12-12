@@ -113,7 +113,7 @@
     bindings = <&kp M>;
     layers = <FACTORY>;
   };
-  // Bottom pinky and middne finger for U.
+  // Bottom pinky and middle finger for U.
   combo_bottom_left_split_u {
     timeout-ms = <50>;
     key-positions = <LB4 LB2>;
