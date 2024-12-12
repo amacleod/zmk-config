@@ -73,11 +73,11 @@ keymap {
   keyboard_control_layer {
     bindings = <
 // ,-----------------------------.   ,-----------------------------.
-// |     |     |     |     |     |   |     |     |     |     |     |
+// |     |     |     |     | DFU |   | DFU |     |     |     |     |
 // |     |     |     |     |     |   |     |     |     |     |     |
 // | BT1 | BT2 | BT3 | BT4 | BT5 |   |ClCur| Clr--[ + ]--All |     |
 // `-----------------|     |     |   |     |Base |-----------------'
-  &none  &none  &none  &none  &none        &none &none &none &none &none
+  &none  &none  &none  &none  &bootloader  &bootloader &none &none &none &none
   &none  &none  &none  &none  &none        &none &none &none &none &none
   &btp 0 &btp 1 &btp 2 &btp 3 &btp 4       &btcc &none &none &none &none
                           &none &none     &none &tog KEEBCTL
