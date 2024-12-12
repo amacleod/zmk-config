@@ -78,6 +78,13 @@
     bindings = <&kp LA(U)>;
     layers = <FACTORY>;
   };
+  // Left ring and index in bottom row for Ctl+Alt, used for map pings with a mouse click.
+  combo_lower_split_ctrl_alt {
+    timeout-ms = <50>;
+    key-positions = <LB3 LB1>;
+    bindings = <&kp LC(LALT)>;
+    layers = <FACTORY>;
+  };
   // Inner two keys of left bottom row for O: train overlay.
   combo_low_inner_overlay {
     timeout-ms = <50>;
@@ -127,11 +134,11 @@
     bindings = <&kp Y>;
     layers = <FACTORY>;
   };
-  // Vertical combo ring finger low for F: pick up stuff.
-  combo_ring_flip_horiz {
+  // Vertical combo ring finger low for H.
+  combo_ring_haitch {
     timeout-ms = <50>;
     key-positions = <LM3 LB3>;
-    bindings = <&kp F>;
+    bindings = <&kp H>;
     layers = <FACTORY>;
   };
   // Vertical combo middle finger low for N.
