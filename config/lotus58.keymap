@@ -1,0 +1,213 @@
+/*
+ * Copyright (c) 2024 Allister MacLeod
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/ext_power.h>
+
+#include "zmk-helpers/helper.h"
+#include "key-labels-glam/lily58.h"
+#include "glam-util.dtsi"
+
+// Things to try next:
+// - more stuff in the keyboard control layer, like stuff on the right half
+
+
+#define DEFAULT 0
+#define QWERTY  0
+#define DVORAK  1
+#define COLEMAK 2
+#define SYM     3
+#define NAV     4
+#define NUMPAD  5
+#define NUMLOCK 6
+#define KEEBCTL 7
+
+// Map of key positions:
+//  0  1  2  3  4  5          6  7  8  9 10 11
+// 12 13 14 15 16 17         18 19 20 21 22 23
+// 24 25 26 27 28 29         30 31 32 33 34 35
+// 36 37 38 39 40 41 42   43 44 45 46 47 48 49
+//         50 51 52 53     54 55 56 57
+//
+// Note: 42 and 43 are offset 1/2 key upward, between bottom row and home row.
+// The "main thumb keys" 53 and 54 are 1.5u bars set diagonally.
+
+/ {
+
+combos {
+  compatible = "zmk,combos";
+
+#include "glam-sym-nav-num-combos.dtsi"
+
+};
+
+behaviors {
+  slx: sticky_layer_extended {
+    compatible = "zmk,behavior-sticky-key";
+    #binding-cells = <1>;
+    bindings = <&mo>;
+    release-after-ms = <8000>;
+  };
+  tphold: tap_prefrerred_hold {
+    compatible = "zmk-behavior-hold-tap";
+    #binding-cells = <2>;
+    tapping-term-ms = <200>;
+    flavor = "tap-preferred";
+    bindings = <&kp>, <&kp>;
+  };
+};
+
+conditional_layers {
+  compatible = "zmk,conditional-layers";
+  numeric_momentary {
+    if-layers = <NAV SYM>;
+    then-layer = <NUMPAD>;
+  };
+  numeric_lock {
+    if-layers = <NUMLOCK>;
+    then-layer = <NUMPAD>;
+  };
+};
+
+keymap {
+  compatible = "zmk,keymap";
+
+  qwerty_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// | ` ~ |  1  |  2  |  3  |  4  |  5  |             |  6  |  7  |  8  |  9  |  0  | Bks |
+// | Tab |  Q  |  W  |  E  |  R  |  T  |             |  Y  |  U  |  I  |  O  |  P  | Ret |
+// | Ctl |  A  |  S  |  D  |  F  |  G  |-----. ,-----|  H  |  J  |  K  |  L  |  ;  |  '  |
+// |Shift|  Z  |  X  |  C  |  V  |  B  | Esc | | \ | |  N  |  M  |  ,  |  .  |  /  |Shift|
+// `----------------| Alt | GUI | SYM | Spc |   | Spc | NAV | Bks |KBCTL|----------------'
+    bindings = <
+&kp GRAVE &kp N1 &kp N2 &kp N3   &kp N4   &kp N5                      &kp N6 &kp N7   &kp N8    &kp N9  &kp N0   &kp BSPC
+&kp TAB   &kp Q  &kp W  &kp E    &kp R    &kp T                       &kp Y  &kp U    &kp I     &kp O   &kp P    &kp ENTER
+&kp LCTRL &kp A  &kp S  &kp D    &kp F    &kp G                       &kp H  &kp J    &kp K     &kp L   &kp SEMI &kp SQT
+&kp LSHFT &kp Z  &kp X  &kp C    &kp V    &kp B  &kp ESC    &kp BSLH  &kp N  &kp M    &kp COMMA &kp DOT &kp FSLH &kp RSHFT
+                      &kp LALT &kp LGUI &mo SYM &kp SPACE   &kp SPACE &mo NAV &kp BSPC &mo KEEBCTL
+    >;
+    display-name = "QWERTY";
+  };
+
+  dvorak_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |  '  |  ,  |  .  |  P  |  Y  |             |  F  |  G  |  C  |  R  |  L  |     |
+// |     |  A  |  O  |  E  |  U  |  I  |-----. ,-----|  D  |  H  |  T  |  N  |  S  |  -  |
+// |     |  ;  |  Q  |  J  |  K  |  X  |     | |     |  B  |  M  |  W  |  V  |  Z  |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &kp SQT  &kp COMMA &kp DOT &kp P &kp Y                 &kp F  &kp G  &kp C  &kp R  &kp L  &trans
+&trans &kp A    &kp O     &kp E   &kp U &kp I                 &kp D  &kp H  &kp T  &kp N  &kp S  &kp MINUS
+&trans &kp SEMI &kp Q     &kp J   &kp K &kp X &trans   &trans &kp B  &kp M  &kp W  &kp V  &kp Z  &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+    display-name = "Dvorak";
+  };
+
+  colemak_dh_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |  Q  |  W  |  F  |  P  |  B  |             |  J  |  L  |  U  |  Y  |  ;  |     |
+// |     |  A  |  R  |  S  |  T  |  G  |-----. ,-----|  M  |  N  |  E  |  I  |  O  |  '  |
+// |     |  Z  |  X  |  C  |  D  |  V  |     | |     |  K  |  H  |  ,  |  .  |  /  |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &kp Q  &kp W  &kp F  &kp P  &kp B                      &kp J  &kp L  &kp U  &kp Y  &kp SEMI &trans
+&trans &kp A  &kp R  &kp S  &kp T  &kp G                      &kp M  &kp N  &kp E  &kp I  &kp O    &kp SQT
+&trans &kp Z  &kp X  &kp C  &kp D  &kp V &trans        &trans &kp K  &kp H  &kp COMMA &kp DOT &kp FSLH &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+    display-name = "Colemak";
+  };
+
+  symbol_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     |  `  |  <  |  >  |  "  |  '  |             |  &  |  :  |  [  |  ]  |  _  |     |
+// |     |  !  |  -  |  +  |  =  |  #  |-----. ,-----|  |  |  ;  |  {  |  }  |  ?  |     |
+// |     |  ~  |  /  |  *  |  %  |  @  |     | |     |  ^  |  $  |  (  |  )  |  /  |     |
+// `----------------|     |     |#####|ShRet|   |     | NUM |  \  |     |----------------'
+    bindings = <
+&trans &trans    &trans    &trans   &trans      &trans                 &trans    &trans     &trans   &trans   &trans    &trans
+&trans &kp GRAVE &kp LT    &kp GT   &kp DQT     &kp SQT                &kp AMPS  &kp COLON  &kp LBKT &kp RBKT &kp UNDER &trans
+&trans &kp EXCL  &kp MINUS &kp PLUS &kp EQUAL   &kp HASH               &kp PIPE  &kp SEMI   &kp LBRC &kp RBRC &kp QMARK &trans
+&trans &kp TILDE &kp SLASH &kp STAR &kp PERCENT &kp AT &trans   &trans &kp CARET &kp DOLLAR &kp LPAR &kp RPAR &kp SLASH &trans
+                         &trans &trans &trans &kp LS(ENTER)        &trans &trans &kp BSLH &trans
+    >;
+    display-name = "SYM";
+  };
+
+  navigation_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     | ^Q  | ^W  | ^E  | ^R  | ^T  |             | Home| PgD | Up  | PgU | Bks |     |
+// |     | ^A  | ^S  | ^D  | ^F  | ^G  |-----. ,-----| End | Left| Down|Right| Ret |     |
+// |     | ^Z  | ^X  | ^C  | ^V  | Del |     | |     | Ins | Ctrl|Shift| Alt | GUI |     |
+// `----------------|     |     | NUM |     |   |     |#####|     |     |----------------'
+    bindings = <
+&trans &trans &trans &trans  &trans  &trans                                &trans   &trans    &trans     &trans    &trans   &trans
+&trans &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R) &kp LC(T)                   &kp HOME &kp PG_DN &kp UP     &kp PG_UP &kp BSPC &trans
+&trans &kp LC(A) &kp LC(S) &kp LC(D) &kp LC(F) &kp LC(G)                   &kp END  &kp LEFT  &kp DOWN   &kp RIGHT &kp RET  &trans
+&trans &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V) &kp DEL &trans       &trans &kp INS  &sk RCTRL &sk RSHIFT &sk LALT  &sk RGUI &trans
+                           &trans &trans &trans &trans           &trans &trans &trans &trans
+    >;
+    display-name = "NAV";
+  };
+
+  numpad_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// |     |     |     |     |     |     |             |     |     |     |     |     |     |
+// |     | F1  | F2  | F3  | F4  |XXXXX|             |  *  |  7  |  8  |  9  |  -  |     |
+// |     | F5  | F6  | F7  | F8  |XXXXX|-----. ,-----|  /  |  4  |  5  |  6  |  +  |NumLk|
+// |     | F9  | F10 | F11 | F12 | Del |     | |     |  0  |  1  |  2  |  3  | Ent |     |
+// `----------------|     |     |#####|     |   |  0  |#####|     |  .  |----------------'
+    bindings = <
+&trans &trans &trans  &trans  &trans  &trans                      &trans          &trans    &trans    &trans    &trans          &trans
+&trans &kp F1 &kp F2  &kp F3  &kp F4  &none                       &kp KP_MULTIPLY &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_SUBTRACT &trans
+&trans &kp F5 &kp F6  &kp F7  &kp F8  &none                       &kp KP_DIVIDE   &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS     &tog NUMLOCK
+&trans &kp F9 &kp F10 &kp F11 &kp F12 &kp DEL &trans       &trans &kp KP_N0       &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_ENTER    &trans
+                       &trans &trans &trans &trans           &kp KP_N0 &trans &trans &kp KP_DOT
+    >;
+    display-name = "Numpad";
+  };
+
+num_lock_layer {
+    // Only exists to toggle numpad layer lock on and off.
+    bindings = <
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                     &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans       &trans &trans &trans &trans &trans &trans &trans
+                   &trans &trans &trans &trans            &trans &trans &trans &trans
+    >;
+    display-name = "NumLOK";
+  };
+
+  keyboard_control_layer {
+// ,-----------------------------------.             ,-----------------------------------.
+// |BTC_C| BT1 | BT2 | BT3 | BT4 | BT5 |             |     |     |     |     |     |BTC_A|
+// |Dvork|QWRTY|     |     |     |     |             |     | USB |     |     |     |     |
+// |Colmk|     |     |Dvork|     |     |-----. ,-----|     |     |     |     |     |     |
+// |QWRTY|     |     |Colmk|     | BLE | DFU | | DFU |     |     |     |     |     |     |
+// `----------------|     |     |     |     |   |     |     |     |     |----------------'
+    bindings = <
+&bt BT_CLR  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                   &trans &trans &trans &trans &trans &bt BT_CLR_ALL
+&to DVORAK  &to QWERTY   &trans       &trans       &trans       &trans                         &trans &out OUT_USB &trans &trans &trans &trans
+&to COLEMAK &trans       &trans       &to DVORAK   &trans       &trans                         &trans &trans &trans &trans &trans &trans
+&to QWERTY  &trans       &trans       &to COLEMAK  &none        &out OUT_BLE  &bootloader   &bootloader &trans &trans &trans &trans &trans &trans
+                                                        &trans &trans &trans &tog KEEBCTL      &trans &trans &trans &trans
+    >;
+    display-name = "KBD CTL";
+  };
+};
+// end keymap
+};
