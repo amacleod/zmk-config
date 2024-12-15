@@ -5,7 +5,7 @@
 .PHONY: tern hummingbird
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
-.PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_weejock deploy_zaphod
+.PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
 .PHONY: transfer
 
 APP_DIR := $(realpath ../zmk/app)
@@ -82,6 +82,11 @@ tern_ble: EXTRA_MODULES += ${TERN_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_ST
 tern_ble:
 	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
+deploy_tern: tern
+	@echo -n "Put $^ in update mode..."
+	@until [ -d ${XIAO_PATH} ]; do sleep 1s; done
+	@echo
+	cp -v ${BUILD_DIR}/tern_ble/zephyr/zmk.uf2 ${XIAO_PATH}/
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
 weejock:
