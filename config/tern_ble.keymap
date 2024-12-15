@@ -27,10 +27,12 @@ keymap {
 
   hands_down_layer {
 // mostly Hands Down Gold with adjusted punctuation
+// Combos for letters: RG->W, XR->Z, UOY->Q, VB->J
+// Plus a bunch of digraph and triple combos.
 //       ,-----------------------.             ,-----------------------.
 // ,-----+  G  |  M  |  P  |  V  |             | / # | . : | ' ! | " ? +-----.
 // |  R  |  S  |  N  |  D  |  B  |             | , ; |  A  |  E  |  I  |  H  |
-// |  X  |  F  |  L  |  C  +-----'-----. ,-----`-----+  U  |  O  |  Y  |  W  |
+// |  X  |  F  |  L  |  C  +-----'-----. ,-----`-----+  U  |  O  |  Y  |  K  |
 // `-----------------------| SYM |  T  | |Space| NAV |-----------------------'
     bindings = <
        &kp G  &kp M  &kp P  &kp V                 &slash_hash  &dot_cln  &sqt_bang  &dqt_ques
@@ -44,7 +46,7 @@ keymap {
 //       ,-----------------------.             ,-----------------------.
 // ,-----+  <  |  >  |  "  |  '  |             |  &  |  :  |  [  |  ]  +-----.
 // |  `  |  -  |  +  |  =  |  @  |             |  |  |  ;  |  {  |  }  |  ?  |
-// |  ~  |  /  |  *  |  %  +-----'-----. ,-----`-----+  $  |  (  |  )  | / \ |
+// |  ~  |  ^  |  *  |  %  +-----'-----. ,-----`-----+  $  |  (  |  )  | / \ |
 // `-----------------------|#####|  #  | |  _  | NUM |-----------------------'
     bindings = <
            &kp LT     &kp GT    &kp DQT      &kp SQT      &kp AMPS  &kp COLON   &kp LBKT  &kp RBKT
@@ -55,16 +57,19 @@ keymap {
     display-name = "SYM";
   };
   navigation_layer {
+// I took a few liberties with the control keys on the left middle
+// finger, since I find C-w, C-a, and C-q more useful than C-m, C-n,
+// and C-l. I figure I can use sticky CTRL or the pinky combo for those.
 //       ,-----------------------.             ,-----------------------.
-// ,-----+     |     |     |     |             |     | PgD | Up  | PgU +-----.
-// |     | ^S  |     |     |     |             |     | Left| Down|Right| Ret |
-// | ^X  | ^F  |     |     +-----'-----. ,-----`-----+ Ctl |Shift| Alt | GUI |
-// `-----------------------| NUM |     | |     |#####|-----------------------'
+// ,-----+ ^G  | ^W  | ^E  | ^V  |             | Ins | PgD | Up  | PgU +-----.
+// | ^R  | ^S  | ^A  | ^D  | ^Z  |             | Home| Left| Down|Right| Ret |
+// | ^X  | ^F  | ^Q  | ^C  +-----'-----. ,-----`-----+ Ctl |Shift| Alt | GUI |
+// `-----------------------| NUM | ^T  | | End |#####|-----------------------'
     bindings = <
-        &trans  &trans  &trans  &trans                 &trans  &kp PG_DN  &kp UP     &kp PG_UP
-&trans  &kp LC(S)  &trans  &trans  &trans                 &trans  &kp LEFT   &kp DOWN   &kp RIGHT  &kp RET
-&kp LC(X)  &kp LC(F)  &trans  &trans                                 &sk RCTRL  &sk RSHFT  &sk LALT   &sk RGUI
-                                &trans &trans   &trans &trans
+           &kp LC(G)  &kp LC(W)  &kp LC(E)  &kp LC(V)       &kp INS   &kp PG_DN  &kp UP     &kp PG_UP
+&kp LC(R)  &kp LC(S)  &kp LC(A)  &kp LC(D)  &kp LC(Z)       &kp HOME  &kp LEFT   &kp DOWN   &kp RIGHT  &kp RET
+&kp LC(X)  &kp LC(F)  &kp LC(Q)  &kp LC(C)                            &sk RCTRL  &sk RSHFT  &sk LALT   &sk RGUI
+                                       &trans &kp LC(T)   &kp END &trans
     >;
     display-name = "NAV";
   };
