@@ -35,7 +35,7 @@ keymap {
     bindings = <
        &kp G  &kp M  &kp P  &kp V                 &slash_hash  &dot_cln  &sqt_bang  &dqt_ques
 &kp R  &kp S  &kp N  &kp D  &kp B                 &com_semi    &kp A     &kp E      &kp I  &kp H
-&kp X  &kp F  &kp L  &kp C                                     &kp U     &kp O      &kp Y  &kp W
+&kp X  &kp F  &kp L  &kp C                                     &kp U     &kp O      &kp Y  &kp K
                             &mo SYM  &kp T   &kp SPACE  &mo NAV
     >;
     display-name = "HDGold";
@@ -49,7 +49,7 @@ keymap {
     bindings = <
            &kp LT     &kp GT    &kp DQT      &kp SQT      &kp AMPS  &kp COLON   &kp LBKT  &kp RBKT
 &kp GRAVE  &kp MINUS  &kp PLUS  &kp EQUAL    &kp AT       &kp PIPE  &kp SEMI    &kp LBRC  &kp RBRC  &kp QMARK
-&kp TILDE  &kp FSLH   &kp STAR  &kp PERCENT                         &kp DOLLAR  &kp LPAR  &kp RPAR  &slashes
+&kp TILDE  &kp CARET  &kp STAR  &kp PERCENT                         &kp DOLLAR  &kp LPAR  &kp RPAR  &slashes
                                 &trans &kp HASH    &kp UNDERSCORE &trans
     >;
     display-name = "SYM";
@@ -57,13 +57,13 @@ keymap {
   navigation_layer {
 //       ,-----------------------.             ,-----------------------.
 // ,-----+     |     |     |     |             |     | PgD | Up  | PgU +-----.
-// |     |     |     |     |     |             |     | Left| Down|Right| Ret |
-// |     |     |     |     +-----'-----. ,-----`-----+ Ctl |Shift| Alt | GUI |
+// |     | ^S  |     |     |     |             |     | Left| Down|Right| Ret |
+// | ^X  | ^F  |     |     +-----'-----. ,-----`-----+ Ctl |Shift| Alt | GUI |
 // `-----------------------| NUM |     | |     |#####|-----------------------'
     bindings = <
         &trans  &trans  &trans  &trans                 &trans  &kp PG_DN  &kp UP     &kp PG_UP
-&trans  &trans  &trans  &trans  &trans                 &trans  &kp LEFT   &kp DOWN   &kp RIGHT  &kp RET
-&trans  &trans  &trans  &trans                                 &sk RCTRL  &sk RSHFT  &sk LALT   &sk RGUI
+&trans  &kp LC(S)  &trans  &trans  &trans                 &trans  &kp LEFT   &kp DOWN   &kp RIGHT  &kp RET
+&kp LC(X)  &kp LC(F)  &trans  &trans                                 &sk RCTRL  &sk RSHFT  &sk LALT   &sk RGUI
                                 &trans &trans   &trans &trans
     >;
     display-name = "NAV";
@@ -170,6 +170,13 @@ combos {
     bindings = <&kp Z>;
     layers = <HD_GOLD>;
   };
+  // Left top ring and pinky mid for W.
+  combo_northwest_wubbley {
+    timeout-ms = <50>;
+    key-positions = <LM4 LT3>;
+    bindings = <&kp W>;
+    layers = <HD_GOLD>;
+  };
   // Vertical combo left pinky for exclamation point, only in symbols layer.
   combo_left_pinky_exclamatiom {
     timeout-ms = <50>;
@@ -177,13 +184,13 @@ combos {
     bindings = <&kp EXCL>;
     layers = <SYM>;
   };
-  // Vertical combo right pinky for K.
-  combo_right_pinky_kay {
-    timeout-ms = <50>;
-    key-positions = <RM4 RB4>;
-    bindings = <&kp K>;
-    layers = <HD_GOLD>;
-  };
+  /* // Vertical combo right pinky for K. */
+  /* combo_right_pinky_kay { */
+  /*   timeout-ms = <50>; */
+  /*   key-positions = <RM4 RB4>; */
+  /*   bindings = <&kp K>; */
+  /*   layers = <HD_GOLD>; */
+  /* }; */
   // Vertical combo left index for J.
   combo_left_index_jay {
     timeout-ms = <50>;
@@ -288,11 +295,17 @@ combos {
     key-positions = <LM4 LM1>;
     bindings = <&kp ESCAPE>;
   };
-  // Left pinky and ring for tab.
+  // Left pinky and middle for tab.
   combo_left_prong_tab {
     timeout-ms = <50>;
     key-positions = <LM4 LM2>;
     bindings = <&kp TAB>;
+  };
+  // Right index and middle in top row for delete.
+  combo_top_poke_delete {
+    timeout-ms = <50>;
+    key-positions = <RT1 RT2>;
+    bindings = <&kp DELETE>;
   };
   // Right ring and pinky uppermost keys for backspace.
   combo_northeast_backspace {
