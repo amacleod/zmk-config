@@ -17,7 +17,6 @@
 
 // TO-DO list:
 // - "smart" semi-layers: smart nav stays in arrows and nav until non-nav pressed, for example
-// - vertical combos for numbers, maybe?
 
 #define DEFAULT 0
 #define HD_NEU  0
