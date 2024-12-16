@@ -113,7 +113,7 @@ behaviors {
     bindings = <&kp FSLH>, <&kp HASH>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
   };
-  dash_slash {
+  dash_slash: morph_hyphen_solidus {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     bindings = <&kp MINUS>, <&kp FSLH>;
