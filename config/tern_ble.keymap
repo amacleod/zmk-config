@@ -62,12 +62,12 @@ keymap {
 // finger, since I find C-w, C-a, and C-q more useful than C-m, C-n,
 // and C-l. I figure I can use sticky CTRL or the pinky combo for those.
 //       ,-----------------------.             ,-----------------------.
-// ,-----+ ^G  | ^W  | ^E  | ^V  |             | Ins | PgD | Up  | PgU +-----.
+// ,-----+ ^G  | ^W  | ^E  | ^V  |             | Ins | PgU | Up  | PgD +-----.
 // | ^R  | ^S  | ^A  | ^D  | ^Z  |             | Home| Left| Down|Right| Ret |
 // | ^X  | ^F  | ^Q  | ^C  +-----'-----. ,-----`-----+ Ctl |Shift| Alt | GUI |
 // `-----------------------| NUM | ^T  | | End |#####|-----------------------'
     bindings = <
-           &kp LC(G)  &kp LC(W)  &kp LC(E)  &kp LC(V)       &kp INS   &kp PG_DN  &kp UP     &kp PG_UP
+           &kp LC(G)  &kp LC(W)  &kp LC(E)  &kp LC(V)       &kp INS   &kp PG_UP  &kp UP     &kp PG_DN
 &kp LC(R)  &kp LC(S)  &kp LC(A)  &kp LC(D)  &kp LC(Z)       &kp HOME  &kp LEFT   &kp DOWN   &kp RIGHT  &kp RET
 &kp LC(X)  &kp LC(F)  &kp LC(Q)  &kp LC(C)                            &sk RCTRL  &sk RSHFT  &sk LALT   &sk RGUI
                                        &trans &kp LC(T)   &kp END &trans
