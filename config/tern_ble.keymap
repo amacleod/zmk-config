@@ -28,15 +28,16 @@ keymap {
   hands_down_layer {
 // mostly Hands Down Gold with adjusted punctuation
 // Combos for letters: RG->W, XR->Z, UOY->Q, VB->J
+// Combos for symbols: ,.->#
 // Plus a bunch of digraph and triple combos.
 //       ,-----------------------.             ,-----------------------.
-// ,-----+  G  |  M  |  P  |  V  |             | / # | . : | ' ! | " ? +-----.
-// |  R  |  S  |  N  |  D  |  B  |             | , ; |  A  |  E  |  I  |  H  |
+// ,-----+  G  |  M  |  P  |  V  |             | , ; | . : | ' ! | " ? +-----.
+// |  R  |  S  |  N  |  D  |  B  |             | - / |  A  |  E  |  I  |  H  |
 // |  X  |  F  |  L  |  C  +-----'-----. ,-----`-----+  U  |  O  |  Y  |  K  |
 // `-----------------------| SYM |  T  | |Space| NAV |-----------------------'
     bindings = <
-       &kp G  &kp M  &kp P  &kp V                 &slash_hash  &dot_cln  &sqt_bang  &dqt_ques
-&kp R  &kp S  &kp N  &kp D  &kp B                 &com_semi    &kp A     &kp E      &kp I  &kp H
+       &kp G  &kp M  &kp P  &kp V                 &com_semi    &dot_cln  &sqt_bang  &dqt_ques
+&kp R  &kp S  &kp N  &kp D  &kp B                 &dash_slash  &kp A     &kp E      &kp I  &kp H
 &kp X  &kp F  &kp L  &kp C                                     &kp U     &kp O      &kp Y  &kp K
                             &mo SYM  &kp T   &kp SPACE  &mo NAV
     >;
@@ -110,6 +111,12 @@ behaviors {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     bindings = <&kp FSLH>, <&kp HASH>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+  };
+  dash_slash {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&kp MINUS>, <&kp FSLH>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
   };
   dot_cln: morph_period_colon {
@@ -190,18 +197,18 @@ combos {
     bindings = <&kp EXCL>;
     layers = <SYM>;
   };
-  /* // Vertical combo right pinky for K. */
-  /* combo_right_pinky_kay { */
-  /*   timeout-ms = <50>; */
-  /*   key-positions = <RM4 RB4>; */
-  /*   bindings = <&kp K>; */
-  /*   layers = <HD_GOLD>; */
-  /* }; */
   // Vertical combo left index for J.
   combo_left_index_jay {
     timeout-ms = <50>;
     key-positions = <LT0 LM0>;
     bindings = <&kp J>;
+    layers = <HD_GOLD>;
+  };
+  // Right top row inner two keys for pound sign.
+  combo_right_northwest_octothorpe {
+    timeout-ms = <50>;
+    key-positions = <RT0 RT1>;
+    bindings = <&kp HASH>;
     layers = <HD_GOLD>;
   };
   // Vertical combo right index for hyphen and plus.
