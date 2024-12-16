@@ -18,8 +18,8 @@
 #include "glam-multigraph.dtsi"
 
 // TODO:
-// - find a place for caret
-// - think about layer access patterns--do I really need to dedicate two thumb buttons to layers, or could I do some clever nesting?
+// - figure out where to put smart shift or caps word
+// - add alt-tab and i3wm shortcuts
 
 / {
 keymap {
@@ -74,14 +74,15 @@ keymap {
     display-name = "NAV";
   };
   numeric_layer {
+// Numeric layer activated conditionally when NAV and SYM are active together.
 //       ,-----------------------.             ,-----------------------.
 // ,-----+     |     |     |     |             |     |     |     |     +-----.
-// |     |     |     |     |     |             |     |     |     |     |     |
+// |  7  |  5  |  3  |  1  |  9  |             |  8  |  0  |  2  |  4  |  6  |
 // |     |     |     |     +-----'-----. ,-----`-----+     |     |     |     |
 // `-----------------------|     |     | |     |     |-----------------------'
     bindings = <
         &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans                 &trans  &trans  &trans  &trans  &trans
+&kp N7  &kp N5  &kp N3  &kp N1  &kp N9                 &kp N8  &kp N0  &kp N2  &kp N4  &kp N6
 &trans  &trans  &trans  &trans                                 &trans  &trans  &trans  &trans
                                 &trans &trans   &trans &trans
     >;
@@ -332,6 +333,14 @@ combos {
   };
   
 }; // end combos
+
+conditional_layers {
+  compatible = "zmk,conditional-layers";
+  numeric_momentary {
+    if-layers = <SYM NAV>;
+    then-layer = <NUM>;
+  };
+}; // end conditional layers
 };
 
 //       ,-----------------------.             ,-----------------------.
