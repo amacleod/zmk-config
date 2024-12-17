@@ -32,10 +32,10 @@ keymap {
 // | Ctrl|  Z  |  X  |  C  |  V  |   |  N  |  M  |  ,  |  .  |  /  |
 // `-----------------| OVL |Space|   | Spc |QWRTY|-----------------'
     bindings = <
- &kp T      &kp Q &kp W &kp E &kp R   &qkp Y &qkp U &qkp I     &qkp O   &qkp P
- &kp LSHIFT &kp A &kp S &kp D &kp F   &qkp H &qkp J &qkp K     &qkp L   &qkp SEMI
- &kp LCTRL  &kp Z &kp X &kp C &kp V   &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
-              &mo OVERLAY &kp SPACE   &qkp SPACE &to QWERTY
+ &kp T      &kp Q &kp W &kp E &kp R        &qkp Y &qkp U &qkp I     &qkp O   &qkp P
+ &kp LSHIFT &kp A &kp S &kp D &kp F        &qkp H &qkp J &qkp K     &qkp L   &qkp SEMI
+ &kp LCTRL  &kp Z &kp X &kp C &tch V    &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
+              &mo OVERLAY &kp SPACE      &qkp SPACE &to QWERTY
     >;
     display-name = "F A C";
   };
@@ -123,6 +123,16 @@ behaviors {
     tapping-term-ms = <200>;
     quick-tap-ms = <100>;
   };
+  // Hold to invoke the tap-followed-by-H macro. For the use case of
+  // sending VVH for Factorio flipping, use a no-op keycode like
+  // K_CANCEL as the tap portion.
+  hmtk: hold_macro_tap_key {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    bindings = <&tfh &kp>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+  };
 }; // end behaviors
 
 macros {
@@ -148,6 +158,34 @@ macros {
       , <&macro_release>
       , <&macro_param_2to1>
       , <&mt MACRO_PLACEHOLDER K_CANCEL>
+      ;
+  };
+  // Tap the first key, but if held then tap again to cancel followed
+  // by a tap of H.
+  // This supposes that the first key is reversible or a toggle, like
+  // the "flip entity" buttons in Factorio.
+  tch: tap_into_cancel_tap_haitch {
+    compatible = "zmk,behavior-macro-one-param";
+    #binding-cells = <1>;
+    bindings
+      = <&macro_param_1to1>
+      , <&kp MACRO_PLACEHOLDER>
+      , <&macro_press>
+      , <&macro_param_1to1>
+      , <&hmtk MACRO_PLACEHOLDER K_CANCEL>
+      , <&macro_pause_for_release>
+      , <&macro_release>
+      , <&macro_param_1to1>
+      , <&hmtk MACRO_PLACEHOLDER K_CANCEL>
+      ;
+  };
+  tfh: tap_followed_by_haitch {
+    compatible = "zmk,behavior-macro-one-param";
+    #binding-cells = <1>;
+    bindings
+      = <&macro_param_1to1>
+      , <&kp MACRO_PLACEHOLDER>
+      , <&kp H>
       ;
   };
 }; // end macros
