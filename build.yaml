@@ -43,3 +43,8 @@ include:
 
   - board: seeeduino_xiao_ble
     shield: tern_ble
+
+  - board: ebyte_e73_2g4m08s1c
+    shield: lotus58_ble_left
+  - board: ebyte_e73_2g4m08s1c
+    shield: lotus58_ble_right
