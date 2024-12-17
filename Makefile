@@ -2,14 +2,16 @@
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
 .PHONY: lily58 lily58_left lily58_right
+.PHONY: lotus58 lotus58_left lotus58_right
 .PHONY: tern hummingbird
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
-.PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
+.PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_lotus58 deploy_tern deploy_weejock deploy_zaphod
 .PHONY: transfer
 
 APP_DIR := $(realpath ../zmk/app)
 BUILD_DIR := ${APP_DIR}/build
+E73_DIR := $(realpath ../zmk-ebyte)
 ZMK_CONFIG_DIR := $(realpath ../zmk-config)
 ZMK_HELPERS_DIR := $(realpath ../zmk-helpers)
 ZMK_AUTO_LAYER_DIR := $(realpath ../zmk-auto-layer)
@@ -69,6 +71,21 @@ lily58_left lily58_right:
 
 deploy_lily58: lily58
 	@echo -n "Put lily58_left in update mode..."
+	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
+	@echo
+	cp -v ${BUILD_DIR}/$^_left/zephyr/zmk.uf2 ${NANO_PATH}/
+	@echo -n "Put lily58_right in update mode..."
+	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
+	@echo
+	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/
+
+lotus58: lotus58_left lotus58_right
+lotus58_left lotus58_right: EXTRA_MODULES += ${E73_DIR}
+lotus58_left lotus58_right:
+	cd ${APP_DIR} && west build -d build/$@ -b ebyte_e73_2g4m08s1c ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+
+deploy_lotus58: lotus58
+	@echo -n "Put lotus58_left in update mode..."
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
 	cp -v ${BUILD_DIR}/$^_left/zephyr/zmk.uf2 ${NANO_PATH}/
