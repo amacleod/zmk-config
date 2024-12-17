@@ -2,23 +2,28 @@
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
 .PHONY: lily58 lily58_left lily58_right
-.PHONY: lotus58 lotus58_left lotus58_right
+.PHONY: lotus58 lotus58_ble lotus58_ble_left lotus58_ble_right
 .PHONY: tern hummingbird
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
 .PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_lotus58 deploy_tern deploy_weejock deploy_zaphod
 .PHONY: transfer
 
+# Basic paths for ZMK and my own config.
 APP_DIR := $(realpath ../zmk/app)
 BUILD_DIR := ${APP_DIR}/build
-E73_DIR := $(realpath ../zmk-ebyte)
 ZMK_CONFIG_DIR := $(realpath ../zmk-config)
+# Third party ZMK module paths.
 ZMK_HELPERS_DIR := $(realpath ../zmk-helpers)
 ZMK_AUTO_LAYER_DIR := $(realpath ../zmk-auto-layer)
 ZMK_TRI_STATE_DIR := $(realpath ../zmk-tri-state)
-ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
-WEEJOCK_CONFIG_DIR := $(realpath ../weejock-zmk)
+# Microcontroller-specific module paths.
+E73_DIR := $(realpath ../zmk-ebyte)
+# Keyboard-specific config directory paths.
+LOTUS58_BLE_CONFIG_DIR := $(realpath ../lotus58-ble-zmk)
 TERN_CONFIG_DIR := $(realpath ../tern-zmk)
+WEEJOCK_CONFIG_DIR := $(realpath ../weejock-zmk)
+ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
 
 EXTRA_MODULES := ${ZMK_HELPERS_DIR}
 
@@ -28,6 +33,7 @@ SPACE := $(EMPTY) $(EMPTY)
 
 XIAO_PATH := /media/${USER}/XIAO-SENSE
 NANO_PATH := /media/${USER}/NICENANO
+UF2B_PATH := /media/${USER}/UF2BOOT
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
 KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right tern_ble weejock zaphod_lite
@@ -79,20 +85,21 @@ deploy_lily58: lily58
 	@echo
 	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/
 
-lotus58: lotus58_left lotus58_right
-lotus58_left lotus58_right: EXTRA_MODULES += ${E73_DIR}
-lotus58_left lotus58_right:
-	cd ${APP_DIR} && west build -d build/$@ -b ebyte_e73_2g4m08s1c ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+lotus58: lotus58_ble
+lotus58_ble: lotus58_ble_left lotus58_ble_right
+lotus58_ble_left lotus58_ble_right: EXTRA_MODULES += ${E73_DIR} ${LOTUS58_BLE_CONFIG_DIR}
+lotus58_ble_left lotus58_ble_right:
+	cd ${APP_DIR} && west build -d build/$@ -b ebyte_e73_2g4m08s1c ${SNIPPETS} -t menuconfig -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
-deploy_lotus58: lotus58
-	@echo -n "Put lotus58_left in update mode..."
+deploy_lotus58: lotus58_ble
+	@echo -n "Put lotus58_ble_left in update mode..."
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
-	cp -v ${BUILD_DIR}/$^_left/zephyr/zmk.uf2 ${NANO_PATH}/
-	@echo -n "Put lily58_right in update mode..."
+	cp -v ${BUILD_DIR}/$^_left/zephyr/zmk.uf2 ${UF2B_PATH}/
+	@echo -n "Put lotus58_ble_right in update mode..."
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
-	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/
+	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${UF2B_PATH}/
 
 tern: tern_ble
 tern_ble: EXTRA_MODULES += ${TERN_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
