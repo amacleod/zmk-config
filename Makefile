@@ -31,7 +31,7 @@ SPACE := $(EMPTY) $(EMPTY)
 
 XIAO_PATH := /media/${USER}/XIAO-SENSE
 NANO_PATH := /media/${USER}/NICENANO
-UF2B_PATH := /media/${USER}/UF2BOOT
+NRF52_PATH := /media/${USER}/NRF52BOOT
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
 KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right lotus58_ble_left lotus58_ble_right tern_ble weejock zaphod_lite
@@ -93,11 +93,11 @@ deploy_lotus58: lotus58_ble
 	@echo -n "Put lotus58_ble_left in update mode..."
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
-	cp -v ${BUILD_DIR}/$^_left/zephyr/zmk.uf2 ${UF2B_PATH}/
+	cp -v ${BUILD_DIR}/$^_left/zephyr/zmk.uf2 ${NRF52_PATH}/
 	@echo -n "Put lotus58_ble_right in update mode..."
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
-	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${UF2B_PATH}/
+	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NRF52_PATH}/
 
 tern: tern_ble
 tern_ble: EXTRA_MODULES += ${TERN_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
