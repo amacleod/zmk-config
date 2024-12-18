@@ -14,9 +14,6 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: zmk-ebyte
-      remote: amacleod
-      revision: main
     - name: zmk-helpers
       remote: urob
       revision: main

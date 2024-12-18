@@ -17,8 +17,6 @@ ZMK_CONFIG_DIR := $(realpath ../zmk-config)
 ZMK_HELPERS_DIR := $(realpath ../zmk-helpers)
 ZMK_AUTO_LAYER_DIR := $(realpath ../zmk-auto-layer)
 ZMK_TRI_STATE_DIR := $(realpath ../zmk-tri-state)
-# Microcontroller-specific module paths.
-E73_DIR := $(realpath ../zmk-ebyte)
 # Keyboard-specific config directory paths.
 LOTUS58_BLE_CONFIG_DIR := $(realpath ../lotus58-ble-zmk)
 TERN_CONFIG_DIR := $(realpath ../tern-zmk)
@@ -87,9 +85,9 @@ deploy_lily58: lily58
 
 lotus58: lotus58_ble
 lotus58_ble: lotus58_ble_left lotus58_ble_right
-lotus58_ble_left lotus58_ble_right: EXTRA_MODULES += ${E73_DIR} ${LOTUS58_BLE_CONFIG_DIR}
+lotus58_ble_left lotus58_ble_right: EXTRA_MODULES += ${LOTUS58_BLE_CONFIG_DIR}
 lotus58_ble_left lotus58_ble_right:
-	cd ${APP_DIR} && west build -d build/$@ -b ebyte_e73_2g4m08s1c ${SNIPPETS} -t menuconfig -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b $@ ${SNIPPETS} -t menuconfig -- -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_lotus58: lotus58_ble
 	@echo -n "Put lotus58_ble_left in update mode..."
