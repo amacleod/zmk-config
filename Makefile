@@ -54,7 +54,7 @@ deploy_corne: corne
 	cp -v ${BUILD_DIR}/corne_right/zephyr/zmk.uf2 ${NANO_PATH}/
 
 ferris: cradio_left cradio_right
-cradio_left: SNIPPETS = -S zmk-usb-logging
+cradio_left:
 cradio_left cradio_right:
 	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
@@ -86,6 +86,7 @@ deploy_lily58: lily58
 lotus58: lotus58_ble
 lotus58_ble: lotus58_ble_left lotus58_ble_right
 lotus58_ble_left lotus58_ble_right: EXTRA_MODULES += ${LOTUS58_BLE_CONFIG_DIR}
+lotus58_ble_left lotus58_ble_right: SNIPPETS = -S zmk-usb-logging
 lotus58_ble_left lotus58_ble_right:
 	cd ${APP_DIR} && west build -d build/$@ -b $@ ${SNIPPETS} -- -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
