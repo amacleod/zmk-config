@@ -34,7 +34,7 @@ NANO_PATH := /media/${USER}/NICENANO
 UF2B_PATH := /media/${USER}/UF2BOOT
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
-KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right tern_ble weejock zaphod_lite
+KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right lotus58_ble_left lotus58_ble_right tern_ble weejock zaphod_lite
 
 all: corne ferris weejock zaphod
 
