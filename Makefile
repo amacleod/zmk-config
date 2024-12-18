@@ -87,7 +87,7 @@ lotus58: lotus58_ble
 lotus58_ble: lotus58_ble_left lotus58_ble_right
 lotus58_ble_left lotus58_ble_right: EXTRA_MODULES += ${LOTUS58_BLE_CONFIG_DIR}
 lotus58_ble_left lotus58_ble_right:
-	cd ${APP_DIR} && west build -d build/$@ -b $@ ${SNIPPETS} -t menuconfig -- -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b $@ ${SNIPPETS} -- -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_lotus58: lotus58_ble
 	@echo -n "Put lotus58_ble_left in update mode..."
