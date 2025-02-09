@@ -35,7 +35,7 @@ keymap {
  &kp T      &kp Q &kp W &kp E &kp R        &qkp Y &qkp U &qkp I     &qkp O   &qkp P
  &kp LSHIFT &kp A &kp S &kp D &kp F        &qkp H &qkp J &qkp K     &qkp L   &qkp SEMI
  &kp LCTRL  &kp Z &kp X &kp C &tch V    &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
-              &mlt LALT OVERLAY &kp SPACE      &qkp SPACE &to QWERTY
+              &mo OVERLAY &kp SPACE      &qkp SPACE &to QWERTY
     >;
     display-name = "F A C";
   };
