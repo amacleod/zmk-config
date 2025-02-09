@@ -35,7 +35,7 @@ keymap {
  &kp T      &kp Q &kp W &kp E &kp R        &qkp Y &qkp U &qkp I     &qkp O   &qkp P
  &kp LSHIFT &kp A &kp S &kp D &kp F        &qkp H &qkp J &qkp K     &qkp L   &qkp SEMI
  &kp LCTRL  &kp Z &kp X &kp C &tch V    &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
-              &mo OVERLAY &kp SPACE      &qkp SPACE &to QWERTY
+              &mlt LALT OVERLAY &kp SPACE      &qkp SPACE &to QWERTY
     >;
     display-name = "F A C";
   };
@@ -122,6 +122,18 @@ behaviors {
     flavor = "tap-preferred";
     tapping-term-ms = <200>;
     quick-tap-ms = <100>;
+  };
+  // Hold a key while waiting for a possible tap of a key within the
+  // layer specified in the tap part. It has a high tapping term so
+  // that you can hold the key for a couple of seconds and still
+  // decide to hit a layer key.
+  mlt: momentary_layer_tap {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    bindings = <&kp &mo>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <2500000>;
+    hold-while-undecided;
   };
   // Hold to invoke the tap-followed-by-H macro. For the use case of
   // sending VVH for Factorio flipping, use a no-op keycode like
