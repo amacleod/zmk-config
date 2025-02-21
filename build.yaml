@@ -44,5 +44,5 @@ include:
   - board: seeeduino_xiao_ble
     shield: tern_ble
 
-  - board: waveshare_rp2040_zero
+  - board: rp2040_zero
     shield: cheapino
