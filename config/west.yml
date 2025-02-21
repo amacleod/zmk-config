@@ -7,12 +7,14 @@ manifest:
       url-base: https://github.com/urob
     - name: dhruvinsh
       url-base: https://github.com/dhruvinsh
+    - name: saixos
+      url-base: https://github.com/Nick-Munnich
     - name: amacleod
       url-base: https://github.com/amacleod
   projects:
     - name: zmk
-      remote: zmkfirmware
-      revision: main
+      remote: saixos
+      revision: rp2040zero
       import: app/west.yml
     - name: zmk-helpers
       remote: urob
@@ -30,6 +32,9 @@ manifest:
       remote: amacleod
       revision: main
     - name: tern-zmk
+      remote: amacleod
+      revision: main
+    - name: cheapino-zmk
       remote: amacleod
       revision: main
   self:
