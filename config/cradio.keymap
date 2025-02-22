@@ -41,12 +41,12 @@ keymap {
   };
 
   overlay_layer {
-    bindings = <
 // ,-----------------------------.   ,-----------------------------.
 // |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
 // |Enter|Alt-A| KP+ |Alt-T|F-Lok|   |XXXXX|XXXXX|XXXXX|XXXXX|XXXXX|
 // | Alt | ^Y  | KP- |Alt-C|M-g/r|   |XXXXX|XXXXX|XXXXX|XXXXX|XXXXX|
 // `-----------------|#####|     |   |Base |QWRTY|-----------------'
+    bindings = <
  &kp N1   &kp N2    &kp N3       &kp N4    &kp N5             &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
  &kp RET  &kp LA(A) &kp KP_PLUS  &kp LA(T) &kt F              &none  &none  &none  &none  &none
  &kp LALT &kp LC(Y) &kp KP_MINUS &kp LA(C) &tth LA(G) LA(R)   &none  &none  &none  &none  &none
