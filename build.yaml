@@ -46,3 +46,4 @@ include:
 
   - board: rp2040_zero
     shield: cheapino
+    snippet: studio-rpc-usb-uart
