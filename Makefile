@@ -36,7 +36,7 @@ KBD_PARTS := cheapino corne_left corne_right cradio_left cradio_right lily58_lef
 all: cheapino corne ferris weejock tern zaphod
 
 cheapino: EXTRA_MODULES += ${CHEAPINO_CONFIG_DIR}
-cheapino: SNIPPETS += -S zmk-usb-logging studio-usb-uart
+cheapino: SNIPPETS += -S zmk-usb-logging -S studio-usb-uart
 cheapino: CMAKEFLAGS += -DCONFIG_ZMK_STUDIO=y
 cheapino:
 	cd ${APP_DIR} && west build -d build/$@ -b rp2040_zero ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
