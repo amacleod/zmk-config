@@ -5,6 +5,7 @@
 .PHONY: lily58 lily58_left lily58_right
 .PHONY: tern hummingbird
 .PHONY: weejock
+.PHONY: xiaotest tester_xiao
 .PHONY: zaphod zaphod_lite
 .PHONY: deploy_cheapino deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
 .PHONY: transfer
@@ -106,6 +107,10 @@ deploy_tern: tern
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
 weejock:
 	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -S studio-rpc-usb-uart -- -DSHIELD=$@ -DCONFIG_ZMK_STUDIO=y -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+
+xiaotest: tester_xiao
+tester_xiao:
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_rp2040 -S studio-rpc-usb-uart -- -DSHIELD=$@ -DCONFIG_ZMK_STUDIO=y -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 zaphod: zaphod_lite
 zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
