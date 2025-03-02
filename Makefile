@@ -78,6 +78,11 @@ deploy_ferris: ferris
 	@echo
 	cp -v ${BUILD_DIR}/cradio_right/zephyr/zmk.uf2 ${NANO_PATH}/
 
+hummingbird: SNIPPETS += -S studio-rpc-usb-uart
+hummingbird: CMAKEFLAGS += -DCONFIG_ZMK_STUDIO=y
+hummingbird:
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_rp2040 ${SNIPPETS} -- -DSHIELD="$@" ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+
 lily58: lily58_left lily58_right
 lily58_left: # SNIPPETS = -S zmk-usb-logging
 lily58_left lily58_right:
