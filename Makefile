@@ -32,7 +32,7 @@ NANO_PATH := /media/${USER}/NICENANO
 ZERO_PATH := /media/${USER}/RPI-RP2
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
-KBD_PARTS := cheapino corne_left corne_right cradio_left cradio_right lily58_left lily58_right tern_ble weejock zaphod_lite
+KBD_PARTS := cheapino corne_left corne_right cradio_left cradio_right hummingbird lily58_left lily58_right tern_ble tester_xiao weejock zaphod_lite
 
 all: cheapino corne ferris weejock tern zaphod
 
