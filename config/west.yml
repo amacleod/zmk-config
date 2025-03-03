@@ -13,8 +13,8 @@ manifest:
       url-base: https://github.com/amacleod
   projects:
     - name: zmk
-      remote: saixos
-      revision: rp2040zero
+      remote: amacleod
+      revision: xiao-tester-physical-layout
       import: app/west.yml
     - name: zmk-helpers
       remote: urob
