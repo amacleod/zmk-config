@@ -3,6 +3,7 @@
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
 .PHONY: lily58 lily58_left lily58_right
+.PHONY: promicrotest tester_pro_micro
 .PHONY: tern hummingbird
 .PHONY: weejock
 .PHONY: xiaotest tester_xiao
@@ -97,6 +98,12 @@ deploy_lily58: lily58
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
 	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/
+
+promicrotest: tester_pro_micro
+tester_pro_micro: SNIPPETS += -S studio-rpc-usb-uart
+tester_pro_micro: CMAKEFLAGS += -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_STUDIO_LOCKING=n
+tester_pro_micro:
+	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 tern: tern_ble
 tern_ble: EXTRA_MODULES += ${TERN_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
