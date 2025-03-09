@@ -29,7 +29,7 @@ NANO_PATH := /media/${USER}/NICENANO
 ZERO_PATH := /media/${USER}/RPI-RP2
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
-KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right tern_ble weejock zaphod_lite
+KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right promicro_cradio_left promicro_cradio_right tern_ble weejock zaphod_lite
 
 all: corne ferris weejock tern zaphod
 
@@ -52,6 +52,7 @@ ferris: cradio_left cradio_right
 cradio_left: SNIPPETS = -S zmk-usb-logging
 cradio_left cradio_right:
 	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/promicro_$@ -b sparkfun_pro_micro_rp2040 ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_ferris: ferris
 	@echo -n "Put ferris_left in update mode..."
