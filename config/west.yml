@@ -13,8 +13,8 @@ manifest:
       url-base: https://github.com/amacleod
   projects:
     - name: zmk
-      remote: saixos
-      revision: rp2040zero
+      remote: zmkfirmware
+      revision: main
       import: app/west.yml
     - name: zmk-helpers
       remote: urob
@@ -32,9 +32,6 @@ manifest:
       remote: amacleod
       revision: main
     - name: tern-zmk
-      remote: amacleod
-      revision: main
-    - name: cheapino-zmk
       remote: amacleod
       revision: main
   self:

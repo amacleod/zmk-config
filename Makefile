@@ -1,12 +1,11 @@
 .PHONY: clean all
-.PHONY: cheapino
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
 .PHONY: lily58 lily58_left lily58_right
 .PHONY: tern hummingbird
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
-.PHONY: deploy_cheapino deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
+.PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
 .PHONY: transfer
 
 APP_DIR := $(realpath ../zmk/app)
@@ -18,7 +17,6 @@ ZMK_TRI_STATE_DIR := $(realpath ../zmk-tri-state)
 ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
 WEEJOCK_CONFIG_DIR := $(realpath ../weejock-zmk)
 TERN_CONFIG_DIR := $(realpath ../tern-zmk)
-CHEAPINO_CONFIG_DIR := $(realpath ../cheapino-zmk)
 
 EXTRA_MODULES := ${ZMK_HELPERS_DIR}
 
@@ -31,21 +29,9 @@ NANO_PATH := /media/${USER}/NICENANO
 ZERO_PATH := /media/${USER}/RPI-RP2
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
-KBD_PARTS := cheapino corne_left corne_right cradio_left cradio_right lily58_left lily58_right tern_ble weejock zaphod_lite
+KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right tern_ble weejock zaphod_lite
 
-all: cheapino corne ferris weejock tern zaphod
-
-cheapino: EXTRA_MODULES += ${CHEAPINO_CONFIG_DIR}
-cheapino: SNIPPETS += -S studio-rpc-usb-uart
-cheapino: CMAKEFLAGS += -DCONFIG_ZMK_STUDIO=y
-cheapino:
-	cd ${APP_DIR} && west build -d build/$@ -b rp2040_zero ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
-
-deploy_cheapino: cheapino
-	@echo -n "Put cheapino in update mode..."
-	@until [ -d ${ZERO_PATH} ]; do sleep 1s; done
-	@echo
-	cp -v ${BUILD_DIR}/zaphod_lite/zephyr/zmk.uf2 ${ZERO_PATH}/
+all: corne ferris weejock tern zaphod
 
 corne: corne_left corne_right
 	ls -l ${BUILD_DIR}/corne_*/zephyr/zmk.uf2
