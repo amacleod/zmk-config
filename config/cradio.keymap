@@ -12,9 +12,9 @@
 
 #include "glam-util.dtsi"
 
-#define FACTORY 0
-#define OVERLAY 1
-#define QWERTY  2
+#define COLEMAK 0
+#define QWERTY  1
+#define HRMODS  2
 #define KEEBCTL 3
 
 #define UNUSED 0
@@ -25,49 +25,44 @@
 keymap {
   compatible = "zmk,keymap";
 
-  factorio_layer {
+  colemak_dh_layer {
 // ,-----------------------------.   ,-----------------------------.
-// |  T  |  Q  |  W  |  E  |  R  |   |  Y  |  U  |  I  |  O  |  P  |
-// |Shift|  A  |  S  |  D  |  F  |   |  H  |  J  |  K  |  L  |  ;  |
-// | Ctrl|  Z  |  X  |  C  |  V  |   |  N  |  M  |  ,  |  .  |  /  |
-// `-----------------| OVL |Space|   |Space|QWRTY|-----------------'
+// |  Q  |  W  |  F  |  P  |  B  |   |  J  |  L  |  U  |  Y  |  '  |
+// |  A  |  R  |  S  |  T  |  G  |   |  M  |  N  |  E  |  I  |  O  |
+// |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H  |  ,  |  .  |  /  |
+// `-----------------| Mods|Shift|   |Space|QWRTY|-----------------'
     bindings = <
- &kp T      &kp Q &kp W &kp E &kp R        &qkp Y &qkp U &qkp I     &qkp O   &qkp P
- &kp LSHIFT &kp A &kp S &kp D &kp F        &qkp H &qkp J &qkp K     &qkp L   &qkp SEMI
- &kp LCTRL  &kp Z &kp X &kp C &tch V    &qkp N &qkp M &qkp COMMA &qkp DOT &qkp FSLH
-              &mo OVERLAY &kp SPACE      &qkp SPACE &to QWERTY
+  &kp Q   &kp W   &kp F   &kp P   &kp B     &kp J  &kp L   &kp U     &kp Y   &kp SQT
+  &kp A   &kp R   &kp S   &kp T   &kp G     &kp M  &kp N   &kp E     &kp I   &kp O
+  &kp Z   &kp X   &kp C   &kp D   &kp V     &kp K  &kp H   &kp COMMA &kp DOT &kp FSLH
+                   &mo HRMODS &kp LSHIFT   &kp SPACE &to QWERTY
     >;
-    display-name = "F A C";
+    display-name = "Clmk-DH";
   };
 
-  overlay_layer {
-// ,-----------------------------.   ,-----------------------------.
-// |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
-// |Enter|Alt-A| KP+ |Alt-T|F-Lok|   |XXXXX|XXXXX|XXXXX|XXXXX|XXXXX|
-// | Alt | ^Y  | KP- |Alt-C|M-g/r|   |XXXXX|XXXXX|XXXXX|XXXXX|XXXXX|
-// `-----------------|#####|     |   |Base |QWRTY|-----------------'
-    bindings = <
- &kp N1   &kp N2    &kp N3       &kp N4    &kp N5             &kp N6 &kp N7 &kp N8 &kp N9 &kp N0
- &kp RET  &kp LA(A) &kp KP_PLUS  &kp LA(T) &kt F              &none  &none  &none  &none  &none
- &kp LALT &kp LC(Y) &kp KP_MINUS &kp LA(C) &tth LA(G) LA(R)   &none  &none  &none  &none  &none
-                                  &trans &trans             &trans &to QWERTY
-    >;
-    display-name = "T O R Y";
-  };
-
-    qwerty_layer {
+  qwerty_layer {
 // ,-----------------------------.   ,-----------------------------.
 // |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |
 // |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  |  ;  |
 // |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  |
-// `-----------------| Esc |Shift|   |Space|#####|-----------------'
+// `-----------------| Esc |Shift|   |Space|Colmk|-----------------'
     bindings = <
   &kp Q   &kp W   &kp E   &kp R   &kp T     &kp Y  &kp U   &kp I     &kp O   &kp P
   &kp A   &kp S   &kp D   &kp F   &kp G     &kp H  &kp J   &kp K     &kp L   &kp SEMI
   &kp Z   &kp X   &kp C   &kp V   &kp B     &kp N  &kp M   &kp COMMA &kp DOT &kp FSLH
-                      &kp ESC &kp LSHIFT   &kp SPACE &tog QWERTY
+                   &mo HRMODS &kp LSHIFT   &kp SPACE &to COLEMAK
     >;
     display-name = "QWERTY";
+  };
+
+  home_row_mods_layer {
+    bindings = <
+  &trans        &trans       &trans      &trans      &trans       &trans &trans      &trans      &trans       &trans
+  &hmt LSHIFT 0 &hmt LCTRL 0 &hmt LALT 0 &hmt LGUI 0 &trans       &trans &hmt RGUI 0 &hmt LALT 0 &hmt LCTRL 0 &hmt RSHIFT 0
+  &trans        &trans       &trans      &trans      &trans       &trans &trans      &trans      &trans       &trans
+                                              &trans &trans       &trans &trans
+    >;
+    display-name = "Mods";
   };
 
   keyboard_control_layer {
@@ -89,10 +84,6 @@ keymap {
 combos {
   compatible = "zmk,combos";
 
-#include "glam-factorio-combos.dtsi"
-
-#include "glam-sym-nav-num-combos.dtsi"
-
   // All four thumb keys for keyboard control layer.
   combo_thumbs_keyboard_control {
     timeout-ms = <50>;
@@ -110,95 +101,15 @@ combos {
 }; // end combos
 
 behaviors {
-  // Hold tap where the tap is a sticky layer, kind of the converse of
-  // a layer-tap. This has a short tapping term since it is meant for
-  // the Factorio layer's "hold to pick up from ground (F), tap for
-  // sticky overlay" binding, and I do not want to have to wait too
-  // terribly long for stuff to start getting picked up.
-  slt: sticky_layer_tap {
+  hmt: homerow_mod_transparent {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
-    bindings = <&kp &sl>;
-    flavor = "tap-preferred";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <100>;
-  };
-  // Hold a key while waiting for a possible tap of a key within the
-  // layer specified in the tap part. It has a high tapping term so
-  // that you can hold the key for a couple of seconds and still
-  // decide to hit a layer key.
-  mlt: momentary_layer_tap {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    bindings = <&kp &mo>;
-    flavor = "tap-preferred";
-    tapping-term-ms = <2500000>;
-    hold-while-undecided;
-  };
-  // Hold to invoke the tap-followed-by-H macro. For the use case of
-  // sending VVH for Factorio flipping, use a no-op keycode like
-  // K_CANCEL as the tap portion.
-  hmtk: hold_macro_tap_key {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    bindings = <&tfh &kp>;
-    flavor = "tap-preferred";
+    bindings = <&kp>, <&trans>;
+    flavor = "balanced";
     tapping-term-ms = <200>;
   };
 }; // end behaviors
 
 macros {
-  qkp: qwerty_keypress {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings
-      = <&to QWERTY>
-      , <&macro_param_1to1>
-      , <&kp MACRO_PLACEHOLDER>
-      ;
-  };
-  tth: tap_into_hold {
-    compatible = "zmk,behavior-macro-two-param";
-    #binding-cells = <2>;
-    bindings
-      = <&macro_param_1to1>
-      , <&kp MACRO_PLACEHOLDER>
-      , <&macro_press>
-      , <&macro_param_2to1>
-      , <&mt MACRO_PLACEHOLDER K_CANCEL>
-      , <&macro_pause_for_release>
-      , <&macro_release>
-      , <&macro_param_2to1>
-      , <&mt MACRO_PLACEHOLDER K_CANCEL>
-      ;
-  };
-  // Tap the first key, but if held then tap again to cancel followed
-  // by a tap of H.
-  // This supposes that the first key is reversible or a toggle, like
-  // the "flip entity" buttons in Factorio.
-  tch: tap_into_cancel_tap_haitch {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings
-      = <&macro_param_1to1>
-      , <&kp MACRO_PLACEHOLDER>
-      , <&macro_press>
-      , <&macro_param_1to1>
-      , <&hmtk MACRO_PLACEHOLDER K_CANCEL>
-      , <&macro_pause_for_release>
-      , <&macro_release>
-      , <&macro_param_1to1>
-      , <&hmtk MACRO_PLACEHOLDER K_CANCEL>
-      ;
-  };
-  tfh: tap_followed_by_haitch {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings
-      = <&macro_param_1to1>
-      , <&kp MACRO_PLACEHOLDER>
-      , <&kp H>
-      ;
-  };
 }; // end macros
 };
