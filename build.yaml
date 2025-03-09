@@ -43,3 +43,6 @@ include:
 
   - board: seeeduino_xiao_ble
     shield: tern_ble
+
+  - board: sparkfun_pro_micro_rp2040
+    shield: cradio_left
