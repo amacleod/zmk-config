@@ -58,7 +58,7 @@ keymap {
   home_row_mods_layer {
     bindings = <
   &trans        &trans       &trans      &trans      &trans       &trans &trans      &trans      &trans       &trans
-  &hmt LSHIFT 0 &hmt LCTRL 0 &hmt LALT 0 &hmt LGUI 0 &trans       &trans &hmt RGUI 0 &hmt LALT 0 &hmt LCTRL 0 &hmt RSHIFT 0
+  &hmt LSHIFT 0 &hmt LCTRL 0 &hmt LALT 0 &hmt LGUI 0 &trans       &trans &trans      &trans      &trans       &trans
   &trans        &trans       &trans      &trans      &trans       &trans &trans      &trans      &trans       &trans
                                               &trans &trans       &trans &trans
     >;
