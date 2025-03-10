@@ -52,7 +52,7 @@ ferris: cradio_left cradio_right
 cradio_left: SNIPPETS = -S zmk-usb-logging
 cradio_left cradio_right:
 	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
-	cd ${APP_DIR} && west build -d build/promicro_$@ -b sparkfun_pro_micro_rp2040 ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/promicro_$@ -b sparkfun_pro_micro_rp2040 ${SNIPPETS} -- -DSHIELD=$@ -DCONFIG_MAIN_STACK_SIZE=4096 -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_ferris: ferris
 	@echo -n "Put ferris_left in update mode..."

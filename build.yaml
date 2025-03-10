@@ -46,3 +46,4 @@ include:
 
   - board: sparkfun_pro_micro_rp2040
     shield: cradio_left
+    cmake-args: -DCONFIG_MAIN_STACK_SIZE=4096
