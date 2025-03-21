@@ -8,7 +8,7 @@ manifest:
     - name: dhruvinsh
       url-base: https://github.com/dhruvinsh
     - name: saixos
-      url-base: https://github.com/Nick-Munnich
+      url-base: https://github.com/nmunnich
     - name: amacleod
       url-base: https://github.com/amacleod
   projects:
