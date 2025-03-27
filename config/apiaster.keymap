@@ -23,6 +23,6 @@
                          &kp LCTRL &kp LALT &kp SPACE   &kp SPACE &kp RGUI &kp RCTRL
       >;
       display-name = "QWERTY";
-    }
+    };
   };
 };
