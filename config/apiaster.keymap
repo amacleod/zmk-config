@@ -80,15 +80,15 @@
 //       ,-----------------------------.               ,-----------------------------.
 //       | BT1 | BT2 | BT3 | BT4 | BT5 |               |     |     |     |     |     |
 // ,-----|     |     |     |     | BLE |               |     |     |     |     |     |-----.
-// |ClCur|     |     |     |     | USB |               |     |     |     |     |     |     |
-// | DFU |     |     |     |     |     |-----.   ,-----|     |     |     |     |     | DFU |
+// |     |     |     |     |     | USB |               |     |     |     |     |     |     |
+// |     |     |     |     |ClCur| DFU |-----.   ,-----| DFU |     |     |     |     | DFU |
 // `-----------------------|     |     | Exit|   |Exit |     |     |-----------------------'
 //                         `-----------------'   `-----------------'
       bindings = <
        &btp 0  &btp 1  &btp 2  &btp 3  &btp 4                &none &none &none &none &none
        &none   &none   &none   &none   &out OUT_BLE          &none &none &none &none &none
-&btcc  &none   &none   &none   &none   &out OUT_USB          &none &none &none &none &none &none
-&bootloader &none &none &none  &none   &none                 &none &none &none &none &none &bootloader
+&none  &none   &none   &none   &none   &out OUT_USB          &none &none &none &none &none &none
+&none  &none   &none   &none   &btcc   &bootloader           &bootloader &none &none &none &none &none
                            &none &none &tog KEEBCTL     &tog KEEBCTL &none &none
       >;
       display-name = "KBDCTL";
@@ -96,15 +96,18 @@
   };
 
   combos {
+    compatible = "zmk,combos";
+
 //     0  1  2  3  4          5  6  7  8  9
 //    10 11 12 13 14         15 16 17 18 19
 // 20 21 22 23 24 25         26 27 28 29 30 31
 // 32 33 34 35 36 37         38 39 40 41 42 43
 //             44 45 46   47 48 49
+
     combo_outers_keyboard_control {
       timeout-ms = <50>;
       key-positions = <20 31 32 43>;
-      bindings = <&tog KEEBCTL>;
+      bindings = <&kp Z>;
     };
   };
 };
