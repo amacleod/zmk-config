@@ -1,11 +1,12 @@
 .PHONY: clean all
+.PHONY: apiaster apiaster_left apiaster_right
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
 .PHONY: lily58 lily58_left lily58_right
 .PHONY: tern hummingbird
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
-.PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
+.PHONY: deploy_apiaster deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
 .PHONY: transfer
 
 APP_DIR := $(realpath ../zmk/app)
@@ -17,6 +18,7 @@ ZMK_TRI_STATE_DIR := $(realpath ../zmk-tri-state)
 ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
 WEEJOCK_CONFIG_DIR := $(realpath ../weejock-zmk)
 TERN_CONFIG_DIR := $(realpath ../tern-zmk)
+APIASTER_CONFIG_DIR := $(realpath ../zmk-apiaster-module)
 
 EXTRA_MODULES := ${ZMK_HELPERS_DIR}
 
@@ -29,9 +31,22 @@ NANO_PATH := /media/${USER}/NICENANO
 ZERO_PATH := /media/${USER}/RPI-RP2
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
-KBD_PARTS := corne_left corne_right cradio_left cradio_right lily58_left lily58_right promicro_cradio_left promicro_cradio_right tern_ble weejock zaphod_lite
+KBD_PARTS := apiaster_left apiaster_right \
+	corne_left corne_right \
+	cradio_left cradio_right \
+	lily58_left lily58_right \
+	promicro_cradio_left promicro_cradio_right \
+	tern_ble \
+	weejock \
+	zaphod_lite
 
-all: corne ferris weejock tern zaphod
+all: apiaster corne ferris weejock tern zaphod
+
+apiaster: apiaster_left apiaster_right
+	ls -l ${BUILD_DIR}/apiaster_*/zephyr/zmk.uf2
+apiaster_left apiaster_right: EXTRA_MODULES += ${APIASTER_CONFIG_DIR}
+apiaster_left apiaster_right:
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 corne: corne_left corne_right
 	ls -l ${BUILD_DIR}/corne_*/zephyr/zmk.uf2
