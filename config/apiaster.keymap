@@ -107,7 +107,7 @@
     combo_outers_keyboard_control {
       timeout-ms = <50>;
       key-positions = <20 31 32 43>;
-      bindings = <&kp Z>;
+      bindings = <&tog KEEBCTL>;
     };
   };
 };
