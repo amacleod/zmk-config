@@ -44,6 +44,7 @@ all: apiaster corne ferris weejock tern zaphod
 
 apiaster: apiaster_left apiaster_right
 	ls -l ${BUILD_DIR}/apiaster_*/zephyr/zmk.uf2
+apiaster_left: SNIPPETS = -S zmk-usb-logging
 apiaster_left apiaster_right: EXTRA_MODULES += ${APIASTER_CONFIG_DIR}
 apiaster_left apiaster_right:
 	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
