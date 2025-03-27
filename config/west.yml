@@ -34,5 +34,8 @@ manifest:
     - name: tern-zmk
       remote: amacleod
       revision: main
+    - name: zmk-apiaster-module
+      remote: saixos
+      revision: main
   self:
     path: config
