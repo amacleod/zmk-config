@@ -1,10 +1,12 @@
 /*
- * Copyright (c) 2024 Allister MacLeod
+ * Copyright (c) 2024-2025 Allister MacLeod
  *
  * SPDX-License-Identifier: MIT
  */
 
 // This file is meant to be included inside a `combos` block.
+// These combos depend on the symbol GAMING being defined with the
+// value of the gaming layer where they are to be used.
 
 // combos {
 
@@ -13,140 +15,140 @@
     timeout-ms = <50>;
     key-positions = <LT4 LT3>;
     bindings = <&kp I>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Left top ring and middle for J.
   combo_upper_left_jay {
     timeout-ms = <50>;
     key-positions = <LT3 LT2>;
     bindings = <&kp J>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Left top middle and index for K.
   combo_upper_right_kay {
     timeout-ms = <50>;
     key-positions = <LT2 LT1>;
     bindings = <&kp K>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Left top inner and index for L, just because.
   combo_northeast_lights {
     timeout-ms = <50>;
     key-positions = <LT1 LT0>;
     bindings = <&kp L>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Left ring and index in top row for sticky Alt.
   combo_upper_split_alt {
     timeout-ms = <50>;
     key-positions = <LT3 LT1>;
     bindings = <&sk LALT>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Central three keys in left top row for Ctrl-Alt-F11: Steam overlay.
   combo_upper_central_steam {
     timeout-ms = <50>;
     key-positions = <LT3 LT2 LT1>;
     bindings = <&kp LC(LA(F11))>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Left ring and index in middle row for G: rail level.
   combo_left_split_grade {
     timeout-ms = <50>;
     key-positions = <LM3 LM1>;
     bindings = <&kp G>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Inner two keys of left middle row for blueprints: B when tapped, Alt+B when held.
   combo_inner_blueprint {
     timeout-ms = <50>;
     key-positions = <LM1 LM0>;
     bindings = <&mt LA(B) B>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Left ring and middle in bottom row for Alt+D: destruction planner.
   combo_low_prod_destruction {
     timeout-ms = <50>;
     key-positions = <LB3 LB2>;
     bindings = <&kp LA(D)>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Left middle and index in bottom row for Alt+U: upgrade planner.
   combo_low_poke_upgrade {
     timeout-ms = <50>;
     key-positions = <LB2 LB1>;
     bindings = <&kp LA(U)>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Left ring and index in bottom row for Ctl+Alt, used for map pings with a mouse click.
   combo_lower_split_ctrl_alt {
     timeout-ms = <50>;
     key-positions = <LB3 LB1>;
     bindings = <&kp LC(LALT)>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Inner two keys of left bottom row for O: train overlay.
   combo_low_inner_overlay {
     timeout-ms = <50>;
     key-positions = <LB1 LB0>;
     bindings = <&kp O>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Vertical combo index finger middle and bottom rows for toggle-F: pick up stuff.
   combo_index_toggle_pickup {
     timeout-ms = <50>;
     key-positions = <LM1 LB1>;
     bindings = <&kt F>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Vertical combo mid-inner + bot-inner for P: production statistics.
   combo_inner_production {
     timeout-ms = <50>;
     key-positions = <LM0 LB0>;
     bindings = <&kp P>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Three bottom row keys in a row for M: map.
   combo_bottom_triple_map {
     timeout-ms = <50>;
     key-positions = <LB3 LB2 LB1>;
     bindings = <&kp M>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Bottom pinky and middle finger for U.
   combo_bottom_left_split_u {
     timeout-ms = <50>;
     key-positions = <LB4 LB2>;
     bindings = <&kp U>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Bottom ring and index. For what?
   combo_bottom_middle_split {
     timeout-ms = <50>;
     key-positions = <LB3 LB1>;
     bindings = <&none>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Bottom middle and inner column for Y.
   combo_bottom_right_split_y { 
     timeout-ms = <50>;
     key-positions = <LB2 LB0>;
     bindings = <&kp Y>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Vertical combo ring finger low for H.
   combo_ring_haitch {
     timeout-ms = <50>;
     key-positions = <LM3 LB3>;
     bindings = <&kp H>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
   // Vertical combo middle finger low for N.
   combo_middle_n {
     timeout-ms = <50>;
     key-positions = <LM2 LB2>;
     bindings = <&kp N>;
-    layers = <FACTORY>;
+    layers = <GAMING>;
   };
 
 // };

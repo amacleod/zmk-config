@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Allister MacLeod
+ * Copyright (c) 2024-2025 Allister MacLeod
  *
  * SPDX-License-Identifier: MIT
  */
@@ -13,6 +13,7 @@
 #include "glam-util.dtsi"
 
 #define FACTORY 0
+#define GAMING  0
 #define OVERLAY 1
 #define QWERTY  2
 #define KEEBCTL 3
