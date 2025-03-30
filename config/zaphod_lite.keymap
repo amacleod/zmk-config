@@ -24,6 +24,7 @@
 #define NAV     2
 #define NUM     3
 #define FACTORY 4
+#define GAMING  4
 #define FACMETA 5
 #define KEEBCTL 6
 
