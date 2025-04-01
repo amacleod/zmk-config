@@ -10,6 +10,7 @@
 #include <dt-bindings/zmk/outputs.h>
 
 #include "glam-util.dtsi"
+#include "glam-gaming.dtsi"
 #include "key-labels-glam/apiaster.h"
 
 // Apiaster keymap.
@@ -31,14 +32,14 @@
 //       |  1  |  2  |  3  |  4  |  5  |               |  6  |  7  |  8  |  9  |  0  |
 // ,-----|  T  |  Q  |  W  |  E  |  R  |               |  Y  |  U  |  I  |  O  |  P  |-----.
 // | Tab |Shift|  A  |  S  |  D  |  F  |               |  H  |  J  |  K  |  L  |  ;  |Enter|
-// | Esc | Ctrl|  Z  |  X  |  C  |  V  |-----.   ,-----|  N  |  M  |  ,  |  .  |  /  |Shift|
+// | Esc | Ctrl|  Z  |  X  |  C  | V/H |-----.   ,-----|  N  |  M  |  ,  |  .  |  /  |Shift|
 // `-----------------------| Alt | OVL |Space|   |Space|QWRTY| Bksp|-----------------------'
 //                         `-----------------'   `-----------------'
       bindings = <
          &kp N1     &kp N2  &kp N3  &kp N4  &kp N5                 &kp N6  &kp N7  &kp N8  &kp N9  &kp N0
          &kp T      &kp Q   &kp W   &kp E   &kp R                  &kp Y   &kp U   &kp I   &kp O   &kp P
 &kp TAB  &kp LSHIFT &kp A   &kp S   &kp D   &kp F                  &kp H   &kp J   &kp K   &kp L   &kp SEMI  &kp ENTER
-&kp ESC  &kp LCTRL  &kp Z   &kp X   &kp C   &kp V                  &kp N   &kp M   &kp COMMA &kp DOT &kp FSLH &kp RSHIFT
+&kp ESC  &kp LCTRL  &kp Z   &kp X   &kp C   &tch V                  &kp N   &kp M   &kp COMMA &kp DOT &kp FSLH &kp RSHIFT
                          &kp LALT &mo OVERLAY &kp SPACE   &kp SPACE &mo QWERTY &kp BACKSPACE
       >;
       display-name = "Game";

@@ -11,6 +11,7 @@
 #include "zmk-helpers/key-labels/34.h"
 
 #include "glam-util.dtsi"
+#include "glam-gaming.dtsi"
 
 #define FACTORY 0
 #define GAMING  0
@@ -136,16 +137,6 @@ behaviors {
     tapping-term-ms = <2500000>;
     hold-while-undecided;
   };
-  // Hold to invoke the tap-followed-by-H macro. For the use case of
-  // sending VVH for Factorio flipping, use a no-op keycode like
-  // K_CANCEL as the tap portion.
-  hmtk: hold_macro_tap_key {
-    compatible = "zmk,behavior-hold-tap";
-    #binding-cells = <2>;
-    bindings = <&tfh &kp>;
-    flavor = "tap-preferred";
-    tapping-term-ms = <200>;
-  };
 }; // end behaviors
 
 macros {
@@ -171,34 +162,6 @@ macros {
       , <&macro_release>
       , <&macro_param_2to1>
       , <&mt MACRO_PLACEHOLDER K_CANCEL>
-      ;
-  };
-  // Tap the first key, but if held then tap again to cancel followed
-  // by a tap of H.
-  // This supposes that the first key is reversible or a toggle, like
-  // the "flip entity" buttons in Factorio.
-  tch: tap_into_cancel_tap_haitch {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings
-      = <&macro_param_1to1>
-      , <&kp MACRO_PLACEHOLDER>
-      , <&macro_press>
-      , <&macro_param_1to1>
-      , <&hmtk MACRO_PLACEHOLDER K_CANCEL>
-      , <&macro_pause_for_release>
-      , <&macro_release>
-      , <&macro_param_1to1>
-      , <&hmtk MACRO_PLACEHOLDER K_CANCEL>
-      ;
-  };
-  tfh: tap_followed_by_haitch {
-    compatible = "zmk,behavior-macro-one-param";
-    #binding-cells = <1>;
-    bindings
-      = <&macro_param_1to1>
-      , <&kp MACRO_PLACEHOLDER>
-      , <&kp H>
       ;
   };
 }; // end macros
