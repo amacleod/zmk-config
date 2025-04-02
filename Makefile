@@ -4,6 +4,7 @@
 .PHONY: ferris cradio_left cradio_right
 .PHONY: lily58 lily58_left lily58_right
 .PHONY: tern hummingbird
+.PHONY: tester_rpi_pico
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
 .PHONY: deploy_apiaster deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
@@ -37,6 +38,7 @@ KBD_PARTS := apiaster_left apiaster_right \
 	lily58_left lily58_right \
 	promicro_cradio_left promicro_cradio_right \
 	tern_ble \
+	tester_rpi_pico \
 	weejock \
 	zaphod_lite
 
@@ -105,6 +107,10 @@ deploy_tern: tern
 	@until [ -d ${XIAO_PATH} ]; do sleep 1s; done
 	@echo
 	cp -v ${BUILD_DIR}/tern_ble/zephyr/zmk.uf2 ${XIAO_PATH}/
+
+tester_rpi_pico: SNIPPETS = -S studio-rpc-usb-uart
+tester_rpi_pico:
+	cd ${APP_DIR} && west build -d build/$@ -b rpi_pico ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
 weejock:

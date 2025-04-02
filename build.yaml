@@ -52,3 +52,8 @@ include:
     shield: apiaster_left
   - board: seeeduino_xiao_ble
     shield: apiaster_right
+
+  - board: rpi_pico
+    shield: tester_rpi_pico
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_MAIN_STACK_SIZE=4096
