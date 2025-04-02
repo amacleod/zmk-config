@@ -13,8 +13,10 @@ manifest:
       url-base: https://github.com/amacleod
   projects:
     - name: zmk
-      remote: zmkfirmware
-      revision: main
+      # remote: zmkfirmware
+      # revision: main
+      remote: saixos
+      revision: boards/rpi-storage+tester-shield
       import: app/west.yml
     - name: zmk-helpers
       remote: urob
