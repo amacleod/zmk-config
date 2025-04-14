@@ -149,20 +149,5 @@ macros {
       , <&kp MACRO_PLACEHOLDER>
       ;
   };
-  tth: tap_into_hold {
-    compatible = "zmk,behavior-macro-two-param";
-    #binding-cells = <2>;
-    bindings
-      = <&macro_param_1to1>
-      , <&kp MACRO_PLACEHOLDER>
-      , <&macro_press>
-      , <&macro_param_2to1>
-      , <&mt MACRO_PLACEHOLDER K_CANCEL>
-      , <&macro_pause_for_release>
-      , <&macro_release>
-      , <&macro_param_2to1>
-      , <&mt MACRO_PLACEHOLDER K_CANCEL>
-      ;
-  };
 }; // end macros
 };

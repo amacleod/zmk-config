@@ -36,10 +36,10 @@
 // `-----------------------| Alt | OVL |Space|   |Space|QWRTY| Bksp|-----------------------'
 //                         `-----------------'   `-----------------'
       bindings = <
-         &kp N1     &kp N2  &kp N3  &kp N4  &kp N5                 &kp N6  &kp N7  &kp N8  &kp N9  &kp N0
-         &kp T      &kp Q   &kp W   &kp E   &kp R                  &kp Y   &kp U   &kp I   &kp O   &kp P
-&kp TAB  &kp LSHIFT &kp A   &kp S   &kp D   &kp F                  &kp H   &kp J   &kp K   &kp L   &kp SEMI  &kp ENTER
-&kp ESC  &kp LCTRL  &kp Z   &kp X   &kp C   &tch V                  &kp N   &kp M   &kp COMMA &kp DOT &kp FSLH &kp RSHIFT
+         &kp N1     &kp N2  &kp N3  &kp N4  &kp N5                 &kp N6  &kp N7  &kp N8    &kp N9  &kp N0
+         &kp T      &kp Q   &kp W   &kp E   &kp R                  &kp Y   &kp U   &kp I     &kp O   &kp P
+&kp TAB  &kp LSHIFT &kp A   &kp S   &kp D   &kp F                  &kp H   &kp J   &kp K     &kp L   &kp SEMI &kp ENTER
+&kp ESC  &kp LCTRL  &kp Z   &kp X   &kp C   &tch V                 &kp N   &kp M   &kp COMMA &kp DOT &kp FSLH &kp RSHIFT
                          &kp LALT &mo OVERLAY &kp SPACE   &kp SPACE &mo QWERTY &kp BACKSPACE
       >;
       display-name = "Game";
@@ -48,17 +48,17 @@
     overlay_layer {
 //       ,-----------------------------.               ,-----------------------------.
 //       |     |     |     |     |     |               |     |     |     |     |     |
-// ,-----|     |     |     |Alt-U|Alt-R|               |     |     |     |     |     |-----.
-// |     | KP+ |Alt-A|Alt-D|Alt-T|Alt-G|               |     |     |     |     |     |     |
-// |     | KP- | ^Y  |Alt-X|Alt-C|  H  |-----.   ,-----|     |     |     |     |     |     |
-// `-----------------------|     |#####|     |   |     |     |     |-----------------------'
+// ,-----| Esc | ^Q  | ^W  | ^E  | ^R  |               |     |     |     |     |     |-----.
+// |     | KP+ |Alt-A|Alt-D|Alt-T|F-Lok|               |     |     |     |     |     |     |
+// |KBCTL| KP- | ^Y  |Alt-X|Alt-C|M-g/r|-----.   ,-----|     |     |     |     |     |     |
+// `-----------------------|     |#####|     |   |     |QWRTY|     |-----------------------'
 //                         `-----------------'   `-----------------'
       bindings = <
-       &trans       &trans    &trans    &trans    &trans                    &trans &trans &trans &trans &trans
-       &trans       &trans    &trans    &kp LA(U) &kp LA(R)                 &trans &trans &trans &trans &trans
-&trans &kp KP_PLUS  &kp LA(A) &kp LA(D) &kp LA(T) &kp LA(G)                 &trans &trans &trans &trans &trans &trans
-&trans &kp KP_MINUS &kp LC(Y) &kp LA(X) &kp LA(C) &kp H                     &trans &trans &trans &trans &trans &trans
-                            &trans &trans &trans      &trans &to QWERTY &trans
+            &trans       &trans    &trans    &trans    &trans                    &trans &trans &trans &trans &trans
+            &kp ESC      &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)                 &trans &trans &trans &trans &trans
+&trans      &kp KP_PLUS  &kp LA(A) &kp LA(D) &kp LA(T) &kt F                     &trans &trans &trans &trans &trans &trans
+&mo KEEBCTL &kp KP_MINUS &kp LC(Y) &kp LA(X) &kp LA(C) &tth LA(G) LA(R)          &trans &trans &trans &trans &trans &trans
+                                                    &trans &trans &trans      &trans &to QWERTY &trans
       >;
       display-name = "OVL";
     };
@@ -76,7 +76,7 @@
          &kp Q   &kp W   &kp E   &kp R   &kp T                  &kp Y   &kp U   &kp I     &kp O   &kp P
 &kp TAB  &kp A   &kp S   &kp D   &kp F   &kp G                  &kp H   &kp J   &kp K     &kp L   &kp SEMI &kp ENTER
 &kp BSLH &kp Z   &kp X   &kp C   &kp V   &kp B                  &kp N   &kp M   &kp COMMA &kp DOT &kp FSLH &kp RSHIFT
-                         &kp LCTRL &kp LALT &kp SPACE   &kp SPACE &kp RGUI &kp RCTRL
+                         &kp LCTRL &kp LALT &kp SPACE   &kp SPACE &kp RGUI &kp BACKSPACE
       >;
       display-name = "QWERTY";
     };
