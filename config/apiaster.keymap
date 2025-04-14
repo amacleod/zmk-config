@@ -57,7 +57,7 @@
             &trans       &trans    &trans    &trans    &trans                    &trans &trans &trans &trans &trans
             &kp ESC      &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)                 &trans &trans &trans &trans &trans
 &trans      &kp KP_PLUS  &kp LA(A) &kp LA(D) &kp LA(T) &kp B                     &trans &trans &trans &trans &trans &trans
-&mo KEEBCTL &kp KP_MINUS &kp LC(Y) &kp LA(X) &kp LA(C) &tth LA(G) LA(R)          &trans &trans &trans &trans &trans &trans
+&to KEEBCTL &kp KP_MINUS &kp LC(Y) &kp LA(X) &kp LA(C) &tth LA(G) LA(R)          &trans &trans &trans &trans &trans &trans
                                                     &trans &trans &trans      &trans &to QWERTY &trans
       >;
       display-name = "OVL";
