@@ -49,14 +49,14 @@
 //       ,-----------------------------.               ,-----------------------------.
 //       |     |     |     |     |     |               |     |     |     |     |     |
 // ,-----| Esc | ^Q  | ^W  | ^E  | ^R  |               |     |     |     |     |     |-----.
-// |     | KP+ |Alt-A|Alt-D|Alt-T|F-Lok|               |     |     |     |     |     |     |
+// |     | KP+ |Alt-A|Alt-D|Alt-T|  B  |               |     |     |     |     |     |     |
 // |KBCTL| KP- | ^Y  |Alt-X|Alt-C|M-g/r|-----.   ,-----|     |     |     |     |     |     |
 // `-----------------------|     |#####|     |   |     |QWRTY|     |-----------------------'
 //                         `-----------------'   `-----------------'
       bindings = <
             &trans       &trans    &trans    &trans    &trans                    &trans &trans &trans &trans &trans
             &kp ESC      &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)                 &trans &trans &trans &trans &trans
-&trans      &kp KP_PLUS  &kp LA(A) &kp LA(D) &kp LA(T) &kt F                     &trans &trans &trans &trans &trans &trans
+&trans      &kp KP_PLUS  &kp LA(A) &kp LA(D) &kp LA(T) &kp B                     &trans &trans &trans &trans &trans &trans
 &mo KEEBCTL &kp KP_MINUS &kp LC(Y) &kp LA(X) &kp LA(C) &tth LA(G) LA(R)          &trans &trans &trans &trans &trans &trans
                                                     &trans &trans &trans      &trans &to QWERTY &trans
       >;
