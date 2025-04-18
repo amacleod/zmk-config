@@ -108,7 +108,7 @@ deploy_tern: tern
 	@echo
 	cp -v ${BUILD_DIR}/tern_ble/zephyr/zmk.uf2 ${XIAO_PATH}/
 
-tester_rpi_pico: SNIPPETS = -S studio-rpc-usb-uart
+tester_rpi_pico: SNIPPETS = -S studio-rpc-usb-uart -S usb-logging
 tester_rpi_pico:
 	cd ${APP_DIR} && west build -d build/$@ -b rpi_pico ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
