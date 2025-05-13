@@ -1,12 +1,13 @@
 .PHONY: clean all
 .PHONY: apiaster apiaster_left apiaster_right
+.PHONY: bykeeb bykeeb_left bykeeb_right
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
 .PHONY: lily58 lily58_left lily58_right
 .PHONY: tern hummingbird
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
-.PHONY: deploy_apiaster deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
+.PHONY: deploy_apiaster deploy_bykeeb deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
 .PHONY: transfer
 
 APP_DIR := $(realpath ../zmk/app)
@@ -19,6 +20,9 @@ ZAPHOD_CONFIG_DIR := $(realpath ../zaphod-config)
 WEEJOCK_CONFIG_DIR := $(realpath ../weejock-zmk)
 TERN_CONFIG_DIR := $(realpath ../tern-zmk)
 APIASTER_CONFIG_DIR := $(realpath ../zmk-apiaster-module)
+BYKEEB_CONFIG_DIR := $(realpath ../zmk-fingerpunch-keyboards)
+VIK_MODULE_DIR := $(realpath ../zmk-fingerpunch-vik)
+FINGERPUNCH_DIR := $(realpath ../zmk-fingerpunch-controllers)
 
 EXTRA_MODULES := ${ZMK_HELPERS_DIR}
 
@@ -32,6 +36,7 @@ ZERO_PATH := /media/${USER}/RPI-RP2
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
 KBD_PARTS := apiaster_left apiaster_right \
+	bykeeb_left bykeeb_right \
 	corne_left corne_right \
 	cradio_left cradio_right \
 	lily58_left lily58_right \
@@ -40,13 +45,18 @@ KBD_PARTS := apiaster_left apiaster_right \
 	weejock \
 	zaphod_lite
 
-all: apiaster corne ferris weejock tern zaphod
+all: apiaster bykeeb corne ferris weejock tern zaphod
 
 apiaster: apiaster_left apiaster_right
 	ls -l ${BUILD_DIR}/apiaster_*/zephyr/zmk.uf2
 # apiaster_left: SNIPPETS = -S zmk-usb-logging
 apiaster_left apiaster_right: EXTRA_MODULES += ${APIASTER_CONFIG_DIR}
 apiaster_left apiaster_right:
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+
+bykeeb: bykeeb_left bykeeb_right
+bykeeb_left bykeeb_right: EXTRA_MODULES += ${BYKEEB_CONFIG_DIR} ${VIK_MODULE_DIR} ${FINGERPUNCH_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
+bykeeb_left bykeeb_right:
 	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 corne: corne_left corne_right
