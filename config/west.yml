@@ -9,6 +9,8 @@ manifest:
       url-base: https://github.com/dhruvinsh
     - name: saixos
       url-base: https://github.com/nmunnich
+    - name: sadekbaroudi
+      url-base: https://github.com/sadekbaroudi
     - name: amacleod
       url-base: https://github.com/amacleod
   projects:
@@ -36,6 +38,15 @@ manifest:
       revision: main
     - name: zmk-apiaster-module
       remote: saixos
+      revision: main
+    - name: zmk-fingerpunch-vik
+      remote: sadekbaroudi
+      revision: main
+    - name: zmk-fingerpunch-controllers
+      remote: sadekbaroudi
+      revision: main
+    - name: zmk-fingerpunch-keyboards
+      remote: sadekbaroudi
       revision: main
   self:
     path: config

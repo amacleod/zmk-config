@@ -52,3 +52,8 @@ include:
     shield: apiaster_left
   - board: seeeduino_xiao_ble
     shield: apiaster_right
+
+  - board: seeeduino_xiao_ble
+    shield: bykeeb_left
+  - board: seeeduino_xiao_ble
+    shield: bykeeb_right
