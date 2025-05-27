@@ -121,24 +121,5 @@
     key-positions = <RT4 RM4>;
     bindings = <&kp N0>;
   };
-  // Right hand combos for symbols and stuff. These ought not to
-  // interfere with Hands Down Neu multigraph combos, since those are
-  // mostly on the left hand (with Qu being the notable exception).
-  // Right index and ring in middle row for left brace and bracket.
-  // This is E and A in Hands Down Neu, so it needs some roll protection because of the EA and AE diphthongs.
-  combo_mid_poke_left_brace {
-    timeout-ms = <20>;
-    key-positions = <RM1 RM2>;
-    bindings = <&left_brace_bracket>;
-    require-prior-idle-ms = <150>;
-  };
-  // Right middle and ring in middle row for right brace and bracket.
-  // This is I and E in Hands Down Neu, so it needs a little roll protection because of the IE diphthong.
-  combo_mid_prod_right_brace {
-    timeout-ms = <30>;
-    key-positions = <RM2 RM3>;
-    bindings = <&right_brace_bracket>;
-    require-prior-idle-ms = <150>;
-  };
 
 // };
