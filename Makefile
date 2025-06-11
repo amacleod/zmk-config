@@ -1,5 +1,6 @@
 .PHONY: clean all
 .PHONY: apiaster apiaster_left apiaster_right
+.PHONY: badwings bw2
 .PHONY: bykeeb bykeeb_left bykeeb_right
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
@@ -7,7 +8,7 @@
 .PHONY: tern hummingbird
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
-.PHONY: deploy_apiaster deploy_bykeeb deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
+.PHONY: deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
 .PHONY: transfer
 
 APP_DIR := $(realpath ../zmk/app)
@@ -23,6 +24,7 @@ APIASTER_CONFIG_DIR := $(realpath ../zmk-apiaster-module)
 BYKEEB_CONFIG_DIR := $(realpath ../zmk-fingerpunch-keyboards)
 VIK_MODULE_DIR := $(realpath ../zmk-fingerpunch-vik)
 FINGERPUNCH_DIR := $(realpath ../zmk-fingerpunch-controllers)
+BADWINGS_CONFIG_DIR := $(realpath ../zmk-bad-wings-2)
 
 EXTRA_MODULES := ${ZMK_HELPERS_DIR}
 
@@ -36,6 +38,7 @@ ZERO_PATH := /media/${USER}/RPI-RP2
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
 KBD_PARTS := apiaster_left apiaster_right \
+	bw2 \
 	bykeeb_left bykeeb_right \
 	corne_left corne_right \
 	cradio_left cradio_right \
@@ -45,7 +48,7 @@ KBD_PARTS := apiaster_left apiaster_right \
 	weejock \
 	zaphod_lite
 
-all: apiaster bykeeb corne ferris weejock tern zaphod
+all: apiaster badwings bykeeb corne ferris weejock tern zaphod
 
 apiaster: apiaster_left apiaster_right
 	ls -l ${BUILD_DIR}/apiaster_*/zephyr/zmk.uf2
@@ -53,6 +56,11 @@ apiaster: apiaster_left apiaster_right
 apiaster_left apiaster_right: EXTRA_MODULES += ${APIASTER_CONFIG_DIR}
 apiaster_left apiaster_right:
 	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+
+badwings: bw2
+bw2: EXTRA_MODULES += ${BADWINGS_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
+bw2:
+	cd ${APP_DIR} && west build -d build/$@ -b bw2 -- ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 bykeeb: bykeeb_left bykeeb_right
 bykeeb_left bykeeb_right: EXTRA_MODULES += ${BYKEEB_CONFIG_DIR} ${VIK_MODULE_DIR} ${FINGERPUNCH_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}

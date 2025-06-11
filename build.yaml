@@ -57,3 +57,5 @@ include:
     shield: bykeeb_left
   - board: seeeduino_xiao_ble
     shield: bykeeb_right
+
+  - board: bw2

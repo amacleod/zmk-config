@@ -48,5 +48,8 @@ manifest:
     - name: zmk-fingerpunch-keyboards
       remote: sadekbaroudi
       revision: main
+    - name: zmk-bad-wings-2
+      remote: amacleod
+      revision: module-refactor
   self:
     path: config
