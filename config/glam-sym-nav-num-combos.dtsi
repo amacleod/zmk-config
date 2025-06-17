@@ -40,12 +40,14 @@
     key-positions = <RB3 RB4>;
     bindings = <&kp RSHFT>;
   };
+#ifndef GLAM_SUPPRESS_ESC_COMBO
   // Left pinky and index in middle row for Esc.
   combo_left_fork_escape {
     timeout-ms = <50>;
     key-positions = <LM4 LM1>;
     bindings = <&kp ESCAPE>;
   };
+#endif
   // Left pinky and middle finger in middle row for Tab.
   combo_left_prong_tab {
     timeout-ms = <50>;

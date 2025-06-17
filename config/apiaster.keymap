@@ -105,6 +105,7 @@
 
 #include "glam-factorio-combos.dtsi"
 
+#define GLAM_SUPPRESS_ESC_COMBO
 #include "glam-sym-nav-num-combos.dtsi"
 
     combo_outer_and_thumbs_keyboard_control {
