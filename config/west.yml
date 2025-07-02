@@ -16,7 +16,7 @@ manifest:
   projects:
     - name: zmk
       remote: amacleod
-      revision: rp2040
+      revision: rp2040zero
       import: app/west.yml
     - name: zmk-helpers
       remote: urob
