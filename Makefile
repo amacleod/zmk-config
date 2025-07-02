@@ -23,6 +23,7 @@ APIASTER_CONFIG_DIR := $(realpath ../zmk-apiaster-module)
 BYKEEB_CONFIG_DIR := $(realpath ../zmk-fingerpunch-keyboards)
 VIK_MODULE_DIR := $(realpath ../zmk-fingerpunch-vik)
 FINGERPUNCH_DIR := $(realpath ../zmk-fingerpunch-controllers)
+STRATAGUM_CONFIG_DIR := $(realpath ../stratagum-zmk)
 
 EXTRA_MODULES := ${ZMK_HELPERS_DIR}
 
@@ -41,6 +42,7 @@ KBD_PARTS := apiaster_left apiaster_right \
 	cradio_left cradio_right \
 	lily58_left lily58_right \
 	promicro_cradio_left promicro_cradio_right \
+	stratagum \
 	tern_ble \
 	weejock \
 	zaphod_lite
@@ -104,6 +106,10 @@ deploy_lily58: lily58
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
 	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/
+
+stratagum: EXTRA_MODULES += ${STRATAGUM_CONFIG_DIR}
+stratagum:
+	cd ${APP_DIR} && west build -d build/$@ -b rp2040_zero ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 tern: tern_ble
 tern_ble: EXTRA_MODULES += ${TERN_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
