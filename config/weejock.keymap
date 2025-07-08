@@ -4,8 +4,9 @@
 
 // Layer numbers
 #define NUM 0
-#define RAISE 1
-#define EXTRA 2
+#define ARROW 1
+#define FKEYS 2
+#define KBDCTL 6
 
 / {
   keymap {
@@ -24,36 +25,69 @@
         &kp N7      &kp N8     &kp N9    &kp MINUS
         &kp N4      &kp N5     &kp N6    &kp PLUS
         &kp N1      &kp N2     &kp N3    &kp SPACE
-        &mo RAISE   &kp N0     &kp DOT   &kp ENTER
+        &mo KBDCTL  &kp N0     &kp DOT   &kp ENTER
       >;
       display-name = "NUM";
     };
-    raise_layer { // layer 1
+    arrow_layer { // layer 1
+      // ,-----------------------.
+      // |     |     |     |     |
+      // |     | Up  |     |     |
+      // | Left|     |Right|     |
+      // |     | Down|     |     |
+      // |#####|     |     | Ctl |
+      // `-----------------------'
+      bindings = <
+        &none    &none    &none     &none
+        &none    &kp UP   &none     &none
+        &kp LEFT &none    &kp RIGHT &none
+        &none    &kp DOWN &none     &none
+        &trans   &none    &none     &kp LCTRL
+      >;
+      display-name = "Arrows";
+    };
+    function_key_layer { // layer 2
+      // ,-----------------------.
+      // |XXXXX|PrtSc|Scrlk|Pause|
+      // |  F7 |  F8 |  F9 | F10 |
+      // |  F4 |  F5 |  F6 | F11 |
+      // |  F1 |  F2 |  F3 | F12 |
+      // | Ctl | Alt |Shift| Del |
+      // `-----------------------'
+      bindings = <
+        &tog FKEYS &kp PSCRN &kp SLCK   &kp PAUSE_BREAK
+        &kp F7     &kp F8    &kp F9     &kp F10
+        &kp F4     &kp F5    &kp F6     &kp F11
+        &kp F1     &kp F2    &kp F3     &kp F12
+        &sk LCTRL  &sk LALT  &sk LSHIFT &kp DEL
+      >;
+      display-name = "FKeys";
+    };
+    extra_layer_3 {
+      status = "reserved";
+    };
+    extra_layer_4 {
+      status = "reserved";
+    };
+    extra_layer_5 {
+      status = "reserved";
+    };
+    keyboard_control_layer { // layer 6
       // ,-----------------------.
       // |ZMKSt|     |     |BTClr|
       // |     |     |     |     |
-      // |     |     |     |     |
+      // |     |FKeys|     | DFU |
       // |     |     |     |     |
       // |#####|     |  :  | Tab |
       // `-----------------------'
       bindings = <
-        &studio_unlock  &trans    &trans     &bt_hold_clear 0 BACKSPACE
-        &trans          &trans    &trans     &trans
-        &trans          &trans    &trans     &trans
-        &trans          &trans    &trans     &trans
-        &trans          &trans    &kp COLON  &kp TAB
+        &studio_unlock  &trans     &trans     &bt_hold_clear 0 BACKSPACE
+        &trans          &trans     &trans     &trans
+        &trans          &tog FKEYS &trans     &bootloader
+        &trans          &trans     &trans     &trans
+        &trans          &trans     &kp COLON  &kp TAB
       >;
       display-name = "Fn";
-    };
-    extra_layer { // layer 2
-      bindings = <
-        &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans
-      >;
-      display-name = "Extra";
     };
   };
 
