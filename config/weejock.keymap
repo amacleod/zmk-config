@@ -6,7 +6,7 @@
 #define NUM 0
 #define ARROW 1
 #define FKEYS 2
-#define KBDCTL 6
+#define KBDCTL 3
 
 / {
   keymap {
@@ -63,16 +63,7 @@
       >;
       display-name = "FKeys";
     };
-    extra_layer_3 {
-      status = "reserved";
-    };
-    extra_layer_4 {
-      status = "reserved";
-    };
-    extra_layer_5 {
-      status = "reserved";
-    };
-    keyboard_control_layer { // layer 6
+    keyboard_control_layer { // layer 3
       // ,-----------------------.
       // |ZMKSt|     |     |BTClr|
       // |     |     |     |     |
@@ -88,6 +79,15 @@
         &trans          &trans     &kp COLON  &kp TAB
       >;
       display-name = "Fn";
+    };
+    extra_layer_4 {
+      status = "reserved";
+    };
+    extra_layer_5 {
+      status = "reserved";
+    };
+    extra_layer_6 {
+      status = "reserved";
     };
   };
 
