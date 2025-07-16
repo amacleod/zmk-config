@@ -47,6 +47,7 @@ KBD_PARTS := apiaster_left apiaster_right \
 	tern_ble \
 	weejock \
 	zaphod_lite
+KBD_HEX_PARTS := planck_rev6
 
 all: apiaster bykeeb corne ferris weejock tern zaphod
 
@@ -147,6 +148,9 @@ deploy_zaphod: zaphod_lite
 transfer:
 	@for x in ${KBD_PARTS}; do \
 	if [ -d ${BUILD_DIR}/$${x} ]; then cp -v ${BUILD_DIR}/$${x}/zephyr/zmk.uf2 ${WIN_DESKTOP}/$${x}.uf2 ; fi \
+	done
+	@for x in ${KBD_HEX_PARTS}; do \
+	if [ -d ${BUILD_DIR}/$${x} ]; then cp -v ${BUILD_DIR}/$${x}/zephyr/zmk.hex ${WIN_DESKTOP}/$${x}.hex ; fi \
 	done
 
 clean:
