@@ -4,6 +4,7 @@
 .PHONY: corne corne_left corne_right
 .PHONY: ferris cradio_left cradio_right
 .PHONY: lily58 lily58_left lily58_right
+.PHONY: planck planck_rev6
 .PHONY: tern hummingbird
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
@@ -106,6 +107,11 @@ deploy_lily58: lily58
 	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
 	@echo
 	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/
+
+planck: planck_rev6
+planck_rev6: # SNIPPETS += -S zmk-usb-logging
+planck_rev6:
+	cd ${APP_DIR} && west build -d build/$@ -b $@ ${SNIPPETS} -- -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 stratagum: EXTRA_MODULES += ${STRATAGUM_CONFIG_DIR}
 stratagum:
