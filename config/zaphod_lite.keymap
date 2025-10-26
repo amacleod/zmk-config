@@ -172,7 +172,7 @@ keymap {
 &kp W &kp F &kp M &kp P &kp V        &hash_at  &dot_cln &sqt_bang &dqt_ques &kp J
 &kp R &kp S &kp N &kp T &kp B        &com_semi &kp A    &kp E     &kp I     &kp H
 &kp X &kp C &kp L &kp D &kp G        &kp MINUS &kp U    &kp O     &kp Y     &kp K
-           &sl SYM &smart_shift    &kp SPACE &sl NAV
+           &sl SYM &sk LSHIFT      &kp SPACE &sl NAV
     >;
     display-name = "HDNeu";
   };
