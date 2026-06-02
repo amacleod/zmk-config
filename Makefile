@@ -31,9 +31,20 @@ EXTRA_MODULES := ${ZMK_HELPERS_DIR}
 EMPTY :=
 SPACE := $(EMPTY) $(EMPTY)
 
-XIAO_PATH := /media/${USER}/XIAO-SENSE
-NANO_PATH := /media/${USER}/NICENANO
-ZERO_PATH := /media/${USER}/RPI-RP2
+MEDIA_BASE := $(shell test -d /run/media/${USER} && echo /run/media/${USER} || echo /media/${USER})
+XIAO_PATH := ${MEDIA_BASE}/XIAO-SENSE
+NANO_PATH := ${MEDIA_BASE}/NICENANO
+ZERO_PATH := ${MEDIA_BASE}/RPI-RP2
+
+# $(1): label  $(2): mount path  $(3): uf2 source
+define flash_part
+	@echo -n "Put $(1) in update mode..."
+	@until [ -d $(2) ]; do sleep 1s; done
+	@echo
+	cp -v $(3) $(2)/
+	@sync
+	@until [ ! -d $(2) ]; do sleep 1s; done
+endef
 
 WIN_DESKTOP := /mnt/c/Users/${USER}/Desktop
 KBD_PARTS := apiaster_left apiaster_right \
@@ -66,15 +77,13 @@ corne: corne_left corne_right
 corne_left corne_right:
 	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
+deploy_apiaster: apiaster
+	$(call flash_part,apiaster_left,${XIAO_PATH},${BUILD_DIR}/apiaster_left/zephyr/zmk.uf2)
+	$(call flash_part,apiaster_right,${XIAO_PATH},${BUILD_DIR}/apiaster_right/zephyr/zmk.uf2)
+
 deploy_corne: corne
-	@echo -n "Put corne_left in update mode..."
-	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
-	@echo
-	cp -v ${BUILD_DIR}/corne_left/zephyr/zmk.uf2 ${NANO_PATH}/
-	@echo -n "Put corne_right in update mode..."
-	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
-	@echo
-	cp -v ${BUILD_DIR}/corne_right/zephyr/zmk.uf2 ${NANO_PATH}/
+	$(call flash_part,corne_left,${NANO_PATH},${BUILD_DIR}/corne_left/zephyr/zmk.uf2)
+	$(call flash_part,corne_right,${NANO_PATH},${BUILD_DIR}/corne_right/zephyr/zmk.uf2)
 
 ferris: cradio_left cradio_right
 cradio_left: SNIPPETS = -S zmk-usb-logging
@@ -83,14 +92,8 @@ cradio_left cradio_right:
 	cd ${APP_DIR} && west build -d build/promicro_$@ -b sparkfun_pro_micro_rp2040 ${SNIPPETS} -- -DSHIELD=$@ -DCONFIG_MAIN_STACK_SIZE=4096 -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_ferris: ferris
-	@echo -n "Put ferris_left in update mode..."
-	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
-	@echo
-	cp -v ${BUILD_DIR}/cradio_left/zephyr/zmk.uf2 ${NANO_PATH}/
-	@echo -n "Put ferris_right in update mode..."
-	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
-	@echo
-	cp -v ${BUILD_DIR}/cradio_right/zephyr/zmk.uf2 ${NANO_PATH}/
+	$(call flash_part,ferris_left,${NANO_PATH},${BUILD_DIR}/cradio_left/zephyr/zmk.uf2)
+	$(call flash_part,ferris_right,${NANO_PATH},${BUILD_DIR}/cradio_right/zephyr/zmk.uf2)
 
 lily58: lily58_left lily58_right
 lily58_left: # SNIPPETS = -S zmk-usb-logging
@@ -98,14 +101,8 @@ lily58_left lily58_right:
 	cd ${APP_DIR} && west build -d build/$@ -b nice_nano_v2 ${SNIPPETS} -- -DSHIELD="$@ nice_view_adapter nice_view" -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_lily58: lily58
-	@echo -n "Put lily58_left in update mode..."
-	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
-	@echo
-	cp -v ${BUILD_DIR}/$^_left/zephyr/zmk.uf2 ${NANO_PATH}/
-	@echo -n "Put lily58_right in update mode..."
-	@until [ -d ${NANO_PATH} ]; do sleep 1s; done
-	@echo
-	cp -v ${BUILD_DIR}/$^_right/zephyr/zmk.uf2 ${NANO_PATH}/
+	$(call flash_part,lily58_left,${NANO_PATH},${BUILD_DIR}/lily58_left/zephyr/zmk.uf2)
+	$(call flash_part,lily58_right,${NANO_PATH},${BUILD_DIR}/lily58_right/zephyr/zmk.uf2)
 
 stratagum: EXTRA_MODULES += ${STRATAGUM_CONFIG_DIR}
 stratagum:
@@ -117,10 +114,7 @@ tern_ble:
 	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_tern: tern
-	@echo -n "Put $^ in update mode..."
-	@until [ -d ${XIAO_PATH} ]; do sleep 1s; done
-	@echo
-	cp -v ${BUILD_DIR}/tern_ble/zephyr/zmk.uf2 ${XIAO_PATH}/
+	$(call flash_part,tern_ble,${XIAO_PATH},${BUILD_DIR}/tern_ble/zephyr/zmk.uf2)
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
 weejock:
@@ -131,11 +125,11 @@ zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_T
 zaphod_lite:
 	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
+deploy_weejock: weejock
+	$(call flash_part,weejock,${XIAO_PATH},${BUILD_DIR}/weejock/zephyr/zmk.uf2)
+
 deploy_zaphod: zaphod_lite
-	@echo -n "Put zaphod_lite in update mode..."
-	@until [ -d ${XIAO_PATH} ]; do sleep 1s; done
-	@echo
-	cp -v ${BUILD_DIR}/zaphod_lite/zephyr/zmk.uf2 ${XIAO_PATH}/
+	$(call flash_part,zaphod_lite,${XIAO_PATH},${BUILD_DIR}/zaphod_lite/zephyr/zmk.uf2)
 
 # For getting UF2s from WSL to the Windows desktop.
 transfer:
