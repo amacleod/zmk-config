@@ -65,12 +65,12 @@ apiaster: apiaster_left apiaster_right
 # apiaster_left: SNIPPETS = -S zmk-usb-logging
 apiaster_left apiaster_right: EXTRA_MODULES += ${APIASTER_CONFIG_DIR}
 apiaster_left apiaster_right:
-	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 bykeeb: bykeeb_left bykeeb_right
 bykeeb_left bykeeb_right: EXTRA_MODULES += ${BYKEEB_CONFIG_DIR} ${VIK_MODULE_DIR} ${FINGERPUNCH_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
 bykeeb_left bykeeb_right:
-	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 corne: corne_left corne_right
 	ls -l ${BUILD_DIR}/corne_*/zephyr/zmk.uf2
@@ -111,19 +111,19 @@ stratagum:
 tern: tern_ble
 tern_ble: EXTRA_MODULES += ${TERN_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
 tern_ble:
-	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble ${SNIPPETS} -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_tern: tern
 	$(call flash_part,tern_ble,${XIAO_PATH},${BUILD_DIR}/tern_ble/zephyr/zmk.uf2)
 
 weejock: EXTRA_MODULES += ${WEEJOCK_CONFIG_DIR}
 weejock:
-	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble -S studio-rpc-usb-uart -- -DSHIELD=$@ -DCONFIG_ZMK_STUDIO=y -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -S studio-rpc-usb-uart -- -DSHIELD=$@ -DCONFIG_ZMK_STUDIO=y -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 zaphod: zaphod_lite
 zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
 zaphod_lite:
-	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b seeeduino_xiao_ble -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_weejock: weejock
 	$(call flash_part,weejock,${XIAO_PATH},${BUILD_DIR}/weejock/zephyr/zmk.uf2)

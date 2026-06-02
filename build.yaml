@@ -48,9 +48,9 @@ include:
     shield: cradio_left
     cmake-args: -DCONFIG_MAIN_STACK_SIZE=4096
 
-  - board: xiao_ble//zmk
+  - board: seeeduino_xiao_ble
     shield: apiaster_left
-  - board: xiao_ble//zmk
+  - board: seeeduino_xiao_ble
     shield: apiaster_right
 
   - board: seeeduino_xiao_ble

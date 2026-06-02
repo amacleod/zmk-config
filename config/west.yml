@@ -15,8 +15,8 @@ manifest:
       url-base: https://github.com/amacleod
   projects:
     - name: zmk
-      remote: amacleod
-      revision: rp2040zero
+      remote: zmkfirmware
+      revision: main
       import: app/west.yml
     - name: zmk-helpers
       remote: urob
