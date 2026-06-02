@@ -8,6 +8,7 @@
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
 .PHONY: deploy_apiaster deploy_bykeeb deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
+.PHONY: settings_reset_xiao settings_reset_nano deploy_settings_reset_xiao deploy_settings_reset_nano
 .PHONY: transfer
 
 APP_DIR := $(realpath ../zmk/app)
@@ -130,6 +131,18 @@ deploy_weejock: weejock
 
 deploy_zaphod: zaphod_lite
 	$(call flash_part,zaphod_lite,${XIAO_PATH},${BUILD_DIR}/zaphod_lite/zephyr/zmk.uf2)
+
+settings_reset_xiao:
+	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble//zmk -- -DSHIELD=settings_reset
+
+settings_reset_nano:
+	cd ${APP_DIR} && west build -d build/$@ -b nice_nano//zmk -- -DSHIELD=settings_reset
+
+deploy_settings_reset_xiao: settings_reset_xiao
+	$(call flash_part,settings_reset_xiao,${XIAO_PATH},${BUILD_DIR}/settings_reset_xiao/zephyr/zmk.uf2)
+
+deploy_settings_reset_nano: settings_reset_nano
+	$(call flash_part,settings_reset_nano,${NANO_PATH},${BUILD_DIR}/settings_reset_nano/zephyr/zmk.uf2)
 
 # For getting UF2s from WSL to the Windows desktop.
 transfer:
