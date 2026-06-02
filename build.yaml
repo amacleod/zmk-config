@@ -5,55 +5,54 @@
 # pass flags to the build command and `artifact-name` to assign a name to
 # distinguish build outputs from each other:
 #
-# board: [ "nice_nano_v2" ]
+# board: [ "nice_nano//zmk" ]
 # shield: [ "corne_left", "corne_right" ]
 # include:
-#   - board: bdn9_rev2
-#   - board: nice_nano_v2
+#   - board: nice_nano//zmk
 #     shield: reviung41
-#   - board: nice_nano_v2
+#   - board: nice_nano//zmk
 #     shield: corne_left
 #     cmake-args: -DCONFIG_ZMK_USB_LOGGING=y
 #     artifact-name: corne_left_with_logging
 #
 ---
 include:
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_left
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_right
 
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: lily58_left nice_view_adapter nice_view
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: lily58_right nice_view_adapter nice_view
 
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: zaphod_lite
 
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: cradio_left
     snippet: zmk-usb-logging
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: cradio_right
 
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: weejock
     snippet: studio-rpc-usb-uart
 
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: tern_ble
 
-  - board: sparkfun_pro_micro_rp2040
+  - board: sparkfun_pro_micro_rp2040//zmk
     shield: cradio_left
     cmake-args: -DCONFIG_MAIN_STACK_SIZE=4096
 
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: apiaster_left
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: apiaster_right
 
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: bykeeb_left
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: bykeeb_right
