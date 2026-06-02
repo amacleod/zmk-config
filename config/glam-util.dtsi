@@ -22,6 +22,17 @@ behaviors {
     flavor = "tap-preferred";
     tapping-term-ms = <300>;
   };
+  // Hold-preferred hold-tap: tap does nothing, hold activates after a
+  // deliberate press. Intended for keys where accidental taps should
+  // be inert but intentional holds should fire.
+  htk: hold_tap_key {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    bindings = <&kp>, <&kp>;
+    flavor = "hold-preferred";
+    tapping-term-ms = <50>;
+    require-prior-idle-ms = <150>;
+  };
   // Morph to reverse the shiftedness of left bracket and brace.
   left_brace_bracket: left_brace_bracket {
     compatible = "zmk,behavior-mod-morph";
