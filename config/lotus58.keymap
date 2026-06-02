@@ -43,6 +43,7 @@
 combos {
   compatible = "zmk,combos";
 
+#define GLAM_SUPPRESS_NUMBER_COMBOS
 #include "glam-sym-nav-num-combos.dtsi"
 
 };

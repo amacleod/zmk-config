@@ -32,33 +32,33 @@
 //       |  1  |  2  |  3  |  4  |  5  |               |  6  |  7  |  8  |  9  |  0  |
 // ,-----|  T  |  Q  |  W  |  E  |  R  |               |  Y  |  U  |  I  |  O  |  P  |-----.
 // | Tab |Shift|  A  |  S  |  D  |  F  |               |  H  |  J  |  K  |  L  |  ;  |Enter|
-// | Esc | Ctrl|  Z  |  X  |  C  |  V  |-----.   ,-----|  N  |  M  |  ,  |  .  |  /  |Shift|
+// |C+Sh | Ctrl|  Z  |  X  |  C  |  V  |-----.   ,-----|  N  |  M  |  ,  |  .  |  /  |Shift|
 // `-----------------------| Alt | OVL |Space|   |Space|QWRTY| Bksp|-----------------------'
 //                         `-----------------'   `-----------------'
       bindings = <
-         &kp N1     &kp N2  &kp N3  &kp N4  &kp N5                 &kp N6  &kp N7  &kp N8    &kp N9  &kp N0
-         &kp T      &kp Q   &kp W   &kp E   &kp R                  &kp Y   &kp U   &kp I     &kp O   &kp P
-&kp TAB  &kp LSHIFT &kp A   &kp S   &kp D   &kp F                  &kp H   &kp J   &kp K     &kp L   &kp SEMI &kp ENTER
-&kp ESC  &kp LCTRL  &kp Z   &kp X   &kp C   &kp V                  &kp N   &kp M   &kp COMMA &kp DOT &kp FSLH &kp RSHIFT
-                         &kp LALT &mo OVERLAY &kp SPACE   &kp SPACE &mo QWERTY &kp BACKSPACE
+                &kp N1      &kp N2  &kp N3  &kp N4  &kp N5                 &kp N6  &kp N7  &kp N8    &kp N9  &kp N0
+                &kp T       &kp Q   &kp W   &kp E   &kp R                  &kp Y   &kp U   &kp I     &kp O   &kp P
+&kp TAB         &kp LSHIFT  &kp A   &kp S   &kp D   &kp F                  &kp H   &kp J   &kp K     &kp L   &kp SEMI &kp ENTER
+&kp LC(LSHIFT)  &kp LCTRL   &kp Z   &kp X   &kp C   &kp V                  &kp N   &kp M   &kp COMMA &kp DOT &kp FSLH &kp RSHIFT
+                                  &kp LALT &mo OVERLAY &kp SPACE   &kp SPACE &mo QWERTY &kp BACKSPACE
       >;
       display-name = "Game";
     };
 
     overlay_layer {
 //       ,-----------------------------.               ,-----------------------------.
-//       | F1  | F2  | F3  | F4  | F5  |               |     |     |     |     |     |
-// ,-----| Esc | ^Q  | ^W  | ^E  | ^R  |               |     |     |     |     |     |-----.
+//       | F1  | F2  | F3  | F4  | F5  |               | F6  | F7  | F8  | F9  | F10 |
+// ,-----|S+Ret| ^Q  | ^W  | ^E  | ^R  |               |     |     |     |     |     |-----.
 // |  M  | KP+ |Alt-A|Alt-D|Alt-T|  B  |               |     |     |     |     |     |     |
-// |KBCTL| KP- | ^Y  |Alt-X|Alt-C|M-g/r|-----.   ,-----|     |     |     |     |     |     |
+// |E/F12| KP- | ^Y  |Alt-X|Alt-C|M-g/r|-----.   ,-----|     |     |     |     |     |     |
 // `-----------------------|     |#####|     |   |     |QWRTY|     |-----------------------'
 //                         `-----------------'   `-----------------'
       bindings = <
-            &kp F1       &kp F2    &kp F3    &kp F4    &kp F5                    &trans &trans &trans &trans &trans
-            &kp ESC      &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)                 &trans &trans &trans &trans &trans
-&kp M       &kp KP_PLUS  &kp LA(A) &kp LA(D) &kp LA(T) &kp B                     &trans &trans &trans &trans &trans &trans
-&to KEEBCTL &kp KP_MINUS &kp LC(Y) &kp LA(X) &kp LA(C) &tth LA(G) LA(R)          &trans &trans &trans &trans &trans &trans
-                                                    &trans &trans &trans      &trans &to QWERTY &trans
+                 &kp F1         &kp F2    &kp F3    &kp F4    &kp F5                   &kp F6 &kp F7 &kp F8 &kp F9 &kp F10
+                 &kp LS(RETURN) &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)                &trans &trans &trans &trans &trans
+&kp M            &kp KP_PLUS    &kp LA(A) &kp LA(D) &kp LA(T) &kp B                    &trans &trans &trans &trans &trans &trans
+&kpht F12 ESCAPE &kp KP_MINUS   &kp LC(Y) &kp LA(X) &kp LA(C) &tth LA(G) LA(R)         &trans &trans &trans &trans &trans &trans
+                                                    &trans &trans &trans        &trans &to QWERTY &trans
       >;
       display-name = "OVL";
     };
@@ -107,6 +107,7 @@
 // #include "glam-factorio-combos.dtsi"
 
 #define GLAM_SUPPRESS_ESC_COMBO
+#define GLAM_SUPPRESS_NUMBER_COMBOS
 #include "glam-sym-nav-num-combos.dtsi"
 
     combo_outer_and_thumbs_keyboard_control {

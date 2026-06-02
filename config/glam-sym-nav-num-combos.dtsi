@@ -72,6 +72,7 @@
     key-positions = <RM3 RM4>;
     bindings = <&kp ENTER>;
   };
+#ifndef GLAM_SUPPRESS_NUMBER_COMBOS
   // Vertical combos for numbers.
   combo_vertical_one {
     timeout-ms = <50>;
@@ -123,5 +124,6 @@
     key-positions = <RT4 RM4>;
     bindings = <&kp N0>;
   };
+#endif
 
 // };
