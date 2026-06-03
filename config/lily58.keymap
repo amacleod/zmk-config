@@ -55,7 +55,7 @@ behaviors {
     bindings = <&mo>;
     release-after-ms = <8000>;
   };
-  tphold: tap_prefrerred_hold {
+  tphold: tap_preferred_hold {
     compatible = "zmk,behavior-hold-tap";
     #binding-cells = <2>;
     tapping-term-ms = <200>;
