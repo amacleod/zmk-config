@@ -33,6 +33,9 @@ manifest:
     - name: weejock-zmk
       remote: amacleod
       revision: main
+    - name: stratagum-zmk
+      remote: amacleod
+      revision: main
     - name: tern-zmk
       remote: amacleod
       revision: main
