@@ -8,6 +8,7 @@
 .PHONY: weejock
 .PHONY: zaphod zaphod_lite
 .PHONY: deploy_apiaster deploy_bykeeb deploy_corne deploy_ferris deploy_lily58 deploy_tern deploy_weejock deploy_zaphod
+.PHONY: deploy_apiaster_left
 .PHONY: settings_reset_xiao settings_reset_nano deploy_settings_reset_xiao deploy_settings_reset_nano
 .PHONY: transfer
 
@@ -68,6 +69,12 @@ apiaster_left apiaster_right: EXTRA_MODULES += ${APIASTER_CONFIG_DIR}
 apiaster_left apiaster_right:
 	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble//zmk ${SNIPPETS} -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
+deploy_apiaster: deploy_apiaster_left deploy_apiaster_right
+deploy_apiaster_left: apiaster
+	$(call flash_part,apiaster_left,${XIAO_PATH},${BUILD_DIR}/apiaster_left/zephyr/zmk.uf2)
+deploy_apiaster_right: apiaster
+	$(call flash_part,apiaster_right,${XIAO_PATH},${BUILD_DIR}/apiaster_right/zephyr/zmk.uf2)
+
 bykeeb: bykeeb_left bykeeb_right
 bykeeb_left bykeeb_right: EXTRA_MODULES += ${BYKEEB_CONFIG_DIR} ${VIK_MODULE_DIR} ${FINGERPUNCH_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
 bykeeb_left bykeeb_right:
@@ -77,10 +84,6 @@ corne: corne_left corne_right
 	ls -l ${BUILD_DIR}/corne_*/zephyr/zmk.uf2
 corne_left corne_right:
 	cd ${APP_DIR} && west build -d build/$@ -b nice_nano//zmk -- -DSHIELD=$@ ${CMAKEFLAGS} -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
-
-deploy_apiaster: apiaster
-	$(call flash_part,apiaster_left,${XIAO_PATH},${BUILD_DIR}/apiaster_left/zephyr/zmk.uf2)
-	$(call flash_part,apiaster_right,${XIAO_PATH},${BUILD_DIR}/apiaster_right/zephyr/zmk.uf2)
 
 deploy_corne: corne
 	$(call flash_part,corne_left,${NANO_PATH},${BUILD_DIR}/corne_left/zephyr/zmk.uf2)
