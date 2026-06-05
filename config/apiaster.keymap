@@ -19,7 +19,8 @@
 #define GAMING  0
 #define OVERLAY 1
 #define QWERTY  2
-#define KEEBCTL 3
+#define FKEYS   3
+#define KEEBCTL 4
 
 #include "glam-bt-kbdctl.dtsi"
 
@@ -28,7 +29,7 @@
     td_esc: tap_dance_esc {
       compatible = "zmk,behavior-tap-dance";
       #binding-cells = <0>;
-      tapping-term-ms = <200>;
+      tapping-term-ms = <600>;
       bindings = <&none>, <&none>, <&kp ESCAPE>;
     };
   };
@@ -56,16 +57,16 @@
 
     overlay_layer {
 //       ,-----------------------------.               ,-----------------------------.
-//       | F1  | F2  | F3  | F4  | F5  |               | F6  | F7  | F8  | F9  | F10 |
+//       |     |     |     |     |     |               |     |     |     |     |     |
 // ,-----|S+Ret| ^Q  | ^W  | ^E  | ^R  |               |     |     |     |     |     |-----.
-// |  M  | KP+ |Alt-A|Alt-D|Alt-T|  B  |               |     |     |     |     |     |     |
+// | FKY | KP+ |Alt-A|Alt-D|Alt-T|  B  |               |     |     |     |     |     |     |
 // |E/F12| KP- | ^Y  |Alt-X|Alt-C|M-g/r|-----.   ,-----|     |     |     |     |     |     |
 // `-----------------------|     |#####|     |   |     |QWRTY|     |-----------------------'
 //                         `-----------------'   `-----------------'
       bindings = <
-                 &kp F1         &kp F2    &kp F3    &kp F4    &kp F5                   &kp F6 &kp F7 &kp F8 &kp F9 &kp F10
+                 &trans         &trans    &trans    &trans    &trans                   &trans &trans &trans &trans &trans
                  &kp LS(RETURN) &kp LC(Q) &kp LC(W) &kp LC(E) &kp LC(R)                &trans &trans &trans &trans &trans
-&kp M            &kp KP_PLUS    &kp LA(A) &kp LA(D) &kp LA(T) &kp B                    &trans &trans &trans &trans &trans &trans
+&mo FKEYS        &kp KP_PLUS    &kp LA(A) &kp LA(D) &kp LA(T) &kp B                    &trans &trans &trans &trans &trans &trans
 &kpht F12 ESCAPE &kp KP_MINUS   &kp LC(Y) &kp LA(X) &kp LA(C) &tth LA(G) LA(R)         &trans &trans &trans &trans &trans &trans
                                                     &trans &trans &trans        &trans &to QWERTY &trans
       >;
@@ -88,6 +89,24 @@
                          &kp LCTRL &kp LALT &kp SPACE   &kp SPACE &kp RGUI &kp BACKSPACE
       >;
       display-name = "QWERTY";
+    };
+
+    fkeys_layer {
+//       ,-----------------------------.               ,-----------------------------.
+//       | F1  | F2  | F3  | F4  | F5  |               | F6  | F7  | F8  | F9  | F10 |
+// ,-----|     |     |  M  |     |     |               |     |     |     |     |     |-----.
+// |#####|     |     |     |     |  G  |               |     |     |     |     |     |     |
+// |     |     |     |     |     |     |-----.   ,-----|     |     |     |     |     |     |
+// `-----------------------|     |#####|     |   |     |     |     |-----------------------'
+//                         `-----------------'   `-----------------'
+      bindings = <
+                &kp F1 &kp F2 &kp F3  &kp F4 &kp F5                 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10
+                &trans &trans &kp M   &trans &trans                 &trans &trans &trans &trans &trans
+&trans          &trans &trans &trans  &trans &kp G                  &trans &trans &trans &trans &trans &trans
+&trans          &trans &trans &trans  &trans &trans                 &trans &trans &trans &trans &trans &trans
+                                   &trans &trans &trans     &trans &trans &trans
+      >;
+      display-name = "F Keys";
     };
 
     keyboard_control_layer {
