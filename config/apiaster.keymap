@@ -138,6 +138,13 @@
 #define GLAM_SUPPRESS_NUMBER_COMBOS
 #include "glam-sym-nav-num-combos.dtsi"
 
+    combo_pinky_thumb_fkeys {
+      timeout-ms = <50>;
+      key-positions = <LM5 LH1>;
+      bindings = <&mo FKEYS>;
+      layers = <GAMING>;
+    };
+
     combo_outer_and_thumbs_keyboard_control {
       timeout-ms = <50>;
       key-positions = <LM5 LB5 LH2 LH1 LH0>;
