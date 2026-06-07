@@ -57,5 +57,5 @@ include:
   - board: xiao_ble//zmk
     shield: bykeeb_right
 
-  - board: rp2040_zero//zmk
+  - board: rp2040_zero/rp2040
     shield: stratagum
