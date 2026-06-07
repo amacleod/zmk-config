@@ -131,8 +131,8 @@
   combos {
     compatible = "zmk,combos";
 
-// 2026-04-12: commenting out gaming macros to avoid accidental presses during fast paced shooter play.
-// #include "glam-factorio-combos.dtsi"
+#define GLAM_SUPPRESS_FPS_RISKY
+#include "glam-factorio-combos.dtsi"
 
 #define GLAM_SUPPRESS_ESC_COMBO
 #define GLAM_SUPPRESS_NUMBER_COMBOS

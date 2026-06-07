@@ -338,7 +338,7 @@ combos {
     key-positions = <RB3 RB4>;
     bindings = <&kp RSHFT>;
   };
-  
+
 }; // end combos
 
 conditional_layers {

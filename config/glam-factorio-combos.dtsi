@@ -10,6 +10,24 @@
 
 // combos {
 
+  // Left ring and index in middle row for G: rail level in Factorio,
+  // generally useful in gaming. Split combo is hard to hit by accident.
+  combo_left_split_grade {
+    timeout-ms = <50>;
+    key-positions = <LM3 LM1>;
+    bindings = <&kp G>;
+    layers = <GAMING>;
+  };
+  // Three bottom row keys in a row for M: map in Factorio, generally
+  // useful in gaming. Three-key combo is hard to hit by accident.
+  combo_bottom_triple_map {
+    timeout-ms = <50>;
+    key-positions = <LB3 LB2 LB1>;
+    bindings = <&kp M>;
+    layers = <GAMING>;
+  };
+
+#ifndef GLAM_SUPPRESS_FPS_RISKY
   // Left top pinky and ring for I: inventory in some games.
   combo_northwest_inventory {
     timeout-ms = <50>;
@@ -50,13 +68,6 @@
     timeout-ms = <50>;
     key-positions = <LT3 LT2 LT1>;
     bindings = <&kp LC(LA(F11))>;
-    layers = <GAMING>;
-  };
-  // Left ring and index in middle row for G: rail level.
-  combo_left_split_grade {
-    timeout-ms = <50>;
-    key-positions = <LM3 LM1>;
-    bindings = <&kp G>;
     layers = <GAMING>;
   };
   // Inner two keys of left middle row for blueprints: B when tapped, Alt+B when held.
@@ -108,13 +119,6 @@
     bindings = <&kp P>;
     layers = <GAMING>;
   };
-  // Three bottom row keys in a row for M: map.
-  combo_bottom_triple_map {
-    timeout-ms = <50>;
-    key-positions = <LB3 LB2 LB1>;
-    bindings = <&kp M>;
-    layers = <GAMING>;
-  };
   // Bottom pinky and middle finger for U.
   combo_bottom_left_split_u {
     timeout-ms = <50>;
@@ -130,7 +134,7 @@
     layers = <GAMING>;
   };
   // Bottom middle and inner column for Y.
-  combo_bottom_right_split_y { 
+  combo_bottom_right_split_y {
     timeout-ms = <50>;
     key-positions = <LB2 LB0>;
     bindings = <&kp Y>;
@@ -150,5 +154,6 @@
     bindings = <&kp N>;
     layers = <GAMING>;
   };
+#endif // GLAM_SUPPRESS_FPS_RISKY
 
 // };
