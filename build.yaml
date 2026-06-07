@@ -56,6 +56,3 @@ include:
     shield: bykeeb_left
   - board: xiao_ble//zmk
     shield: bykeeb_right
-
-  - board: rp2040_zero//zmk
-    shield: stratagum
