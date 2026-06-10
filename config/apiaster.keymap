@@ -94,15 +94,15 @@
     fkeys_layer {
 //       ,-----------------------------.               ,-----------------------------.
 //       | F1  | F2  | F3  | F4  | F5  |               | F6  | F7  | F8  | F9  | F10 |
-// ,-----|     |     |  M  |     |     |               |     |     |     |     |     |-----.
-// |#####|     |     |     |     |  G  |               |     |     |     |     |     |     |
+// ,-----|     |  G  |  M  |  I  |     |               |     |     |     |     |     |-----.
+// |#####|     |     |     |     |  H  |               |     |     |     |     |     |     |
 // |     |     |     |     |     |     |-----.   ,-----|     |     |     |     |     |     |
 // `-----------------------|     |#####|     |   |     |     |     |-----------------------'
 //                         `-----------------'   `-----------------'
       bindings = <
                 &kp F1 &kp F2 &kp F3  &kp F4 &kp F5                 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10
-                &trans &trans &kp M   &trans &trans                 &trans &trans &trans &trans &trans
-&trans          &trans &trans &trans  &trans &kp G                  &trans &trans &trans &trans &trans &trans
+                &trans &kp G  &kp M   &kp I  &trans                 &trans &trans &trans &trans &trans
+&trans          &trans &trans &trans  &trans &kp H                  &trans &trans &trans &trans &trans &trans
 &trans          &trans &trans &trans  &trans &trans                 &trans &trans &trans &trans &trans &trans
                                    &trans &trans &trans     &trans &trans &trans
       >;
@@ -134,7 +134,6 @@
 #define GLAM_SUPPRESS_FPS_RISKY
 #include "glam-factorio-combos.dtsi"
 
-#define GLAM_SUPPRESS_ESC_COMBO
 #define GLAM_SUPPRESS_NUMBER_COMBOS
 #include "glam-sym-nav-num-combos.dtsi"
 

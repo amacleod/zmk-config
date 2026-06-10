@@ -10,8 +10,11 @@
 
 // combos {
 
+#ifndef GLAM_SUPPRESS_FPS_RISKY
   // Left ring and index in middle row for G: rail level in Factorio,
   // generally useful in gaming. Split combo is hard to hit by accident.
+  // NOTE: LM3+LM1 = A+D, which adds 50ms latency on strafe direction
+  // changes in games where those keys are movement keys.
   combo_left_split_grade {
     timeout-ms = <50>;
     key-positions = <LM3 LM1>;
@@ -26,6 +29,7 @@
     bindings = <&kp M>;
     layers = <GAMING>;
   };
+#endif // GLAM_SUPPRESS_FPS_RISKY (G and M)
 
 #ifndef GLAM_SUPPRESS_FPS_RISKY
   // Left top pinky and ring for I: inventory in some games.
