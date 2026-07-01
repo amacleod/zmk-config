@@ -127,7 +127,7 @@ weejock:
 zaphod: zaphod_lite
 zaphod_lite: EXTRA_MODULES += ${ZAPHOD_CONFIG_DIR} ${ZMK_AUTO_LAYER_DIR} ${ZMK_TRI_STATE_DIR}
 zaphod_lite:
-	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble//zmk -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
+	cd ${APP_DIR} && west build -d build/$@ -b xiao_ble/nrf52840 -S zmk-usb-logging -- -DSHIELD=$@ -DZMK_CONFIG=${ZMK_CONFIG_DIR}/config -DZMK_EXTRA_MODULES="$(subst $(SPACE),;,$(EXTRA_MODULES))"
 
 deploy_weejock: weejock
 	$(call flash_part,weejock,${XIAO_PATH},${BUILD_DIR}/weejock/zephyr/zmk.uf2)
